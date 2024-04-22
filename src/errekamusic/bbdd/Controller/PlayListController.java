@@ -2,7 +2,7 @@ package errekamusic.bbdd.Controller;
 
 import java.util.List;
 
-import errekamusic.bbdd.PlayList;
+import errekamusic.bbdd.Pojo.PlayList;
 
 public class PlayListController {
 

@@ -2,7 +2,7 @@ package errekamusic.bbdd.Controller;
 
 import java.util.List;
 
-import errekamusic.bbdd.Podcast;
+import errekamusic.bbdd.Pojo.Podcast;
 
 public class PodcastController {
 	

@@ -1,4 +1,4 @@
-package errekamusic.bbdd;
+package errekamusic.bbdd.Pojo;
 
 import java.util.Date;
 import java.util.Objects;

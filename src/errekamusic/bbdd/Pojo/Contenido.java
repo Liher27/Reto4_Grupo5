@@ -1,4 +1,4 @@
-package errekamusic.bbdd;
+package errekamusic.bbdd.Pojo;
 
 import java.sql.Time;
 import java.util.Objects;

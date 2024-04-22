@@ -2,7 +2,7 @@ package errekamusic.bbdd.Controller;
 
 import java.util.List;
 
-import errekamusic.bbdd.Canciones;
+import errekamusic.bbdd.Pojo.Canciones;
 
 public class SongsController {
 	

@@ -2,7 +2,7 @@ package errekamusic.bbdd.Controller;
 
 import java.util.List;
 
-import errekamusic.bbdd.FreeUser;
+import errekamusic.bbdd.Pojo.FreeUser;
 
 public class FreeUserController {
 	

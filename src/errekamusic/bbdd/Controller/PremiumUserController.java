@@ -2,7 +2,7 @@ package errekamusic.bbdd.Controller;
 
 import java.util.List;
 
-import errekamusic.bbdd.PremiumUser;
+import errekamusic.bbdd.Pojo.PremiumUser;
 
 public class PremiumUserController {
 	

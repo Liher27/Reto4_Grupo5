@@ -1,4 +1,4 @@
-package errekamusic.bbdd;
+package errekamusic.bbdd.Pojo;
 
 public class Disc extends Coleccion{
 
