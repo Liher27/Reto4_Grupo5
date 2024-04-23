@@ -4,14 +4,19 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.PlayList;
 
-public class PlayListController {
+public class PlayListController implements InterfaceController <PlayList> {
 
-	public List<PlayList> getPlayListById(int playListId){
+	@Override
+	public List<PlayList> getAll() {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
-	public List<PlayList> getPlayListForEachUser(int userId){
+
+	@Override
+	public List<PlayList> getById(int id) {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
+
+
 }

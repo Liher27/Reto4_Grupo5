@@ -4,15 +4,16 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.PremiumUser;
 
-public class PremiumUserController {
-	
-	public List<PremiumUser>getPremiumUserById(int premiumUserId){
+public class PremiumUserController implements InterfaceController <PremiumUser> {
+	@Override
+	public List<PremiumUser> getAll() {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
-	
-	public List<PremiumUser>getAllPremiumUser(){
+
+	@Override
+	public List<PremiumUser> getById(int id) {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
 }
