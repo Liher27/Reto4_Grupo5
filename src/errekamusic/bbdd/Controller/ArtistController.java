@@ -4,14 +4,18 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
 
-public class ArtistController {
+public class ArtistController implements InterfaceController<Artist> {
+
+	@Override
+	public List<Artist> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Artist> getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-	public List<Artist> getArtistByID (int artistId){
-		return null;
-		
-	}
-	public List<Artist> getAllArtist(){
-		return null;
-		
-	}
 }

@@ -4,16 +4,20 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.Series;
 
-public class SeriesController {
-	
-	
-	
-	public List<Series> getSeriesById(int serieId){
+public class SeriesController implements InterfaceController <Series> {
+
+	@Override
+	public List<Series> getAll() {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
-	public List<Series> getAllSeries(){
+
+	@Override
+	public List<Series> getById(int id) {
+		// TODO Auto-generated method stub
 		return null;
-		
 	}
+	
+	
+
 }
