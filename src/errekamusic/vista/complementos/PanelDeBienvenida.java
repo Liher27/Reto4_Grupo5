@@ -4,11 +4,13 @@ package errekamusic.vista.complementos;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 
 /**
@@ -18,12 +20,14 @@ public class PanelDeBienvenida {
 
 	private JPanel panelDeBienvenida = null;
 	private JLabel lblBienvenida = null;
-	private JLabel lblLogoErrekaMusic = null;
+	private JLabel lblLogoErrekamusic = null;
+
 
 	/**
 	 * El panel Bienvenida
+	 * @param paneles 
 	 */
-	public PanelDeBienvenida() {
+	public PanelDeBienvenida(ArrayList<JPanel> paneles) {
 
 		panelDeBienvenida = new JPanel();
 		panelDeBienvenida.setBounds(0, 0, 984, 611);
@@ -39,13 +43,12 @@ public class PanelDeBienvenida {
 			 */
 			public void mouseClicked(MouseEvent e) {
 				esperar();
-			
+				
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(true);
+				paneles.get(2).setVisible(false);
 
-				
-				
-				
-				
-				
+
 			}
 		});
 
@@ -53,11 +56,11 @@ public class PanelDeBienvenida {
 		lblBienvenida.setIcon(new ImageIcon(""));
 		panelDeBienvenida.add(lblBienvenida);
 
-		lblLogoErrekaMusic = new JLabel("");
-		lblLogoErrekaMusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekaMusic.setBounds(33, 33, 90, 90);
-		lblLogoErrekaMusic.setIcon(new ImageIcon(""));
-		panelDeBienvenida.add(lblLogoErrekaMusic);
+		lblLogoErrekamusic = new JLabel("");
+		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogoErrekamusic.setBounds(33, 33, 90, 90);
+		lblLogoErrekamusic.setIcon(new ImageIcon(""));
+		panelDeBienvenida.add(lblLogoErrekamusic);
 	}
 
 	/**
@@ -65,15 +68,14 @@ public class PanelDeBienvenida {
 	 * 
 	 * @return panelDeBienvenida
 	 */
-	public JPanel getPanelDeBienvenida() {
+	public JPanel inicializarPanelDeBienvenida() {
 		return panelDeBienvenida;
 	}
 
 	private void esperar() {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 		}
 	}
-
 }
