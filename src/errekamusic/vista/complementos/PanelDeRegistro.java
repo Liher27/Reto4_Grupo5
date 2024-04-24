@@ -250,36 +250,36 @@ public class PanelDeRegistro {
 			 * Comfirmamos para registrar una nueva cuenta
 			 * @param e
 			 */
-			public void actionPerformed(ActionEvent e) {
-				boolean CampoVacio = false;
-				JTextField[] campos = { textFieldDNIRegistro, textFieldNombreRegistro, textFieldPrimerApellidoRegistro,
-						 passwordFieldContrasenyaRegistro,  };
-				for (int i = 0; i < campos.length; i++) {
-					if (campos[i].getText().isEmpty()) {
-						CampoVacio = true;
-						break;
-					}
-				}
-				if (CampoVacio) {
-					JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenarlo Por favor", "Error",
-							JOptionPane.ERROR_MESSAGE);
+			//public void actionPerformed(ActionEvent e) {
+			//	boolean CampoVacio = false;
+				//JTextField[] campos = { textFieldDNIRegistro, textFieldNombreRegistro, textFieldPrimerApellidoRegistro,
+					//	 passwordFieldContrasenyaRegistro,  };
+				//for (int i = 0; i < campos.length; i++) {
+					//if (campos[i].getText().isEmpty()) {
+						//CampoVacio = true;
+						//break;
+					//}
+				//}
+				//if (CampoVacio) {
+					//JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenarlo Por favor", "Error",
+						//	JOptionPane.ERROR_MESSAGE);
 
-				} else {
-					GestorDeCliente gestorDeCliente = new GestorDeCliente();
+				//} else {
+					//GestorDeCliente gestorDeCliente = new GestorDeCliente();
 
-					gestorDeCliente.compararRegistroUsuario(textFieldDNIRegistro, textFieldNombreRegistro,
-							textFieldPrimerApellidoRegistro,  passwordFieldContrasenyaRegistro
-						);
+					//gestorDeCliente.compararRegistroUsuario(textFieldDNIRegistro, textFieldNombreRegistro,
+						//	textFieldPrimerApellidoRegistro,  passwordFieldContrasenyaRegistro
+						//);
 
-					Session.getInstance().getPanelDeBienvenida().getPanelDeBienvenida().setVisible(false);
-					Session.getInstance().getPanelDeCines().getPanelDeCines().setVisible(false);
-					Session.getInstance().getPanelDePeliculas().getPanelDePeliculas().setVisible(false);
-					Session.getInstance().getPanelDeLogin().getPanelDeLogin().setVisible(true);
-					Session.getInstance().getPanelDeRegistro().getPanelDeRegistro().setVisible(false);
-					Session.getInstance().getPanelDeResumen().getPanelDeResumen().setVisible(false);
-					Session.getInstance().getPanelDeSesion().getPanelDeSesion().setVisible(false);
-				}
-			}
+					//Session.getInstance().getPanelDeBienvenida().getPanelDeBienvenida().setVisible(false);
+					//Session.getInstance().getPanelDeCines().getPanelDeCines().setVisible(false);
+					//Session.getInstance().getPanelDePeliculas().getPanelDePeliculas().setVisible(false);
+					//Session.getInstance().getPanelDeLogin().getPanelDeLogin().setVisible(true);
+					//Session.getInstance().getPanelDeRegistro().getPanelDeRegistro().setVisible(false);
+					//Session.getInstance().getPanelDeResumen().getPanelDeResumen().setVisible(false);
+					//Session.getInstance().getPanelDeSesion().getPanelDeSesion().setVisible(false);
+				//}
+			//}
 		});
 		btnConfirmarDeRegistro.setForeground(new Color(0, 0, 0));
 		btnConfirmarDeRegistro.setBounds(800, 556, 98, 33);

@@ -5,6 +5,10 @@ package errekamusic.vista;
 import errekamusic.vista.complementos.PanelDeBienvenida;
 import errekamusic.vista.complementos.PanelDeLogin;
 import errekamusic.vista.complementos.PanelDeRegistro;
+import errekamusic.vista.complementos.PanelFavoritos;
+import errekamusic.vista.complementos.PanelGrupos;
+import errekamusic.vista.complementos.PanelPodcast;
+import errekamusic.vista.complementos.PanelPrincipal;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -81,22 +85,49 @@ public class VentanaPrincipal extends JFrame {
 		PanelDeRegistro panelDeRegistro = new PanelDeRegistro();
 		JPanel thePanelDeRegistro = panelDeRegistro.getPanelDeRegistro();
 		thePanelDeRegistro.setVisible(false);
+		paneles.add(thePanelDeRegistro);
 		frame.getContentPane().add(thePanelDeRegistro);
 //
 //		// 3
-//	
+		PanelPrincipal panelPrincipal = new PanelPrincipal();
+		JPanel thePanelPrincipal = panelPrincipal.getPanelPrincipal();
+		thePanelPrincipal.setVisible(false);
+		paneles.add(thePanelPrincipal);
+		frame.getContentPane().add(thePanelPrincipal);
 //
 //		// 4
-//		
+		PanelFavoritos panelFavoritos = new PanelFavoritos();
+		JPanel thepanelFavoritos = panelFavoritos.getPanelFavoritos();
+		thepanelFavoritos.setVisible(false);
+		paneles.add(thepanelFavoritos);
+		frame.getContentPane().add(thepanelFavoritos);
 //
 //		// 5
-//	
+		PanelGrupos panelGrupos = new PanelGrupos();
+		JPanel thePanelGrupos = panelGrupos.getPanelGrupos();
+		thePanelGrupos.setVisible(false);
+		paneles.add(thePanelGrupos);
+		frame.getContentPane().add(thePanelGrupos);
 //
 //		// 6
-//
+		PanelPodcast panelPodcast = new PanelPodcast();
+		JPanel thePanelPodcast = panelPodcast.getPanelPodcast();
+		thePanelPodcast.setVisible(false);
+		paneles.add(thePanelPodcast);
+		frame.getContentPane().add(thePanelPodcast);
 //
 //		// 7
-//	
+		PanelDeRegistro panelDeRegistro = new PanelDeRegistro();
+		JPanel thePanelDeRegistro = panelDeRegistro.getPanelDeRegistro();
+		thePanelDeRegistro.setVisible(false);
+		paneles.add(thePanelDeRegistro);
+		frame.getContentPane().add(thePanelDeRegistro);
+		// 8
+		PanelDeRegistro panelDeRegistro = new PanelDeRegistro();
+		JPanel thePanelDeRegistro = panelDeRegistro.getPanelDeRegistro();
+		thePanelDeRegistro.setVisible(false);
+		paneles.add(thePanelDeRegistro);
+		frame.getContentPane().add(thePanelDeRegistro);
 
 	}
 

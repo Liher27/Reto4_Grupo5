@@ -134,9 +134,9 @@ public class PanelDeLogin {
 			 * El boton para volver al panel de registro
 			 */
 			public void actionPerformed(ActionEvent e) {
-				PanelDeBienvenida.getPanelDeBienvenida().setVisible(false);
-				Session.getInstance().getPanelDeLogin().getPanelDeLogin().setVisible(false);
-				Session.getInstance().getPanelDeRegistro().getPanelDeRegistro().setVisible(true);
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(true);
 
 			}
 		});
