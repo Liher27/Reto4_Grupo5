@@ -223,21 +223,19 @@ public class PanelDeRegistro {
 		lblLogoErrekamusic.setIcon(new ImageIcon(""));
 		panelDeRegistro.add(lblLogoErrekamusic);
 
-		JButton btnCancelarPanelDeRegistro = new JButton("Bienvenida");
-		btnCancelarPanelDeRegistro.addMouseListener(new MouseAdapter() {
+		JButton btnCancelarPanelDeRegistro = new JButton("Cancelar");
+		btnCancelarPanelDeRegistro.addActionListener(new ActionListener() {
 			@Override
 			/**
 			 * Volvemos al panel de bienvenida
 			 * @param e
 			 */
-			public void mouseClicked(MouseEvent e) {
-				//Session.getInstance().getPanelDeBienvenida().getPanelDeBienvenida().setVisible(true);
-				//Session.getInstance().getPanelDeCines().getPanelDeCines().setVisible(false);
-				//Session.getInstance().getPanelDePeliculas().getPanelDePeliculas().setVisible(false);
-				//Session.getInstance().getPanelDeLogin().getPanelDeLogin().setVisible(false);
-				//Session.getInstance().getPanelDeRegistro().getPanelDeRegistro().setVisible(false);
-				//Session.getInstance().getPanelDeResumen().getPanelDeResumen().setVisible(false);
-				//Session.getInstance().getPanelDeSesion().getPanelDeSesion().setVisible(false);
+			
+
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+			
 			}
 		});
 		btnCancelarPanelDeRegistro.setForeground(new Color(0, 0, 0));
@@ -246,6 +244,12 @@ public class PanelDeRegistro {
 
 		JButton btnConfirmarDeRegistro = new JButton("Confirmar");
 		btnConfirmarDeRegistro.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
 			/**
 			 * Comfirmamos para registrar una nueva cuenta
 			 * @param e

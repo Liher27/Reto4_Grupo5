@@ -12,22 +12,26 @@ import java.awt.event.MouseEvent;
 public class PanelPrincipal extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel panelPrincipal = null;
+
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelPrincipal() {
+		
+
 		setLayout(null);
 		
 		JLabel lblMenuPrincipal = new JLabel(" MENU PRINCIPAL ");
 		lblMenuPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblMenuPrincipal.setBounds(325, 31, 266, 106);
-		add(lblMenuPrincipal);
+		panelPrincipal.add(lblMenuPrincipal);
 		
 		JLabel lblDescubregrupos = new JLabel("1. Descubre Grupos");
 		lblDescubregrupos.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDescubregrupos.setBounds(82, 195, 214, 25);
-		add(lblDescubregrupos);
+		panelPrincipal.add(lblDescubregrupos);
 		lblDescubregrupos.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
@@ -61,8 +65,7 @@ public class PanelPrincipal extends JPanel {
 		lblSalir.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
-            	PanelDeBienvenida inicioApp = new PanelDeBienvenida();
-				inicioApp.setVisible(true);
+            	
             }
 		});
 		
@@ -76,6 +79,13 @@ public class PanelPrincipal extends JPanel {
 		lblNewLabel_2.setBounds(491, 204, 376, 210);
 		add(lblNewLabel_2);
 
+	}
+
+	
+
+	public JPanel getPanelPrincipal() {
+		// TODO Auto-generated method stub
+		return panelPrincipal;
 	}
 
 }

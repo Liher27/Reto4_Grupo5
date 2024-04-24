@@ -83,47 +83,26 @@ public class PanelDeLogin {
 			 * @param e
 			 */
 			public void actionPerformed(ActionEvent e) {
-				GestorDeCliente gestorDeCliente = new GestorDeCliente();
-				if (gestorDeCliente.obtenerUsuario(fieldUsuario, fieldContrasenna) != null) {
-					if (!(fieldUsuario.getText().isEmpty()) || !(fieldContrasenna.getPassword().length < 0)) {
-						Session.getInstance().getPanelDeBienvenida().getPanelDeBienvenida().setVisible(false);
-						Session.getInstance().getPanelDeCines().getPanelDeCines().setVisible(false);
-						Session.getInstance().getPanelDePeliculas().getPanelDePeliculas().setVisible(false);
-						Session.getInstance().getPanelDeLogin().getPanelDeLogin().setVisible(false);
-						Session.getInstance().getPanelDeRegistro().getPanelDeRegistro().setVisible(false);
-						Session.getInstance().getPanelDeResumen().getPanelDeResumen().setVisible(false);
-						Session.getInstance().getPanelDeSesion().getPanelDeSesion().setVisible(false);
-						Session.getInstance().getPanelDeTicket().getPanelDeTicket().setVisible(true);
-					} else {
-						JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenarlo Por favor", "Error",
-								JOptionPane.ERROR_MESSAGE);
-					}
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(true);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
 
 					/**
 					 * Obtener el nombre de usuario para guardar en el array
 					 */
-					for (int j = 0; j < paneles.size(); j++) {
-						Panel paneles = paneles.get(j);
-						Cliente cliente = paneles.getCliente();
-						if (cliente != null) {
-							cliente.setNombre(fieldUsuario.getText());
-						} else {
-							Cliente newCliente = new Cliente();
-							newCliente.setNombre(fieldUsuario.getText());
-							paneles.setCliente(newCliente);
-						}
-
-					}
+					
 					/**
 					 * obtener los datos de cliente y guardar en el array
 					 */
-					Cliente clienteLogeado = new GestorDeCliente().obtenerUsuario(fieldUsuario, fieldContrasenna);
-					for (int i = 0; i < entradas.size(); i++) {
-						Entrada entrada = entradas.get(i);
-						entrada.setCliente(clienteLogeado);
-					}
+					
 				}
-			}
+			
 		});
 		jButtonLoginAceptar.setBounds(530, 431, 98, 33);
 		panelDeLogin.add(jButtonLoginAceptar);
@@ -137,6 +116,13 @@ public class PanelDeLogin {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
 				paneles.get(2).setVisible(true);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				
 
 			}
 		});

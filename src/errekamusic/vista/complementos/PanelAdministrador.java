@@ -13,4 +13,9 @@ public class PanelAdministrador extends JPanel {
 
 	}
 
+	public JPanel getPanelAdministrador() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

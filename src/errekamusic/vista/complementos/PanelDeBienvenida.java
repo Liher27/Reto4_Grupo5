@@ -47,6 +47,13 @@ public class PanelDeBienvenida {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(true);
 				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
 
 
 			}
