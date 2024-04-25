@@ -132,7 +132,7 @@ public class PanelDeLogin {
 		JLabel lblLogoCineElorrieta = new JLabel("");
 		lblLogoCineElorrieta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoCineElorrieta.setBounds(33, 33, 90, 90);
-		lblLogoCineElorrieta.setIcon(new ImageIcon("src/LogoCineElorrieta.png"));
+		lblLogoCineElorrieta.setIcon(new ImageIcon(""));
 		panelDeLogin.add(lblLogoCineElorrieta);
 
 	}

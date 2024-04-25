@@ -85,14 +85,14 @@ public class VentanaPrincipal extends JFrame {
 		frame.getContentPane().add(thePanelDeLogin);
 //
 //		// 2
-		PanelDeRegistro panelDeRegistro = new PanelDeRegistro();
+		PanelDeRegistro panelDeRegistro = new PanelDeRegistro(paneles);
 		JPanel thePanelDeRegistro = panelDeRegistro.getPanelDeRegistro();
 		thePanelDeRegistro.setVisible(false);
 		paneles.add(thePanelDeRegistro);
 		frame.getContentPane().add(thePanelDeRegistro);
 //
 //		// 3
-		PanelPrincipal panelPrincipal = new PanelPrincipal();
+		PanelPrincipal panelPrincipal = new PanelPrincipal(paneles);
 		JPanel thePanelPrincipal = panelPrincipal.getPanelPrincipal();
 		thePanelPrincipal.setVisible(false);
 		paneles.add(thePanelPrincipal);
@@ -100,7 +100,7 @@ public class VentanaPrincipal extends JFrame {
 //
 //		// 4
 		
-		PanelGrupos panelGrupos = new PanelGrupos();
+		PanelGrupos panelGrupos = new PanelGrupos(paneles);
 		JPanel thePanelGrupos = panelGrupos.getPanelGrupos();
 		thePanelGrupos.setVisible(false);
 		paneles.add(thePanelGrupos);
@@ -109,7 +109,7 @@ public class VentanaPrincipal extends JFrame {
 //
 //		// 5
 		
-		PanelPodcast panelPodcast = new PanelPodcast();
+		PanelPodcast panelPodcast = new PanelPodcast(paneles);
 		JPanel thePanelPodcast = panelPodcast.getPanelPodcast();
 		thePanelPodcast.setVisible(false);
 		paneles.add(thePanelPodcast);
@@ -118,20 +118,20 @@ public class VentanaPrincipal extends JFrame {
 	
 //
 //		// 6
-		PanelReproduccion panelReproduccion = new PanelReproduccion();
+		PanelReproduccion panelReproduccion = new PanelReproduccion(paneles);
 		JPanel thePanelReproduccion = panelReproduccion.getPanelReproduccion();
 		thePanelReproduccion.setVisible(false);
 		paneles.add(thePanelReproduccion);
 		frame.getContentPane().add(thePanelReproduccion);
 //
 //		// 7
-		PanelFavoritos panelFavoritos = new PanelFavoritos();
+		PanelFavoritos panelFavoritos = new PanelFavoritos(paneles);
 		JPanel thepanelFavoritos = panelFavoritos.getPanelFavoritos();
 		thepanelFavoritos.setVisible(false);
 		paneles.add(thepanelFavoritos);
 		frame.getContentPane().add(thepanelFavoritos);
 		// 8
-		PanelPerfiles panelPerfiles = new PanelPerfiles();
+		PanelPerfiles panelPerfiles = new PanelPerfiles(paneles);
 		JPanel thePanelPerfiles = panelPerfiles.getPanelPerfiles();
 		thePanelPerfiles.setVisible(false);
 		paneles.add(thePanelPerfiles);
@@ -139,7 +139,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		// 9
 		
-		PanelAdministrador panelAdministrador = new PanelAdministrador();
+		PanelAdministrador panelAdministrador = new PanelAdministrador(paneles);
 		JPanel thePanelAdministrador = panelAdministrador.getPanelAdministrador();
 		thePanelAdministrador.setVisible(false);
 		paneles.add(thePanelAdministrador);

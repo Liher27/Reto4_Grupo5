@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JPasswordField;
 
@@ -37,7 +38,7 @@ public class PanelDeRegistro {
 	/**
 	 * panel principal 
 	 */
-	public PanelDeRegistro() {
+	public PanelDeRegistro(ArrayList<JPanel> paneles) {
 		panelDeRegistro = new JPanel();
 		panelDeRegistro.setBounds(0, 0, 984, 611);
 		panelDeRegistro.setBackground(new Color(192, 192, 192));
@@ -225,18 +226,28 @@ public class PanelDeRegistro {
 
 		JButton btnCancelarPanelDeRegistro = new JButton("Cancelar");
 		btnCancelarPanelDeRegistro.addActionListener(new ActionListener() {
-			@Override
-			/**
-			 * Volvemos al panel de bienvenida
-			 * @param e
-			 */
-			
 
-			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(true);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+
+					/**
+					 * Obtener el nombre de usuario para guardar en el array
+					 */
+					
+					/**
+					 * obtener los datos de cliente y guardar en el array
+					 */
+					
+				}
 			
-			}
 		});
 		btnCancelarPanelDeRegistro.setForeground(new Color(0, 0, 0));
 		btnCancelarPanelDeRegistro.setBounds(100, 556, 98, 33);
