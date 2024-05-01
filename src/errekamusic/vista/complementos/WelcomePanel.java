@@ -16,22 +16,23 @@ import javax.swing.JButton;
 /**
  * El panel inicio de nuestro programa
  */
-public class PanelDeBienvenida {
+public class WelcomePanel {
 
 	private JPanel panelDeBienvenida = null;
 	private JLabel lblBienvenida = null;
 	private JLabel lblLogoErrekamusic = null;
+	private JLabel lblWelcomeMessage = null;
 
 
 	/**
 	 * El panel Bienvenida
 	 * @param paneles 
 	 */
-	public PanelDeBienvenida(ArrayList<JPanel> paneles) {
+	public WelcomePanel(ArrayList<JPanel> paneles) {
 
 		panelDeBienvenida = new JPanel();
 		panelDeBienvenida.setBounds(0, 0, 984, 611);
-		panelDeBienvenida.setBackground(new Color(192, 192, 192));
+		panelDeBienvenida.setBackground(Color.black);
 
 		lblBienvenida = new JLabel("");
 		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,9 +66,17 @@ public class PanelDeBienvenida {
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(33, 33, 90, 90);
-		lblLogoErrekamusic.setIcon(new ImageIcon(""));
+		lblLogoErrekamusic.setBounds(10,10,145,145);
+		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		panelDeBienvenida.add(lblLogoErrekamusic);
+		
+		lblWelcomeMessage = new JLabel("");
+		lblWelcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcomeMessage.setBounds(140, 191, 702, 215);
+		lblWelcomeMessage.setIcon(new ImageIcon("contents/welcomeMessage.png"));
+		panelDeBienvenida.add(lblWelcomeMessage);
+		
+		
 	}
 
 	/**

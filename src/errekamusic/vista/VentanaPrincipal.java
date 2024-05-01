@@ -2,16 +2,8 @@
 package errekamusic.vista;
 
 
-import errekamusic.vista.complementos.PanelAdministrador;
-import errekamusic.vista.complementos.PanelDeBienvenida;
-import errekamusic.vista.complementos.PanelDeLogin;
-import errekamusic.vista.complementos.PanelDeRegistro;
-import errekamusic.vista.complementos.PanelFavoritos;
-import errekamusic.vista.complementos.PanelGrupos;
-import errekamusic.vista.complementos.PanelPerfiles;
-import errekamusic.vista.complementos.PanelPodcast;
-import errekamusic.vista.complementos.PanelPrincipal;
-import errekamusic.vista.complementos.PanelReproduccion;
+import errekamusic.vista.complementos.*;
+
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -29,18 +21,30 @@ public class VentanaPrincipal extends JFrame {
 	private JFrame frame;
 	
 	private ArrayList <JPanel> paneles = null;
-
-	/**
-	 * El array usaremos para guardar los datos para final
-	 */
-	//private ArrayList<Entrada> entradas = new ArrayList<Entrada>();
-
+	private JPanel contentPlayerPanel = null;
+	private JPanel adminPanel = null;
+	private JPanel discsPanel = null;
+	private JPanel groupPanel = null;
+	private JPanel listsPanel = null;
+	private JPanel loginPanel = null;
+	private JPanel mainMenuPanel = null;
+	private JPanel podcasterPanel = null;
+	private JPanel profilePanel = null;
+	private JPanel podcastPanel = null;
+	private JPanel registerPanel = null;
+	private JPanel seriesPanel = null;
+	private JPanel songsPanel = null;
+	private JPanel welcomePanel = null;
+	
+	
+	
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * run
 	 * 
-	 * @param args main para ejecutar el programa
+	 * @param metodo main para iniciar el frame con los paneles
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -68,82 +72,97 @@ public class VentanaPrincipal extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		
+		/**
+		 * El array que usaremos para guardar los paneles
+		 */
 		paneles = new ArrayList <JPanel> ();
 
 		// 0
-		PanelDeBienvenida panelDeBienvenida = new PanelDeBienvenida(paneles);
-		JPanel PanelBienvenida = panelDeBienvenida.inicializarPanelDeBienvenida();
-		PanelBienvenida.setVisible(true);
-		paneles.add(PanelBienvenida);
-		frame.getContentPane().add(PanelBienvenida);
-
-//		// 1
-		PanelDeLogin panelDeLogin = new PanelDeLogin(paneles);
-		JPanel thePanelDeLogin = panelDeLogin.getPanelDeLogin();
-		thePanelDeLogin.setVisible(false);
-		paneles.add(thePanelDeLogin);
-		frame.getContentPane().add(thePanelDeLogin);
-//
-//		// 2
-		PanelDeRegistro panelDeRegistro = new PanelDeRegistro(paneles);
-		JPanel thePanelDeRegistro = panelDeRegistro.getPanelDeRegistro();
-		thePanelDeRegistro.setVisible(false);
-		paneles.add(thePanelDeRegistro);
-		frame.getContentPane().add(thePanelDeRegistro);
-//
-//		// 3
-		PanelPrincipal panelPrincipal = new PanelPrincipal(paneles);
-		JPanel thePanelPrincipal = panelPrincipal.getPanelPrincipal();
-		thePanelPrincipal.setVisible(false);
-		paneles.add(thePanelPrincipal);
-		frame.getContentPane().add(thePanelPrincipal);
-//
-//		// 4
-		
-		PanelGrupos panelGrupos = new PanelGrupos(paneles);
-		JPanel thePanelGrupos = panelGrupos.getPanelGrupos();
-		thePanelGrupos.setVisible(false);
-		paneles.add(thePanelGrupos);
-		frame.getContentPane().add(thePanelGrupos);
-		
-//
-//		// 5
-		
-		PanelPodcast panelPodcast = new PanelPodcast(paneles);
-		JPanel thePanelPodcast = panelPodcast.getPanelPodcast();
-		thePanelPodcast.setVisible(false);
-		paneles.add(thePanelPodcast);
-		frame.getContentPane().add(thePanelPodcast);
-		
-	
-//
-//		// 6
-		PanelReproduccion panelReproduccion = new PanelReproduccion(paneles);
-		JPanel thePanelReproduccion = panelReproduccion.getPanelReproduccion();
-		thePanelReproduccion.setVisible(false);
-		paneles.add(thePanelReproduccion);
-		frame.getContentPane().add(thePanelReproduccion);
-//
-//		// 7
-		PanelFavoritos panelFavoritos = new PanelFavoritos(paneles);
-		JPanel thepanelFavoritos = panelFavoritos.getPanelFavoritos();
-		thepanelFavoritos.setVisible(false);
-		paneles.add(thepanelFavoritos);
-		frame.getContentPane().add(thepanelFavoritos);
+		WelcomePanel welcome = new WelcomePanel(paneles);
+		welcomePanel = welcome.inicializarPanelDeBienvenida();
+		welcomePanel.setVisible(true);
+		paneles.add(welcomePanel);
+		frame.getContentPane().add(welcomePanel);
+		// 1
+		LoginPanel login = new LoginPanel(paneles);
+		loginPanel = login.getPanelDeLogin();
+		loginPanel.setVisible(false);
+		paneles.add(loginPanel);
+		frame.getContentPane().add(loginPanel);
+		// 2
+		RegisterPanel register = new RegisterPanel(paneles);
+		registerPanel = register.getPanelDeRegistro();
+		registerPanel.setVisible(false);
+		paneles.add(registerPanel);
+		frame.getContentPane().add(registerPanel);
+		// 3
+		MainMenuPanel mainMenu = new MainMenuPanel(paneles);
+		mainMenuPanel = mainMenu.getPanelPrincipal();
+		mainMenuPanel.setVisible(false);
+		paneles.add(mainMenuPanel);
+		frame.getContentPane().add(mainMenuPanel);
+		// 4
+		GroupPanel group = new GroupPanel(paneles);
+		groupPanel = group.getPanelGrupos();
+		groupPanel.setVisible(false);
+		paneles.add(groupPanel);
+		frame.getContentPane().add(groupPanel);
+		// 5
+		PodcastPanel podcast = new PodcastPanel(paneles);
+		podcastPanel = podcast.getPanelPodcast();
+		podcastPanel.setVisible(false);
+		paneles.add(podcastPanel);
+		frame.getContentPane().add(podcastPanel);
+		// 6
+		ContentPlayerPanel contentPlayer = new ContentPlayerPanel(paneles);
+		contentPlayerPanel = contentPlayer.getContentPlayerPanel();
+		contentPlayerPanel.setVisible(false);
+		paneles.add(contentPlayerPanel);
+		frame.getContentPane().add(contentPlayerPanel);
+		// 7
+		ListsPanel lists = new ListsPanel(paneles);
+		listsPanel = lists.getPanelFavoritos();
+		listsPanel.setVisible(false);
+		paneles.add(listsPanel);
+		frame.getContentPane().add(listsPanel);
 		// 8
-		PanelPerfiles panelPerfiles = new PanelPerfiles(paneles);
-		JPanel thePanelPerfiles = panelPerfiles.getPanelPerfiles();
-		thePanelPerfiles.setVisible(false);
-		paneles.add(thePanelPerfiles);
-		frame.getContentPane().add(thePanelPerfiles);
-		
+		ProfilePanel profile = new ProfilePanel(paneles);
+		profilePanel = profile.getPanelPerfiles();
+		profilePanel.setVisible(false);
+		paneles.add(profilePanel);
+		frame.getContentPane().add(profilePanel);
 		// 9
+		AdminPanel admin = new AdminPanel(paneles);
+		adminPanel = admin.getPanelAdministrador();
+		adminPanel.setVisible(false);
+		paneles.add(adminPanel);
+		frame.getContentPane().add(adminPanel);
+		//10
+		DiscsPanel discs = new DiscsPanel(paneles);
+		discsPanel = discs.getDiscsPanel();
+		discsPanel.setVisible(false);
+		paneles.add(discsPanel);
+		frame.getContentPane().add(discsPanel);
+		//11
+		PodcasterPanel podcaster = new PodcasterPanel(paneles);
+		podcasterPanel = podcaster.getPodcasterPanel();
+		podcasterPanel.setVisible(false);
+		paneles.add(podcasterPanel);
+		frame.getContentPane().add(podcasterPanel);
+		//12
+		SeriesPanel series = new SeriesPanel(paneles);
+		seriesPanel = series.getSeriesPanel();
+		seriesPanel.setVisible(false);
+		paneles.add(seriesPanel);
+		frame.getContentPane().add(seriesPanel);
+		//13
+		SongsPanel songs = new SongsPanel(paneles);
+		songsPanel = songs.getSongsPanel();
+		songsPanel.setVisible(false);
+		paneles.add(songsPanel);
+		frame.getContentPane().add(songsPanel);
 		
-		PanelAdministrador panelAdministrador = new PanelAdministrador(paneles);
-		JPanel thePanelAdministrador = panelAdministrador.getPanelAdministrador();
-		thePanelAdministrador.setVisible(false);
-		paneles.add(thePanelAdministrador);
-		frame.getContentPane().add(thePanelAdministrador);
 
 	}
 

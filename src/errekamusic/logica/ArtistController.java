@@ -1,4 +1,4 @@
-package errekamusic.bbdd.Controller;
+package errekamusic.logica;
 
 import java.util.List;
 

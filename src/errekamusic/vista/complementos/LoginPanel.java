@@ -8,8 +8,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -23,45 +21,49 @@ import java.awt.Color;
 /**
  * Panel de login para logearse y registrarse
  */
-public class PanelDeLogin {
-	/**
-	 * campo de nombre
-	 */
-	public JTextField fieldUsuario = null;
-	/**
-	 * campo de contraseña
-	 */
-	public JPasswordField fieldContrasenna = null;
+public class LoginPanel {
 
-	private JPanel panelDeLogin;
+	private JPanel panelDeLogin = null;
+
+	public JTextField fieldUsuario = null;
+
+	private JLabel labelContrasena = null;
+	private JLabel labelUsuario = null;
+	private JLabel tituloLogIn = null;
+	private JLabel lblErrekamusicLogo = null;
+
+	private JButton jButtonRegistro = null;
+	private JButton jButtonLoginAceptar = null;
+
+	public JPasswordField fieldContrasenna = null;
 
 	/**
 	 * 
 	 * @param entradas El array que guarde los datos del usuario
 	 */
-	public PanelDeLogin(ArrayList<JPanel> paneles) {
+	public LoginPanel(ArrayList<JPanel> paneles) {
 		panelDeLogin = new JPanel();
-		panelDeLogin.setBackground(new Color(192, 192, 192));
+		panelDeLogin.setForeground(new Color(0, 0, 0));
+		panelDeLogin.setBackground(new Color(0, 0, 0));
 		panelDeLogin.setBounds(0, 0, 984, 611);
 		panelDeLogin.setLayout(null);
 
-		JLabel tituloLogIn = new JLabel("Iniciar sesión");
+		tituloLogIn = new JLabel("Iniciar sesión");
 		tituloLogIn.setHorizontalAlignment(SwingConstants.CENTER);
-		tituloLogIn.setForeground(new Color(253, 185, 74));
-		tituloLogIn.setForeground(new Color(253, 185, 74));
-		tituloLogIn.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 28));
+		tituloLogIn.setForeground(new Color(255, 222, 89));
+		tituloLogIn.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
 		tituloLogIn.setBounds(328, 32, 337, 64);
 		panelDeLogin.add(tituloLogIn);
 
-		JLabel labelUsuario = new JLabel("Usuario");
-		labelUsuario.setForeground(new Color(0, 0, 0));
-		labelUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelUsuario = new JLabel("Usuario");
+		labelUsuario.setForeground(new Color(255, 222, 89));
+		labelUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
 		labelUsuario.setBounds(300, 225, 109, 14);
 		panelDeLogin.add(labelUsuario);
 
-		JLabel labelContrasena = new JLabel("Contraseña");
-		labelContrasena.setForeground(new Color(0, 0, 0));
-		labelContrasena.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelContrasena = new JLabel("Contraseña");
+		labelContrasena.setForeground(new Color(255, 222, 89));
+		labelContrasena.setFont(new Font("Tahoma", Font.BOLD, 14));
 		labelContrasena.setBounds(300, 373, 109, 14);
 		panelDeLogin.add(labelContrasena);
 
@@ -75,7 +77,7 @@ public class PanelDeLogin {
 		panelDeLogin.add(fieldContrasenna);
 		fieldContrasenna.setColumns(10);
 
-		JButton jButtonLoginAceptar = new JButton("Aceptar");
+		jButtonLoginAceptar = new JButton("Aceptar");
 		jButtonLoginAceptar.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -92,22 +94,27 @@ public class PanelDeLogin {
 				paneles.get(6).setVisible(false);
 				paneles.get(7).setVisible(false);
 				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
 
-					/**
-					 * Obtener el nombre de usuario para guardar en el array
-					 */
-					
-					/**
-					 * obtener los datos de cliente y guardar en el array
-					 */
-					
-				}
-			
+				/**
+				 * Obtener el nombre de usuario para guardar en el array
+				 */
+
+				/**
+				 * obtener los datos de cliente y guardar en el array
+				 */
+
+			}
+
 		});
-		jButtonLoginAceptar.setBounds(530, 431, 98, 33);
+		jButtonLoginAceptar.setBounds(851, 556, 98, 33);
 		panelDeLogin.add(jButtonLoginAceptar);
 
-		JButton jButtonRegistro = new JButton("Registro");
+		jButtonRegistro = new JButton("Registro");
 		jButtonRegistro.addActionListener(new ActionListener() {
 			/**
 			 * El boton para volver al panel de registro
@@ -122,18 +129,22 @@ public class PanelDeLogin {
 				paneles.get(6).setVisible(false);
 				paneles.get(7).setVisible(false);
 				paneles.get(8).setVisible(false);
-				
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
 
 			}
 		});
-		jButtonRegistro.setBounds(100, 556, 98, 33);
+		jButtonRegistro.setBounds(43, 556, 98, 33);
 		panelDeLogin.add(jButtonRegistro);
 
-		JLabel lblLogoCineElorrieta = new JLabel("");
-		lblLogoCineElorrieta.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoCineElorrieta.setBounds(33, 33, 90, 90);
-		lblLogoCineElorrieta.setIcon(new ImageIcon(""));
-		panelDeLogin.add(lblLogoCineElorrieta);
+		lblErrekamusicLogo = new JLabel("");
+		lblErrekamusicLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErrekamusicLogo.setBounds(10, 10, 145, 145);
+		lblErrekamusicLogo.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
+		panelDeLogin.add(lblErrekamusicLogo);
 
 	}
 
@@ -145,7 +156,4 @@ public class PanelDeLogin {
 	public JPanel getPanelDeLogin() {
 		return panelDeLogin;
 	}
-
-
-
 }
