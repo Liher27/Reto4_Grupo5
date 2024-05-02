@@ -1,5 +1,5 @@
 package errekamusic.logica;
 
-public class PremiumUserController{
+public class PremiumUserController {
 
 }
