@@ -4,23 +4,19 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.Canciones;
 
-public class SongsController implements InterfaceController <Canciones> {
-
-	public List<Canciones>getSongsByDiscId(int discId){
-		return null;
-		
-		
-	}
+public class SongsController implements ContentsInterface <Canciones> {
 
 	@Override
-	public List<Canciones> getAll() {
+	public List<Canciones> GetAllContent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Canciones> getById(int id) {
+	public List<Canciones> GetContentByCollectionId(int collectionID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -18,10 +20,10 @@ public class AdminPanel extends JPanel {
 	private JPanel adminPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
-	private JLabel lblFavoriteTitle = null;
+	private JLabel lblAdminTitle = null;
 
-	private JButton btn_Registro_1_1 = null;
-	private JButton btn_Registro_1 = null;
+	private JButton adminPanelBackBtn = null;
+	private JLabel lblProfilePicture = null;
 
 	/**
 	 * Create the panel.
@@ -33,17 +35,14 @@ public class AdminPanel extends JPanel {
 		adminPanel.setBackground(new Color(0, 0, 0));
 		adminPanel.setLayout(null);
 
-		btn_Registro_1 = new JButton("Perfil");
-		btn_Registro_1.setBounds(736, 554, 87, 43);
-		btn_Registro_1.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		adminPanel.add(btn_Registro_1);
-		btn_Registro_1.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
-			public void actionPerformed(ActionEvent e) {
+		lblProfilePicture = new JLabel("");
+		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProfilePicture.setBounds(854, 31, 80, 80);
+		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.png"));
+		adminPanel.add(lblProfilePicture);
+		lblProfilePicture.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
 				paneles.get(2).setVisible(false);
@@ -58,17 +57,14 @@ public class AdminPanel extends JPanel {
 				paneles.get(11).setVisible(false);
 				paneles.get(12).setVisible(false);
 				paneles.get(13).setVisible(false);
-
-
 			}
-
 		});
 
-		btn_Registro_1_1 = new JButton("Volver");
-		btn_Registro_1_1.setBounds(845, 554, 101, 43);
-		btn_Registro_1_1.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		adminPanel.add(btn_Registro_1_1);
-		btn_Registro_1_1.addActionListener(new ActionListener() {
+		adminPanelBackBtn = new JButton("Volver");
+		adminPanelBackBtn.setBounds(844, 556, 98, 33);
+		adminPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		adminPanel.add(adminPanelBackBtn);
+		adminPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
 			 * 
@@ -90,8 +86,8 @@ public class AdminPanel extends JPanel {
 				paneles.get(12).setVisible(false);
 				paneles.get(13).setVisible(false);
 
-
 			}
+
 		});
 
 		lblLogoErrekamusic = new JLabel("");
@@ -100,12 +96,12 @@ public class AdminPanel extends JPanel {
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		adminPanel.add(lblLogoErrekamusic);
 
-		lblFavoriteTitle = new JLabel("Panel de administrador");
-		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFavoriteTitle.setForeground(new Color(255, 222, 89));
-		lblFavoriteTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblFavoriteTitle.setBounds(328, 32, 349, 64);
-		adminPanel.add(lblFavoriteTitle);
+		lblAdminTitle = new JLabel("Panel de administrador");
+		lblAdminTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdminTitle.setForeground(new Color(255, 222, 89));
+		lblAdminTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblAdminTitle.setBounds(328, 32, 349, 64);
+		adminPanel.add(lblAdminTitle);
 	}
 
 	public JPanel getPanelAdministrador() {

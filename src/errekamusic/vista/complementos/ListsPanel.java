@@ -21,8 +21,10 @@ public class ListsPanel extends JPanel {
 	private JPanel favoritesPanel = null;
 
 	private JLabel lblProfilePicture = null;
-	private JButton btn_Registro_1_1 = null;
 	private JLabel lblLogoErrekamusic = null;
+	private JLabel lblFavoriteTitle = null;
+
+	private JButton listsPanelBackBtn = null;
 
 	/**
 	 * Create the panel.
@@ -33,7 +35,6 @@ public class ListsPanel extends JPanel {
 		favoritesPanel.setBounds(0, 0, 984, 611);
 		favoritesPanel.setBackground(new Color(0, 0, 0));
 		favoritesPanel.setLayout(null);
-
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,12 +61,11 @@ public class ListsPanel extends JPanel {
 			}
 		});
 
-
-		btn_Registro_1_1 = new JButton("Volver");
-		btn_Registro_1_1.setBounds(844, 556, 98, 33);
-		btn_Registro_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		favoritesPanel.add(btn_Registro_1_1);
-		btn_Registro_1_1.addActionListener(new ActionListener() {
+		listsPanelBackBtn = new JButton("Volver");
+		listsPanelBackBtn.setBounds(844, 556, 98, 33);
+		listsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		favoritesPanel.add(listsPanelBackBtn);
+		listsPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
 			 * 
@@ -97,7 +97,7 @@ public class ListsPanel extends JPanel {
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		favoritesPanel.add(lblLogoErrekamusic);
 
-		JLabel lblFavoriteTitle = new JLabel("Playlists");
+		lblFavoriteTitle = new JLabel("Playlists");
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFavoriteTitle.setForeground(new Color(255, 222, 89));
 		lblFavoriteTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));

@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
 
 
 /**
@@ -18,8 +17,8 @@ import javax.swing.JButton;
  */
 public class WelcomePanel {
 
-	private JPanel panelDeBienvenida = null;
-	private JLabel lblBienvenida = null;
+	private JPanel welcomePanel = null;
+	private JLabel transparentButtonLbl = null;
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblWelcomeMessage = null;
 
@@ -30,15 +29,15 @@ public class WelcomePanel {
 	 */
 	public WelcomePanel(ArrayList<JPanel> paneles) {
 
-		panelDeBienvenida = new JPanel();
-		panelDeBienvenida.setBounds(0, 0, 984, 611);
-		panelDeBienvenida.setBackground(Color.black);
+		welcomePanel = new JPanel();
+		welcomePanel.setBounds(0, 0, 984, 611);
+		welcomePanel.setBackground(Color.black);
 
-		lblBienvenida = new JLabel("");
-		lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBienvenida.setBounds(0, 0, 984, 611);
+		transparentButtonLbl = new JLabel("");
+		transparentButtonLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		transparentButtonLbl.setBounds(0, 0, 984, 611);
 
-		lblBienvenida.addMouseListener(new MouseAdapter() {
+		transparentButtonLbl.addMouseListener(new MouseAdapter() {
 			/**
 			 * Cuando hagamos click en ello nos pasamos al panel de Login
 			 */
@@ -60,21 +59,21 @@ public class WelcomePanel {
 			}
 		});
 
-		panelDeBienvenida.setLayout(null);
-		lblBienvenida.setIcon(new ImageIcon(""));
-		panelDeBienvenida.add(lblBienvenida);
+		welcomePanel.setLayout(null);
+		transparentButtonLbl.setIcon(new ImageIcon(""));
+		welcomePanel.add(transparentButtonLbl);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(10,10,145,145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
-		panelDeBienvenida.add(lblLogoErrekamusic);
+		welcomePanel.add(lblLogoErrekamusic);
 		
 		lblWelcomeMessage = new JLabel("");
 		lblWelcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomeMessage.setBounds(140, 191, 702, 215);
 		lblWelcomeMessage.setIcon(new ImageIcon("contents/welcomeMessage.png"));
-		panelDeBienvenida.add(lblWelcomeMessage);
+		welcomePanel.add(lblWelcomeMessage);
 		
 		
 	}
@@ -85,7 +84,7 @@ public class WelcomePanel {
 	 * @return panelDeBienvenida
 	 */
 	public JPanel inicializarPanelDeBienvenida() {
-		return panelDeBienvenida;
+		return welcomePanel;
 	}
 
 	private void esperar() {

@@ -9,10 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,15 +25,15 @@ public class LoginPanel {
 
 	public JTextField fieldUsuario = null;
 
-	private JLabel labelContrasena = null;
-	private JLabel labelUsuario = null;
-	private JLabel tituloLogIn = null;
+	private JLabel passwdLbl = null;
+	private JLabel userLbl = null;
+	private JLabel logInTitleLbl = null;
 	private JLabel lblErrekamusicLogo = null;
 
-	private JButton jButtonRegistro = null;
-	private JButton jButtonLoginAceptar = null;
+	private JButton registerBtn = null;
+	private JButton logInPanelNextBtn = null;
 
-	public JPasswordField fieldContrasenna = null;
+	public JPasswordField passwdTextField = null;
 
 	/**
 	 * 
@@ -48,37 +46,37 @@ public class LoginPanel {
 		panelDeLogin.setBounds(0, 0, 984, 611);
 		panelDeLogin.setLayout(null);
 
-		tituloLogIn = new JLabel("Iniciar sesión");
-		tituloLogIn.setHorizontalAlignment(SwingConstants.CENTER);
-		tituloLogIn.setForeground(new Color(255, 222, 89));
-		tituloLogIn.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		tituloLogIn.setBounds(328, 32, 337, 64);
-		panelDeLogin.add(tituloLogIn);
+		logInTitleLbl = new JLabel("Iniciar sesión");
+		logInTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		logInTitleLbl.setForeground(new Color(255, 222, 89));
+		logInTitleLbl.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		logInTitleLbl.setBounds(328, 32, 337, 64);
+		panelDeLogin.add(logInTitleLbl);
 
-		labelUsuario = new JLabel("Usuario");
-		labelUsuario.setForeground(new Color(255, 222, 89));
-		labelUsuario.setFont(new Font("Tahoma", Font.BOLD, 14));
-		labelUsuario.setBounds(300, 225, 109, 14);
-		panelDeLogin.add(labelUsuario);
+		userLbl = new JLabel("Usuario");
+		userLbl.setForeground(new Color(255, 222, 89));
+		userLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
+		userLbl.setBounds(300, 225, 109, 14);
+		panelDeLogin.add(userLbl);
 
-		labelContrasena = new JLabel("Contraseña");
-		labelContrasena.setForeground(new Color(255, 222, 89));
-		labelContrasena.setFont(new Font("Tahoma", Font.BOLD, 14));
-		labelContrasena.setBounds(300, 373, 109, 14);
-		panelDeLogin.add(labelContrasena);
+		passwdLbl = new JLabel("Contraseña");
+		passwdLbl.setForeground(new Color(255, 222, 89));
+		passwdLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
+		passwdLbl.setBounds(300, 373, 109, 14);
+		panelDeLogin.add(passwdLbl);
 
 		fieldUsuario = new JTextField();
 		fieldUsuario.setBounds(470, 224, 211, 20);
 		panelDeLogin.add(fieldUsuario);
 		fieldUsuario.setColumns(10);
 
-		fieldContrasenna = new JPasswordField();
-		fieldContrasenna.setBounds(470, 372, 211, 20);
-		panelDeLogin.add(fieldContrasenna);
-		fieldContrasenna.setColumns(10);
+		passwdTextField = new JPasswordField();
+		passwdTextField.setBounds(470, 372, 211, 20);
+		panelDeLogin.add(passwdTextField);
+		passwdTextField.setColumns(10);
 
-		jButtonLoginAceptar = new JButton("Aceptar");
-		jButtonLoginAceptar.addActionListener(new ActionListener() {
+		logInPanelNextBtn = new JButton("Aceptar");
+		logInPanelNextBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
 			 * 
@@ -111,11 +109,11 @@ public class LoginPanel {
 			}
 
 		});
-		jButtonLoginAceptar.setBounds(851, 556, 98, 33);
-		panelDeLogin.add(jButtonLoginAceptar);
+		logInPanelNextBtn.setBounds(851, 556, 98, 33);
+		panelDeLogin.add(logInPanelNextBtn);
 
-		jButtonRegistro = new JButton("Registro");
-		jButtonRegistro.addActionListener(new ActionListener() {
+		registerBtn = new JButton("Registro");
+		registerBtn.addActionListener(new ActionListener() {
 			/**
 			 * El boton para volver al panel de registro
 			 */
@@ -137,8 +135,8 @@ public class LoginPanel {
 
 			}
 		});
-		jButtonRegistro.setBounds(43, 556, 98, 33);
-		panelDeLogin.add(jButtonRegistro);
+		registerBtn.setBounds(43, 556, 98, 33);
+		panelDeLogin.add(registerBtn);
 
 		lblErrekamusicLogo = new JLabel("");
 		lblErrekamusicLogo.setHorizontalAlignment(SwingConstants.CENTER);

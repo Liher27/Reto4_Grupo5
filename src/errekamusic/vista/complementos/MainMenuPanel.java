@@ -19,10 +19,10 @@ public class MainMenuPanel extends JPanel {
 	private JLabel lblMenuPrincipal = null;
 	private JLabel lblNewLabel_2 = null;
 	private JLabel lblProfilePicture = null;
-	private JLabel lblSalir = null;
-	private JLabel lblListaFavoritos = null;
-	private JLabel lblDescubregrupos = null;
-	private JLabel lblDescubrepodcast = null;
+	private JLabel mainMenuPanelExitBtn = null;
+	private JLabel playlistsLbl = null;
+	private JLabel discoverGroupsLbl = null;
+	private JLabel discoverPodcastersLbl = null;
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel overlayLbl = null;
 
@@ -34,112 +34,112 @@ public class MainMenuPanel extends JPanel {
 		panelPrincipal.setBounds(0, 0, 984, 611);
 		panelPrincipal.setBackground(new Color(0, 0, 0));
 		panelPrincipal.setLayout(null);
-								
-										lblSalir = new JLabel("4. Salir ");
-										lblSalir.setForeground(new Color(255, 222, 89));
-										lblSalir.setFont(new Font("Cambria", Font.BOLD, 20));
-										lblSalir.setBounds(49, 396, 219, 25);
-										panelPrincipal.add(lblSalir);
-										lblSalir.addMouseListener(new MouseAdapter() {
-											@Override
-											public void mouseClicked(MouseEvent e) {
-												paneles.get(0).setVisible(true);
-												paneles.get(1).setVisible(false);
-												paneles.get(2).setVisible(false);
-												paneles.get(3).setVisible(false);
-												paneles.get(4).setVisible(false);
-												paneles.get(5).setVisible(false);
-												paneles.get(6).setVisible(false);
-												paneles.get(7).setVisible(false);
-												paneles.get(8).setVisible(false);
-												paneles.get(9).setVisible(false);
-											}
-										});
-						
-								lblListaFavoritos = new JLabel("3. Ver playlists");
-								lblListaFavoritos.setForeground(new Color(255, 222, 89));
-								lblListaFavoritos.setFont(new Font("Cambria", Font.BOLD, 20));
-								lblListaFavoritos.setBounds(49, 332, 219, 25);
-								panelPrincipal.add(lblListaFavoritos);
-								lblListaFavoritos.addMouseListener(new MouseAdapter() {
-									@Override
-									public void mouseClicked(MouseEvent e) {
 
-										paneles.get(0).setVisible(false);
-										paneles.get(1).setVisible(false);
-										paneles.get(2).setVisible(false);
-										paneles.get(3).setVisible(false);
-										paneles.get(4).setVisible(false);
-										paneles.get(5).setVisible(false);
-										paneles.get(6).setVisible(false);
-										paneles.get(7).setVisible(true);
-										paneles.get(8).setVisible(false);
-										paneles.get(9).setVisible(false);
-										paneles.get(10).setVisible(false);
-										paneles.get(11).setVisible(false);
-										paneles.get(12).setVisible(false);
-										paneles.get(13).setVisible(false);
+		mainMenuPanelExitBtn = new JLabel("4. Salir ");
+		mainMenuPanelExitBtn.setForeground(new Color(255, 222, 89));
+		mainMenuPanelExitBtn.setFont(new Font("Cambria", Font.BOLD, 20));
+		mainMenuPanelExitBtn.setBounds(49, 396, 219, 25);
+		panelPrincipal.add(mainMenuPanelExitBtn);
+		mainMenuPanelExitBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				paneles.get(0).setVisible(true);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+			}
+		});
 
-									}
-								});
-				
-						lblDescubrepodcast = new JLabel("2. Descubre podcasters");
-						lblDescubrepodcast.setForeground(new Color(255, 222, 89));
-						lblDescubrepodcast.setFont(new Font("Cambria", Font.BOLD, 20));
-						lblDescubrepodcast.setBounds(49, 257, 219, 25);
-						panelPrincipal.add(lblDescubrepodcast);
-						lblDescubrepodcast.addMouseListener(new MouseAdapter() {
-							@Override
-							public void mouseClicked(MouseEvent e) {
+		playlistsLbl = new JLabel("3. Ver playlists");
+		playlistsLbl.setForeground(new Color(255, 222, 89));
+		playlistsLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		playlistsLbl.setBounds(49, 332, 219, 25);
+		panelPrincipal.add(playlistsLbl);
+		playlistsLbl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
-								paneles.get(0).setVisible(false);
-								paneles.get(1).setVisible(false);
-								paneles.get(2).setVisible(false);
-								paneles.get(3).setVisible(false);
-								paneles.get(4).setVisible(false);
-								paneles.get(5).setVisible(false);
-								paneles.get(6).setVisible(false);
-								paneles.get(7).setVisible(false);
-								paneles.get(8).setVisible(false);
-								paneles.get(9).setVisible(false);
-								paneles.get(10).setVisible(false);
-								paneles.get(11).setVisible(true);
-								paneles.get(12).setVisible(false);
-								paneles.get(13).setVisible(false);
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(true);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
 
-							}
-						});
-		
-				lblDescubregrupos = new JLabel("1. Descubre Grupos");
-				lblDescubregrupos.setForeground(new Color(255, 222, 89));
-				lblDescubregrupos.setFont(new Font("Cambria", Font.BOLD, 20));
-				lblDescubregrupos.setBounds(49, 197, 214, 25);
-				panelPrincipal.add(lblDescubregrupos);
-				lblDescubregrupos.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
+			}
+		});
 
-						paneles.get(0).setVisible(false);
-						paneles.get(1).setVisible(false);
-						paneles.get(2).setVisible(false);
-						paneles.get(3).setVisible(false);
-						paneles.get(4).setVisible(true);
-						paneles.get(5).setVisible(false);
-						paneles.get(6).setVisible(false);
-						paneles.get(7).setVisible(false);
-						paneles.get(8).setVisible(false);
-						paneles.get(9).setVisible(false);
-						paneles.get(10).setVisible(false);
-						paneles.get(11).setVisible(false);
-						paneles.get(12).setVisible(false);
-						paneles.get(13).setVisible(false);
-					}
-				});
+		discoverPodcastersLbl = new JLabel("2. Descubre podcasters");
+		discoverPodcastersLbl.setForeground(new Color(255, 222, 89));
+		discoverPodcastersLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		discoverPodcastersLbl.setBounds(49, 257, 219, 25);
+		panelPrincipal.add(discoverPodcastersLbl);
+		discoverPodcastersLbl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(true);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+
+			}
+		});
+
+		discoverGroupsLbl = new JLabel("1. Descubre Grupos");
+		discoverGroupsLbl.setForeground(new Color(255, 222, 89));
+		discoverGroupsLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		discoverGroupsLbl.setBounds(49, 197, 214, 25);
+		panelPrincipal.add(discoverGroupsLbl);
+		discoverGroupsLbl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(true);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+			}
+		});
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
-		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo(2).png"));
+		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo(1).png"));
 		panelPrincipal.add(lblLogoErrekamusic);
 
 		overlayLbl = new JLabel("");

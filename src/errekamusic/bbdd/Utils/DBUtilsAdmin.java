@@ -1,7 +1,7 @@
 package errekamusic.bbdd.Utils;
 
 public class DBUtilsAdmin {
-	public static final String URL = "jdbc:mysql://localhost:3306/******";
+	public static final String URL = "jdbc:mysql://localhost:3307/reto4_grupo5";
 
 	// El Driver que vamos a usar
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";

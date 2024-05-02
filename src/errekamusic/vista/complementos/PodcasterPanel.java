@@ -19,14 +19,13 @@ public class PodcasterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel podcasterPanel = null;
 
-	private JButton btn_Registro = null;
+	private JButton collectionInfoBtn = null;
 	private JLabel lblProfilePicture = null;
 	private JButton podcasterPanelBackBtn = null;
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblFavoriteTitle = null;
-	
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -36,35 +35,6 @@ public class PodcasterPanel extends JPanel {
 		podcasterPanel.setBounds(0, 0, 984, 611);
 		podcasterPanel.setBackground(new Color(0, 0, 0));
 		podcasterPanel.setLayout(null);
-
-		btn_Registro = new JButton("Reproducir");
-		btn_Registro.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		podcasterPanel.add(btn_Registro);
-		btn_Registro.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
-			public void actionPerformed(ActionEvent e) {
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(false);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(true);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
-
-			}
-
-		});
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
@@ -133,6 +103,35 @@ public class PodcasterPanel extends JPanel {
 		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		podcasterPanel.add(lblLogoErrekamusic);
+
+		collectionInfoBtn = new JButton("Mas informacion");
+		collectionInfoBtn.setBounds(440, 561, 186, 28);
+		podcasterPanel.add(collectionInfoBtn);
+		collectionInfoBtn.addActionListener(new ActionListener() {
+			/**
+			 * Confirmamos para logearnos
+			 * 
+			 * @param e
+			 */
+			public void actionPerformed(ActionEvent e) {
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(true);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+
+			}
+
+		});
 
 	}
 

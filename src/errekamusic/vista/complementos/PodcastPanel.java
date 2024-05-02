@@ -19,15 +19,13 @@ public class PodcastPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel podcastPanel = null;
 
-	private JButton btn_Registro = null;
 	private JLabel lblProfilePicture = null;
-	private JButton btn_Registro_1_1 = null;
-
 	private JLabel lblLogoErrekamusic = null;
-	private JLabel lblDescubregrupos = null;
-	private JLabel lblpodcaster = null;
-	private JLabel lblseries = null;
-	private JLabel lblpodcast = null;
+	private JLabel lblSubtitle = null;
+	private JLabel lblPodcastTitle = null;
+
+	private JButton podcastPanelBackBtn = null;
+	private JButton reproContentBtn = null;
 
 	/**
 	 * Create the panel.
@@ -39,34 +37,12 @@ public class PodcastPanel extends JPanel {
 		podcastPanel.setBackground(new Color(0, 0, 0));
 		podcastPanel.setLayout(null);
 
-		btn_Registro = new JButton("Reproducir");
-		btn_Registro.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		podcastPanel.add(btn_Registro);
-		btn_Registro.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
-			public void actionPerformed(ActionEvent e) {
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(false);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(true);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
-
-			}
-
-		});
+		lblPodcastTitle = new JLabel("Descubre podcasts");
+		lblPodcastTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPodcastTitle.setForeground(new Color(255, 222, 89));
+		lblPodcastTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblPodcastTitle.setBounds(328, 32, 349, 64);
+		podcastPanel.add(lblPodcastTitle);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,11 +69,11 @@ public class PodcastPanel extends JPanel {
 			}
 		});
 
-		btn_Registro_1_1 = new JButton("Volver");
-		btn_Registro_1_1.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		btn_Registro_1_1.setBounds(739, 524, 149, 43);
-		podcastPanel.add(btn_Registro_1_1);
-		btn_Registro_1_1.addActionListener(new ActionListener() {
+		podcastPanelBackBtn = new JButton("Volver");
+		podcastPanelBackBtn.setBounds(844, 556, 98, 33);
+		podcastPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		podcastPanel.add(podcastPanelBackBtn);
+		podcastPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
 			 * 
@@ -123,34 +99,45 @@ public class PodcastPanel extends JPanel {
 
 		});
 
-		lblDescubregrupos = new JLabel("Seleccione la opción que desee:");
-		lblDescubregrupos.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblDescubregrupos.setBounds(68, 64, 285, 25);
-		podcastPanel.add(lblDescubregrupos);
-
-		lblpodcaster = new JLabel("1. Podcasters");
-		lblpodcaster.setForeground(new Color(255, 222, 89));
-		lblpodcaster.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblpodcaster.setBounds(68, 166, 142, 54);
-		podcastPanel.add(lblpodcaster);
-
-		lblseries = new JLabel("2. Series ");
-		lblseries.setForeground(new Color(255, 222, 89));
-		lblseries.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblseries.setBounds(68, 253, 142, 49);
-		podcastPanel.add(lblseries);
-
-		lblpodcast = new JLabel("3. Podcast ");
-		lblpodcast.setForeground(new Color(255, 222, 89));
-		lblpodcast.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblpodcast.setBounds(68, 341, 142, 43);
-		podcastPanel.add(lblpodcast);
+		lblSubtitle = new JLabel("Seleccione la opción que desee:");
+		lblSubtitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSubtitle.setBounds(68, 64, 285, 25);
+		podcastPanel.add(lblSubtitle);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		podcastPanel.add(lblLogoErrekamusic);
+
+		reproContentBtn = new JButton("Reproducir contenido");
+		reproContentBtn.setBounds(440, 561, 186, 28);
+		podcastPanel.add(reproContentBtn);
+		reproContentBtn.addActionListener(new ActionListener() {
+			/**
+			 * Confirmamos para logearnos
+			 * 
+			 * @param e
+			 */
+			public void actionPerformed(ActionEvent e) {
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(true);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+
+			}
+
+		});
 
 	}
 

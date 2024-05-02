@@ -15,34 +15,52 @@ import javax.swing.SwingConstants;
 public class ProfilePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel panelPerfiles = null;
+	private JPanel profilePanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
+	private JLabel lblProfileTitle = null;
 
-	private JButton btn_Registro_1 = null;
-	private JButton btn_Registro_1_1 = null;
+	private JButton groupPanelNextBtn = null;
+	private JButton groupPanelBackBtn = null;
 
 	/**
 	 * Create the panel.
 	 */
 	public ProfilePanel(ArrayList<JPanel> paneles) {
 
-		panelPerfiles = new JPanel();
-		panelPerfiles.setBounds(0, 0, 984, 611);
-		panelPerfiles.setBackground(new Color(0, 152, 218));
-		panelPerfiles.setLayout(null);
+		profilePanel = new JPanel();
+		profilePanel.setBounds(0, 0, 984, 611);
+		profilePanel.setBackground(new Color(0, 0, 0));
+		profilePanel.setLayout(null);
 
-		btn_Registro_1 = new JButton("Aceptar");
-		btn_Registro_1.setBounds(636, 554, 139, 43);
-		btn_Registro_1.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		panelPerfiles.add(btn_Registro_1);
-		btn_Registro_1.addActionListener(new ActionListener() {
+		
+		lblProfileTitle = new JLabel("Cambiar perfil");
+		lblProfileTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProfileTitle.setForeground(new Color(255, 222, 89));
+		lblProfileTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblProfileTitle.setBounds(328, 32, 349, 64);
+		profilePanel.add(lblProfileTitle);
+		
+		groupPanelNextBtn = new JButton("Aceptar");
+		groupPanelNextBtn.setBounds(844, 556, 98, 33);
+		groupPanelNextBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		profilePanel.add(groupPanelNextBtn);
+		groupPanelNextBtn.addActionListener(new ActionListener() {
+			
+			
 			/**
 			 * Confirmamos para logearnos
 			 * 
 			 * @param e
 			 */
 			public void actionPerformed(ActionEvent e) {
+				
+				SaveNewProfileData();
+
+				/*
+				 * popUp datos cambiados if true, else nada
+				 */
+				
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
 				paneles.get(2).setVisible(false);
@@ -62,11 +80,11 @@ public class ProfilePanel extends JPanel {
 
 		});
 
-		btn_Registro_1_1 = new JButton("Cancelar");
-		btn_Registro_1_1.setBounds(807, 554, 139, 43);
-		btn_Registro_1_1.setFont(new Font("Nirmala UI Semilight", Font.PLAIN, 25));
-		panelPerfiles.add(btn_Registro_1_1);
-		btn_Registro_1_1.addActionListener(new ActionListener() {
+		groupPanelBackBtn = new JButton("Volver");
+		groupPanelBackBtn.setBounds(844, 556, 98, 33);
+		groupPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		profilePanel.add(groupPanelBackBtn);
+		groupPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
 			 * 
@@ -96,12 +114,24 @@ public class ProfilePanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
-		panelPerfiles.add(lblLogoErrekamusic);
+		profilePanel.add(lblLogoErrekamusic);
 	}
 
 	public JPanel getPanelPerfiles() {
 		// TODO Auto-generated method stub
-		return panelPerfiles;
+		return profilePanel;
+	}
+	
+	private boolean SaveNewProfileData() {
+		boolean ret = false;
+		
+		/*
+		 * if datosCambiados, ret = true
+		 * else false
+		 */
+		
+		return ret;
+		
 	}
 
 }

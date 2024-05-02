@@ -162,8 +162,6 @@ public class VentanaPrincipal extends JFrame {
 		songsPanel.setVisible(false);
 		paneles.add(songsPanel);
 		frame.getContentPane().add(songsPanel);
-		
-
 	}
 
 }
