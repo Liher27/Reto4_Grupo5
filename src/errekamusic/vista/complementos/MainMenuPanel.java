@@ -3,7 +3,8 @@ package errekamusic.vista.complementos;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.logica.ImageController;
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.DiscController;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -15,6 +16,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainMenuPanel extends JPanel {
@@ -23,7 +25,7 @@ public class MainMenuPanel extends JPanel {
 	private JPanel mainMenuPanel = null;
 
 	private JLabel lblMenuPrincipal = null;
-	public JLabel propagandaImageLbl = null;
+	private JLabel propagandaImageLbl = null;
 	private JLabel lblProfilePicture = null;
 	private JLabel mainMenuPanelExitBtn = null;
 	private JLabel playlistsLbl = null;
@@ -32,12 +34,22 @@ public class MainMenuPanel extends JPanel {
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel overlayLbl = null;
 	private JLabel mainMenuContentPlayerLblBtn = null;
+	private JLabel groupDiscBelongLbl = null;
+	private JLabel discNameTitleLbl = null;
+	private JLabel discNameLbl = null;
+	private JLabel groupDiscBelongTitleLbl = null;
+	private JLabel propagandaDiscDateTitleLbl = null;
+	private JLabel propagandaDiscDateLbl = null;
+	private JLabel propagandaDiscGenreTitleLbl = null;
+	private JLabel propagandaDiscGenreLbl = null;
 
-	private ImageIcon propagandaGroupIcon = null;
-	private ImageController imageController = null;
+	private List<Disc> discInfo = null;
+	private DiscController discController = null;
+	private Disc discForPropaganda = null;
 
 	private Random randomNumberToExecute = null;
-	int randomDiscID = 0;
+	private int randomDiscID = 0;
+	private ImageIcon discImageIcon = null;
 
 	/**
 	 * Create the panel.
@@ -249,50 +261,50 @@ public class MainMenuPanel extends JPanel {
 			}
 		});
 		mainMenuPanel.add(propagandaImageLbl);
-		
-		JLabel discNameTitleLbl = new JLabel("Nombre del disco: ");
+
+		discNameTitleLbl = new JLabel("Nombre del disco: ");
 		discNameTitleLbl.setForeground(new Color(127, 57, 206));
 		discNameTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		discNameTitleLbl.setBounds(383, 166, 214, 25);
 		mainMenuPanel.add(discNameTitleLbl);
-		
-		JLabel discNameLbl = new JLabel("adasda");
+
+		discNameLbl = new JLabel("");
 		discNameLbl.setForeground(new Color(255, 255, 255));
 		discNameLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		discNameLbl.setBounds(383, 198, 214, 25);
 		mainMenuPanel.add(discNameLbl);
-		
-		JLabel groupDiscBelongTitleLbl = new JLabel("Grupo:");
+
+		groupDiscBelongTitleLbl = new JLabel("Grupo:");
 		groupDiscBelongTitleLbl.setForeground(new Color(127, 57, 206));
 		groupDiscBelongTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		groupDiscBelongTitleLbl.setBounds(383, 266, 214, 25);
 		mainMenuPanel.add(groupDiscBelongTitleLbl);
-		
-		JLabel groupDiscBelongLbl = new JLabel("adads");
+
+		groupDiscBelongLbl = new JLabel("");
 		groupDiscBelongLbl.setForeground(new Color(255, 255, 255));
 		groupDiscBelongLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		groupDiscBelongLbl.setBounds(383, 302, 214, 25);
 		mainMenuPanel.add(groupDiscBelongLbl);
-		
-		JLabel propagandaDiscDateTitleLbl = new JLabel("Fecha de publicacion:");
+
+		propagandaDiscDateTitleLbl = new JLabel("Fecha de publicacion:");
 		propagandaDiscDateTitleLbl.setForeground(new Color(127, 57, 206));
 		propagandaDiscDateTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		propagandaDiscDateTitleLbl.setBounds(383, 377, 214, 25);
 		mainMenuPanel.add(propagandaDiscDateTitleLbl);
-		
-		JLabel propagandaDiscDateLbl = new JLabel("awdsd");
+
+		propagandaDiscDateLbl = new JLabel("");
 		propagandaDiscDateLbl.setForeground(new Color(255, 255, 255));
 		propagandaDiscDateLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		propagandaDiscDateLbl.setBounds(383, 405, 214, 25);
 		mainMenuPanel.add(propagandaDiscDateLbl);
-		
-		JLabel propagandaDiscGenreTitleLbl = new JLabel("Genero");
+
+		propagandaDiscGenreTitleLbl = new JLabel("Genero");
 		propagandaDiscGenreTitleLbl.setForeground(new Color(127, 57, 206));
 		propagandaDiscGenreTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		propagandaDiscGenreTitleLbl.setBounds(383, 478, 214, 25);
 		mainMenuPanel.add(propagandaDiscGenreTitleLbl);
-		
-		JLabel propagandaDiscGenreLbl = new JLabel("adsadw");
+
+		propagandaDiscGenreLbl = new JLabel("");
 		propagandaDiscGenreLbl.setForeground(new Color(255, 255, 255));
 		propagandaDiscGenreLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		propagandaDiscGenreLbl.setBounds(383, 512, 214, 25);
@@ -302,15 +314,28 @@ public class MainMenuPanel extends JPanel {
 
 	public void getPropagandaImage() {
 		randomNumberToExecute = new Random();
+		discInfo = new ArrayList<Disc>();
 		randomDiscID = (randomNumberToExecute.nextInt(3) + 1);
-		System.out.println(randomDiscID);
 
-		imageController = new ImageController();
+		discController = new DiscController();
 
-		propagandaGroupIcon = new ImageIcon();
-		propagandaGroupIcon = imageController.getDiscImageById(randomDiscID);
+		try {
+			discInfo = discController.GetDiscForPropaganda(randomDiscID);
+			if (null != discInfo) {
+				discForPropaganda = discInfo.get(0);
 
-		propagandaImageLbl.setIcon(propagandaGroupIcon);
+				discNameLbl.setText(discForPropaganda.getCollectionName());
+				groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
+				propagandaDiscDateLbl.setText(discForPropaganda.getCollectionDate().toString());
+				propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
+
+				discImageIcon = discForPropaganda.getCollectionImage();
+				propagandaImageLbl.setIcon(discImageIcon);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public JPanel getPanelPrincipal() {

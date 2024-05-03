@@ -1,9 +1,7 @@
 
 package errekamusic.vista;
 
-
 import errekamusic.vista.complementos.*;
-
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -19,8 +17,8 @@ public class VentanaPrincipal extends JFrame {
 	 * el JFrame para panel
 	 */
 	private JFrame frame;
-	
-	private ArrayList <JPanel> paneles = null;
+
+	private ArrayList<JPanel> paneles = null;
 	private JPanel contentPlayerPanel = null;
 	private JPanel adminPanel = null;
 	private JPanel discsPanel = null;
@@ -35,11 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel seriesPanel = null;
 	private JPanel songsPanel = null;
 	private JPanel welcomePanel = null;
-	
-	
-	
-	
-	
+
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -71,12 +65,11 @@ public class VentanaPrincipal extends JFrame {
 		frame.setBounds(100, 100, 1000, 650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		
+
 		/**
 		 * El array que usaremos para guardar los paneles
 		 */
-		paneles = new ArrayList <JPanel> ();
+		paneles = new ArrayList<JPanel>();
 
 		// 0
 		WelcomePanel welcome = new WelcomePanel(paneles);
@@ -138,31 +131,31 @@ public class VentanaPrincipal extends JFrame {
 		adminPanel.setVisible(false);
 		paneles.add(adminPanel);
 		frame.getContentPane().add(adminPanel);
-		//10
+		// 10
 		DiscsPanel discs = new DiscsPanel(paneles);
 		discsPanel = discs.getDiscsPanel();
 		discsPanel.setVisible(false);
 		paneles.add(discsPanel);
 		frame.getContentPane().add(discsPanel);
-		//11
+		// 11
 		PodcasterPanel podcaster = new PodcasterPanel(paneles);
 		podcasterPanel = podcaster.getPodcasterPanel();
 		podcasterPanel.setVisible(false);
 		paneles.add(podcasterPanel);
 		frame.getContentPane().add(podcasterPanel);
-		//12
+		// 12
 		SeriesPanel series = new SeriesPanel(paneles);
 		seriesPanel = series.getSeriesPanel();
 		seriesPanel.setVisible(false);
 		paneles.add(seriesPanel);
 		frame.getContentPane().add(seriesPanel);
-		//13
+		// 13
 		SongsPanel songs = new SongsPanel(paneles);
 		songsPanel = songs.getSongsPanel();
 		songsPanel.setVisible(false);
 		paneles.add(songsPanel);
 		frame.getContentPane().add(songsPanel);
-		
+
 	}
 
 }
