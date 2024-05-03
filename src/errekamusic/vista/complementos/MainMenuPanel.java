@@ -257,7 +257,12 @@ public class MainMenuPanel extends JPanel {
 		propagandaImageLbl.setBounds(649, 198, 287, 287);
 		mainMenuPanel.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent c) {
-				getPropagandaImage();
+				try {
+					getPropagandaImage();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		mainMenuPanel.add(propagandaImageLbl);
@@ -312,14 +317,14 @@ public class MainMenuPanel extends JPanel {
 
 	}
 
-	public void getPropagandaImage() {
+	public void getPropagandaImage() throws Exception{
 		randomNumberToExecute = new Random();
+		
 		discInfo = new ArrayList<Disc>();
 		randomDiscID = (randomNumberToExecute.nextInt(3) + 1);
 
 		discController = new DiscController();
 
-		try {
 			discInfo = discController.GetDiscForPropaganda(randomDiscID);
 			if (null != discInfo) {
 				discForPropaganda = discInfo.get(0);
@@ -328,18 +333,14 @@ public class MainMenuPanel extends JPanel {
 				groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
 				propagandaDiscDateLbl.setText(discForPropaganda.getCollectionDate().toString());
 				propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
-
 				discImageIcon = discForPropaganda.getCollectionImage();
 				propagandaImageLbl.setIcon(discImageIcon);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 
 	}
 
 	public JPanel getPanelPrincipal() {
-		// TODO Auto-generated method stub
 		return mainMenuPanel;
 	}
 }

@@ -1,5 +1,6 @@
 package errekamusic.bbdd.Pojo;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,8 +9,7 @@ import javax.swing.ImageIcon;
 public class Coleccion {
 	private int collectionID = 0;
 	private String collectionName = null;
-	private Date publicationDate = null;
-	private Date collectionDate = null;
+	private LocalDate localDate = null;
 	private int collectionRepNum = 0;
 	private String collectionType = null;
 	private String collectionGenre = null;
@@ -28,17 +28,11 @@ public class Coleccion {
 	public void setCollectionName(String collectionName) {
 		this.collectionName = collectionName;
 	}
-	public Date getPublicationDate() {
-		return publicationDate;
+	public LocalDate getCollectionDate() {
+		return localDate;
 	}
-	public void setPublicationDate(Date publicationDate) {
-		this.publicationDate = publicationDate;
-	}
-	public Date getCollectionDate() {
-		return collectionDate;
-	}
-	public void setCollectionDate(Date collectionDate) {
-		this.collectionDate = collectionDate;
+	public void setCollectionDate(LocalDate localDate) {
+		this.localDate = localDate;
 	}
 	public int getCollectionRepNum() {
 		return collectionRepNum;
@@ -78,8 +72,8 @@ public class Coleccion {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(artist, collectionDate, collectionDesc, collectionGenre, collectionID, collectionImage,
-				collectionName, collectionRepNum, collectionType, publicationDate);
+		return Objects.hash(artist, localDate, collectionDesc, collectionGenre, collectionID, collectionImage,
+				collectionName, collectionRepNum, collectionType);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -90,18 +84,17 @@ public class Coleccion {
 		if (getClass() != obj.getClass())
 			return false;
 		Coleccion other = (Coleccion) obj;
-		return Objects.equals(artist, other.artist) && Objects.equals(collectionDate, other.collectionDate)
+		return Objects.equals(artist, other.artist) && Objects.equals(localDate, other.localDate)
 				&& Objects.equals(collectionDesc, other.collectionDesc)
 				&& Objects.equals(collectionGenre, other.collectionGenre) && collectionID == other.collectionID
 				&& Objects.equals(collectionImage, other.collectionImage)
 				&& Objects.equals(collectionName, other.collectionName) && collectionRepNum == other.collectionRepNum
-				&& Objects.equals(collectionType, other.collectionType)
-				&& Objects.equals(publicationDate, other.publicationDate);
+				&& Objects.equals(collectionType, other.collectionType);
 	}
 	@Override
 	public String toString() {
 		return "Coleccion [collectionID=" + collectionID + ", collectionName=" + collectionName + ", publicationDate="
-				+ publicationDate + ", collectionDate=" + collectionDate + ", collectionRepNum=" + collectionRepNum
+				+ ", collectionDate=" + localDate + ", collectionRepNum=" + collectionRepNum
 				+ ", collectionType=" + collectionType + ", collectionGenre=" + collectionGenre + ", collectionDesc="
 				+ collectionDesc + ", collectionImage=" + collectionImage + ", artist=" + artist + "]";
 	}

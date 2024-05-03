@@ -3,6 +3,7 @@ package errekamusic.utils;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import java.sql.Blob;
+import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -24,20 +25,16 @@ public class Converter {
 		return ret;
 	}
 
-	public static java.util.Date convertFromSqlDateToUtilDate(java.sql.Date sqlDateFromDatabase) {
+	public static LocalDate convertFromSqlDateToUtilDate(java.sql.Date sqlDateFromDatabase) {
 
-		java.util.Date ret = null;
-
-		ret = new java.util.Date(sqlDateFromDatabase.getTime());
-
-		return ret;
+		return sqlDateFromDatabase.toLocalDate();
 	}
 
-	public static java.sql.Date convertFromUtilDateToSqlDate(java.util.Date utilDateFromDatabase) {
+	public static java.sql.Date convertFromUtilDateToSqlDate(java.util.Date utilDateToDatabase) {
 
 		java.sql.Date ret = null;
 
-		ret = new java.sql.Date(utilDateFromDatabase.getTime());
+		ret = new java.sql.Date(utilDateToDatabase.getTime());
 
 		return ret;
 	}
