@@ -98,7 +98,7 @@ public class AdminPanel extends JPanel {
 
 		lblAdminTitle = new JLabel("Panel de administrador");
 		lblAdminTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdminTitle.setForeground(new Color(255, 222, 89));
+		lblAdminTitle.setForeground(new Color(255, 255, 255));
 		lblAdminTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
 		lblAdminTitle.setBounds(328, 32, 349, 64);
 		adminPanel.add(lblAdminTitle);

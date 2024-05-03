@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Random;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -22,19 +21,14 @@ public class ImageController {
 	private PreparedStatement pstmt = null;
 	private ResultSet result = null;
 	private ImageIcon artistImageIcon = null;
-	private Random randomNumberToExecute = null;
-	int randomArtistID = 0;
-
-	public ImageIcon getDiscImageById() {
-
-		randomNumberToExecute = new Random();
-		randomArtistID = (randomNumberToExecute.nextInt(2) + 1);
+	
+	public ImageIcon getDiscImageById(int randomArtistID) {
 
 		try {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "SELECT COLLECTIONIMAGE FROM COLLECTION WHERE COLLECTIONID = ?";
+			String sql = "SELECT * FROM collection WHERE CollectionID=? AND CollectionType LIKE 'DISC'";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, randomArtistID);
 			result = pstmt.executeQuery();
@@ -46,9 +40,7 @@ public class ImageController {
 
 				Image image = ImageIO.read(new ByteArrayInputStream(imageBytes));
 
-				Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-
-				ImageIcon icon = new ImageIcon(scaledImage);
+				ImageIcon icon = new ImageIcon(image);
 
 				artistImageIcon = icon;
 

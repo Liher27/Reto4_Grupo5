@@ -10,9 +10,12 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainMenuPanel extends JPanel {
 
@@ -20,7 +23,7 @@ public class MainMenuPanel extends JPanel {
 	private JPanel mainMenuPanel = null;
 
 	private JLabel lblMenuPrincipal = null;
-	private JLabel propagandaImageLbl = null;
+	public JLabel propagandaImageLbl = null;
 	private JLabel lblProfilePicture = null;
 	private JLabel mainMenuPanelExitBtn = null;
 	private JLabel playlistsLbl = null;
@@ -33,6 +36,9 @@ public class MainMenuPanel extends JPanel {
 	private ImageIcon propagandaGroupIcon = null;
 	private ImageController imageController = null;
 
+	private Random randomNumberToExecute = null;
+	int randomDiscID = 0;
+
 	/**
 	 * Create the panel.
 	 */
@@ -42,12 +48,7 @@ public class MainMenuPanel extends JPanel {
 		mainMenuPanel.setBackground(new Color(0, 0, 0));
 		mainMenuPanel.setLayout(null);
 
-		imageController = new ImageController();
-
-		propagandaGroupIcon = new ImageIcon();
-		propagandaGroupIcon = imageController.getDiscImageById();
-
-		discoverGroupsLbl = new JLabel("Descubre Grupos");
+		discoverGroupsLbl = new JLabel("Descubre grupos");
 		discoverGroupsLbl.setForeground(new Color(255, 222, 89));
 		discoverGroupsLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		discoverGroupsLbl.setBounds(49, 166, 214, 25);
@@ -215,7 +216,7 @@ public class MainMenuPanel extends JPanel {
 
 		lblMenuPrincipal = new JLabel("Menu principal");
 		lblMenuPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMenuPrincipal.setForeground(new Color(255, 222, 89));
+		lblMenuPrincipal.setForeground(new Color(255, 255, 255));
 		lblMenuPrincipal.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 30));
 		lblMenuPrincipal.setBounds(460, 10, 266, 106);
 		mainMenuPanel.add(lblMenuPrincipal);
@@ -241,10 +242,75 @@ public class MainMenuPanel extends JPanel {
 
 		propagandaImageLbl = new JLabel("");
 		propagandaImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
-		propagandaImageLbl.setBounds(497, 166, 400, 400);
-		propagandaImageLbl.setIcon(propagandaGroupIcon);
+		propagandaImageLbl.setBounds(649, 198, 287, 287);
+		mainMenuPanel.addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent c) {
+				getPropagandaImage();
+			}
+		});
 		mainMenuPanel.add(propagandaImageLbl);
 		
+		JLabel discNameTitleLbl = new JLabel("Nombre del disco: ");
+		discNameTitleLbl.setForeground(new Color(127, 57, 206));
+		discNameTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		discNameTitleLbl.setBounds(383, 166, 214, 25);
+		mainMenuPanel.add(discNameTitleLbl);
+		
+		JLabel discNameLbl = new JLabel("adasda");
+		discNameLbl.setForeground(new Color(255, 255, 255));
+		discNameLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		discNameLbl.setBounds(383, 198, 214, 25);
+		mainMenuPanel.add(discNameLbl);
+		
+		JLabel groupDiscBelongTitleLbl = new JLabel("Grupo:");
+		groupDiscBelongTitleLbl.setForeground(new Color(127, 57, 206));
+		groupDiscBelongTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		groupDiscBelongTitleLbl.setBounds(383, 266, 214, 25);
+		mainMenuPanel.add(groupDiscBelongTitleLbl);
+		
+		JLabel groupDiscBelongLbl = new JLabel("adads");
+		groupDiscBelongLbl.setForeground(new Color(255, 255, 255));
+		groupDiscBelongLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		groupDiscBelongLbl.setBounds(383, 302, 214, 25);
+		mainMenuPanel.add(groupDiscBelongLbl);
+		
+		JLabel propagandaDiscDateTitleLbl = new JLabel("Fecha de publicacion:");
+		propagandaDiscDateTitleLbl.setForeground(new Color(127, 57, 206));
+		propagandaDiscDateTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		propagandaDiscDateTitleLbl.setBounds(383, 377, 214, 25);
+		mainMenuPanel.add(propagandaDiscDateTitleLbl);
+		
+		JLabel propagandaDiscDateLbl = new JLabel("awdsd");
+		propagandaDiscDateLbl.setForeground(new Color(255, 255, 255));
+		propagandaDiscDateLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		propagandaDiscDateLbl.setBounds(383, 405, 214, 25);
+		mainMenuPanel.add(propagandaDiscDateLbl);
+		
+		JLabel propagandaDiscGenreTitleLbl = new JLabel("Genero");
+		propagandaDiscGenreTitleLbl.setForeground(new Color(127, 57, 206));
+		propagandaDiscGenreTitleLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		propagandaDiscGenreTitleLbl.setBounds(383, 478, 214, 25);
+		mainMenuPanel.add(propagandaDiscGenreTitleLbl);
+		
+		JLabel propagandaDiscGenreLbl = new JLabel("adsadw");
+		propagandaDiscGenreLbl.setForeground(new Color(255, 255, 255));
+		propagandaDiscGenreLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		propagandaDiscGenreLbl.setBounds(383, 512, 214, 25);
+		mainMenuPanel.add(propagandaDiscGenreLbl);
+
+	}
+
+	public void getPropagandaImage() {
+		randomNumberToExecute = new Random();
+		randomDiscID = (randomNumberToExecute.nextInt(3) + 1);
+		System.out.println(randomDiscID);
+
+		imageController = new ImageController();
+
+		propagandaGroupIcon = new ImageIcon();
+		propagandaGroupIcon = imageController.getDiscImageById(randomDiscID);
+
+		propagandaImageLbl.setIcon(propagandaGroupIcon);
 	}
 
 	public JPanel getPanelPrincipal() {

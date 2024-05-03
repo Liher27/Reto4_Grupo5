@@ -16,13 +16,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
 
-/**
- * Panel de login para logearse y registrarse
- */
 public class LoginPanel {
 
 	private JPanel panelDeLogin = null;
-
+	
 	public JTextField fieldUsuario = null;
 
 	private JLabel passwdLbl = null;
@@ -35,17 +32,13 @@ public class LoginPanel {
 
 	public JPasswordField passwdTextField = null;
 
-	/**
-	 * 
-	 * @param entradas El array que guarde los datos del usuario
-	 */
 	public LoginPanel(ArrayList<JPanel> paneles) {
 		panelDeLogin = new JPanel();
 		panelDeLogin.setForeground(new Color(0, 0, 0));
 		panelDeLogin.setBackground(new Color(0, 0, 0));
 		panelDeLogin.setBounds(0, 0, 984, 611);
 		panelDeLogin.setLayout(null);
-
+		
 		logInTitleLbl = new JLabel("Iniciar sesión");
 		logInTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		logInTitleLbl.setForeground(new Color(255, 222, 89));
@@ -77,11 +70,6 @@ public class LoginPanel {
 
 		logInPanelNextBtn = new JButton("Aceptar");
 		logInPanelNextBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
 			public void actionPerformed(ActionEvent e) {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
@@ -98,14 +86,6 @@ public class LoginPanel {
 				paneles.get(12).setVisible(false);
 				paneles.get(13).setVisible(false);
 
-				/**
-				 * Obtener el nombre de usuario para guardar en el array
-				 */
-
-				/**
-				 * obtener los datos de cliente y guardar en el array
-				 */
-
 			}
 
 		});
@@ -114,9 +94,6 @@ public class LoginPanel {
 
 		registerBtn = new JButton("Registro");
 		registerBtn.addActionListener(new ActionListener() {
-			/**
-			 * El boton para volver al panel de registro
-			 */
 			public void actionPerformed(ActionEvent e) {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
@@ -146,11 +123,6 @@ public class LoginPanel {
 
 	}
 
-	/**
-	 * Obtiene a este panel
-	 * 
-	 * @return panelDeLogin
-	 */
 	public JPanel getPanelDeLogin() {
 		return panelDeLogin;
 	}
