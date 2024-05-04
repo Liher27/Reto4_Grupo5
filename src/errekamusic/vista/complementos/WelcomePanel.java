@@ -65,14 +65,13 @@ public class WelcomePanel {
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(10,10,145,145);
+		lblLogoErrekamusic.setBounds(330,50,300,200);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		welcomePanel.add(lblLogoErrekamusic);
 		
-		lblWelcomeMessage = new JLabel("");
+		lblWelcomeMessage = new JLabel("BIENVENIDO");
 		lblWelcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeMessage.setBounds(140, 191, 702, 215);
-		lblWelcomeMessage.setIcon(new ImageIcon("contents/welcomeMessage.png"));
+		lblWelcomeMessage.setBounds(140, 240, 702, 215);
 		welcomePanel.add(lblWelcomeMessage);
 		
 		

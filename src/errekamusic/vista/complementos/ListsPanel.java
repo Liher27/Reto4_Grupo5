@@ -188,14 +188,14 @@ public class ListsPanel extends JPanel {
 		
 		overlayLbl = new JLabel("");
 		overlayLbl.setBounds(0, 0, 305, 611);
-		overlayLbl.setIcon(new ImageIcon("contents/overlayClr.png"));
+		overlayLbl.setIcon(new ImageIcon("contents/overlayClr.jpg"));
 		listsPanel.add(overlayLbl);
 
 		lblFavoriteTitle = new JLabel("Playlists");
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFavoriteTitle.setForeground(new Color(255, 222, 89));
 		lblFavoriteTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblFavoriteTitle.setBounds(328, 32, 349, 64);
+		lblFavoriteTitle.setBounds(328, 32, 349, 64); 
 		listsPanel.add(lblFavoriteTitle);
 		
 		

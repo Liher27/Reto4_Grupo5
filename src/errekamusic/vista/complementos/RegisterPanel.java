@@ -242,10 +242,10 @@ public class RegisterPanel {
 		fieldRegisterCVV.setBounds(753, 416, 176, 20);
 		panelDeRegistro.add(fieldRegisterCVV);
 
-		registerTitleLbl = new JLabel("Registrar nuevo usuario");
+		registerTitleLbl = new JLabel("Registrate");
 		registerTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		registerTitleLbl.setForeground(new Color(255, 222, 89));
-		registerTitleLbl.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		registerTitleLbl.setForeground(new Color(127, 57, 206));
+		registerTitleLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 41));
 		registerTitleLbl.setBounds(328, 32, 349, 64);
 		panelDeRegistro.add(registerTitleLbl);
 
