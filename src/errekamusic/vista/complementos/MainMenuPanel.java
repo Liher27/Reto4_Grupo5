@@ -141,8 +141,8 @@ public class MainMenuPanel extends JPanel {
 		});
 
 		mainMenuPanelExitBtn = new JLabel("Salir ");
-		mainMenuPanelExitBtn.setForeground(new Color(140, 82, 255));
-		mainMenuPanelExitBtn.setFont(new Font("Segoe UI Semibold", Font.BOLD | Font.ITALIC, 20));
+		mainMenuPanelExitBtn.setForeground(new Color(190, 30, 255));
+		mainMenuPanelExitBtn.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
 		mainMenuPanelExitBtn.setBounds(49, 460, 219, 25);
 		mainMenuPanel.add(mainMenuPanelExitBtn);
 		mainMenuPanelExitBtn.addMouseListener(new MouseAdapter() {

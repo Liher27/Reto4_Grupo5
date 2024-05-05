@@ -39,9 +39,9 @@ public class PodcastPanel extends JPanel {
 
 		lblPodcastTitle = new JLabel("Descubre podcasts");
 		lblPodcastTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPodcastTitle.setForeground(new Color(255, 222, 89));
-		lblPodcastTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblPodcastTitle.setBounds(328, 32, 349, 64);
+		lblPodcastTitle.setForeground(new Color(200, 40, 255));
+		lblPodcastTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		lblPodcastTitle.setBounds(284, 32, 393, 64);
 		podcastPanel.add(lblPodcastTitle);
 
 		lblProfilePicture = new JLabel("");

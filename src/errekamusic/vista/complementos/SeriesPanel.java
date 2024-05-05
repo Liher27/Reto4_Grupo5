@@ -99,8 +99,8 @@ public class SeriesPanel extends JPanel {
 
 		lblSeriesTitle = new JLabel("Descubre series");
 		lblSeriesTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSeriesTitle.setForeground(new Color(255, 222, 89));
-		lblSeriesTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblSeriesTitle.setForeground(new Color(200, 40, 255));
+		lblSeriesTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblSeriesTitle.setBounds(328, 32, 349, 64);
 		seriesPanel.add(lblSeriesTitle);
 

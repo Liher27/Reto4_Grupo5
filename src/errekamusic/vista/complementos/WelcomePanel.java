@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 
 /**
@@ -70,8 +71,10 @@ public class WelcomePanel {
 		welcomePanel.add(lblLogoErrekamusic);
 		
 		lblWelcomeMessage = new JLabel("BIENVENIDO");
+		lblWelcomeMessage.setForeground(new Color(190, 30, 255));
+		lblWelcomeMessage.setFont(new Font("Segoe UI Black", Font.BOLD, 58));
 		lblWelcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeMessage.setBounds(140, 240, 702, 215);
+		lblWelcomeMessage.setBounds(140, 290, 702, 215);
 		welcomePanel.add(lblWelcomeMessage);
 		
 		

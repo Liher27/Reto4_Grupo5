@@ -96,9 +96,9 @@ public class ContentPlayerPanel extends JPanel {
 
 		lblFavoriteTitle = new JLabel("Reproductor de contenido");
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFavoriteTitle.setForeground(new Color(255, 222, 89));
-		lblFavoriteTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblFavoriteTitle.setBounds(328, 32, 368, 64);
+		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
+		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		lblFavoriteTitle.setBounds(215, 32, 527, 64);
 		contentPlayerPanel.add(lblFavoriteTitle);
 	}
 

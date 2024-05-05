@@ -99,9 +99,9 @@ public class SongsPanel extends JPanel {
 
 		lblSongsTitle = new JLabel("Descubre canciones");
 		lblSongsTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSongsTitle.setForeground(new Color(255, 222, 89));
-		lblSongsTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblSongsTitle.setBounds(328, 32, 349, 64);
+		lblSongsTitle.setForeground(new Color(200, 40, 255));
+		lblSongsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		lblSongsTitle.setBounds(274, 32, 403, 64);
 		songsPanel.add(lblSongsTitle);
 
 		btnReproContent = new JButton("Reproducir contenido");

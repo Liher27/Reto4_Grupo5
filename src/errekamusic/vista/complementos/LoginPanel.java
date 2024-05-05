@@ -39,32 +39,32 @@ public class LoginPanel {
 		panelDeLogin.setBounds(0, 0, 984, 611);
 		panelDeLogin.setLayout(null);
 		
-		logInTitleLbl = new JLabel("Iniciar sesión");
+		logInTitleLbl = new JLabel("INICIA SESION");
 		logInTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		logInTitleLbl.setForeground(new Color(255, 222, 89));
-		logInTitleLbl.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		logInTitleLbl.setForeground(new Color(255, 255, 255));
+		logInTitleLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 30));
 		logInTitleLbl.setBounds(328, 32, 337, 64);
 		panelDeLogin.add(logInTitleLbl);
 
-		userLbl = new JLabel("Usuario");
-		userLbl.setForeground(new Color(255, 222, 89));
-		userLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		userLbl.setBounds(300, 225, 109, 14);
+		userLbl = new JLabel("Usuario:");
+		userLbl.setForeground(new Color(190, 30, 255));
+		userLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
+		userLbl.setBounds(300, 386, 109, 14);
 		panelDeLogin.add(userLbl);
 
-		passwdLbl = new JLabel("Contraseña");
-		passwdLbl.setForeground(new Color(255, 222, 89));
-		passwdLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		passwdLbl.setBounds(300, 373, 109, 14);
+		passwdLbl = new JLabel("Contraseña:");
+		passwdLbl.setForeground(new Color(190, 30, 255));
+		passwdLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
+		passwdLbl.setBounds(300, 456, 109, 14);
 		panelDeLogin.add(passwdLbl);
 
 		fieldUsuario = new JTextField();
-		fieldUsuario.setBounds(470, 224, 211, 20);
+		fieldUsuario.setBounds(470, 385, 211, 20);
 		panelDeLogin.add(fieldUsuario);
 		fieldUsuario.setColumns(10);
 
 		passwdTextField = new JPasswordField();
-		passwdTextField.setBounds(470, 372, 211, 20);
+		passwdTextField.setBounds(470, 455, 211, 20);
 		panelDeLogin.add(passwdTextField);
 		passwdTextField.setColumns(10);
 
@@ -117,9 +117,16 @@ public class LoginPanel {
 
 		lblErrekamusicLogo = new JLabel("");
 		lblErrekamusicLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblErrekamusicLogo.setBounds(10, 10, 145, 145);
+		lblErrekamusicLogo.setBounds(298, 108, 422, 230);
 		lblErrekamusicLogo.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		panelDeLogin.add(lblErrekamusicLogo);
+		
+		JLabel lblNewLabel = new JLabel("¿No tienes cuenta?");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(new Color(190, 30, 255));
+		lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		lblNewLabel.setBounds(30, 531, 129, 20);
+		panelDeLogin.add(lblNewLabel);
 
 	}
 

@@ -99,8 +99,8 @@ public class DiscsPanel extends JPanel {
 
 		lblDiscsTitle = new JLabel("Descubre discos");
 		lblDiscsTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDiscsTitle.setForeground(new Color(255, 222, 89));
-		lblDiscsTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblDiscsTitle.setForeground(new Color(200, 40, 255));
+		lblDiscsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblDiscsTitle.setBounds(328, 32, 349, 64);
 		discsPanel.add(lblDiscsTitle);
 

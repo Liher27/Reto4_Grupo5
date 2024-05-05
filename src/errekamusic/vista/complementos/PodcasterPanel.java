@@ -93,9 +93,9 @@ public class PodcasterPanel extends JPanel {
 
 		lblFavoriteTitle = new JLabel("Descubre Podcasters");
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFavoriteTitle.setForeground(new Color(255, 222, 89));
-		lblFavoriteTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
-		lblFavoriteTitle.setBounds(328, 32, 349, 64);
+		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
+		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		lblFavoriteTitle.setBounds(279, 32, 398, 64);
 		podcasterPanel.add(lblFavoriteTitle);
 
 		lblLogoErrekamusic = new JLabel("");

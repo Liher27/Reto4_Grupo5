@@ -99,8 +99,8 @@ public class GroupPanel extends JPanel {
 
 		lblGroupTitle = new JLabel("Descubre grupos");
 		lblGroupTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGroupTitle.setForeground(new Color(255, 222, 89));
-		lblGroupTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblGroupTitle.setForeground(new Color(200, 40, 255));
+		lblGroupTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblGroupTitle.setBounds(328, 32, 349, 64);
 		groupPanel.add(lblGroupTitle);
 

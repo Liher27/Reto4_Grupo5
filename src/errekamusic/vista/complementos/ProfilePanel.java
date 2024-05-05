@@ -36,8 +36,8 @@ public class ProfilePanel extends JPanel {
 		
 		lblProfileTitle = new JLabel("Cambiar perfil");
 		lblProfileTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfileTitle.setForeground(new Color(255, 222, 89));
-		lblProfileTitle.setFont(new Font("Cambria", Font.BOLD | Font.ITALIC, 28));
+		lblProfileTitle.setForeground(new Color(200, 40, 255));
+		lblProfileTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblProfileTitle.setBounds(328, 32, 349, 64);
 		profilePanel.add(lblProfileTitle);
 		
