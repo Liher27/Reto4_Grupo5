@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.enumerado.ArtistType;
 import errekamusic.logica.ArtistsInterfaceController;
 import errekamusic.logica.CollectionInterface;
@@ -158,7 +159,6 @@ public class GroupPanel extends JPanel {
 		tableCollections.setColumnSelectionAllowed(true);
 		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableCollections.setBounds(162, 143, 649, 331);
-		groupPanel.add(tableCollections);
 		tableGroups.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -166,7 +166,24 @@ public class GroupPanel extends JPanel {
 				Artist artist = artists.get(selectedRow);
 				tableGroups.setVisible(false);
 				CollectionInterface collectionInterface = new DiscController();
-				List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
+				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
+				
+				String[] headersDisc= {"Grupo","Descripción"};
+			    
+				DefaultTableModel modelDisc = new DefaultTableModel();
+				modelDisc.setColumnIdentifiers(headersDisc);
+				
+				for (Disc disc : discs) {
+					String name = disc.getCollectionName();
+					String type = disc.getCollectionType();
+					String genre = disc.getCollectionGenre();
+					String desc = disc.getCollectionDesc();
+					Object[] row = {name, type, genre, desc};
+					modelDisc.addRow(row);
+				}
+				tableCollections.setModel(modelDisc);
+				groupPanel.add(tableCollections);
+
 			}
 		});
 		
