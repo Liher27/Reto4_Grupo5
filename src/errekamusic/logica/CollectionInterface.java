@@ -2,11 +2,13 @@ package errekamusic.logica;
 
 import java.util.List;
 
+import errekamusic.bbdd.Pojo.Disc;
 
-public interface CollectionInterface<T>{
 
-	public List <T> GetCollectionByType ();
+public interface CollectionInterface{
+
+	public List<Disc> GetCollectionByType ();
 	
-	public List <T> GetCollectionByArtist (int creatorID);
+	public List<Disc> GetCollectionByArtist (int creatorID);
 	
 }
