@@ -83,7 +83,7 @@ public class UserController {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			sql = "SELECT * FROM USERS WHERE LOGINUSER = ?";
+			sql = "SELECT * FROM USERS WHERE LOGINUSER ='"+ username +"'";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			result = pstmt.executeQuery();

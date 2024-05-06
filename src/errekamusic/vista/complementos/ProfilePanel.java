@@ -315,6 +315,7 @@ public class ProfilePanel extends JPanel {
 	}
 
 	public void showUserInfor(String userField) {
+		
 		userInfor = new ArrayList<Users>();
 
 		userController = new UserController();
@@ -322,6 +323,7 @@ public class ProfilePanel extends JPanel {
 		userInfor = userController.getLogedUser(userName);
 
 		if (null != userInfor) {
+			userProfile = new Users();
 			userProfile = userInfor.get(0);
 
 			registerPasswd = userProfile.getUserPassword();

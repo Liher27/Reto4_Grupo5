@@ -97,7 +97,8 @@ public class LoginPanel {
 						paneles.get(13).setVisible(false);
 						
 						profilePanel = new ProfilePanel(paneles);
-						profilePanel.setUserName(userField.toString());
+						profilePanel.setUserName(userField.getText().toString());
+						
 
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
 								JOptionPane.INFORMATION_MESSAGE);
