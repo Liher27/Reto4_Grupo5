@@ -7,25 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.enumerado.ArtistType;
-import errekamusic.logica.ArtistsInterfaceController;
-import errekamusic.logica.CollectionInterface;
-import errekamusic.logica.DiscController;
-import errekamusic.logica.GroupController;
-
-import javax.swing.JTable;
-import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
-
 
 public class GroupPanel extends JPanel {
 
@@ -39,23 +26,20 @@ public class GroupPanel extends JPanel {
 	private JButton groupPanelBackBtn = null;
 	private JButton collectionInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
-	private JTable tableGroups;
-	private JTable tableCollections;
-
 
 	/**
 	 * Create the panel.
 	 */
 	public GroupPanel(ArrayList<JPanel> paneles) {
-				
+
 		groupPanel = new JPanel();
 		groupPanel.setBounds(0, 0, 984, 611);
 		groupPanel.setBackground(new Color(0, 0, 0));
 		groupPanel.setLayout(null);
 
 		lblProfilePicture = new JLabel("");
-		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
 		groupPanel.add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
@@ -79,9 +63,9 @@ public class GroupPanel extends JPanel {
 		});
 		
 		seeYourProfileLbl = new JLabel("Ver perfil");
-		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		groupPanel.add(seeYourProfileLbl);
 
 		groupPanelBackBtn = new JButton("Volver");
@@ -115,61 +99,21 @@ public class GroupPanel extends JPanel {
 		});
 
 		lblLogoErrekamusic = new JLabel("");
-		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		groupPanel.add(lblLogoErrekamusic);
 
 		lblGroupTitle = new JLabel("Descubre grupos");
-		lblGroupTitle.setBounds(328, 32, 349, 64);
 		lblGroupTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGroupTitle.setForeground(new Color(200, 40, 255));
 		lblGroupTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		lblGroupTitle.setBounds(328, 32, 349, 64);
 		groupPanel.add(lblGroupTitle);
 
 		collectionInfoBtn = new JButton("Mas informacion");
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
 		groupPanel.add(collectionInfoBtn);
-		
-		
-		tableGroups = new JTable();
-		tableGroups.setColumnSelectionAllowed(true);
-		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tableGroups.setBounds(162, 143, 649, 331);
-		
-		ArtistsInterfaceController artistsInterfaceController = new GroupController();
-		List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
-		
-	    String[] headers= {"Grupo","Descripción"};
-	    
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(headers);
-		
-		for (Artist artist : artists) {
-			String grupo = artist.getArtistName();
-			String descripcionGrupo = artist.getArtistDesc();
-			Object[] row = {grupo, descripcionGrupo};
-			model.addRow(row);
-		}
-		tableGroups.setModel(model);
-		groupPanel.add(tableGroups);
-		
-		tableCollections = new JTable();
-		tableCollections.setColumnSelectionAllowed(true);
-		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tableCollections.setBounds(162, 143, 649, 331);
-		groupPanel.add(tableCollections);
-		tableGroups.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selectedRow = tableGroups.getSelectedRow();
-				Artist artist = artists.get(selectedRow);
-				tableGroups.setVisible(false);
-				CollectionInterface collectionInterface = new DiscController();
-				List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
-			}
-		});
-		
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -201,4 +145,5 @@ public class GroupPanel extends JPanel {
 		// TODO Auto-generated method stub
 		return groupPanel;
 	}
+
 }

@@ -13,9 +13,8 @@ import javax.swing.JOptionPane;
 
 import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Utils.DBUtils;
-import errekamusic.enumerado.ArtistType;
 
-public class GroupController implements ArtistsInterfaceController {
+public class GroupController implements ArtistsInterfaceController<Artist> {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -59,16 +58,16 @@ public class GroupController implements ArtistsInterfaceController {
 	}
 
 	@Override
-	public List<Artist> getByArtistType(ArtistType artistType) {
+	public List<Artist> getByArtistType(boolean artistType) {
 		artistInfo = new ArrayList<Artist>();
-		String artistTypeSend = artistType.toString();
+		boolean getInputArtistType = artistType;
 		try {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			String sql = "SELECT * FROM ARTIST WHERE ArtistType = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, artistTypeSend);
+			pstmt.setBoolean(1, getInputArtistType);
 			result = pstmt.executeQuery();
 
 			while (result.next()) {
@@ -77,7 +76,7 @@ public class GroupController implements ArtistsInterfaceController {
 				artist.setArtistRegDate(result.getDate("ArtistRegDate"));
 				artist.setArtistDesc(result.getString("ArtistDesc"));
 				artist.setArtistRepNum(result.getInt("ArtistRepNum"));
-				//artist.setArtistImage((ImageIcon) result.getObject("CreatorIconImage"));
+				artist.setArtistImage((ImageIcon) result.getObject("CreatorIconImage"));
 				artistInfo.add(artist);
 			}
 			if (artistInfo.isEmpty()) {
