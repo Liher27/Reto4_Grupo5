@@ -58,6 +58,17 @@ public class MainMenuPanel extends JPanel {
 		mainMenuPanel.setBackground(new Color(0, 0, 0));
 		mainMenuPanel.setLayout(null);
 
+		propagandaImageLbl = new JLabel("");
+		propagandaImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		propagandaImageLbl.setBounds(462, 157, 327, 317);
+		mainMenuPanel.add(propagandaImageLbl);
+
+		layOutForPropagandaLbl = new JLabel("");
+		layOutForPropagandaLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
+		layOutForPropagandaLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
+		layOutForPropagandaLbl.setBounds(432, 125, 387, 382);
+		mainMenuPanel.add(layOutForPropagandaLbl);
+
 		discoverGroupsLbl = new JLabel("Descubre grupos");
 		discoverGroupsLbl.setForeground(new Color(255, 255, 255));
 		discoverGroupsLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
@@ -199,8 +210,6 @@ public class MainMenuPanel extends JPanel {
 		overlayLbl.setIcon(new ImageIcon("contents/overlayClr.jpg"));
 		mainMenuPanel.add(overlayLbl);
 
-		
-
 		lblMenuPrincipal = new JLabel("");
 		lblMenuPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuPrincipal.setFont(new Font("Segoe UI", Font.BOLD, 39));
@@ -226,10 +235,6 @@ public class MainMenuPanel extends JPanel {
 				paneles.get(13).setVisible(false);
 			}
 		});
-
-		propagandaImageLbl = new JLabel("");
-		propagandaImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
-		propagandaImageLbl.setBounds(462, 157, 327, 317);
 		mainMenuPanel.addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent c) {
 				try {
@@ -240,11 +245,10 @@ public class MainMenuPanel extends JPanel {
 				}
 			}
 		});
-		mainMenuPanel.add(propagandaImageLbl);
 
 		discNameLbl = new JLabel("");
 		discNameLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		discNameLbl.setForeground(new Color(140, 82, 255));
+		discNameLbl.setForeground(new Color(190, 30, 255));
 		discNameLbl.setFont(new Font("Arial Black", Font.BOLD, 40));
 		discNameLbl.setBounds(468, 517, 327, 47);
 		mainMenuPanel.add(discNameLbl);
@@ -267,7 +271,7 @@ public class MainMenuPanel extends JPanel {
 		propagandaDiscGenreLbl.setFont(new Font("Arial Black", Font.BOLD, 13));
 		propagandaDiscGenreLbl.setBounds(776, 575, 151, 25);
 		mainMenuPanel.add(propagandaDiscGenreLbl);
-		
+
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
@@ -292,42 +296,34 @@ public class MainMenuPanel extends JPanel {
 				paneles.get(13).setVisible(false);
 			}
 		});
-		
+
 		seeYourProfileLbl = new JLabel("Ver perfil");
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		mainMenuPanel.add(seeYourProfileLbl);
-		
-		layOutForPropagandaLbl = new JLabel("");
-		layOutForPropagandaLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
-		layOutForPropagandaLbl.setForeground(new Color(255, 255, 255));
-		layOutForPropagandaLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
-		layOutForPropagandaLbl.setBounds(432, 125, 387, 382);
-		mainMenuPanel.add(layOutForPropagandaLbl);
 
 	}
 
-	public void getPropagandaImage() throws Exception{
+	public void getPropagandaImage() throws Exception {
 		randomNumberToExecute = new Random();
-		
+
 		discInfo = new ArrayList<Disc>();
 		randomDiscID = (randomNumberToExecute.nextInt(3) + 1);
 
 		discController = new DiscController();
 
-			discInfo = discController.GetDiscForPropaganda(randomDiscID);
-			if (null != discInfo) {
-				discForPropaganda = discInfo.get(0);
+		discInfo = discController.GetDiscForPropaganda(randomDiscID);
+		if (null != discInfo) {
+			discForPropaganda = discInfo.get(0);
 
-				discNameLbl.setText(discForPropaganda.getCollectionName().toUpperCase());
-				groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
-				propagandaDiscDateLbl.setText(discForPropaganda.getCollectionDate().toString());
-				propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
-				discImageIcon = discForPropaganda.getCollectionImage();
-				propagandaImageLbl.setIcon(discImageIcon);
-			}
-		
+			discNameLbl.setText(discForPropaganda.getCollectionName().toUpperCase());
+			groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
+			propagandaDiscDateLbl.setText(discForPropaganda.getCollectionDate().toString());
+			propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
+			discImageIcon = discForPropaganda.getCollectionImage();
+			propagandaImageLbl.setIcon(discImageIcon);
+		}
 
 	}
 

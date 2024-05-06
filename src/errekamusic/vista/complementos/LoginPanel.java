@@ -8,7 +8,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import errekamusic.bbdd.Pojo.Users;
 import errekamusic.logica.UserController;
 
 import javax.swing.JLabel;
@@ -18,13 +17,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import java.awt.Color;
 
 public class LoginPanel {
 
 	private JPanel panelDeLogin = null;
 	private UserController userController = null;
+	private ProfilePanel profilePanel = null;
 
 	public JTextField userField = null;
 	public JPasswordField passwdTextField = null;
@@ -38,7 +37,6 @@ public class LoginPanel {
 	private JButton registerBtn = null;
 	private JButton logInPanelNextBtn = null;
 
-	private List<Users> logedUserInfo = null;
 
 	public LoginPanel(ArrayList<JPanel> paneles) {
 		panelDeLogin = new JPanel();
@@ -97,6 +95,9 @@ public class LoginPanel {
 						paneles.get(11).setVisible(false);
 						paneles.get(12).setVisible(false);
 						paneles.get(13).setVisible(false);
+						
+						profilePanel = new ProfilePanel(paneles);
+						profilePanel.setUserName(userField.toString());
 
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -156,4 +157,6 @@ public class LoginPanel {
 	public JPanel getPanelDeLogin() {
 		return panelDeLogin;
 	}
+
+
 }
