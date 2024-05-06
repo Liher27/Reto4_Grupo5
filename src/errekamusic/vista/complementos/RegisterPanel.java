@@ -285,6 +285,7 @@ public class RegisterPanel {
 		btnConfirmarDeRegistro = new JButton("Confirmar");
 		btnConfirmarDeRegistro.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("unlikely-arg-type")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean CampoVacio = false;

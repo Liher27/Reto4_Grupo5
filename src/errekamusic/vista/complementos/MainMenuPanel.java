@@ -35,13 +35,11 @@ public class MainMenuPanel extends JPanel {
 	private JLabel overlayLbl = null;
 	private JLabel mainMenuContentPlayerLblBtn = null;
 	private JLabel groupDiscBelongLbl = null;
-	private JLabel discNameTitleLbl = null;
 	private JLabel discNameLbl = null;
-	private JLabel groupDiscBelongTitleLbl = null;
-	private JLabel propagandaDiscDateTitleLbl = null;
 	private JLabel propagandaDiscDateLbl = null;
-	private JLabel propagandaDiscGenreTitleLbl = null;
 	private JLabel propagandaDiscGenreLbl = null;
+	private JLabel layOutForPropagandaLbl = null;
+	private JLabel seeYourProfileLbl = null;
 
 	private List<Disc> discInfo = null;
 	private DiscController discController = null;
@@ -201,36 +199,13 @@ public class MainMenuPanel extends JPanel {
 		overlayLbl.setIcon(new ImageIcon("contents/overlayClr.jpg"));
 		mainMenuPanel.add(overlayLbl);
 
-		lblProfilePicture = new JLabel("");
-		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfilePicture.setBounds(923, 11, 51, 51);
-		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		mainMenuPanel.add(lblProfilePicture);
-		lblProfilePicture.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(false);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(true);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
-			}
-		});
+		
 
 		lblMenuPrincipal = new JLabel("");
 		lblMenuPrincipal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMenuPrincipal.setFont(new Font("Segoe UI", Font.BOLD, 39));
 		lblMenuPrincipal.setBounds(472, 11, 266, 99);
-		lblMenuPrincipal.setIcon(new ImageIcon("contents/secondaryLogoForMenu(1).png"));
+		lblMenuPrincipal.setIcon(new ImageIcon("contents/errekaMusicLogoForMainMenu.png"));
 		mainMenuPanel.add(lblMenuPrincipal);
 		lblMenuPrincipal.addMouseListener(new MouseAdapter() {
 			@Override
@@ -293,18 +268,43 @@ public class MainMenuPanel extends JPanel {
 		propagandaDiscGenreLbl.setBounds(776, 575, 151, 25);
 		mainMenuPanel.add(propagandaDiscGenreLbl);
 		
-		JLabel lblNewLabel = new JLabel("Ver perfil");
-		lblNewLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(856, 26, 64, 25);
-		mainMenuPanel.add(lblNewLabel);
+		lblProfilePicture = new JLabel("");
+		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProfilePicture.setBounds(923, 11, 51, 51);
+		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
+		mainMenuPanel.add(lblProfilePicture);
+		lblProfilePicture.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(false);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(true);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+			}
+		});
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 99));
-		lblNewLabel_1.setBounds(432, 125, 387, 382);
-		mainMenuPanel.add(lblNewLabel_1);
+		seeYourProfileLbl = new JLabel("Ver perfil");
+		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
+		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
+		mainMenuPanel.add(seeYourProfileLbl);
+		
+		layOutForPropagandaLbl = new JLabel("");
+		layOutForPropagandaLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
+		layOutForPropagandaLbl.setForeground(new Color(255, 255, 255));
+		layOutForPropagandaLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
+		layOutForPropagandaLbl.setBounds(432, 125, 387, 382);
+		mainMenuPanel.add(layOutForPropagandaLbl);
 
 	}
 

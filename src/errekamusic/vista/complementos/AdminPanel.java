@@ -21,6 +21,7 @@ public class AdminPanel extends JPanel {
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblAdminTitle = null;
+	private JLabel seeYourProfileLbl = null;
 
 	private JButton adminPanelBackBtn = null;
 	private JLabel lblProfilePicture = null;
@@ -37,8 +38,8 @@ public class AdminPanel extends JPanel {
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfilePicture.setBounds(854, 31, 80, 80);
-		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.png"));
+		lblProfilePicture.setBounds(923, 11, 51, 51);
+		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
 		adminPanel.add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
@@ -59,6 +60,12 @@ public class AdminPanel extends JPanel {
 				paneles.get(13).setVisible(false);
 			}
 		});
+		
+		seeYourProfileLbl = new JLabel("Ver perfil");
+		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
+		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
+		adminPanel.add(seeYourProfileLbl);
 
 		adminPanelBackBtn = new JButton("Volver");
 		adminPanelBackBtn.setBounds(844, 556, 98, 33);
@@ -92,8 +99,8 @@ public class AdminPanel extends JPanel {
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
-		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
+		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
+		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		adminPanel.add(lblLogoErrekamusic);
 
 		lblAdminTitle = new JLabel("Panel de administrador");

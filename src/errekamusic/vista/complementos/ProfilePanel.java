@@ -112,8 +112,8 @@ public class ProfilePanel extends JPanel {
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
-		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
+		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
+		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		profilePanel.add(lblLogoErrekamusic);
 	}
 

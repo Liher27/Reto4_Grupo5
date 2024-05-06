@@ -8,29 +8,37 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.Users;
+import errekamusic.logica.UserController;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Color;
 
 public class LoginPanel {
 
 	private JPanel panelDeLogin = null;
-	
-	public JTextField fieldUsuario = null;
+	private UserController userController = null;
+
+	public JTextField userField = null;
+	public JPasswordField passwdTextField = null;
 
 	private JLabel passwdLbl = null;
 	private JLabel userLbl = null;
 	private JLabel logInTitleLbl = null;
 	private JLabel lblErrekamusicLogo = null;
+	private JLabel lblDontHaveAccount = null;
 
 	private JButton registerBtn = null;
 	private JButton logInPanelNextBtn = null;
 
-	public JPasswordField passwdTextField = null;
+	private List<Users> logedUserInfo = null;
 
 	public LoginPanel(ArrayList<JPanel> paneles) {
 		panelDeLogin = new JPanel();
@@ -38,7 +46,7 @@ public class LoginPanel {
 		panelDeLogin.setBackground(new Color(0, 0, 0));
 		panelDeLogin.setBounds(0, 0, 984, 611);
 		panelDeLogin.setLayout(null);
-		
+
 		logInTitleLbl = new JLabel("INICIA SESION");
 		logInTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		logInTitleLbl.setForeground(new Color(255, 255, 255));
@@ -58,10 +66,10 @@ public class LoginPanel {
 		passwdLbl.setBounds(300, 456, 109, 14);
 		panelDeLogin.add(passwdLbl);
 
-		fieldUsuario = new JTextField();
-		fieldUsuario.setBounds(470, 385, 211, 20);
-		panelDeLogin.add(fieldUsuario);
-		fieldUsuario.setColumns(10);
+		userField = new JTextField();
+		userField.setBounds(470, 385, 211, 20);
+		panelDeLogin.add(userField);
+		userField.setColumns(10);
 
 		passwdTextField = new JPasswordField();
 		passwdTextField.setBounds(470, 455, 211, 20);
@@ -71,24 +79,39 @@ public class LoginPanel {
 		logInPanelNextBtn = new JButton("Aceptar");
 		logInPanelNextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(true);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
 
+				userController = new UserController();
+				if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
+					if (userController.confirmLogedUser(userField, passwdTextField)) {
+						paneles.get(0).setVisible(false);
+						paneles.get(1).setVisible(false);
+						paneles.get(2).setVisible(false);
+						paneles.get(3).setVisible(true);
+						paneles.get(4).setVisible(false);
+						paneles.get(5).setVisible(false);
+						paneles.get(6).setVisible(false);
+						paneles.get(7).setVisible(false);
+						paneles.get(8).setVisible(false);
+						paneles.get(9).setVisible(false);
+						paneles.get(10).setVisible(false);
+						paneles.get(11).setVisible(false);
+						paneles.get(12).setVisible(false);
+						paneles.get(13).setVisible(false);
+
+						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "Usuario o contraseñas incorrectas", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenalo por favor", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
-
 		});
+
 		logInPanelNextBtn.setBounds(851, 556, 98, 33);
 		panelDeLogin.add(logInPanelNextBtn);
 
@@ -120,13 +143,13 @@ public class LoginPanel {
 		lblErrekamusicLogo.setBounds(298, 108, 422, 230);
 		lblErrekamusicLogo.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
 		panelDeLogin.add(lblErrekamusicLogo);
-		
-		JLabel lblNewLabel = new JLabel("¿No tienes cuenta?");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(new Color(190, 30, 255));
-		lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
-		lblNewLabel.setBounds(30, 531, 129, 20);
-		panelDeLogin.add(lblNewLabel);
+
+		lblDontHaveAccount = new JLabel("¿No tienes cuenta?");
+		lblDontHaveAccount.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDontHaveAccount.setForeground(new Color(190, 30, 255));
+		lblDontHaveAccount.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		lblDontHaveAccount.setBounds(30, 531, 129, 20);
+		panelDeLogin.add(lblDontHaveAccount);
 
 	}
 

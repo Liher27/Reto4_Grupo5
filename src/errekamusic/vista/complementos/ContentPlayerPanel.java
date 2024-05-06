@@ -24,6 +24,7 @@ public class ContentPlayerPanel extends JPanel {
 	private JLabel lblProfilePicture = null;
 	private JButton btn_Registro_1_1 = null;
 	private JLabel lblFavoriteTitle = null;
+	private JLabel seeYourProfileLbl = null;
 
 	/**
 	 * Create the panel.
@@ -36,8 +37,8 @@ public class ContentPlayerPanel extends JPanel {
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProfilePicture.setBounds(854, 31, 80, 80);
-		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.png"));
+		lblProfilePicture.setBounds(923, 11, 51, 51);
+		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
 		contentPlayerPanel.add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
@@ -58,6 +59,12 @@ public class ContentPlayerPanel extends JPanel {
 				paneles.get(13).setVisible(false);
 			}
 		});
+		
+		seeYourProfileLbl = new JLabel("Ver perfil");
+		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
+		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
+		contentPlayerPanel.add(seeYourProfileLbl);
 
 		btn_Registro_1_1 = new JButton("Volver");
 		btn_Registro_1_1.setBounds(844, 556, 98, 33);
@@ -90,8 +97,8 @@ public class ContentPlayerPanel extends JPanel {
 		});
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(10, 10, 145, 145);
-		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
+		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
+		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		contentPlayerPanel.add(lblLogoErrekamusic);
 
 		lblFavoriteTitle = new JLabel("Reproductor de contenido");
