@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class PodcasterPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel podcasterPanel = null;
 
 	private JButton collectionInfoBtn = null;
 	private JLabel lblProfilePicture = null;
@@ -32,16 +31,15 @@ public class PodcasterPanel extends JPanel {
 	 */
 	public PodcasterPanel(ArrayList<JPanel> paneles) {
 
-		podcasterPanel = new JPanel();
-		podcasterPanel.setBounds(0, 0, 984, 611);
-		podcasterPanel.setBackground(new Color(0, 0, 0));
-		podcasterPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		podcasterPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -66,11 +64,11 @@ public class PodcasterPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		podcasterPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 		podcasterPanelBackBtn = new JButton("Volver");
 		podcasterPanelBackBtn.setBounds(844, 556, 98, 33);
 		podcasterPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		podcasterPanel.add(podcasterPanelBackBtn);
+		add(podcasterPanelBackBtn);
 		podcasterPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -102,17 +100,17 @@ public class PodcasterPanel extends JPanel {
 		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
 		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblFavoriteTitle.setBounds(279, 32, 398, 64);
-		podcasterPanel.add(lblFavoriteTitle);
+		add(lblFavoriteTitle);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		podcasterPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		collectionInfoBtn = new JButton("Mas informacion");
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
-		podcasterPanel.add(collectionInfoBtn);
+		add(collectionInfoBtn);
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -143,7 +141,7 @@ public class PodcasterPanel extends JPanel {
 
 	public JPanel getPodcasterPanel() {
 		// TODO Auto-generated method stub
-		return podcasterPanel;
+		return this;
 	}
 
 }

@@ -16,9 +16,8 @@ import java.awt.Font;
 /**
  * El panel inicio de nuestro programa
  */
-public class WelcomePanel {
+public class WelcomePanel extends JPanel{
 
-	private JPanel welcomePanel = null;
 	private JLabel transparentButtonLbl = null;
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblWelcomeMessage = null;
@@ -30,9 +29,8 @@ public class WelcomePanel {
 	 */
 	public WelcomePanel(ArrayList<JPanel> paneles) {
 
-		welcomePanel = new JPanel();
-		welcomePanel.setBounds(0, 0, 984, 611);
-		welcomePanel.setBackground(Color.black);
+		setBounds(0, 0, 984, 611);
+		setBackground(Color.black);
 
 		transparentButtonLbl = new JLabel("");
 		transparentButtonLbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,22 +58,22 @@ public class WelcomePanel {
 			}
 		});
 
-		welcomePanel.setLayout(null);
+		setLayout(null);
 		transparentButtonLbl.setIcon(new ImageIcon(""));
-		welcomePanel.add(transparentButtonLbl);
+		add(transparentButtonLbl);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(330,50,300,200);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
-		welcomePanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 		
 		lblWelcomeMessage = new JLabel("BIENVENIDO");
 		lblWelcomeMessage.setForeground(new Color(190, 30, 255));
 		lblWelcomeMessage.setFont(new Font("Segoe UI Black", Font.BOLD, 58));
 		lblWelcomeMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcomeMessage.setBounds(140, 290, 702, 215);
-		welcomePanel.add(lblWelcomeMessage);
+		add(lblWelcomeMessage);
 		
 		
 	}
@@ -86,7 +84,7 @@ public class WelcomePanel {
 	 * @return panelDeBienvenida
 	 */
 	public JPanel inicializarPanelDeBienvenida() {
-		return welcomePanel;
+		return this;
 	}
 
 	private void esperar() {

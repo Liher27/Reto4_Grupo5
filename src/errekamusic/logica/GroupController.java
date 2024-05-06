@@ -47,7 +47,7 @@ public class GroupController implements ArtistsInterfaceController {
 			if (artistInfo.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
 			} else {
-				JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+//				JOptionPane.showMessageDialog(null, "Usuario no encontrado");
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());
@@ -83,7 +83,7 @@ public class GroupController implements ArtistsInterfaceController {
 			if (artistInfo.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
 			} else {
-				JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+//				JOptionPane.showMessageDialog(null, "Usuario no encontrado");
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());

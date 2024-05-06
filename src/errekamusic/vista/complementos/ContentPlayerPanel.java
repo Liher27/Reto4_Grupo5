@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class ContentPlayerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPlayerPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
 
@@ -30,16 +29,15 @@ public class ContentPlayerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ContentPlayerPanel(ArrayList<JPanel> paneles) {
-		contentPlayerPanel = new JPanel();
-		contentPlayerPanel.setBounds(0, 0, 984, 611);
-		contentPlayerPanel.setBackground(new Color(0, 0, 0));
-		contentPlayerPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		contentPlayerPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -64,12 +62,12 @@ public class ContentPlayerPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		contentPlayerPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		btn_Registro_1_1 = new JButton("Volver");
 		btn_Registro_1_1.setBounds(844, 556, 98, 33);
 		btn_Registro_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		contentPlayerPanel.add(btn_Registro_1_1);
+		add(btn_Registro_1_1);
 		btn_Registro_1_1.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -99,19 +97,19 @@ public class ContentPlayerPanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		contentPlayerPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblFavoriteTitle = new JLabel("Reproductor de contenido");
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
 		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblFavoriteTitle.setBounds(215, 32, 527, 64);
-		contentPlayerPanel.add(lblFavoriteTitle);
+		add(lblFavoriteTitle);
 	}
 
 	public JPanel getContentPlayerPanel() {
 		// TODO Auto-generated method stub
-		return contentPlayerPanel;
+		return this;
 	}
 
 }

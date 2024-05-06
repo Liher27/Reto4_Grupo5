@@ -18,8 +18,6 @@ public class DiscsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JPanel discsPanel = null;
-
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblDiscsTitle = null;
 	private JLabel lblProfilePicture = null;
@@ -33,16 +31,15 @@ public class DiscsPanel extends JPanel {
 	 */
 	public DiscsPanel(ArrayList<JPanel> paneles) {
 
-		discsPanel = new JPanel();
-		discsPanel.setBounds(0, 0, 984, 611);
-		discsPanel.setBackground(new Color(0, 0, 0));
-		discsPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		discsPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -67,12 +64,12 @@ public class DiscsPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		discsPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		discsPanelBackBtn = new JButton("Volver");
 		discsPanelBackBtn.setBounds(844, 556, 98, 33);
 		discsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		discsPanel.add(discsPanelBackBtn);
+		add(discsPanelBackBtn);
 		discsPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -102,18 +99,18 @@ public class DiscsPanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		discsPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblDiscsTitle = new JLabel("Descubre discos");
 		lblDiscsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDiscsTitle.setForeground(new Color(200, 40, 255));
 		lblDiscsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblDiscsTitle.setBounds(328, 32, 349, 64);
-		discsPanel.add(lblDiscsTitle);
+		add(lblDiscsTitle);
 
 		songInfoBtn = new JButton("Mas informacion");
 		songInfoBtn.setBounds(440, 561, 186, 28);
-		discsPanel.add(songInfoBtn);
+		add(songInfoBtn);
 		songInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -143,6 +140,6 @@ public class DiscsPanel extends JPanel {
 
 	public JPanel getDiscsPanel() {
 		// TODO Auto-generated method stub
-		return discsPanel;
+		return this;
 	}
 }

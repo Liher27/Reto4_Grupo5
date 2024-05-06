@@ -31,7 +31,6 @@ import javax.swing.table.DefaultTableModel;
 public class GroupPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel groupPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblGroupTitle = null;
@@ -49,16 +48,15 @@ public class GroupPanel extends JPanel {
 	 */
 	public GroupPanel(ArrayList<JPanel> paneles) {
 				
-		groupPanel = new JPanel();
-		groupPanel.setBounds(0, 0, 984, 611);
-		groupPanel.setBackground(new Color(0, 0, 0));
-		groupPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		groupPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -83,12 +81,12 @@ public class GroupPanel extends JPanel {
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
-		groupPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		groupPanelBackBtn = new JButton("Volver");
 		groupPanelBackBtn.setBounds(844, 556, 98, 33);
 		groupPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		groupPanel.add(groupPanelBackBtn);
+		add(groupPanelBackBtn);
 		groupPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -119,18 +117,18 @@ public class GroupPanel extends JPanel {
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		groupPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblGroupTitle = new JLabel("Descubre grupos");
 		lblGroupTitle.setBounds(328, 32, 349, 64);
 		lblGroupTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGroupTitle.setForeground(new Color(200, 40, 255));
 		lblGroupTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
-		groupPanel.add(lblGroupTitle);
+		add(lblGroupTitle);
 
 		collectionInfoBtn = new JButton("Mas informacion");
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
-		groupPanel.add(collectionInfoBtn);
+		add(collectionInfoBtn);
 		
 		
 		tableGroups = new JTable();
@@ -153,7 +151,7 @@ public class GroupPanel extends JPanel {
 			model.addRow(row);
 		}
 		tableGroups.setModel(model);
-		groupPanel.add(tableGroups);
+		add(tableGroups);
 		
 		tableCollections = new JTable();
 		tableCollections.setColumnSelectionAllowed(true);
@@ -182,7 +180,7 @@ public class GroupPanel extends JPanel {
 					modelDisc.addRow(row);
 				}
 				tableCollections.setModel(modelDisc);
-				groupPanel.add(tableCollections);
+				add(tableCollections);
 
 			}
 		});
@@ -216,6 +214,6 @@ public class GroupPanel extends JPanel {
 
 	public JPanel getPanelGrupos() {
 		// TODO Auto-generated method stub
-		return groupPanel;
+		return this;
 	}
 }

@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class SongsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel songsPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblSongsTitle = null;
@@ -32,16 +31,15 @@ public class SongsPanel extends JPanel {
 	 */
 	public SongsPanel(ArrayList<JPanel> paneles) {
 
-		songsPanel = new JPanel();
-		songsPanel.setBounds(0, 0, 984, 611);
-		songsPanel.setBackground(new Color(0, 0, 0));
-		songsPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		songsPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -61,17 +59,17 @@ public class SongsPanel extends JPanel {
 				paneles.get(13).setVisible(false);
 			}
 		});
-		
+
 		seeYourProfileLbl = new JLabel("Ver perfil");
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		songsPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		songsPanelBackBtn = new JButton("Volver");
 		songsPanelBackBtn.setBounds(844, 556, 98, 33);
 		songsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		songsPanel.add(songsPanelBackBtn);
+		add(songsPanelBackBtn);
 		songsPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -102,18 +100,18 @@ public class SongsPanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		songsPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblSongsTitle = new JLabel("Descubre canciones");
 		lblSongsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSongsTitle.setForeground(new Color(200, 40, 255));
 		lblSongsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblSongsTitle.setBounds(274, 32, 403, 64);
-		songsPanel.add(lblSongsTitle);
+		add(lblSongsTitle);
 
 		btnReproContent = new JButton("Reproducir contenido");
 		btnReproContent.setBounds(440, 561, 186, 28);
-		songsPanel.add(btnReproContent);
+		add(btnReproContent);
 		btnReproContent.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -143,7 +141,7 @@ public class SongsPanel extends JPanel {
 
 	public JPanel getSongsPanel() {
 		// TODO Auto-generated method stub
-		return songsPanel;
+		return this;
 	}
 
 }

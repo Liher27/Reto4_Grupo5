@@ -15,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Users;
@@ -24,9 +23,8 @@ import errekamusic.logica.UserController;
 public class ProfilePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel profilePanel = null;
+	
 	private UserController userController = null;
-	private LoginPanel loginPanel = null;
 	private Users userProfile = null;
 
 	private JLabel lblLogoErrekamusic = null;
@@ -68,8 +66,7 @@ public class ProfilePanel extends JPanel {
 	private String registerCVV = null;
 	private String userName = null;
 
-	private JButton profilePanelNextBtn = null;
-	private JButton profilePanelBackBtn = null;
+	private JButton NextBtn = null;
 	private JButton btnCambiarContrasea = null;
 
 	private String newPasswordToInsert = null;
@@ -80,12 +77,12 @@ public class ProfilePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ProfilePanel(ArrayList<JPanel> paneles) {
+	public ProfilePanel(List <JPanel> paneles) {
 
-		profilePanel = new JPanel();
-		profilePanel.setBounds(0, 0, 984, 611);
-		profilePanel.setBackground(new Color(0, 0, 0));
-		profilePanel.setLayout(null);
+		
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		
 		lblProfileTitle = new JLabel("Cambiar perfil");
@@ -93,41 +90,16 @@ public class ProfilePanel extends JPanel {
 		lblProfileTitle.setForeground(new Color(200, 40, 255));
 		lblProfileTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblProfileTitle.setBounds(328, 32, 349, 64);
-		profilePanel.add(lblProfileTitle);
+		add(lblProfileTitle);
 
-		profilePanelNextBtn = new JButton("Aceptar");
-		profilePanelNextBtn.setBounds(854, 567, 98, 33);
-		profilePanelNextBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		profilePanel.add(profilePanelNextBtn);
-		profilePanelNextBtn.addActionListener(new ActionListener() {
+		NextBtn = new JButton("Aceptar");
+		NextBtn.setBounds(854, 567, 98, 33);
+		NextBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		add(NextBtn);
+		NextBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(true);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
-
-			}
-
-		});
-
-		profilePanelBackBtn = new JButton("Volver");
-		profilePanelBackBtn.setBounds(29, 567, 98, 33);
-		profilePanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		profilePanel.add(profilePanelBackBtn);
-		profilePanelBackBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
 				paneles.get(2).setVisible(false);
@@ -151,124 +123,124 @@ public class ProfilePanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		profilePanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblPersonalOpt = new JLabel("DATOS PERSONALES");
 		lblPersonalOpt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonalOpt.setForeground(new Color(190, 30, 255));
 		lblPersonalOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblPersonalOpt.setBounds(29, 107, 365, 64);
-		profilePanel.add(lblPersonalOpt);
+		add(lblPersonalOpt);
 
 		lblRegisterName = new JLabel("Nombre: " + registerName);
 		lblRegisterName.setForeground(Color.WHITE);
 		lblRegisterName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterName.setBounds(74, 170, 365, 27);
-		profilePanel.add(lblRegisterName);
+		add(lblRegisterName);
 
 		lblRegisterFirstSurname = new JLabel("Primer apellido: " + registerFirstSurname);
 		lblRegisterFirstSurname.setForeground(Color.WHITE);
 		lblRegisterFirstSurname.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterFirstSurname.setBounds(74, 208, 365, 32);
-		profilePanel.add(lblRegisterFirstSurname);
+		add(lblRegisterFirstSurname);
 
 		lblRegisterSecondSurname = new JLabel("Segundo Apellido: " + registerSecondSurname);
 		lblRegisterSecondSurname.setForeground(Color.WHITE);
 		lblRegisterSecondSurname.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterSecondSurname.setBounds(74, 248, 365, 32);
-		profilePanel.add(lblRegisterSecondSurname);
+		add(lblRegisterSecondSurname);
 
 		lblRegisterDNI = new JLabel("DNI: " + registerDNI);
 		lblRegisterDNI.setForeground(Color.WHITE);
 		lblRegisterDNI.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterDNI.setBounds(74, 283, 282, 43);
-		profilePanel.add(lblRegisterDNI);
+		add(lblRegisterDNI);
 
 		lblRegisterBirthDate = new JLabel("Fecha de Nacimiento: " + registerBirthDate);
 		lblRegisterBirthDate.setForeground(Color.WHITE);
 		lblRegisterBirthDate.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterBirthDate.setBounds(74, 324, 320, 32);
-		profilePanel.add(lblRegisterBirthDate);
+		add(lblRegisterBirthDate);
 
 		lblCountOpt = new JLabel("DATOS DE LA CUENTA");
 		lblCountOpt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCountOpt.setForeground(new Color(190, 30, 255));
 		lblCountOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblCountOpt.setBounds(41, 359, 365, 64);
-		profilePanel.add(lblCountOpt);
+		add(lblCountOpt);
 
-		lblRegisterUsername = new JLabel("Nombre Usuario: ");
+		lblRegisterUsername = new JLabel("Nombre Usuario: " + registerName);
 		lblRegisterUsername.setForeground(Color.WHITE);
 		lblRegisterUsername.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterUsername.setBounds(70, 418, 324, 31);
-		profilePanel.add(lblRegisterUsername);
+		add(lblRegisterUsername);
 
 		lblRegisterPasswd = new JLabel("Contraseña: " + registerPasswd);
 		lblRegisterPasswd.setForeground(Color.WHITE);
 		lblRegisterPasswd.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterPasswd.setBounds(70, 453, 324, 31);
-		profilePanel.add(lblRegisterPasswd);
+		add(lblRegisterPasswd);
 
 		lblRegisterUserType = new JLabel("Tipo de Usuario: " + lblRegisterUserType);
 		lblRegisterUserType.setForeground(Color.WHITE);
 		lblRegisterUserType.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterUserType.setBounds(70, 495, 324, 31);
-		profilePanel.add(lblRegisterUserType);
+		add(lblRegisterUserType);
 
 		lblRegisterDirection = new JLabel("Calle: " + registerDirection);
 		lblRegisterDirection.setForeground(Color.WHITE);
 		lblRegisterDirection.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterDirection.setBounds(602, 170, 320, 32);
-		profilePanel.add(lblRegisterDirection);
+		add(lblRegisterDirection);
 
 		lblRegisterCity = new JLabel("Ciudad: " + registerCity);
 		lblRegisterCity.setForeground(Color.WHITE);
 		lblRegisterCity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCity.setBounds(602, 212, 291, 31);
-		profilePanel.add(lblRegisterCity);
+		add(lblRegisterCity);
 
 		lblRegisterProvince = new JLabel("Provincia: " + registerProvince);
 		lblRegisterProvince.setForeground(Color.WHITE);
 		lblRegisterProvince.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterProvince.setBounds(602, 255, 291, 31);
-		profilePanel.add(lblRegisterProvince);
+		add(lblRegisterProvince);
 
 		lblRegisterCP = new JLabel("Codigo Postal: " + registerCP);
 		lblRegisterCP.setForeground(Color.WHITE);
 		lblRegisterCP.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCP.setBounds(602, 297, 291, 31);
-		profilePanel.add(lblRegisterCP);
+		add(lblRegisterCP);
 
 		lblRegisterCountName = new JLabel("Numero de Cuenta: " + registerCountNum);
 		lblRegisterCountName.setForeground(Color.WHITE);
 		lblRegisterCountName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCountName.setBounds(602, 434, 349, 31);
-		profilePanel.add(lblRegisterCountName);
+		add(lblRegisterCountName);
 
 		lblRegisterCardCaducity = new JLabel("Caducidad: " + registerCardCaducity);
 		lblRegisterCardCaducity.setForeground(Color.WHITE);
 		lblRegisterCardCaducity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCardCaducity.setBounds(602, 470, 340, 31);
-		profilePanel.add(lblRegisterCardCaducity);
+		add(lblRegisterCardCaducity);
 
 		lblRegisterCVV = new JLabel("CVV o CVC: " + registerCVV);
 		lblRegisterCVV.setForeground(Color.WHITE);
 		lblRegisterCVV.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCVV.setBounds(603, 514, 319, 31);
-		profilePanel.add(lblRegisterCVV);
+		add(lblRegisterCVV);
 
 		lblPremiumOpt = new JLabel("OPCIONES PREMIUM");
 		lblPremiumOpt.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPremiumOpt.setForeground(new Color(190, 30, 255));
 		lblPremiumOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblPremiumOpt.setBounds(602, 369, 365, 64);
-		profilePanel.add(lblPremiumOpt);
+		add(lblPremiumOpt);
 
 		lblUserDirOpt = new JLabel("DIRECCION");
 		lblUserDirOpt.setForeground(new Color(190, 30, 255));
 		lblUserDirOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblUserDirOpt.setBounds(602, 107, 365, 64);
-		profilePanel.add(lblUserDirOpt);
+		add(lblUserDirOpt);
 
 		btnCambiarContrasea = new JButton("Cambiar contraseña");
 		btnCambiarContrasea.addActionListener(new ActionListener() {
@@ -290,12 +262,11 @@ public class ProfilePanel extends JPanel {
 		});
 		btnCambiarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCambiarContrasea.setBounds(359, 567, 192, 33);
-		profilePanel.add(btnCambiarContrasea);
+		add(btnCambiarContrasea);
 		
-		profilePanel.addComponentListener(new ComponentAdapter() {
+		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent c) {
 				try {
-					getUserName();
 					showUserInfor(userName);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -322,8 +293,8 @@ public class ProfilePanel extends JPanel {
 		
 		userInfor = userController.getLogedUser(userName);
 
-		if (null != userInfor) {
-			userProfile = new Users();
+		if (!userInfor.isEmpty()) {
+		    userProfile = new Users();
 			userProfile = userInfor.get(0);
 
 			registerPasswd = userProfile.getUserPassword();
@@ -337,13 +308,17 @@ public class ProfilePanel extends JPanel {
 			registerCity = userProfile.getUserCity();
 			registerAccType = userProfile.getAccountType();
 			registerProvince = userProfile.getUserProvince();
+		} else {
+			JOptionPane.showMessageDialog(null, "No se ha cargado la informacion",
+					"Error", JOptionPane.ERROR_MESSAGE);
 		}
+		
 
 	}
 
 	public JPanel getPanelPerfiles() {
 		// TODO Auto-generated method stub
-		return profilePanel;
+		return this;
 	}
 
 }

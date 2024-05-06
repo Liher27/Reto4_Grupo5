@@ -63,7 +63,9 @@ public class VentanaPrincipal extends JFrame {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 650);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 
 		/**

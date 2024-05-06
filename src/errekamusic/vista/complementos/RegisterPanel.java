@@ -25,9 +25,10 @@ import javax.swing.JPasswordField;
 /**
  * El panel para registro con los datos que ha introducido el usuario
  */
-public class RegisterPanel {
+public class RegisterPanel extends JPanel{
 
-	private JPanel panelDeRegistro;
+	private static final long serialVersionUID = 1L;
+
 	private UserController userController = null;
 	
 	private JLabel lblRegisterDNI = null;
@@ -78,183 +79,183 @@ public class RegisterPanel {
 	 * panel principal
 	 */
 	public RegisterPanel(ArrayList<JPanel> paneles) {
-		panelDeRegistro = new JPanel();
-		panelDeRegistro.setBounds(0, 0, 984, 611);
-		panelDeRegistro.setBackground(new Color(0, 0, 0));
-		panelDeRegistro.setLayout(null);
+
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblRegisterDNI = new JLabel("DNI");
 		lblRegisterDNI.setForeground(new Color(255, 255, 255));
 		lblRegisterDNI.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterDNI.setBounds(45, 264, 86, 43);
-		panelDeRegistro.add(lblRegisterDNI);
+		add(lblRegisterDNI);
 
 		lblRegisterName = new JLabel("Nombre");
 		lblRegisterName.setForeground(new Color(255, 255, 255));
 		lblRegisterName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterName.setBounds(45, 143, 86, 27);
-		panelDeRegistro.add(lblRegisterName);
+		add(lblRegisterName);
 
 		lblRegisterFirstSurname = new JLabel("Primer apellido");
 		lblRegisterFirstSurname.setForeground(new Color(255, 255, 255));
 		lblRegisterFirstSurname.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterFirstSurname.setBounds(45, 181, 176, 32);
-		panelDeRegistro.add(lblRegisterFirstSurname);
+		add(lblRegisterFirstSurname);
 
 		lblRegisterSecondSurname = new JLabel("Segundo Apellido");
 		lblRegisterSecondSurname.setForeground(new Color(255, 255, 255));
 		lblRegisterSecondSurname.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterSecondSurname.setBounds(45, 224, 205, 32);
-		panelDeRegistro.add(lblRegisterSecondSurname);
+		add(lblRegisterSecondSurname);
 
 		lblRegisterPasswd = new JLabel("Contraseña");
 		lblRegisterPasswd.setForeground(new Color(255, 255, 255));
 		lblRegisterPasswd.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterPasswd.setBounds(45, 437, 159, 31);
-		panelDeRegistro.add(lblRegisterPasswd);
+		add(lblRegisterPasswd);
 
 		lblConfirmPasswd = new JLabel("Confirmar contraseña");
 		lblConfirmPasswd.setForeground(new Color(255, 255, 255));
 		lblConfirmPasswd.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblConfirmPasswd.setBounds(45, 474, 230, 27);
-		panelDeRegistro.add(lblConfirmPasswd);
+		add(lblConfirmPasswd);
 
 		lblRegisterDirection = new JLabel("Calle");
 		lblRegisterDirection.setForeground(new Color(255, 255, 255));
 		lblRegisterDirection.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterDirection.setBounds(573, 143, 130, 32);
-		panelDeRegistro.add(lblRegisterDirection);
+		add(lblRegisterDirection);
 
 		lblRegisterBirthDate = new JLabel("Fecha de Nacimiento");
 		lblRegisterBirthDate.setForeground(new Color(255, 255, 255));
 		lblRegisterBirthDate.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterBirthDate.setBounds(45, 310, 230, 32);
-		panelDeRegistro.add(lblRegisterBirthDate);
+		add(lblRegisterBirthDate);
 
 		lblRegisterCP = new JLabel("Codigo Postal");
 		lblRegisterCP.setForeground(new Color(255, 255, 255));
 		lblRegisterCP.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCP.setBounds(573, 270, 159, 31);
-		panelDeRegistro.add(lblRegisterCP);
+		add(lblRegisterCP);
 
 		fieldRegisterDNI = new JTextField();
 		fieldRegisterDNI.setBounds(101, 274, 262, 20);
-		panelDeRegistro.add(fieldRegisterDNI);
+		add(fieldRegisterDNI);
 		fieldRegisterDNI.setColumns(10);
 
 		fieldRegisterName = new JTextField();
 		fieldRegisterName.setBounds(139, 144, 262, 20);
-		panelDeRegistro.add(fieldRegisterName);
+		add(fieldRegisterName);
 		fieldRegisterName.setColumns(10);
 
 		fieldRegisterFirstSurname = new JTextField();
 		fieldRegisterFirstSurname.setBounds(189, 184, 218, 20);
-		panelDeRegistro.add(fieldRegisterFirstSurname);
+		add(fieldRegisterFirstSurname);
 		fieldRegisterFirstSurname.setColumns(10);
 
 		fieldRegisterSecondSurname = new JTextField();
 		fieldRegisterSecondSurname.setBounds(203, 230, 218, 20);
-		panelDeRegistro.add(fieldRegisterSecondSurname);
+		add(fieldRegisterSecondSurname);
 		fieldRegisterSecondSurname.setColumns(10);
 
 		fieldRegisterBirthDate = new JTextField();
 		fieldRegisterBirthDate.setBounds(231, 316, 176, 20);
-		panelDeRegistro.add(fieldRegisterBirthDate);
+		add(fieldRegisterBirthDate);
 		fieldRegisterBirthDate.setColumns(10);
 
 		fieldRegisterDirection = new JTextField();
 		fieldRegisterDirection.setColumns(10);
 		fieldRegisterDirection.setBounds(636, 149, 216, 20);
-		panelDeRegistro.add(fieldRegisterDirection);
+		add(fieldRegisterDirection);
 
 		fieldRegisterCP = new JTextField();
 		fieldRegisterCP.setColumns(10);
 		fieldRegisterCP.setBounds(160, 440, 245, 20);
-		panelDeRegistro.add(fieldRegisterCP);
+		add(fieldRegisterCP);
 
 		lblRegisterCity = new JLabel("Ciudad");
 		lblRegisterCity.setForeground(new Color(255, 255, 255));
 		lblRegisterCity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCity.setBounds(573, 185, 130, 31);
-		panelDeRegistro.add(lblRegisterCity);
+		add(lblRegisterCity);
 
 		lblRegisterProvince = new JLabel("Provincia");
 		lblRegisterProvince.setForeground(new Color(255, 255, 255));
 		lblRegisterProvince.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterProvince.setBounds(573, 228, 130, 31);
-		panelDeRegistro.add(lblRegisterProvince);
+		add(lblRegisterProvince);
 
 		lblRegisterUsername = new JLabel("Nombre Usuario");
 		lblRegisterUsername.setForeground(new Color(255, 255, 255));
 		lblRegisterUsername.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterUsername.setBounds(45, 401, 205, 31);
-		panelDeRegistro.add(lblRegisterUsername);
+		add(lblRegisterUsername);
 
 		userTypeComboBox = new JComboBox<String>();
 		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Usuario Gratuito", "Usuario Premium" }));
 		userTypeComboBox.setBounds(189, 510, 205, 29);
-		panelDeRegistro.add(userTypeComboBox);
+		add(userTypeComboBox);
 		
 		lblRegisterUserType = new JLabel("Tipo de Usuario");
 		lblRegisterUserType.setForeground(new Color(255, 255, 255));
 		lblRegisterUserType.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterUserType.setBounds(45, 508, 176, 31);
-		panelDeRegistro.add(lblRegisterUserType);
+		add(lblRegisterUserType);
 
 		fieldRegisterCity = new JTextField();
 		fieldRegisterCity.setColumns(10);
 		fieldRegisterCity.setBounds(652, 188, 176, 20);
-		panelDeRegistro.add(fieldRegisterCity);
+		add(fieldRegisterCity);
 
 		fieldRegisterProvince = new JTextField();
 		fieldRegisterProvince.setColumns(10);
 		fieldRegisterProvince.setBounds(667, 232, 187, 20);
-		panelDeRegistro.add(fieldRegisterProvince);
+		add(fieldRegisterProvince);
 
 		fieldRegisterUsername = new JTextField();
 		fieldRegisterUsername.setColumns(10);
 		fieldRegisterUsername.setBounds(196, 407, 210, 20);
-		panelDeRegistro.add(fieldRegisterUsername);
+		add(fieldRegisterUsername);
 
 		lblRegisterCountName = new JLabel("Numero de Cuenta");
 		lblRegisterCountName.setForeground(new Color(255, 255, 255));
 		lblRegisterCountName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCountName.setBounds(573, 407, 192, 31);
-		panelDeRegistro.add(lblRegisterCountName);
+		add(lblRegisterCountName);
 
 		fieldRegisterCountName = new JTextField();
 		fieldRegisterCountName.setColumns(10);
 		fieldRegisterCountName.setBounds(751, 411, 166, 20);
-		panelDeRegistro.add(fieldRegisterCountName);
+		add(fieldRegisterCountName);
 
 		lblRegisterCardCaducity = new JLabel("Caducidad");
 		lblRegisterCardCaducity.setForeground(new Color(255, 255, 255));
 		lblRegisterCardCaducity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCardCaducity.setBounds(573, 443, 159, 31);
-		panelDeRegistro.add(lblRegisterCardCaducity);
+		add(lblRegisterCardCaducity);
 
 		fieldRegisterCardCaducity = new JTextField();
 		fieldRegisterCardCaducity.setColumns(10);
 		fieldRegisterCardCaducity.setBounds(684, 447, 176, 20);
-		panelDeRegistro.add(fieldRegisterCardCaducity);
+		add(fieldRegisterCardCaducity);
 
 		lblRegisterCVV = new JLabel("CVV o CVC");
 		lblRegisterCVV.setForeground(new Color(255, 255, 255));
 		lblRegisterCVV.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
 		lblRegisterCVV.setBounds(574, 487, 159, 31);
-		panelDeRegistro.add(lblRegisterCVV);
+		add(lblRegisterCVV);
 
 		fieldRegisterCVV = new JTextField();
 		fieldRegisterCVV.setColumns(10);
 		fieldRegisterCVV.setBounds(683, 491, 176, 20);
-		panelDeRegistro.add(fieldRegisterCVV);
+		add(fieldRegisterCVV);
 
 		registerTitleLbl = new JLabel("REGISTRATE");
 		registerTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		registerTitleLbl.setForeground(new Color(190, 30, 255));
 		registerTitleLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 41));
 		registerTitleLbl.setBounds(329, 11, 349, 64);
-		panelDeRegistro.add(registerTitleLbl);
+		add(registerTitleLbl);
 
 		btnCancelarPanelDeRegistro = new JButton("Cancelar");
 		btnCancelarPanelDeRegistro.addActionListener(new ActionListener() {
@@ -278,9 +279,9 @@ public class RegisterPanel {
 			}
 
 		});
-		btnCancelarPanelDeRegistro.setForeground(new Color(0, 0, 0));
+		btnCancelarPanelDeRegistro.setBackground(new Color(0, 0, 0));
 		btnCancelarPanelDeRegistro.setBounds(44, 556, 98, 33);
-		panelDeRegistro.add(btnCancelarPanelDeRegistro);
+		add(btnCancelarPanelDeRegistro);
 
 		btnConfirmarDeRegistro = new JButton("Confirmar");
 		btnConfirmarDeRegistro.addActionListener(new ActionListener() {
@@ -329,48 +330,48 @@ public class RegisterPanel {
 		});
 		btnConfirmarDeRegistro.setForeground(new Color(0, 0, 0));
 		btnConfirmarDeRegistro.setBounds(836, 556, 98, 33);
-		panelDeRegistro.add(btnConfirmarDeRegistro);
+		add(btnConfirmarDeRegistro);
 
 		fieldRegisterPasswd = new JPasswordField();
 		fieldRegisterPasswd.setBounds(702, 273, 173, 20);
-		panelDeRegistro.add(fieldRegisterPasswd);
+		add(fieldRegisterPasswd);
 
 		passwordFieldConfirmarContrasenyaRegistro = new JPasswordField();
 		passwordFieldConfirmarContrasenyaRegistro.setBounds(231, 476, 187, 20);
-		panelDeRegistro.add(passwordFieldConfirmarContrasenyaRegistro);
+		add(passwordFieldConfirmarContrasenyaRegistro);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		panelDeRegistro.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblPersonalOpt = new JLabel("DATOS PERSONALES");
 		lblPersonalOpt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonalOpt.setForeground(new Color(190, 30, 255));
 		lblPersonalOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblPersonalOpt.setBounds(0, 80, 365, 64);
-		panelDeRegistro.add(lblPersonalOpt);
+		add(lblPersonalOpt);
 
 		lblCountOpt = new JLabel("DATOS DE LA CUENTA");
 		lblCountOpt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCountOpt.setForeground(new Color(190, 30, 255));
 		lblCountOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblCountOpt.setBounds(16, 342, 365, 64);
-		panelDeRegistro.add(lblCountOpt);
+		add(lblCountOpt);
 
 		lblUserDirOpt = new JLabel("DIRECCION");
 		lblUserDirOpt.setForeground(new Color(190, 30, 255));
 		lblUserDirOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblUserDirOpt.setBounds(573, 80, 365, 64);
-		panelDeRegistro.add(lblUserDirOpt);
+		add(lblUserDirOpt);
 
 		lblPremiumOpt = new JLabel("OPCIONES PREMIUM");
 		lblPremiumOpt.setHorizontalAlignment(SwingConstants.LEFT);
 		lblPremiumOpt.setForeground(new Color(190, 30, 255));
 		lblPremiumOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
 		lblPremiumOpt.setBounds(573, 342, 365, 64);
-		panelDeRegistro.add(lblPremiumOpt);
+		add(lblPremiumOpt);
 
 	}
 
@@ -380,6 +381,6 @@ public class RegisterPanel {
 	 * @return panelDeRegistro
 	 */
 	public JPanel getPanelDeRegistro() {
-		return panelDeRegistro;
+		return this;
 	}
 }

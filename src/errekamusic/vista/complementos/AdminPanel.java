@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class AdminPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel adminPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblAdminTitle = null;
@@ -31,16 +30,15 @@ public class AdminPanel extends JPanel {
 	 */
 	public AdminPanel(ArrayList<JPanel> paneles) {
 
-		adminPanel = new JPanel();
-		adminPanel.setBounds(0, 0, 984, 611);
-		adminPanel.setBackground(new Color(0, 0, 0));
-		adminPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		adminPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -65,12 +63,12 @@ public class AdminPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		adminPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		adminPanelBackBtn = new JButton("Volver");
 		adminPanelBackBtn.setBounds(844, 556, 98, 33);
 		adminPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		adminPanel.add(adminPanelBackBtn);
+		add(adminPanelBackBtn);
 		adminPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -101,19 +99,19 @@ public class AdminPanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		adminPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblAdminTitle = new JLabel("Panel de administrador");
 		lblAdminTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdminTitle.setForeground(new Color(200, 40, 255));
 		lblAdminTitle.setFont(new Font("Segoe UI Black", Font.PLAIN, 37));
 		lblAdminTitle.setBounds(255, 32, 448, 64);
-		adminPanel.add(lblAdminTitle);
+		add(lblAdminTitle);
 	}
 
 	public JPanel getPanelAdministrador() {
 		// TODO Auto-generated method stub
-		return adminPanel;
+		return this;
 	}
 
 }

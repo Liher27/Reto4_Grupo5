@@ -1,4 +1,3 @@
-
 package errekamusic.vista.complementos;
 
 import javax.swing.ImageIcon;
@@ -19,11 +18,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
 
-public class LoginPanel {
+public class LoginPanel extends JPanel {
 
-	private JPanel panelDeLogin = null;
+	private static final long serialVersionUID = 1L;
 	private UserController userController = null;
-	private ProfilePanel profilePanel = null;
+//	private ProfilePanel profilePanel = null;
 
 	public JTextField userField = null;
 	public JPasswordField passwdTextField = null;
@@ -37,41 +36,39 @@ public class LoginPanel {
 	private JButton registerBtn = null;
 	private JButton logInPanelNextBtn = null;
 
-
 	public LoginPanel(ArrayList<JPanel> paneles) {
-		panelDeLogin = new JPanel();
-		panelDeLogin.setForeground(new Color(0, 0, 0));
-		panelDeLogin.setBackground(new Color(0, 0, 0));
-		panelDeLogin.setBounds(0, 0, 984, 611);
-		panelDeLogin.setLayout(null);
+
+		setBackground(new Color(0, 0, 0));
+		setBounds(0, 0, 984, 611);
+		setLayout(null);
 
 		logInTitleLbl = new JLabel("INICIA SESION");
 		logInTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		logInTitleLbl.setForeground(new Color(255, 255, 255));
 		logInTitleLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 30));
 		logInTitleLbl.setBounds(328, 32, 337, 64);
-		panelDeLogin.add(logInTitleLbl);
+		add(logInTitleLbl);
 
 		userLbl = new JLabel("Usuario:");
 		userLbl.setForeground(new Color(190, 30, 255));
 		userLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
 		userLbl.setBounds(300, 386, 109, 14);
-		panelDeLogin.add(userLbl);
+		add(userLbl);
 
 		passwdLbl = new JLabel("Contraseña:");
 		passwdLbl.setForeground(new Color(190, 30, 255));
 		passwdLbl.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
 		passwdLbl.setBounds(300, 456, 109, 14);
-		panelDeLogin.add(passwdLbl);
+		add(passwdLbl);
 
 		userField = new JTextField();
 		userField.setBounds(470, 385, 211, 20);
-		panelDeLogin.add(userField);
+		add(userField);
 		userField.setColumns(10);
 
 		passwdTextField = new JPasswordField();
 		passwdTextField.setBounds(470, 455, 211, 20);
-		panelDeLogin.add(passwdTextField);
+		add(passwdTextField);
 		passwdTextField.setColumns(10);
 
 		logInPanelNextBtn = new JButton("Aceptar");
@@ -80,7 +77,7 @@ public class LoginPanel {
 
 				userController = new UserController();
 				if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
-					if (userController.confirmLogedUser(userField, passwdTextField)) {
+					if (userController.confirmLogedUser(userField.getText().toString(), passwdTextField.getPassword().toString())) {
 						paneles.get(0).setVisible(false);
 						paneles.get(1).setVisible(false);
 						paneles.get(2).setVisible(false);
@@ -95,10 +92,6 @@ public class LoginPanel {
 						paneles.get(11).setVisible(false);
 						paneles.get(12).setVisible(false);
 						paneles.get(13).setVisible(false);
-						
-						profilePanel = new ProfilePanel(paneles);
-						profilePanel.setUserName(userField.getText().toString());
-						
 
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -115,7 +108,7 @@ public class LoginPanel {
 		});
 
 		logInPanelNextBtn.setBounds(851, 556, 98, 33);
-		panelDeLogin.add(logInPanelNextBtn);
+		add(logInPanelNextBtn);
 
 		registerBtn = new JButton("Registro");
 		registerBtn.addActionListener(new ActionListener() {
@@ -138,26 +131,24 @@ public class LoginPanel {
 			}
 		});
 		registerBtn.setBounds(43, 556, 98, 33);
-		panelDeLogin.add(registerBtn);
+		add(registerBtn);
 
 		lblErrekamusicLogo = new JLabel("");
 		lblErrekamusicLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblErrekamusicLogo.setBounds(298, 108, 422, 230);
 		lblErrekamusicLogo.setIcon(new ImageIcon("contents/errekamusicLogo.png"));
-		panelDeLogin.add(lblErrekamusicLogo);
+		add(lblErrekamusicLogo);
 
 		lblDontHaveAccount = new JLabel("¿No tienes cuenta?");
 		lblDontHaveAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDontHaveAccount.setForeground(new Color(190, 30, 255));
 		lblDontHaveAccount.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblDontHaveAccount.setBounds(30, 531, 129, 20);
-		panelDeLogin.add(lblDontHaveAccount);
-
+		add(lblDontHaveAccount);
 	}
 
 	public JPanel getPanelDeLogin() {
-		return panelDeLogin;
+		return this;
 	}
-
 
 }

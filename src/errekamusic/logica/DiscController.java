@@ -12,7 +12,7 @@ import java.util.List;
 import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
-import errekamusic.utils.Converter;
+import errekamusic.bbdd.Utils.Converter;
 
 public class DiscController implements CollectionInterface {
 

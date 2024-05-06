@@ -15,12 +15,14 @@ import errekamusic.bbdd.Pojo.FreeUser;
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.DBUtils;
-import errekamusic.utils.Converter;
+import errekamusic.bbdd.Utils.UserUtils;
+import errekamusic.bbdd.Utils.Converter;
 
 public class UserController {
 
 	private List<Users> userInfo = null;
 	private Users user = null;
+	private UserUtils userUtils = null;
 	private PremiumUser premiumUser = null;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -50,32 +52,26 @@ public class UserController {
 		return null;
 	}
 
-	public boolean confirmLogedUser(JTextField userField, JPasswordField passwdTextField) {
-		boolean ret = false;
+	public boolean confirmLogedUser(String userField, String string) {
+	    boolean ret = false;
 
-		String getUsernameInput = userField.getText();
-		String getPasswdInput = new String(passwdTextField.getPassword());
+	    userUtils = new UserUtils();
+	    userInfo = new ArrayList<Users>();
+	    
+	    String password = new String(string);
 
-		try {
-			Class.forName(DBUtils.DRIVER);
+	    userInfo = userUtils.getUser(userField, password);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			sql = "SELECT * FROM USERS WHERE LOGINUSER = ? AND USERPASSWORD = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, getUsernameInput);
-			pstmt.setString(2, getPasswdInput);
-			result = pstmt.executeQuery();
-			if (result.next()) {
-				ret = true;
-			}
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("Ha dado fallo -> " + e.getMessage());
-		} catch (SQLException e) {
-			System.out.println("Malformacion sqlazo -> " + e.getMessage());
-		}
-		return ret;
+	    if (userInfo != null && !userInfo.isEmpty()) {
+	        user = userInfo.get(0);
+	        
+	        if (user.getUserPassword().equals(password)) {
+	            ret = true;
+	        }
+	    }
+	    return ret;
 	}
+
 
 	public List<Users> getLogedUser(String username) {
 		userInfo = new ArrayList<Users>();
@@ -83,33 +79,33 @@ public class UserController {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			sql = "SELECT * FROM USERS WHERE LOGINUSER ='"+ username +"'";
+			sql = "SELECT * FROM USERS WHERE LOGINUSER = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			result = pstmt.executeQuery();
-			
-				while (result.next()) {
-					user = new Users();
+
+			while (result.next()) {
+				user = new Users();
 //					premiumUser = new PremiumUser();
-					user.setLoginUser(result.getString("LoginUser"));
-					user.setNameUser(result.getString("NameUser"));
-					user.setSurName1(result.getString("SurnameUser1"));
-					user.setSurName1(result.getString("SurnameUser2"));
-					user.setDNI(result.getString("SurnameUser2"));
-					user.setBirthDateUser(Converter.convertFromSqlDateToUtilDate(result.getDate("BirthDateUser")));
-					user.setDirUser(result.getString("DirUser"));
-					user.setcPUser(result.getInt("CPUser"));
-					user.setUserCity(result.getString("UserCity"));
-					user.setUserProvince(result.getString("UserProvince"));
-					user.setRegisterDate(Converter.convertFromSqlDateToUtilDate(result.getDate("RegisterDate")));
-					user.setAccountType(result.getString("AccountType"));
+				user.setLoginUser(result.getString("LoginUser"));
+				user.setNameUser(result.getString("NameUser"));
+				user.setSurName1(result.getString("SurnameUser1"));
+				user.setSurName1(result.getString("SurnameUser2"));
+				user.setDNI(result.getString("SurnameUser2"));
+				user.setBirthDateUser(Converter.convertFromSqlDateToUtilDate(result.getDate("BirthDateUser")));
+				user.setDirUser(result.getString("DirUser"));
+				user.setcPUser(result.getInt("CPUser"));
+				user.setUserCity(result.getString("UserCity"));
+				user.setUserProvince(result.getString("UserProvince"));
+				user.setRegisterDate(Converter.convertFromSqlDateToUtilDate(result.getDate("RegisterDate")));
+				user.setAccountType(result.getString("AccountType"));
 //					if ((result.getString("AccountType")).equals("Premium")) {
 //						premiumUser.setCountNum(result.getInt("CountNum"));
 //						premiumUser.setCaducity(result.getInt("Caducity"));
 //						premiumUser.setcVV(result.getInt("CVV"));
 //						user.setPremiumUser(premiumUser);
 //					}
-					userInfo.add(user);
+				userInfo.add(user);
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());
@@ -122,7 +118,7 @@ public class UserController {
 
 	public boolean changeUserPassword(String newPasswordToInsert, String registerUsername) {
 		boolean ret = false;
-			
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet result = null;
@@ -137,7 +133,7 @@ public class UserController {
 			pstmt.setString(1, registerUsername);
 			result = pstmt.executeQuery();
 			if (result.next()) {
-			
+
 			}
 
 		} catch (ClassNotFoundException e) {

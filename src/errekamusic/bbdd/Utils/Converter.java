@@ -1,4 +1,4 @@
-package errekamusic.utils;
+package errekamusic.bbdd.Utils;
 
 import java.awt.Image;
 import java.io.ByteArrayInputStream;

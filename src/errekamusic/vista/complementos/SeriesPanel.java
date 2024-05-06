@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class SeriesPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel seriesPanel = null;
 
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblSeriesTitle = null;
@@ -32,16 +31,15 @@ public class SeriesPanel extends JPanel {
 	 */
 	public SeriesPanel(ArrayList<JPanel> paneles) {
 
-		seriesPanel = new JPanel();
-		seriesPanel.setBounds(0, 0, 984, 611);
-		seriesPanel.setBackground(new Color(0, 0, 0));
-		seriesPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		seriesPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -66,12 +64,12 @@ public class SeriesPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		seriesPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		seriesPanelBackBtn = new JButton("Volver");
 		seriesPanelBackBtn.setBounds(844, 556, 98, 33);
 		seriesPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		seriesPanel.add(seriesPanelBackBtn);
+		add(seriesPanelBackBtn);
 		seriesPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -102,18 +100,18 @@ public class SeriesPanel extends JPanel {
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		seriesPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		lblSeriesTitle = new JLabel("Descubre series");
 		lblSeriesTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeriesTitle.setForeground(new Color(200, 40, 255));
 		lblSeriesTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblSeriesTitle.setBounds(328, 32, 349, 64);
-		seriesPanel.add(lblSeriesTitle);
+		add(lblSeriesTitle);
 
 		collectionInfoBtn = new JButton("Mas informacion");
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
-		seriesPanel.add(collectionInfoBtn);
+		add(collectionInfoBtn);
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -143,7 +141,7 @@ public class SeriesPanel extends JPanel {
 
 	public JPanel getSeriesPanel() {
 		// TODO Auto-generated method stub
-		return seriesPanel;
+		return this;
 	}
 
 }

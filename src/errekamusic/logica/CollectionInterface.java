@@ -7,8 +7,8 @@ import errekamusic.bbdd.Pojo.Disc;
 
 public interface CollectionInterface{
 
-	public List<Disc> GetCollectionByType ();
+	public <T> List<T> GetCollectionByType ();
 	
-	public List<Disc> GetCollectionByArtist (int creatorID);
+	public <T> List<T> GetCollectionByArtist (int creatorID);
 	
 }

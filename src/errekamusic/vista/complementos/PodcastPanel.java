@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 public class PodcastPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel podcastPanel = null;
 
 	private JLabel lblProfilePicture = null;
 	private JLabel lblLogoErrekamusic = null;
@@ -25,31 +24,30 @@ public class PodcastPanel extends JPanel {
 	private JLabel lblPodcastTitle = null;
 	private JLabel seeYourProfileLbl = null;
 
-	private JButton podcastPanelBackBtn = null;
 	private JButton reproContentBtn = null;
+	private JButton podcastPanelBackBtn = null;
 
 	/**
 	 * Create the panel.
 	 */
 	public PodcastPanel(ArrayList<JPanel> paneles) {
 
-		podcastPanel = new JPanel();
-		podcastPanel.setBounds(0, 0, 984, 611);
-		podcastPanel.setBackground(new Color(0, 0, 0));
-		podcastPanel.setLayout(null);
+		setBounds(0, 0, 984, 611);
+		setBackground(new Color(0, 0, 0));
+		setLayout(null);
 
 		lblPodcastTitle = new JLabel("Descubre podcasts");
 		lblPodcastTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPodcastTitle.setForeground(new Color(200, 40, 255));
 		lblPodcastTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
 		lblPodcastTitle.setBounds(284, 32, 393, 64);
-		podcastPanel.add(lblPodcastTitle);
+		add(lblPodcastTitle);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
 		lblProfilePicture.setIcon(new ImageIcon("contents/profilePicture.jpg"));
-		podcastPanel.add(lblProfilePicture);
+		add(lblProfilePicture);
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -74,12 +72,12 @@ public class PodcastPanel extends JPanel {
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
-		podcastPanel.add(seeYourProfileLbl);
+		add(seeYourProfileLbl);
 
 		podcastPanelBackBtn = new JButton("Volver");
 		podcastPanelBackBtn.setBounds(844, 556, 98, 33);
 		podcastPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		podcastPanel.add(podcastPanelBackBtn);
+		add(podcastPanelBackBtn);
 		podcastPanelBackBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -109,17 +107,17 @@ public class PodcastPanel extends JPanel {
 		lblSubtitle = new JLabel("Seleccione la opción que desee:");
 		lblSubtitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSubtitle.setBounds(68, 64, 285, 25);
-		podcastPanel.add(lblSubtitle);
+		add(lblSubtitle);
 
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
-		podcastPanel.add(lblLogoErrekamusic);
+		add(lblLogoErrekamusic);
 
 		reproContentBtn = new JButton("Reproducir contenido");
 		reproContentBtn.setBounds(440, 561, 186, 28);
-		podcastPanel.add(reproContentBtn);
+		add(reproContentBtn);
 		reproContentBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -150,7 +148,7 @@ public class PodcastPanel extends JPanel {
 
 	public JPanel getPanelPodcast() {
 		// TODO Auto-generated method stub
-		return podcastPanel;
+		return this;
 	}
 
 }
