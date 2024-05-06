@@ -2,10 +2,12 @@ package errekamusic.logica;
 
 import java.util.List;
 
-public interface ArtistsInterfaceController<T> {
+import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.enumerado.ArtistType;
+
+public interface ArtistsInterfaceController {
 	
-	public List <T> getByArtistType (boolean artistType);
+	public List<Artist> getByArtistType (ArtistType artistType);
 		
-	public List <T> getById(int id);
-	
+	public List<Artist> getById(int id);
 }

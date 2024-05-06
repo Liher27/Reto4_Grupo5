@@ -14,7 +14,7 @@ import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.utils.Converter;
 
-public class DiscController implements CollectionInterface<Disc> {
+public class DiscController implements CollectionInterface {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -26,13 +26,13 @@ public class DiscController implements CollectionInterface<Disc> {
 	@Override
 	public List<Disc> GetCollectionByType() {
 		discInfo = new ArrayList<Disc>();
-		return null;
+		return discInfo;
 	}
 
 	@Override
 	public List<Disc> GetCollectionByArtist(int creatorID) {
 		discInfo = new ArrayList<Disc>();
-		return null;
+		return discInfo;
 	}
 
 	public List<Disc> GetDiscForPropaganda(int randomArtistID) throws Exception {
