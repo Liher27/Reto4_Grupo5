@@ -2,7 +2,7 @@ package errekamusic.bbdd.Pojo;
 
 import java.util.Objects;
 
-public class Canciones {
+public class Canciones extends Contenido {
 	
 	private Disc disc = null;
 

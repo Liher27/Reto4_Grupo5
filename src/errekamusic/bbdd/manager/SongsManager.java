@@ -1,8 +1,15 @@
 package errekamusic.bbdd.manager;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Utils.DBUtils;
 
 public class SongsManager implements ContentsInterface <Canciones>, DataBaseInterface <Canciones> {
 
@@ -26,9 +33,38 @@ public class SongsManager implements ContentsInterface <Canciones>, DataBaseInte
 
 	@Override
 	public List<Canciones> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Canciones> songs = new ArrayList<Canciones>();
+		try {
+			Class.forName(DBUtils.DRIVER);
+			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Statement statement = connection.createStatement();
+			String sql = "SELECT * FROM content";
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+
+				Canciones song = new Canciones();
+
+				song.setContentName(result.getString("ContentName"));
+
+				song.setContentDuration(result.getTime("ContentDuration"));
+
+				song.setContentPath(result.getString("ContentPath"));
+				songs.add(song);
+			}
+		} catch (ClassNotFoundException e) {
+
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+
+		} catch (SQLException e) {
+			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+
+		}
+		return songs;
+
 	}
+
+
+	
 
 	@Override
 	public void insertInto(Canciones song) {

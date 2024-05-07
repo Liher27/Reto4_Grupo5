@@ -9,6 +9,7 @@ public class Contenido {
 	private Time contentDuration = null;
 	private boolean contentType = false;
 	private int contentReproNum = 0;
+	private String contentPath = null;
 	public int getContentID() {
 		return contentID;
 	}
@@ -39,9 +40,15 @@ public class Contenido {
 	public void setContentReproNum(int contentReproNum) {
 		this.contentReproNum = contentReproNum;
 	}
+	public String getContentPath() {
+		return contentPath;
+	}
+	public void setContentPath(String contentPath) {
+		this.contentPath = contentPath;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(contentDuration, contentID, contentName, contentReproNum, contentType);
+		return Objects.hash(contentDuration, contentID, contentName, contentPath, contentReproNum, contentType);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -53,13 +60,14 @@ public class Contenido {
 			return false;
 		Contenido other = (Contenido) obj;
 		return Objects.equals(contentDuration, other.contentDuration) && contentID == other.contentID
-				&& Objects.equals(contentName, other.contentName) && contentReproNum == other.contentReproNum
-				&& contentType == other.contentType;
+				&& Objects.equals(contentName, other.contentName) && Objects.equals(contentPath, other.contentPath)
+				&& contentReproNum == other.contentReproNum && contentType == other.contentType;
 	}
 	@Override
 	public String toString() {
 		return "Contenido [contentID=" + contentID + ", contentName=" + contentName + ", contentDuration="
-				+ contentDuration + ", contentType=" + contentType + ", contentReproNum=" + contentReproNum + "]";
+				+ contentDuration + ", contentType=" + contentType + ", contentReproNum=" + contentReproNum
+				+ ", contentPath=" + contentPath + "]";
 	}
 	
 		

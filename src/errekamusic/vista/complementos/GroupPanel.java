@@ -134,55 +134,55 @@ public class GroupPanel extends JPanel {
 		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableGroups.setBounds(162, 143, 649, 331);
 		
-		ArtistsInterface artistsInterfaceController = new GroupManager();
-		List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
-		
-	    String[] headers= {"Grupo","Descripción"};
-	    
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(headers);
-		
-		for (Artist artist : artists) {
-			String grupo = artist.getArtistName();
-			String descripcionGrupo = artist.getArtistDesc();
-			Object[] row = {grupo, descripcionGrupo};
-			model.addRow(row);
-		}
-		tableGroups.setModel(model);
-		add(tableGroups);
-		
-		tableCollections = new JTable();
-		tableCollections.setColumnSelectionAllowed(true);
-		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tableCollections.setBounds(162, 143, 649, 331);
-		tableGroups.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selectedRow = tableGroups.getSelectedRow();
-				Artist artist = artists.get(selectedRow);
-				tableGroups.setVisible(false);
-				CollectionInterface collectionInterface = new DiscManager();
-				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
-				
-				String[] headersDisc= {"Grupo","Descripción"};
-			    
-				DefaultTableModel modelDisc = new DefaultTableModel();
-				modelDisc.setColumnIdentifiers(headersDisc);
-				
-				for (Disc disc : discs) {
-					String name = disc.getCollectionName();
-					String type = disc.getCollectionType();
-					String genre = disc.getCollectionGenre();
-					String desc = disc.getCollectionDesc();
-					Object[] row = {name, type, genre, desc};
-					modelDisc.addRow(row);
-				}
-				tableCollections.setModel(modelDisc);
-				add(tableCollections);
-
-			}
-		});
-		
+//		ArtistsInterface artistsInterfaceController = new GroupManager();
+//		List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
+//		
+//	    String[] headers= {"Grupo","Descripción"};
+//	    
+//		DefaultTableModel model = new DefaultTableModel();
+//		model.setColumnIdentifiers(headers);
+//		
+//		for (Artist artist : artists) {
+//			String grupo = artist.getArtistName();
+//			String descripcionGrupo = artist.getArtistDesc();
+//			Object[] row = {grupo, descripcionGrupo};
+//			model.addRow(row);
+//		}
+//		tableGroups.setModel(model);
+//		add(tableGroups);
+//		
+//		tableCollections = new JTable();
+//		tableCollections.setColumnSelectionAllowed(true);
+//		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
+//		tableCollections.setBounds(162, 143, 649, 331);
+//		tableGroups.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int selectedRow = tableGroups.getSelectedRow();
+//				Artist artist = artists.get(selectedRow);
+//				tableGroups.setVisible(false);
+//				CollectionInterface collectionInterface = new DiscManager();
+//				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
+//				
+//				String[] headersDisc= {"Grupo","Descripción"};
+//			    
+//				DefaultTableModel modelDisc = new DefaultTableModel();
+//				modelDisc.setColumnIdentifiers(headersDisc);
+//				
+//				for (Disc disc : discs) {
+//					String name = disc.getCollectionName();
+//					String type = disc.getCollectionType();
+//					String genre = disc.getCollectionGenre();
+//					String desc = disc.getCollectionDesc();
+//					Object[] row = {name, type, genre, desc};
+//					modelDisc.addRow(row);
+//				}
+//				tableCollections.setModel(modelDisc);
+//				add(tableCollections);
+//
+//			}
+//		});
+//		
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
