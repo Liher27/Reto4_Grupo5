@@ -5,7 +5,7 @@ import java.util.Objects;
 public class PremiumUser extends Users{
 	
 	private int countNum = 0;
-	private int caducity = 0;
+	private String caducity = null;
 	private int cVV = 0;
 	public int getCountNum() {
 		return countNum;
@@ -13,10 +13,10 @@ public class PremiumUser extends Users{
 	public void setCountNum(int countNum) {
 		this.countNum = countNum;
 	}
-	public int getCaducity() {
+	public String getCaducity() {
 		return caducity;
 	}
-	public void setCaducity(int caducity) {
+	public void setCaducity(String caducity) {
 		this.caducity = caducity;
 	}
 	public int getcVV() {

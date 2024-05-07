@@ -17,11 +17,9 @@ import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.ArtistController;
+import errekamusic.logica.CollectionController;
 import errekamusic.enumerado.ArtistType;
-import errekamusic.logica.ArtistsInterfaceController;
-import errekamusic.logica.CollectionInterface;
-import errekamusic.logica.DiscController;
-import errekamusic.logica.GroupController;
 
 import javax.swing.JTable;
 import javax.swing.border.MatteBorder;
@@ -136,7 +134,7 @@ public class GroupPanel extends JPanel {
 		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableGroups.setBounds(162, 143, 649, 331);
 		
-		ArtistsInterfaceController artistsInterfaceController = new GroupController();
+		ArtistsInterface artistsInterfaceController = new GroupManager();
 		List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
 		
 	    String[] headers= {"Grupo","Descripción"};
@@ -163,7 +161,7 @@ public class GroupPanel extends JPanel {
 				int selectedRow = tableGroups.getSelectedRow();
 				Artist artist = artists.get(selectedRow);
 				tableGroups.setVisible(false);
-				CollectionInterface collectionInterface = new DiscController();
+				CollectionInterface collectionInterface = new DiscManager();
 				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
 				
 				String[] headersDisc= {"Grupo","Descripción"};

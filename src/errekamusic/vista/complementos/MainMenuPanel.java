@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Disc;
-import errekamusic.logica.DiscController;
+import errekamusic.logica.CollectionController;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -41,7 +41,7 @@ public class MainMenuPanel extends JPanel {
 	private JLabel seeYourProfileLbl = null;
 
 	private List<Disc> discInfo = null;
-	private DiscController discController = null;
+	private CollectionController discController = null;
 	private Disc discForPropaganda = null;
 
 	private Random randomNumberToExecute = null;
@@ -309,7 +309,7 @@ public class MainMenuPanel extends JPanel {
 		discInfo = new ArrayList<Disc>();
 		randomDiscID = (randomNumberToExecute.nextInt(3) + 1);
 
-		discController = new DiscController();
+		discController = new CollectionController();
 
 		discInfo = discController.GetDiscForPropaganda(randomDiscID);
 		if (null != discInfo) {
