@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 
 import errekamusic.logica.UserController;
 
+import errekamusic.vista.VentanaPrincipal;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -93,6 +95,8 @@ public class LoginPanel extends JPanel {
 						paneles.get(12).setVisible(false);
 						paneles.get(13).setVisible(false);
 
+						VentanaPrincipal.setUsername(userField.getText());
+						
 						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {

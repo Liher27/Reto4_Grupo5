@@ -33,6 +33,16 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel seriesPanel = null;
 	private JPanel songsPanel = null;
 	private JPanel welcomePanel = null;
+	
+	private static String username = null;
+
+	public static String getUsername() {
+		return username;
+	}
+
+	public static void setUsername(String username) {
+		VentanaPrincipal.username = username;
+	}
 
 	private static final long serialVersionUID = 1L;
 

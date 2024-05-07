@@ -8,6 +8,4 @@ public interface DataBaseInterface<T> {
 	
 	public void insertInto(T t);
 	
-	public T getOne(T t);
-	
 }

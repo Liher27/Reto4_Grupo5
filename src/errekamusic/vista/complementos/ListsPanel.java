@@ -185,7 +185,7 @@ public class ListsPanel extends JPanel {
 		
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoErrekamusic.setBounds(44, 93, 145, 145);
+		lblLogoErrekamusic.setBounds(49, 11, 145, 145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo(1).png"));
 		add(lblLogoErrekamusic);
 		

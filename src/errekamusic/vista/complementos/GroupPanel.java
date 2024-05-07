@@ -150,11 +150,7 @@ public class GroupPanel extends JPanel {
 //		}
 //		tableGroups.setModel(model);
 //		add(tableGroups);
-<<<<<<< HEAD
-		
 
-		
-=======
 //		
 //		tableCollections = new JTable();
 //		tableCollections.setColumnSelectionAllowed(true);
@@ -188,13 +184,9 @@ public class GroupPanel extends JPanel {
 //			}
 //		});
 //		
->>>>>>> b0c391cdbe38efac48a968c1e1044a29c97faf4e
+
 		collectionInfoBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
+			
 			public void actionPerformed(ActionEvent e) {
 				paneles.get(0).setVisible(false);
 				paneles.get(1).setVisible(false);
