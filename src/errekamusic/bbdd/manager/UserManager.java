@@ -97,6 +97,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 				user.setUserProvince(result.getString("UserProvince"));
 				user.setRegisterDate(Converter.convertFromSqlDateToUtilDate(result.getDate("RegisterDate")));
 				user.setAccountType(result.getString("AccountType"));
+				user.setUserPassword(result.getString("UserPassword"));
 //					if ((result.getString("AccountType")).equals("Premium")) {
 //						premiumUser.setCountNum(result.getInt("CountNum"));
 //						premiumUser.setCaducity(result.getInt("Caducity"));
