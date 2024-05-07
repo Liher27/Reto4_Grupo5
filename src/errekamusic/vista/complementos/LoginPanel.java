@@ -145,10 +145,31 @@ public class LoginPanel extends JPanel {
 		lblDontHaveAccount.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblDontHaveAccount.setBounds(30, 531, 129, 20);
 		add(lblDontHaveAccount);
+		
+		JButton Enter = new JButton("Enter");
+		Enter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				paneles.get(0).setVisible(false);
+				paneles.get(1).setVisible(false);
+				paneles.get(2).setVisible(false);
+				paneles.get(3).setVisible(true);
+				paneles.get(4).setVisible(false);
+				paneles.get(5).setVisible(false);
+				paneles.get(6).setVisible(false);
+				paneles.get(7).setVisible(false);
+				paneles.get(8).setVisible(false);
+				paneles.get(9).setVisible(false);
+				paneles.get(10).setVisible(false);
+				paneles.get(11).setVisible(false);
+				paneles.get(12).setVisible(false);
+				paneles.get(13).setVisible(false);
+			}
+		});
+		Enter.setBounds(414, 543, 98, 33);
+		add(Enter);
 	}
 
 	public JPanel getPanelDeLogin() {
 		return this;
 	}
-
 }

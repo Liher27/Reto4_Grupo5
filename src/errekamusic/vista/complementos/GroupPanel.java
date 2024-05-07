@@ -150,9 +150,45 @@ public class GroupPanel extends JPanel {
 //		}
 //		tableGroups.setModel(model);
 //		add(tableGroups);
+<<<<<<< HEAD
 		
 
 		
+=======
+//		
+//		tableCollections = new JTable();
+//		tableCollections.setColumnSelectionAllowed(true);
+//		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
+//		tableCollections.setBounds(162, 143, 649, 331);
+//		tableGroups.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int selectedRow = tableGroups.getSelectedRow();
+//				Artist artist = artists.get(selectedRow);
+//				tableGroups.setVisible(false);
+//				CollectionInterface collectionInterface = new DiscManager();
+//				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
+//				
+//				String[] headersDisc= {"Grupo","Descripción"};
+//			    
+//				DefaultTableModel modelDisc = new DefaultTableModel();
+//				modelDisc.setColumnIdentifiers(headersDisc);
+//				
+//				for (Disc disc : discs) {
+//					String name = disc.getCollectionName();
+//					String type = disc.getCollectionType();
+//					String genre = disc.getCollectionGenre();
+//					String desc = disc.getCollectionDesc();
+//					Object[] row = {name, type, genre, desc};
+//					modelDisc.addRow(row);
+//				}
+//				tableCollections.setModel(modelDisc);
+//				add(tableCollections);
+//
+//			}
+//		});
+//		
+>>>>>>> b0c391cdbe38efac48a968c1e1044a29c97faf4e
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
