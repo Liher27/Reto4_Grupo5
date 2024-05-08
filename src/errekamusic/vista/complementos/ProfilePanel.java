@@ -242,7 +242,7 @@ public class ProfilePanel extends JPanel {
 				newPasswordConfirm = JOptionPane.showInputDialog("Por favor, repita la contraseña: ");
 
 				if (newPasswordToInsert.equals(newPasswordConfirm)) {
-					if (userController.changeUserPassword(newPasswordToInsert, registerUsername)) {
+					if (userController.changeUserPassword(newPasswordToInsert, Singleton.getInstance().getUsername())) {
 						JOptionPane.showMessageDialog(null, "Contrasenya cambiada correctamente", "OK!!",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
@@ -255,6 +255,7 @@ public class ProfilePanel extends JPanel {
 							"Error", JOptionPane.ERROR_MESSAGE);
 			}
 
+			
 		});
 		btnCambiarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCambiarContrasea.setBounds(359, 567, 192, 33);

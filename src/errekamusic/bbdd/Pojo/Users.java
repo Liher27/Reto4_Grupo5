@@ -11,7 +11,7 @@ public class Users {
 	private String DNI = null;
 	private LocalDate birthDateUser = null;
 	private String dirUser = null;
-	private boolean isAdmin = false;
+	private String isAdmin = null;
 	private int cPUser = 0;
 	private String userCity = null;
 	private String userProvince = null;
@@ -77,11 +77,11 @@ public class Users {
 		this.dirUser = dirUser;
 	}
 
-	public boolean isAdmin() {
+	public String getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setAdmin(String isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

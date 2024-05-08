@@ -10,22 +10,18 @@ import javax.swing.SwingConstants;
 import errekamusic.logica.Singleton;
 import errekamusic.logica.UserController;
 
-import errekamusic.vista.VentanaPrincipal;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.Color;
 
 public class LoginPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private UserController userController = null;
-//	private ProfilePanel profilePanel = null;
 
 	public JTextField userField = null;
 	public JPasswordField passwdTextField = null;
@@ -35,9 +31,13 @@ public class LoginPanel extends JPanel {
 	private JLabel logInTitleLbl = null;
 	private JLabel lblErrekamusicLogo = null;
 	private JLabel lblDontHaveAccount = null;
+	private JLabel lblAreYouAdmin = null;
 
 	private JButton registerBtn = null;
 	private JButton logInPanelNextBtn = null;
+	private JButton adminPanelBtn = null;
+
+	private int loginErrorCounter = 0;
 
 	public LoginPanel() {
 
@@ -79,38 +79,54 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				userController = new UserController();
-				if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
-					if (userController.confirmLogedUser(userField.getText().toString(), passwdTextField.getPassword().toString())) {
-						
-						Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-						Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-						Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-						Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
-						Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-						Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-						Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-						Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-						Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-						Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-						Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-						Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-						Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-						Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
-						Singleton.getInstance().setUsername(userField.getText().toString());
-						
-						JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
-								JOptionPane.INFORMATION_MESSAGE);
+				if (loginErrorCounter < 3) {
+					if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
+						if (userController.confirmLogedUser(userField.getText().toString(),
+								passwdTextField.getPassword().toString())) {
+
+							Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+							Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+							Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+							Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
+							Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+							Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+							Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+							Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+							Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+							Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+							Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+							Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+							Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+							Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+
+							Singleton.getInstance().setUsername(userField.getText().toString());
+
+							JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
+									JOptionPane.INFORMATION_MESSAGE);
+
+							loginErrorCounter = 0;
+							userField.setText("");
+							passwdTextField.setText("");
+						} else {
+							JOptionPane.showMessageDialog(null, "Usuario o contraseñas incorrectas", "Error",
+									JOptionPane.ERROR_MESSAGE);
+							loginErrorCounter++;
+							userField.setText("");
+							passwdTextField.setText("");
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Usuario o contraseñas incorrectas", "Error",
+						JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenalo por favor", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					}
-
-				} else {
-					JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenalo por favor", "Error",
+				} else if (loginErrorCounter > 2) {
+					JOptionPane.showMessageDialog(null,
+							"Se ha bloqueado el acceso a la aplicacion por demasiados intentos", "Tonto",
 							JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
+
 		});
 
 		logInPanelNextBtn.setBounds(851, 556, 98, 33);
@@ -151,28 +167,68 @@ public class LoginPanel extends JPanel {
 		lblDontHaveAccount.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblDontHaveAccount.setBounds(30, 531, 129, 20);
 		add(lblDontHaveAccount);
-		
-		JButton Enter = new JButton("Enter");
-		Enter.addActionListener(new ActionListener() {
+
+		adminPanelBtn = new JButton("Panel admin");
+		adminPanelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				userController = new UserController();
+
+				if (loginErrorCounter < 3) {
+					if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
+						if (userController.isAdminUser() && userController.confirmLogedUser(
+								userField.getText().toString(), passwdTextField.getPassword().toString())) {
+
+							Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+							Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+							Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+							Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+							Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+							Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+							Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+							Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+							Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+							Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(true);
+							Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+							Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+							Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+							Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+
+							Singleton.getInstance().setUsername(userField.getText().toString());
+
+							JOptionPane.showMessageDialog(null, "Bienvenido, administrador", "Bienvenido!!",
+									JOptionPane.INFORMATION_MESSAGE);
+
+							loginErrorCounter = 0;
+							userField.setText("");
+							passwdTextField.setText("");
+						} else {
+							JOptionPane.showMessageDialog(null, "Usuario o contraseñas incorrectas", "Error",
+									JOptionPane.ERROR_MESSAGE);
+							loginErrorCounter++;
+							userField.setText("");
+							passwdTextField.setText("");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenalo por favor", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else if (loginErrorCounter > 2) {
+					JOptionPane.showMessageDialog(null,
+							"Se ha bloqueado el acceso a la aplicacion por demasiados intentos", "Tonto",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
-		Enter.setBounds(414, 543, 98, 33);
-		add(Enter);
+		adminPanelBtn.setBounds(408, 556, 98, 33);
+		add(adminPanelBtn);
+
+		lblAreYouAdmin = new JLabel("¿Eres administrador?");
+		lblAreYouAdmin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAreYouAdmin.setForeground(new Color(190, 30, 255));
+		lblAreYouAdmin.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
+		lblAreYouAdmin.setBounds(386, 531, 143, 20);
+		add(lblAreYouAdmin);
 	}
 
 	public JPanel getLoginPanel() {

@@ -16,7 +16,8 @@ public class UserController {
 		Users user = new Users();
 		user = userManager.getByUserName(username);
 		if (null != user) {
-			if (user.getUserPassword().equals(password));
+			if (user.getUserPassword().equals(password))
+				;
 			return true;
 		} else
 			return false;
@@ -27,6 +28,8 @@ public class UserController {
 		userManager = new UserManager();
 		if (userManager.changeUserPassword(newPasswordToInsert, registerUsername)) {
 			ret = true;
+		} else {
+			ret = false;
 		}
 		return ret;
 	}
@@ -41,7 +44,7 @@ public class UserController {
 		} else
 			return null;
 	}
-	
+
 	public PremiumUser getPremiumUserInfo(String username) {
 		userManager = new UserManager();
 		PremiumUser user = new PremiumUser();
@@ -52,29 +55,39 @@ public class UserController {
 		} else
 			return null;
 	}
-	
+
 	public boolean insertNewUser(Users user) {
 		boolean ret = false;
 		userManager = new UserManager();
-		userManager.insertInto(user);		
-		
-		return false;
+		userManager.insertInto(user);
+
+		return ret;
 	}
 
 	public boolean insertFreeUserInfo(Users user) {
 		boolean ret = false;
-		
-		return false;
+
+		return ret;
 	}
 
-	
 	public boolean insertPremiumUserInfo(Users user) {
 		boolean ret = false;
-		
-		return false;
+
+		return ret;
 	}
 
-	
+	public boolean isAdminUser() {
+		boolean ret = false;
+		Users admin = new Users();
+		admin = userManager.getByUserName(Singleton.getInstance().getUsername());
+		if (admin.getIsAdmin().equals("Si")) {
+			ret = true;
+		} else
+			ret = false;
+
+		return ret;
+	}
+
 	// Codigo para administrar los usuarios
 
 }
