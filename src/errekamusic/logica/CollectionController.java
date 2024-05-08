@@ -9,7 +9,7 @@ import errekamusic.bbdd.manager.DiscManager;
 public class CollectionController {
 
 	DiscManager discManager = null;
-	
+	private List<Disc>discList = null;
 	public List<Disc> GetDiscForPropaganda(int randomDiscID) throws Exception {
 		discManager = new DiscManager();
 		List <Disc> ret = new ArrayList<>();
@@ -19,6 +19,10 @@ public class CollectionController {
 		return ret;
 	}
 	
-	//Codigo para administrar los managers de disco y serie
+	public List<Disc> getDiscList(int id) throws Exception{
+		discManager = new DiscManager();
+		return discManager.getDiscBySongId(id);
+		
+	}
 
 }

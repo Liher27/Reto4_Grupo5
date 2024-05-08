@@ -36,7 +36,6 @@ public class PodcastManager implements ContentsInterface<Podcast>,DataBaseInterf
 		return false;
 	}
 
-	@Override
 	public Podcast getOne(Podcast podcast) {
 		// TODO Auto-generated method stub
 		return null;

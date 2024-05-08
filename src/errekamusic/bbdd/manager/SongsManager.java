@@ -72,7 +72,6 @@ public class SongsManager implements ContentsInterface <Canciones>, DataBaseInte
 		
 	}
 
-	@Override
 	public Canciones getOne(Canciones song) {
 		// TODO Auto-generated method stub
 		return null;

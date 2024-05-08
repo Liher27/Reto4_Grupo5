@@ -183,7 +183,6 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 
 	}
 
-	@Override
 	public Users getOne(Users user) {
 		// TODO Auto-generated method stub
 		return null;
@@ -212,6 +211,12 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		}
 
 		return ret;
+	}
+
+	@Override
+	public void insertInto(Users t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
