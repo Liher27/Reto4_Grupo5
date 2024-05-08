@@ -39,9 +39,9 @@ public class ContentPlayerPanel extends JPanel {
 	private JLabel songName = null;
 	private JLabel artistName = null;
 	private JLabel discName = null;
+	private ImageIcon discImage = null;
 	private List<Canciones> musicList = null;
-	private List<Disc> discList = null;
-	private CollectionController collectionController = null;
+	private JLabel discImageLabel = null;
 	private int cancionActual = -1;
 	private boolean audioPlay = true;
 
@@ -132,12 +132,14 @@ public class ContentPlayerPanel extends JPanel {
 		previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				musicPlayer.stopMusic();
-				if (cancionActual <= musicList.size()) {
+				if (cancionActual > 0) {
 					cancionActual--;
-					musicPlayer.playMusic(musicList.get(cancionActual));
-					songName.setText(musicList.get(cancionActual).getContentName());
-
+				} else {
+					cancionActual = musicList.size() - 1;
 				}
+				musicPlayer.playMusic(musicList.get(cancionActual));
+				setSongData();
+
 			}
 		});
 		previous.setBounds(279, 473, 71, 33);
@@ -151,7 +153,12 @@ public class ContentPlayerPanel extends JPanel {
 					if (!audioPlay) {
 						if (cancionActual < 0) {
 							musicPlayer = new MusicPlayer();
-							musicList = musicPlayer.getSongsList();
+							try {
+								musicList = musicPlayer.getSongsList();
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							cancionActual = 0;
 							musicPlayer.playMusic(musicList.get(cancionActual));
 							setSongData();
@@ -184,6 +191,7 @@ public class ContentPlayerPanel extends JPanel {
 					cancionActual = 0;
 				}
 				musicPlayer.playMusic(musicList.get(cancionActual));
+				setSongData();
 
 			}
 		});
@@ -231,16 +239,20 @@ public class ContentPlayerPanel extends JPanel {
 		discName.setFont(new Font("Segoe UI Black", Font.BOLD, 24));
 		discName.setBounds(506, 202, 345, 51);
 		contentPlayerPanel.add(discName);
+		
+		discImageLabel = new JLabel("Disc Image");
+		discImageLabel.setBounds(556, 264, 273, 189);
+		contentPlayerPanel.add(discImageLabel);
 
 	}
 
 	public void setSongData() {
 		try {
 			songName.setText(musicList.get(cancionActual).getContentName());
-			collectionController = new CollectionController();
-			discList = collectionController.getDiscList(cancionActual + 1);
-			discName.setText(discList.get(cancionActual).getCollectionName());
-			artistName.setText(discList.get(cancionActual).getArtist().getArtistName());
+			discName.setText(musicList.get(cancionActual).getDisc().getCollectionName());
+			artistName.setText(musicList.get(cancionActual).getDisc().getArtist().getArtistName());
+			discImage = musicList.get(cancionActual).getDisc().getCollectionImage();
+			discImageLabel.setIcon(discImage);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

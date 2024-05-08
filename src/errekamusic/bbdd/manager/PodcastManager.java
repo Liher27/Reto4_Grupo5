@@ -13,7 +13,8 @@ public class PodcastManager implements ContentsInterface<Podcast>,DataBaseInterf
 	}
 
 	@Override
-	public void insertInto(Podcast podcast) {
+	public boolean insertInto(Podcast podcast) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}

@@ -29,7 +29,8 @@ public class DiscManager implements CollectionInterface <Disc>, DataBaseInterfac
 		return null;
 	}
 	@Override
-	public void insertInto(Disc disc) {
+	public boolean insertInto(Disc disc) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
@@ -83,7 +84,6 @@ public class DiscManager implements CollectionInterface <Disc>, DataBaseInterfac
 		} catch (SQLException e) {
 			System.out.println("Malformacion sql -> " + e.getMessage());
 		}
-
 		return discInfo;
 	}
 	public List<Disc> getDiscBySongId(int contentId) throws Exception {

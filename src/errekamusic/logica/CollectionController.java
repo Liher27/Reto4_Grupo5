@@ -10,6 +10,7 @@ public class CollectionController {
 
 	DiscManager discManager = null;
 	private List<Disc>discList = null;
+	
 	public List<Disc> GetDiscForPropaganda(int randomDiscID) throws Exception {
 		discManager = new DiscManager();
 		List <Disc> ret = new ArrayList<>();
