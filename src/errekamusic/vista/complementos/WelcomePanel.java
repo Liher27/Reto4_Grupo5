@@ -10,6 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import errekamusic.logica.Singleton;
+
 import java.awt.Font;
 
 
@@ -27,7 +30,7 @@ public class WelcomePanel extends JPanel{
 	 * El panel Bienvenida
 	 * @param paneles 
 	 */
-	public WelcomePanel(ArrayList<JPanel> paneles) {
+	public WelcomePanel() {
 
 		setBounds(0, 0, 984, 611);
 		setBackground(Color.black);
@@ -43,17 +46,20 @@ public class WelcomePanel extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				esperar();
 				
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(true);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(false);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-
+				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
 			}
 		});
@@ -83,7 +89,7 @@ public class WelcomePanel extends JPanel{
 	 * 
 	 * @return panelDeBienvenida
 	 */
-	public JPanel inicializarPanelDeBienvenida() {
+	public JPanel getWelcomePanel() {
 		return this;
 	}
 

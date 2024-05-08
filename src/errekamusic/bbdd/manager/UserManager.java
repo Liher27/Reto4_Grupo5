@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 import errekamusic.bbdd.Pojo.FreeUser;
 import errekamusic.bbdd.Pojo.PremiumUser;
@@ -70,56 +70,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		return ret;
 	}
 
-	public FreeUser getFreeInfo(String username) {
-		FreeUser ret = new FreeUser();
-		
-		try {
-			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			sql = "SELECT * FROM USERLIBRE WHERE LOGINUSERFREE = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, username);
-			result = pstmt.executeQuery();
-			while (result.next()) {
-				ret.setPlayListNum(result.getInt("PlaylistQuantity"));
-				ret.setLastRepDate(result.getDate("LastRepDate"));
-			}
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("Ha dado fallo -> " + e.getMessage());
-		} catch (SQLException e) {
-			System.out.println("Malformacion sqlazo -> " + e.getMessage());
-		}
-		
-		return ret;
-	}
-
-	public PremiumUser getPremiumInfo(String username) {
-		PremiumUser ret = new PremiumUser();
-		
-		try {
-			Class.forName(DBUtils.DRIVER);
-
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			sql = "SELECT * FROM USERPREMIUM WHERE LOGINUSERPREMIUM = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, username);
-			result = pstmt.executeQuery();
-			while (result.next()) {
-				ret.setCountNum(result.getInt("CountNum"));
-				ret.setcVV(result.getInt("CVV"));
-				ret.setCaducity(result.getString("Caducity"));
-			}
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("Ha dado fallo -> " + e.getMessage());
-		} catch (SQLException e) {
-			System.out.println("Malformacion sqlazo -> " + e.getMessage());
-		}
-		
-		return ret;
-	}
 
 	@Override
 	public Users getByUserName(String username) {
@@ -155,7 +106,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 					freeUser = getFreeInfo(result.getString("LoginUser"));
 					user.setFreeUser(freeUser);
 				}
-						
+
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());
@@ -169,23 +120,6 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 	@Override
 	public void removeByUserName(String userName) {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public boolean changeByUserName(String username, Users user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void insertInto(String username, Users user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Users getOne(Users user) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -214,9 +148,107 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 	}
 
 	@Override
-	public void insertInto(Users t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insertInto(Users users) {
+		boolean ret = false;
+//		
+//		String username = users.getLoginUser();
+//		String name = users.getLoginUser();
+//		String surnameUser = autorLibro;
+//		String surnameUser2 = editorialLibro;
+//		String DNIUser = users.getLoginUser();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String birthDate = users.getBirthDateUser().toString();
+//		java.util.Date fechaEnSQLConvertida = dateFormat.parse(birthDate);
+//		java.sql.Date sqlDate = new java.sql.Date(fechaEnSQLConvertida.getTime());
+//		String DirUser = autorLibro;
+//		String CPUser = editorialLibro;
+//		String IsAdmin = users.getLoginUser();
+//		String UserCity = users.getLoginUser();
+//		String UserProvince = autorLibro;
+//		String userPassword = editorialLibro;
+//		String registerDate = users.getRegisterDate().toString();
+//		java.util.Date fechaEnSQLConvertida = dateFormat.parse(birthDate);
+//		java.sql.Date sqlDate = new java.sql.Date(fechaEnSQLConvertida.getTime());
+//		String userPassword = editorialLibro;
+//
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+//			String sql = "INSERT INTO Users (`LoginUser`, `TITULO`, `AUTOR`, `EDITORIAL`, `FECHAPUBLICACION`)"
+//					+ " VALUES (?,?,?,?,?);";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, getInputIdLibro);
+//			pstmt.setString(2, getInputTitulo);
+//			pstmt.setString(3, getInputAutor);
+//			pstmt.setString(4, getInputEditorial);
+//			pstmt.setDate(5, sqlDate);
+//
+//			int i = pstmt.executeUpdate();
+//			if (i > 0) {
+//				return true;
+//			}
+//
+//		} catch (ClassNotFoundException e) {
+//			System.out.println("Ha dado fallo -> " + e.getMessage());
+//		} catch (SQLException e) {
+//			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+//		}
+//		
+		return ret;
+	}
+	
+	
+	public FreeUser getFreeInfo(String username) {
+		FreeUser ret = new FreeUser();
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			sql = "SELECT * FROM USERLIBRE WHERE LOGINUSERFREE = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				ret.setPlayListNum(result.getInt("PlaylistQuantity"));
+				ret.setLastRepDate(result.getDate("LastRepDate"));
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+		}
+
+		return ret;
+	}
+
+	public PremiumUser getPremiumInfo(String username) {
+		PremiumUser ret = new PremiumUser();
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			sql = "SELECT * FROM USERPREMIUM WHERE LOGINUSERPREMIUM = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			result = pstmt.executeQuery();
+			while (result.next()) {
+				ret.setCountNum(result.getInt("CountNum"));
+				ret.setcVV(result.getInt("CVV"));
+				ret.setCaducity(result.getString("Caducity"));
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+		}
+
+		return ret;
 	}
 
 }

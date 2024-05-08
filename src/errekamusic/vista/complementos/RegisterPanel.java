@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.Users;
+import errekamusic.logica.Singleton;
 import errekamusic.logica.UserController;
 
 import java.awt.event.ActionEvent;
@@ -25,12 +27,14 @@ import javax.swing.JPasswordField;
 /**
  * El panel para registro con los datos que ha introducido el usuario
  */
-public class RegisterPanel extends JPanel{
+public class RegisterPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private UserController userController = null;
 	
+	private Users user = null;
+
 	private JLabel lblRegisterDNI = null;
 	private JLabel lblRegisterName = null;
 	private JLabel lblRegisterFirstSurname = null;
@@ -78,7 +82,7 @@ public class RegisterPanel extends JPanel{
 	/**
 	 * panel principal
 	 */
-	public RegisterPanel(ArrayList<JPanel> paneles) {
+	public RegisterPanel() {
 
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
@@ -192,10 +196,11 @@ public class RegisterPanel extends JPanel{
 		add(lblRegisterUsername);
 
 		userTypeComboBox = new JComboBox<String>();
-		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Usuario Gratuito", "Usuario Premium" }));
+		userTypeComboBox
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "Usuario Gratuito", "Usuario Premium" }));
 		userTypeComboBox.setBounds(189, 510, 205, 29);
 		add(userTypeComboBox);
-		
+
 		lblRegisterUserType = new JLabel("Tipo de Usuario");
 		lblRegisterUserType.setForeground(new Color(255, 255, 255));
 		lblRegisterUserType.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
@@ -261,20 +266,25 @@ public class RegisterPanel extends JPanel{
 		btnCancelarPanelDeRegistro.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(true);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(false);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
+				userController = new UserController();
+				
+				
+				if (userController.insertNewUser(user)) {
+				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				}
 
 			}
 
@@ -290,42 +300,21 @@ public class RegisterPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean CampoVacio = false;
-				JTextField[] campos = { fieldRegisterName, fieldRegisterFirstSurname, fieldRegisterDNI,
-						fieldRegisterBirthDate, fieldRegisterDNI, fieldRegisterDirection, fieldRegisterCP,
-						fieldRegisterCity, fieldRegisterProvince, fieldRegisterUsername, fieldRegisterPasswd,
-						passwordFieldConfirmarContrasenyaRegistro };
-				for (int i = 0; i < campos.length; i++) {
-					if (campos[i].getText().isEmpty() && (userTypeComboBox != null)) {
-						CampoVacio = true;
-						break;
-					}
-				}
-				if (CampoVacio) {
-					JOptionPane.showMessageDialog(null, "El campo esta vacio!! \n Rellenarlo Por favor", "Error",
-							JOptionPane.ERROR_MESSAGE);
 
-				} else  if (userTypeComboBox.equals("Usuario gratuito")){
-					 userController = new UserController();;
-
-//					userController.compararRegistroUsuario(fieldRegisterName, fieldRegisterFirstSurname, fieldRegisterDNI,
-//							fieldRegisterBirthDate, fieldRegisterDNI, fieldRegisterDirection, fieldRegisterCP,
-//							fieldRegisterCity, fieldRegisterProvince, fieldRegisterUsername, fieldRegisterPasswd,
-//							passwordFieldConfirmarContrasenyaRegistro);
-
-					paneles.get(0).setVisible(false);
-					paneles.get(1).setVisible(true);
-					paneles.get(2).setVisible(false);
-					paneles.get(3).setVisible(false);
-					paneles.get(4).setVisible(false);
-					paneles.get(5).setVisible(false);
-					paneles.get(6).setVisible(false);
-					paneles.get(7).setVisible(false);
-					paneles.get(8).setVisible(false);
-					paneles.get(9).setVisible(false);
-					paneles.get(10).setVisible(false);
-					paneles.get(11).setVisible(false);
-					paneles.get(12).setVisible(false);
-					paneles.get(13).setVisible(false);				}
+				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 			}
 		});
 		btnConfirmarDeRegistro.setForeground(new Color(0, 0, 0));
@@ -380,7 +369,7 @@ public class RegisterPanel extends JPanel{
 	 * 
 	 * @return panelDeRegistro
 	 */
-	public JPanel getPanelDeRegistro() {
+	public JPanel getRegisterPanel() {
 		return this;
 	}
 }

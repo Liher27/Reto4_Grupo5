@@ -24,15 +24,14 @@ public class UserController {
 
 	public boolean changeUserPassword(String newPasswordToInsert, String registerUsername) {
 		boolean ret = false;
-		
 		userManager = new UserManager();
-		userManager.changeUserPassword(newPasswordToInsert, registerUsername);
-		
+		if (userManager.changeUserPassword(newPasswordToInsert, registerUsername)) {
+			ret = true;
+		}
 		return ret;
 	}
 
 	public Users getLogedUser(String username) {
-		System.out.println(username);
 		userManager = new UserManager();
 		Users user = new Users();
 		user = userManager.getByUserName(username);
@@ -53,7 +52,29 @@ public class UserController {
 		} else
 			return null;
 	}
+	
+	public boolean insertNewUser(Users user) {
+		boolean ret = false;
+		userManager = new UserManager();
+		userManager.insertInto(user);		
+		
+		return false;
+	}
 
+	public boolean insertFreeUserInfo(Users user) {
+		boolean ret = false;
+		
+		return false;
+	}
+
+	
+	public boolean insertPremiumUserInfo(Users user) {
+		boolean ret = false;
+		
+		return false;
+	}
+
+	
 	// Codigo para administrar los usuarios
 
 }

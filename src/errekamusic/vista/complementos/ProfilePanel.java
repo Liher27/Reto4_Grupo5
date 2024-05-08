@@ -6,9 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,8 +16,8 @@ import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
+import errekamusic.logica.Singleton;
 import errekamusic.logica.UserController;
-import errekamusic.vista.VentanaPrincipal;
 
 public class ProfilePanel extends JPanel {
 
@@ -51,8 +48,8 @@ public class ProfilePanel extends JPanel {
 	private JLabel lblCountOpt = null;
 	private JLabel lblPremiumOpt = null;
 	private JLabel lblUserDirOpt = null;
-
 	private String registerUsername = null;
+	
 	private JButton NextBtn = null;
 	private JButton btnCambiarContrasea = null;
 
@@ -63,7 +60,7 @@ public class ProfilePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ProfilePanel(List<JPanel> paneles) {
+	public ProfilePanel() {
 
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
@@ -94,21 +91,21 @@ public class ProfilePanel extends JPanel {
 		NextBtn.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
-				paneles.get(0).setVisible(false);
-				paneles.get(1).setVisible(false);
-				paneles.get(2).setVisible(false);
-				paneles.get(3).setVisible(true);
-				paneles.get(4).setVisible(false);
-				paneles.get(5).setVisible(false);
-				paneles.get(6).setVisible(false);
-				paneles.get(7).setVisible(false);
-				paneles.get(8).setVisible(false);
-				paneles.get(9).setVisible(false);
-				paneles.get(10).setVisible(false);
-				paneles.get(11).setVisible(false);
-				paneles.get(12).setVisible(false);
-				paneles.get(13).setVisible(false);
+				
+				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
+				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
 			}
 
@@ -269,7 +266,7 @@ public class ProfilePanel extends JPanel {
 		userController = new UserController();
 
 		premiumUser = new PremiumUser();
-		userProfile = userController.getLogedUser(VentanaPrincipal.getUsername());
+		userProfile = userController.getLogedUser(Singleton.getInstance().getUsername());
 
 		if (null != userProfile) {
 
@@ -292,7 +289,7 @@ public class ProfilePanel extends JPanel {
 			lblRegisterProvince.setText("Provincia: " + userProfile.getUserProvince());
 			lblRegisterUsername.setText("Nombre usuario: " + userProfile.getLoginUser());
 			if (userProfile.getAccountType().equals("Premium")) {
-				premiumUser = userController.getPremiumUserInfo(VentanaPrincipal.getUsername());
+				premiumUser = userController.getPremiumUserInfo(Singleton.getInstance().getUsername());
 				lblRegisterCountName.setText("Numero de cuenta: " + premiumUser.getCountNum());
 				lblRegisterCardCaducity.setText("Caducidad: " + premiumUser.getCaducity());
 				lblRegisterCVV.setText("Numero de cuenta: " + premiumUser.getcVV());
@@ -304,7 +301,7 @@ public class ProfilePanel extends JPanel {
 
 	}
 
-	public JPanel getPanelPerfiles() {
+	public JPanel getProfilePanel() {
 		// TODO Auto-generated method stub
 		return this;
 	}

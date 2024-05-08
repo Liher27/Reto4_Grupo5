@@ -1,7 +1,5 @@
 package errekamusic.logica;
 
-
-
 import java.io.FileInputStream;
 
 import java.security.PublicKey;
@@ -13,6 +11,7 @@ import java.util.List;
 import errekamusic.bbdd.Pojo.Canciones;
 import errekamusic.bbdd.manager.SongsManager;
 import javazoom.jl.player.Player;
+
 public class MusicPlayer {
 
 	private int pausedLocation = 0;
@@ -24,16 +23,14 @@ public class MusicPlayer {
 	private List<Canciones> allSongs = null;
 
 	/*
-
+	 * 
 	 * public String musicPath(String ruta) { getSongsList(); for (int i = 0; i <
-
+	 * 
 	 * allSongs.size(); i++) { ruta = allSongs.get(i).getContentPath();
-
+	 * 
 	 * System.out.println(allSongs.get(i).getContentPath()); } return ruta; }
-
+	 * 
 	 */
-
-
 
 //	public List<String> musicPaths() {
 
@@ -59,8 +56,6 @@ public class MusicPlayer {
 
 	}
 
-
-
 	public void playMusic(Canciones canciones) {
 
 		new Thread() {
@@ -85,33 +80,21 @@ public class MusicPlayer {
 
 			}
 
-
-
 		}.start();
 
 	}
-
-	
 
 	public void resumeMusic(Canciones canciones) {
 
 		if (paused) {
 
-		paused = false;
+			paused = false;
 
-		playMusic(canciones);
-
-		
+			playMusic(canciones);
 
 		}
 
 	}
-
-	
-
-
-
-
 
 	public void stopMusic() {
 
@@ -121,26 +104,18 @@ public class MusicPlayer {
 
 		}
 
-
-
 	}
-
-
 
 	public void pauseMusic() {
 
-		if(player != null) {
+		if (player != null) {
 
-		paused = true;
+			paused = true;
 
-		player.close();
+			player.close();
+
+		}
 
 	}
-
-		
-
-	
-
-	}	
 
 }

@@ -6,6 +6,6 @@ public interface DataBaseInterface<T> {
 	
 	public List <T> getAll();
 	
-	public void insertInto(T t);
+	public boolean insertInto(T t);
 	
 }
