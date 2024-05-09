@@ -3,8 +3,10 @@ package errekamusic.vista.complementos;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.Canciones;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.logica.CollectionController;
+import errekamusic.logica.MusicPlayer;
 import errekamusic.logica.Singleton;
 
 import javax.swing.ImageIcon;
@@ -40,7 +42,7 @@ public class MainMenuPanel extends JPanel {
 	private JLabel propagandaDiscGenreLbl = null;
 	private JLabel layOutForPropagandaLbl = null;
 	private JLabel seeYourProfileLbl = null;
-
+	private List<Canciones> musicList = null;
 	private List<Disc> discInfo = null;
 	private CollectionController discController = null;
 	private Disc discForPropaganda = null;
@@ -184,6 +186,13 @@ public class MainMenuPanel extends JPanel {
 				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				MusicPlayer musicPlayer = new MusicPlayer();
+				try {
+					musicList = musicPlayer.getSongsList();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});

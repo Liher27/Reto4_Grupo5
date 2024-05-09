@@ -1,6 +1,7 @@
 package errekamusic.bbdd.Pojo;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 public class Users {
@@ -9,14 +10,14 @@ public class Users {
 	private String surName1 = null;
 	private String surName2 = null;
 	private String DNI = null;
-	private LocalDate birthDateUser = null;
+	private Date birthDateUser = null;
 	private String dirUser = null;
 	private boolean isAdmin = false;
 	private int cPUser = 0;
 	private String userCity = null;
 	private String userProvince = null;
 	private String accountType = null;
-	private LocalDate registerDate = null;
+	private Date registerDate = null;
 	private String userPassword = null;
 	private PremiumUser premiumUser = null;
 	private FreeUser freeUser = null;
@@ -61,11 +62,11 @@ public class Users {
 		DNI = dNI;
 	}
 
-	public LocalDate getBirthDateUser() {
+	public Date getBirthDateUser() {
 		return birthDateUser;
 	}
 
-	public void setBirthDateUser(LocalDate birthDateUser) {
+	public void setBirthDateUser(Date birthDateUser) {
 		this.birthDateUser = birthDateUser;
 	}
 
@@ -117,11 +118,11 @@ public class Users {
 		this.accountType = accountType;
 	}
 
-	public LocalDate getRegisterDate() {
+	public Date getRegisterDate() {
 		return registerDate;
 	}
 
-	public void setRegisterDate(LocalDate registerDate) {
+	public void setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 	}
 

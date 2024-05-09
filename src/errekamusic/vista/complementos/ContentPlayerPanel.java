@@ -1,27 +1,19 @@
 package errekamusic.vista.complementos;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import errekamusic.bbdd.Pojo.Canciones;
-import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.logica.MusicPlayer;
 import errekamusic.logica.Singleton;
-import errekamusic.logica.CollectionController;
-
 public class ContentPlayerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -153,12 +145,11 @@ public class ContentPlayerPanel extends JPanel {
 					if (!audioPlay) {
 						if (cancionActual < 0) {
 							musicPlayer = new MusicPlayer();
-							try {
-								musicList = musicPlayer.getSongsList();
-							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+								try {
+									musicList = musicPlayer.getSongsList();
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
 							cancionActual = 0;
 							musicPlayer.playMusic(musicList.get(cancionActual));
 							setSongData();
@@ -172,7 +163,6 @@ public class ContentPlayerPanel extends JPanel {
 						play.setIcon(new ImageIcon("./contents/pause-solid.png"));
 						musicPlayer.pauseMusic();
 					}
-
 				}
 
 			}
@@ -192,7 +182,6 @@ public class ContentPlayerPanel extends JPanel {
 				}
 				musicPlayer.playMusic(musicList.get(cancionActual));
 				setSongData();
-
 			}
 		});
 		next.setBounds(694, 473, 89, 40);
@@ -259,7 +248,6 @@ public class ContentPlayerPanel extends JPanel {
 	}
 
 	public JPanel getContentPlayerPanel() {
-// TODO Auto-generated method stub
 		return contentPlayerPanel;
 	}
 }

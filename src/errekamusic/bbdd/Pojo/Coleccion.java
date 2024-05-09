@@ -1,6 +1,7 @@
 package errekamusic.bbdd.Pojo;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.swing.ImageIcon;
@@ -8,7 +9,7 @@ import javax.swing.ImageIcon;
 public class Coleccion {
 	private int collectionID = 0;
 	private String collectionName = null;
-	private LocalDate localDate = null;
+	private Date localDate = null;
 	private int collectionRepNum = 0;
 	private String collectionType = null;
 	private String collectionGenre = null;
@@ -27,10 +28,10 @@ public class Coleccion {
 	public void setCollectionName(String collectionName) {
 		this.collectionName = collectionName;
 	}
-	public LocalDate getCollectionDate() {
+	public Date getCollectionDate() {
 		return localDate;
 	}
-	public void setCollectionDate(LocalDate localDate) {
+	public void setCollectionDate(Date localDate) {
 		this.localDate = localDate;
 	}
 	public int getCollectionRepNum() {

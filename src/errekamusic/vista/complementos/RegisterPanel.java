@@ -1,4 +1,3 @@
-
 package errekamusic.vista.complementos;
 
 import java.awt.Color;
@@ -15,11 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Users;
+import errekamusic.bbdd.manager.UserManager;
 import errekamusic.logica.Singleton;
 import errekamusic.logica.UserController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JPasswordField;
@@ -32,8 +33,9 @@ public class RegisterPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private UserController userController = null;
-	
+
 	private Users user = null;
+	private JPanel premiumPanel = null;
 
 	private JLabel lblRegisterDNI = null;
 	private JLabel lblRegisterName = null;
@@ -56,6 +58,7 @@ public class RegisterPanel extends JPanel {
 	private JLabel lblPersonalOpt = null;
 	private JLabel lblCountOpt = null;
 	private JLabel lblPremiumOpt = null;
+
 	private JLabel lblUserDirOpt = null;
 
 	private JTextField fieldRegisterPasswd = null;
@@ -69,20 +72,22 @@ public class RegisterPanel extends JPanel {
 	private JTextField fieldRegisterCity = null;
 	private JTextField fieldRegisterProvince = null;
 	private JTextField fieldRegisterUsername = null;
-	private JTextField fieldRegisterCountName = null;
 	private JTextField fieldRegisterCardCaducity = null;
 	private JTextField fieldRegisterCVV = null;
+	private JTextField fieldRegisterCountName = null;
 
 	private JComboBox<String> userTypeComboBox = null;
-
+	private Users users = null;
 	private JButton btnCancelarPanelDeRegistro = null;
 	private JButton btnConfirmarDeRegistro = null;
 	private JPasswordField passwordFieldConfirmarContrasenyaRegistro = null;
-
+	private boolean registed = false;
 	/**
 	 * panel principal
 	 */
 	public RegisterPanel() {
+
+		premiumPanel = new JPanel();
 
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
@@ -174,7 +179,7 @@ public class RegisterPanel extends JPanel {
 
 		fieldRegisterCP = new JTextField();
 		fieldRegisterCP.setColumns(10);
-		fieldRegisterCP.setBounds(160, 440, 245, 20);
+		fieldRegisterCP.setBounds(691, 278, 187, 20);
 		add(fieldRegisterCP);
 
 		lblRegisterCity = new JLabel("Ciudad");
@@ -197,9 +202,15 @@ public class RegisterPanel extends JPanel {
 
 		userTypeComboBox = new JComboBox<String>();
 		userTypeComboBox
-				.setModel(new DefaultComboBoxModel<String>(new String[] { "Usuario Gratuito", "Usuario Premium" }));
+				.setModel(new DefaultComboBoxModel<String>(new String[] { "Free", "Premium" }));
 		userTypeComboBox.setBounds(189, 510, 205, 29);
 		add(userTypeComboBox);
+		userTypeComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setPremiumPanel();
+			}
+
+		});
 
 		lblRegisterUserType = new JLabel("Tipo de Usuario");
 		lblRegisterUserType.setForeground(new Color(255, 255, 255));
@@ -222,39 +233,6 @@ public class RegisterPanel extends JPanel {
 		fieldRegisterUsername.setBounds(196, 407, 210, 20);
 		add(fieldRegisterUsername);
 
-		lblRegisterCountName = new JLabel("Numero de Cuenta");
-		lblRegisterCountName.setForeground(new Color(255, 255, 255));
-		lblRegisterCountName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
-		lblRegisterCountName.setBounds(573, 407, 192, 31);
-		add(lblRegisterCountName);
-
-		fieldRegisterCountName = new JTextField();
-		fieldRegisterCountName.setColumns(10);
-		fieldRegisterCountName.setBounds(751, 411, 166, 20);
-		add(fieldRegisterCountName);
-
-		lblRegisterCardCaducity = new JLabel("Caducidad");
-		lblRegisterCardCaducity.setForeground(new Color(255, 255, 255));
-		lblRegisterCardCaducity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
-		lblRegisterCardCaducity.setBounds(573, 443, 159, 31);
-		add(lblRegisterCardCaducity);
-
-		fieldRegisterCardCaducity = new JTextField();
-		fieldRegisterCardCaducity.setColumns(10);
-		fieldRegisterCardCaducity.setBounds(684, 447, 176, 20);
-		add(fieldRegisterCardCaducity);
-
-		lblRegisterCVV = new JLabel("CVV o CVC");
-		lblRegisterCVV.setForeground(new Color(255, 255, 255));
-		lblRegisterCVV.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
-		lblRegisterCVV.setBounds(574, 487, 159, 31);
-		add(lblRegisterCVV);
-
-		fieldRegisterCVV = new JTextField();
-		fieldRegisterCVV.setColumns(10);
-		fieldRegisterCVV.setBounds(683, 491, 176, 20);
-		add(fieldRegisterCVV);
-
 		registerTitleLbl = new JLabel("REGISTRATE");
 		registerTitleLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		registerTitleLbl.setForeground(new Color(190, 30, 255));
@@ -267,23 +245,22 @@ public class RegisterPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				userController = new UserController();
-				
-				
+
 				if (userController.insertNewUser(user)) {
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+					Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+					Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+					Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+					Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+					Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+					Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+					Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+					Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
+					Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+					Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+					Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+					Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+					Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+					Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				}
 
 			}
@@ -295,11 +272,17 @@ public class RegisterPanel extends JPanel {
 
 		btnConfirmarDeRegistro = new JButton("Confirmar");
 		btnConfirmarDeRegistro.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unlikely-arg-type")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean CampoVacio = false;
+				UserManager userManager = new UserManager();
+				try {
+					userManager.userRegister(fieldRegisterUsername,fieldRegisterName,fieldRegisterFirstSurname ,fieldRegisterSecondSurname,
+							fieldRegisterDNI,fieldRegisterBirthDate,fieldRegisterDirection,fieldRegisterCP,fieldRegisterCity,fieldRegisterProvince,
+							fieldRegisterPasswd,passwordFieldConfirmarContrasenyaRegistro,userTypeComboBox.getSelectedItem().toString());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
@@ -315,14 +298,16 @@ public class RegisterPanel extends JPanel {
 				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-			}
+				registed = true;
+			
+				}
 		});
 		btnConfirmarDeRegistro.setForeground(new Color(0, 0, 0));
 		btnConfirmarDeRegistro.setBounds(836, 556, 98, 33);
 		add(btnConfirmarDeRegistro);
 
 		fieldRegisterPasswd = new JPasswordField();
-		fieldRegisterPasswd.setBounds(702, 273, 173, 20);
+		fieldRegisterPasswd.setBounds(155, 445, 246, 20);
 		add(fieldRegisterPasswd);
 
 		passwordFieldConfirmarContrasenyaRegistro = new JPasswordField();
@@ -355,18 +340,68 @@ public class RegisterPanel extends JPanel {
 		lblUserDirOpt.setBounds(573, 80, 365, 64);
 		add(lblUserDirOpt);
 
+		premiumPanel = new JPanel();
+		premiumPanel.setBackground(Color.BLACK);
+		premiumPanel.setBounds(536, 326, 438, 220);
+		add(premiumPanel);
+		premiumPanel.setLayout(null);
+		premiumPanel.setVisible(false);
+
 		lblPremiumOpt = new JLabel("OPCIONES PREMIUM");
-		lblPremiumOpt.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPremiumOpt.setBounds(64, 5, 310, 42);
+		lblPremiumOpt.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPremiumOpt.setForeground(new Color(190, 30, 255));
 		lblPremiumOpt.setFont(new Font("Segoe UI Black", Font.PLAIN, 30));
-		lblPremiumOpt.setBounds(573, 342, 365, 64);
-		add(lblPremiumOpt);
+		premiumPanel.add(lblPremiumOpt);
 
+		lblRegisterCountName = new JLabel("Numero de Cuenta");
+		lblRegisterCountName.setForeground(new Color(255, 255, 255));
+		lblRegisterCountName.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
+		lblRegisterCountName.setBounds(9, 52, 148, 24);
+		premiumPanel.add(lblRegisterCountName);
+
+		fieldRegisterCountName = new JTextField();
+		fieldRegisterCountName.setColumns(10);
+		fieldRegisterCountName.setBounds(180, 57, 168, 20);
+		premiumPanel.add(fieldRegisterCountName);
+
+		lblRegisterCardCaducity = new JLabel("Caducidad");
+		lblRegisterCardCaducity.setForeground(new Color(255, 255, 255));
+		lblRegisterCardCaducity.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
+		lblRegisterCardCaducity.setBounds(22, 102, 85, 24);
+		premiumPanel.add(lblRegisterCardCaducity);
+
+		fieldRegisterCardCaducity = new JTextField();
+		fieldRegisterCardCaducity.setColumns(10);
+		fieldRegisterCardCaducity.setBounds(140, 107, 185, 20);
+		premiumPanel.add(fieldRegisterCardCaducity);
+
+		lblRegisterCVV = new JLabel("CVV o CVC");
+		lblRegisterCVV.setForeground(new Color(255, 255, 255));
+		lblRegisterCVV.setFont(new Font("Segoe UI Semilight", Font.BOLD, 17));
+		lblRegisterCVV.setBounds(20, 150, 87, 24);
+		premiumPanel.add(lblRegisterCVV);
+
+		fieldRegisterCVV = new JTextField();
+		fieldRegisterCVV.setColumns(10);
+		fieldRegisterCVV.setBounds(140, 155, 185, 20);
+		premiumPanel.add(fieldRegisterCVV);
+	}
+	
+
+	public void setPremiumPanel() {
+		if (userTypeComboBox != null && userTypeComboBox.getSelectedItem() != null) {
+			if (userTypeComboBox.getSelectedItem().toString().equals("Free")) {
+				premiumPanel.setVisible(false);
+			} else {
+				premiumPanel.setVisible(true);
+			}
+		}
 	}
 
 	/**
 	 * obtener a este panel
-	 * 
+	 *
 	 * @return panelDeRegistro
 	 */
 	public JPanel getRegisterPanel() {

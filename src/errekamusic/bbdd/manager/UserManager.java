@@ -5,14 +5,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import errekamusic.bbdd.Pojo.FreeUser;
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
+import errekamusic.logica.UserController;
 
 public class UserManager implements DataBaseInterface<Users>, UserInterface<Users> {
 
@@ -23,6 +32,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 	private Users user = null;
 	private PremiumUser premiumUser = null;
 	private FreeUser freeUser = null;
+	private UserController userController = null;
 
 	@Override
 	public ArrayList<Users> getAll() {
@@ -45,7 +55,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 				user.setSurName1(result.getString("SurnameUser1"));
 				user.setSurName1(result.getString("SurnameUser2"));
 				user.setDNI(result.getString("SurnameUser2"));
-				user.setBirthDateUser(Converter.convertFromSqlDateToUtilDate(result.getDate("BirthDateUser")));
+				user.setBirthDateUser(result.getDate("BirthDateUser"));
 				user.setDirUser(result.getString("DirUser"));
 				user.setcPUser(result.getInt("CPUser"));
 				user.setUserCity(result.getString("UserCity"));
@@ -70,8 +80,6 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		return ret;
 	}
 
-
-
 	@Override
 	public Users getByUserName(String username) {
 		try {
@@ -92,7 +100,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 				user.setUserPassword(result.getString("UserPassword"));
 				user.setSurName1(result.getString("SurnameUser2"));
 				user.setDNI(result.getString("SurnameUser2"));
-				user.setBirthDateUser(Converter.convertFromSqlDateToUtilDate(result.getDate("BirthDateUser")));
+				user.setBirthDateUser(result.getDate("BirthDateUser"));
 				user.setDirUser(result.getString("DirUser"));
 				user.setcPUser(result.getInt("CPUser"));
 				user.setUserCity(result.getString("UserCity"));
@@ -198,8 +206,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 //		
 		return ret;
 	}
-	
-	
+
 	public FreeUser getFreeInfo(String username) {
 		FreeUser ret = new FreeUser();
 
@@ -249,6 +256,63 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		}
 
 		return ret;
+	}
+
+	public boolean userRegister(JTextField userName, JTextField name, JTextField sur1, JTextField sur2, JTextField dni,
+			JTextField birty, JTextField dir, JTextField cp, JTextField city, JTextField province, JTextField password,
+			JTextField password2, String type) throws ParseException {
+		String countName = userName.getText();
+		String dniUser = dni.getText();
+		String pass = password.getText();
+		String pass2 = password2.getText();
+		String nameUser = name.getText();
+		String surname1 = sur1.getText();
+		String surname2 = sur2.getText();
+		String direction = dir.getText();
+		String userCity = city.getText();
+		String isAmdin = "No";
+		int userCP = Integer.valueOf(cp.getText());
+		java.sql.Date userBirty = Converter
+				.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(birty.getText()));
+		String userProvince = province.getText();
+		Date current = new Date();
+		java.sql.Date resDate = Converter.convertFromUtilDateToSqlDate(current);
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "INSERT INTO USERS(LoginUser,Nameuser,SurnameUser1,SurnameUser2,DNIUser,BirthDateUser,DirUser,CPUser,IsAdmin,UserCity,UserProvince,UserPassword,registerDate,accountType) "
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, countName);
+			pstmt.setString(2, nameUser);
+			pstmt.setString(3, surname1);
+			pstmt.setString(4, surname2);
+			pstmt.setString(5, dniUser);
+			pstmt.setDate(6, userBirty);
+			pstmt.setString(7, direction);
+			pstmt.setInt(8, userCP);
+			pstmt.setString(9, isAmdin);
+			pstmt.setString(10, userCity);
+			pstmt.setString(11, userProvince);
+			pstmt.setString(12, pass);
+			pstmt.setDate(13, resDate);
+			pstmt.setString(14, type);
+			int i = pstmt.executeUpdate();
+			if (i > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+			return false;
+		} finally {
+			DBUtils reto4Utils = new DBUtils();
+			reto4Utils.release(conn, pstmt, rs);
+		}
 	}
 
 }
