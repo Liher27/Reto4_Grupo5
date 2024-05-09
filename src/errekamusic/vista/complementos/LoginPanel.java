@@ -173,9 +173,11 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				userController = new UserController();
 
+				
+				
 				if (loginErrorCounter < 3) {
 					if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
-						if (userController.isAdminUser() && userController.confirmLogedUser(
+						if (userController.isAdminUser(userField.getText().toString()) && userController.confirmLogedUser(
 								userField.getText().toString(), passwdTextField.getPassword().toString())) {
 
 							Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);

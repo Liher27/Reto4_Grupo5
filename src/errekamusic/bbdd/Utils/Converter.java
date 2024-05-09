@@ -67,4 +67,11 @@ public class Converter {
 		sqldate = new java.sql.Date(utilDate.getTime());
 		return sqldate;
 	}
+	
+	public static Date getCurrentDate() {
+		long millis = System.currentTimeMillis();
+		Date date = new Date(millis);
+		return date;
+	}
+	
 }

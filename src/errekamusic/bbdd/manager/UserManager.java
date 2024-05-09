@@ -98,11 +98,12 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 				user.setNameUser(result.getString("NameUser"));
 				user.setSurName1(result.getString("SurnameUser1"));
 				user.setUserPassword(result.getString("UserPassword"));
-				user.setSurName1(result.getString("SurnameUser2"));
-				user.setDNI(result.getString("SurnameUser2"));
+				user.setSurName2(result.getString("SurnameUser2"));
+				user.setDNI(result.getString("DNIUser"));
 				user.setBirthDateUser(result.getDate("BirthDateUser"));
 				user.setDirUser(result.getString("DirUser"));
 				user.setcPUser(result.getInt("CPUser"));
+				user.setAdmin(result.getString("IsAdmin"));
 				user.setUserCity(result.getString("UserCity"));
 				user.setUserProvince(result.getString("UserProvince"));
 				user.setRegisterDate(Converter.convertFromSqlDateToUtilDate(result.getDate("RegisterDate")));
@@ -314,5 +315,31 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 			reto4Utils.release(conn, pstmt, rs);
 		}
 	}
+	
+	public boolean setLastLoginDate(Date date, String username) {
+	    boolean ret = false;
+	    try {
+	        Class.forName(DBUtils.DRIVER);
+	        conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+	        String sql = "UPDATE users SET LastLogInDate = ? WHERE LoginUser = ?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setDate(1, Converter.convertFromUtilDateToSqlDate(date));
+	        pstmt.setString(2, username);
+	        int i = pstmt.executeUpdate();
+	        if (i > 0) {
+	            ret = true;
+	            System.out.println("Fecha de último inicio de sesión actualizada correctamente para el usuario: " + username);
+	        } else {
+	            System.out.println("La fecha de último inicio de sesión no se actualizó para el usuario: " + username);
+	        }
+
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error al cargar el controlador: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error de SQL al actualizar la fecha de último inicio de sesión: " + e.getMessage());
+	    }
+	    return ret;
+	}
+
 
 }

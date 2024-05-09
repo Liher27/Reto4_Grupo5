@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
+import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.manager.UserManager;
 
 public class UserController {
@@ -31,17 +32,21 @@ public class UserController {
 		
 	}
 
+	
 	public boolean confirmLogedUser(String username, String password) {
+		boolean ret = false;
 		userManager = new UserManager();
 		Users user = new Users();
 		user = userManager.getByUserName(username);
-		if (null != user) {
-			if (user.getUserPassword().equals(password))
-				;
-			return true;
-		} else
-			return false;
+
+		if (user.getUserPassword().equals(password)
+				&& userManager.setLastLoginDate(Converter.getCurrentDate(), username));
+		{
+			ret = true;
+		}
+		return ret;
 	}
+
 
 	public boolean changeUserPassword(String newPasswordToInsert, String registerUsername) {
 		boolean ret = false;
@@ -94,29 +99,6 @@ public class UserController {
 		return ret;
 	}
 
-	public boolean isAdminUser() {
-		boolean ret = false;
-		Users admin = new Users();
-		admin = userManager.getByUserName(Singleton.getInstance().getUsername());
-		if (admin.getIsAdmin().equals("Si")) {
-			ret = true;
-		} else
-			ret = false;
-
-		return ret;
-	}
-
-	// Codigo para administrar los usuarios
-
-	public boolean comparePassword(String pass, String pass2) {
-		if (pass2 != pass) {
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-
 	public boolean cplength(int num) {
 		String a = "" + num;
 		int length = a.length();
@@ -126,4 +108,19 @@ public class UserController {
 			return true;
 		}
 	}
+
+
+	public boolean isAdminUser(String username) {
+		boolean ret = false;
+		Users admin = new Users();
+		userManager = new UserManager();
+		admin = userManager.getByUserName(username);
+		if (admin.getIsAdmin().equals("Yes")) {
+			ret = true;
+		} else
+			ret = false;
+
+		return ret;
+	}
+
 }
