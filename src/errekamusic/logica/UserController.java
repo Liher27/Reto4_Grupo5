@@ -48,6 +48,8 @@ public class UserController {
 		userManager = new UserManager();
 		if (userManager.changeUserPassword(newPasswordToInsert, registerUsername)) {
 			ret = true;
+		} else {
+			ret = false;
 		}
 		return ret;
 	}
@@ -79,19 +81,29 @@ public class UserController {
 		userManager = new UserManager();
 		userManager.insertInto(user);
 
-		return false;
+		return ret;
 	}
 
 	public boolean insertFreeUserInfo(Users user) {
 		boolean ret = false;
-
-		return false;
+		return ret;
 	}
 
 	public boolean insertPremiumUserInfo(Users user) {
 		boolean ret = false;
+		return ret;
+	}
 
-		return false;
+	public boolean isAdminUser() {
+		boolean ret = false;
+		Users admin = new Users();
+		admin = userManager.getByUserName(Singleton.getInstance().getUsername());
+		if (admin.getIsAdmin().equals("Si")) {
+			ret = true;
+		} else
+			ret = false;
+
+		return ret;
 	}
 
 	// Codigo para administrar los usuarios
