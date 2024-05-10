@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.logica.Singleton;
+import errekamusic.logica.Sesion;
 
 public class ListsPanel extends JPanel {
 
@@ -56,20 +56,20 @@ public class ListsPanel extends JPanel {
 		lblProfilePicture.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 			}
 		});
 		
@@ -86,20 +86,20 @@ public class ListsPanel extends JPanel {
 		listsPanelBackLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(true);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(true);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 			}
 		});
 		
@@ -154,20 +154,20 @@ public class ListsPanel extends JPanel {
 		add(listsPanelBackBtn);
 		listsPanelBackBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				
 			}
 

@@ -14,8 +14,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Users;
+import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.manager.UserManager;
-import errekamusic.logica.Singleton;
+import errekamusic.logica.Sesion;
 import errekamusic.logica.UserController;
 
 import java.awt.event.ActionEvent;
@@ -247,20 +248,20 @@ public class RegisterPanel extends JPanel {
 				userController = new UserController();
 
 				if (userController.insertNewUser(user)) {
-					Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-					Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
-					Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-					Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-					Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-					Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-					Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-					Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-					Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-					Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-					Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-					Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-					Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-					Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+					Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+					Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+					Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+					Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+					Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+					Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+					Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+					Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+					Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+					Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+					Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+					Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+					Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+					Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				}
 
 			}
@@ -275,8 +276,20 @@ public class RegisterPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserManager userManager = new UserManager();
+				userController = new UserController();
 				try {
-					userManager.userRegister(fieldRegisterUsername,fieldRegisterName,fieldRegisterFirstSurname ,fieldRegisterSecondSurname,
+					Users users = new Users();
+					users.setBirthDateUser(Converter
+							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
+					users.setAccountType(userTypeComboBox.getSelectedItem().toString());
+					users.setAdmin("No");
+					users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
+					users.setDirUser(fieldRegisterDirection.getText());
+					
+					
+					userController.registerUser(users);
+					
+					userController.registerUser(fieldRegisterUsername,fieldRegisterName,fieldRegisterFirstSurname ,fieldRegisterSecondSurname,
 							fieldRegisterDNI,fieldRegisterBirthDate,fieldRegisterDirection,fieldRegisterCP,fieldRegisterCity,fieldRegisterProvince,
 							fieldRegisterPasswd,passwordFieldConfirmarContrasenyaRegistro,userTypeComboBox.getSelectedItem().toString());
 				} catch (ParseException e1) {
@@ -284,20 +297,20 @@ public class RegisterPanel extends JPanel {
 					e1.printStackTrace();
 				}
 
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				registed = true;
 			
 				}

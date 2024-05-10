@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
-import errekamusic.logica.Singleton;
+import errekamusic.logica.Sesion;
 import errekamusic.logica.UserController;
 
 public class ProfilePanel extends JPanel {
@@ -92,20 +92,20 @@ public class ProfilePanel extends JPanel {
 
 			public void actionPerformed(ActionEvent e) {
 				
-				Singleton.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Singleton.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Singleton.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Singleton.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
-				Singleton.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Singleton.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Singleton.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Singleton.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Singleton.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Singleton.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Singleton.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Singleton.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Singleton.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Singleton.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(true);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
 			}
 
@@ -242,7 +242,7 @@ public class ProfilePanel extends JPanel {
 				newPasswordConfirm = JOptionPane.showInputDialog("Por favor, repita la contraseña: ");
 
 				if (newPasswordToInsert.equals(newPasswordConfirm)) {
-					if (userController.changeUserPassword(newPasswordToInsert, Singleton.getInstance().getUsername())) {
+					if (userController.changeUserPassword(newPasswordToInsert, Sesion.getInstance().getUsername())) {
 						JOptionPane.showMessageDialog(null, "Contrasenya cambiada correctamente", "OK!!",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
@@ -267,7 +267,7 @@ public class ProfilePanel extends JPanel {
 		userController = new UserController();
 
 		premiumUser = new PremiumUser();
-		userProfile = userController.getLogedUser(Singleton.getInstance().getUsername());
+		userProfile = userController.getLogedUser(Sesion.getInstance().getUsername());
 
 		if (null != userProfile) {
 
@@ -290,7 +290,7 @@ public class ProfilePanel extends JPanel {
 			lblRegisterProvince.setText("Provincia: " + userProfile.getUserProvince());
 			lblRegisterUsername.setText("Nombre usuario: " + userProfile.getLoginUser());
 			if (userProfile.getAccountType().equals("Premium")) {
-				premiumUser = userController.getPremiumUserInfo(Singleton.getInstance().getUsername());
+				premiumUser = userController.getPremiumUserInfo(Sesion.getInstance().getUsername());
 				lblRegisterCountName.setText("Numero de cuenta: " + premiumUser.getCountNum());
 				lblRegisterCardCaducity.setText("Caducidad: " + premiumUser.getCaducity());
 				lblRegisterCVV.setText("Numero de cuenta: " + premiumUser.getcVV());

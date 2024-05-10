@@ -23,16 +23,14 @@ import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.logica.UserController;
 
-public class UserManager implements DataBaseInterface<Users>, UserInterface<Users> {
+public class UserManager extends AbstractManager implements UserInterface <Users>, DataBaseInterface <Users> {
 
-	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet result = null;
 	private String sql = null;
 	private Users user = null;
 	private PremiumUser premiumUser = null;
 	private FreeUser freeUser = null;
-	private UserController userController = null;
 
 	@Override
 	public ArrayList<Users> getAll() {
@@ -43,7 +41,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		try {
 			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			sql = "SELECT * FROM USERS";
 			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeQuery();
@@ -85,7 +83,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		try {
 			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			sql = "SELECT * FROM USERS WHERE LOGINUSER = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -137,7 +135,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		try {
 			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			String sql = "UPDATE users SET UserPassword = ? WHERE LoginUser = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, newPasswordToInsert);
@@ -214,7 +212,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		try {
 			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			sql = "SELECT * FROM USERLIBRE WHERE LOGINUSERFREE = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -239,7 +237,7 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 		try {
 			Class.forName(DBUtils.DRIVER);
 
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			sql = "SELECT * FROM USERPREMIUM WHERE LOGINUSERPREMIUM = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -262,30 +260,37 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 	public boolean userRegister(JTextField userName, JTextField name, JTextField sur1, JTextField sur2, JTextField dni,
 			JTextField birty, JTextField dir, JTextField cp, JTextField city, JTextField province, JTextField password,
 			JTextField password2, String type) throws ParseException {
+		
+		boolean ret = false;
+		
 		String countName = userName.getText();
 		String dniUser = dni.getText();
 		String pass = password.getText();
-		String pass2 = password2.getText();
 		String nameUser = name.getText();
 		String surname1 = sur1.getText();
 		String surname2 = sur2.getText();
 		String direction = dir.getText();
 		String userCity = city.getText();
 		String isAmdin = "No";
-		int userCP = Integer.valueOf(cp.getText());
-		java.sql.Date userBirty = Converter
-				.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(birty.getText()));
 		String userProvince = province.getText();
 		Date current = new Date();
+		int userCP = Integer.valueOf(cp.getText());
+		
+		java.sql.Date userBirty = Converter
+				.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(birty.getText()));
+		
 		java.sql.Date resDate = Converter.convertFromUtilDateToSqlDate(current);
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			
 			String sql = "INSERT INTO USERS(LoginUser,Nameuser,SurnameUser1,SurnameUser2,DNIUser,BirthDateUser,DirUser,CPUser,IsAdmin,UserCity,UserProvince,UserPassword,registerDate,accountType) "
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, countName);
 			pstmt.setString(2, nameUser);
@@ -301,6 +306,38 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 			pstmt.setString(12, pass);
 			pstmt.setDate(13, resDate);
 			pstmt.setString(14, type);
+			
+			if (pstmt.executeUpdate() > 0) {
+				ret = true;
+			} 
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			release(conn, pstmt, rs);
+		}
+		return ret;
+	}
+
+	public boolean insertPremiumUserData(String loginUser, JTextField countNumber, JTextField caducity,
+			JTextField cvv) {
+
+		int cardnumber = Integer.valueOf(countNumber.getText());
+		String cadu = caducity.getText();
+		int cvvNumber = Integer.valueOf(cvv.getText());
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "INSERT INTO USERS(CountNum,Caducity,CVV,LoginUserPremium) VALUES(?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cardnumber);
+			pstmt.setString(2, cadu);
+			pstmt.setInt(3, cvvNumber);
+			pstmt.setString(4, loginUser);
 			int i = pstmt.executeUpdate();
 			if (i > 0) {
 				return true;
@@ -311,35 +348,34 @@ public class UserManager implements DataBaseInterface<Users>, UserInterface<User
 			throwables.printStackTrace();
 			return false;
 		} finally {
-			DBUtils reto4Utils = new DBUtils();
-			reto4Utils.release(conn, pstmt, rs);
+			release(conn, pstmt, rs);
 		}
 	}
-	
+
 	public boolean setLastLoginDate(Date date, String username) {
-	    boolean ret = false;
-	    try {
-	        Class.forName(DBUtils.DRIVER);
-	        conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-	        String sql = "UPDATE users SET LastLogInDate = ? WHERE LoginUser = ?";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setDate(1, Converter.convertFromUtilDateToSqlDate(date));
-	        pstmt.setString(2, username);
-	        int i = pstmt.executeUpdate();
-	        if (i > 0) {
-	            ret = true;
-	            System.out.println("Fecha de último inicio de sesión actualizada correctamente para el usuario: " + username);
-	        } else {
-	            System.out.println("La fecha de último inicio de sesión no se actualizó para el usuario: " + username);
-	        }
+		boolean ret = false;
+		try {
+			Class.forName(DBUtils.DRIVER);
+			Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "UPDATE users SET LastLogInDate = ? WHERE LoginUser = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setDate(1, Converter.convertFromUtilDateToSqlDate(date));
+			pstmt.setString(2, username);
+			int i = pstmt.executeUpdate();
+			if (i > 0) {
+				ret = true;
+				System.out.println(
+						"Fecha de último inicio de sesión actualizada correctamente para el usuario: " + username);
+			} else {
+				System.out.println("La fecha de último inicio de sesión no se actualizó para el usuario: " + username);
+			}
 
-	    } catch (ClassNotFoundException e) {
-	        System.out.println("Error al cargar el controlador: " + e.getMessage());
-	    } catch (SQLException e) {
-	        System.out.println("Error de SQL al actualizar la fecha de último inicio de sesión: " + e.getMessage());
-	    }
-	    return ret;
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error al cargar el controlador: " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Error de SQL al actualizar la fecha de último inicio de sesión: " + e.getMessage());
+		}
+		return ret;
 	}
-
 
 }

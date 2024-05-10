@@ -13,44 +13,39 @@ import errekamusic.bbdd.manager.UserManager;
 
 public class UserController {
 
-	UserManager userManager = null;
-
 	public void registerUser(JTextField userName, JTextField dni, JTextField password, JTextField password2,
 			JTextField name, JTextField sur1, JTextField sur2, JTextField dir, JTextField city, JTextField cp,
 			JTextField birty, JTextField province, String type) throws ParseException {
 		boolean reged = false;
 		if (password == password2) {
-		userManager = new UserManager();
-		userManager.userRegister(userName, name, sur1, sur2, dni, birty, dir, cp, city, province, password, password2,
-				type);
-		reged = true;
+			UserManager userManager = new UserManager();
+			userManager.userRegister(userName, name, sur1, sur2, dni, birty, dir, cp, city, province, password,
+					password2, type);
+			reged = true;
 		} else if (password2 != password) {
 			reged = false;
 		} else if (cp.getText().toString().length() > 5) {
 			reged = false;
 		}
-		
+
 	}
 
-	
 	public boolean confirmLogedUser(String username, String password) {
 		boolean ret = false;
-		userManager = new UserManager();
-		Users user = new Users();
-		user = userManager.getByUserName(username);
+		UserManager userManager = new UserManager();
+		Users user = new UserManager().getByUserName(username);
 
 		if (user.getUserPassword().equals(password)
-				&& userManager.setLastLoginDate(Converter.getCurrentDate(), username));
-		{
+				&& userManager.setLastLoginDate(Converter.getCurrentDate(), username)) {
 			ret = true;
 		}
 		return ret;
 	}
 
-
 	public boolean changeUserPassword(String newPasswordToInsert, String registerUsername) {
 		boolean ret = false;
-		userManager = new UserManager();
+		UserManager userManager = new UserManager();
+
 		if (userManager.changeUserPassword(newPasswordToInsert, registerUsername)) {
 			ret = true;
 		} else {
@@ -60,7 +55,7 @@ public class UserController {
 	}
 
 	public Users getLogedUser(String username) {
-		userManager = new UserManager();
+		UserManager userManager = new UserManager();
 		Users user = new Users();
 		user = userManager.getByUserName(username);
 
@@ -71,7 +66,7 @@ public class UserController {
 	}
 
 	public PremiumUser getPremiumUserInfo(String username) {
-		userManager = new UserManager();
+		UserManager userManager = new UserManager();
 		PremiumUser user = new PremiumUser();
 		user = userManager.getPremiumInfo(username);
 
@@ -83,7 +78,7 @@ public class UserController {
 
 	public boolean insertNewUser(Users user) {
 		boolean ret = false;
-		userManager = new UserManager();
+		UserManager userManager = new UserManager();
 		userManager.insertInto(user);
 
 		return ret;
@@ -109,11 +104,10 @@ public class UserController {
 		}
 	}
 
-
 	public boolean isAdminUser(String username) {
 		boolean ret = false;
 		Users admin = new Users();
-		userManager = new UserManager();
+		UserManager userManager = new UserManager();
 		admin = userManager.getByUserName(username);
 		if (admin.getIsAdmin().equals("Yes")) {
 			ret = true;

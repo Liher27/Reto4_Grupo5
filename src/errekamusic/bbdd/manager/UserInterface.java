@@ -1,8 +1,5 @@
 package errekamusic.bbdd.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import errekamusic.bbdd.Pojo.Users;
 
 public interface UserInterface <T>{
