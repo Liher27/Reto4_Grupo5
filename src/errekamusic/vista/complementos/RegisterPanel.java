@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.manager.UserManager;
@@ -275,43 +276,7 @@ public class RegisterPanel extends JPanel {
 		btnConfirmarDeRegistro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserManager userManager = new UserManager();
-				userController = new UserController();
-				try {
-					Users users = new Users();
-					users.setBirthDateUser(Converter
-							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
-					users.setAccountType(userTypeComboBox.getSelectedItem().toString());
-					users.setAdmin("No");
-					users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
-					users.setDirUser(fieldRegisterDirection.getText());
-					
-					
-					userController.registerUser(users);
-					
-					userController.registerUser(fieldRegisterUsername,fieldRegisterName,fieldRegisterFirstSurname ,fieldRegisterSecondSurname,
-							fieldRegisterDNI,fieldRegisterBirthDate,fieldRegisterDirection,fieldRegisterCP,fieldRegisterCity,fieldRegisterProvince,
-							fieldRegisterPasswd,passwordFieldConfirmarContrasenyaRegistro,userTypeComboBox.getSelectedItem().toString());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
-				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-				registed = true;
+				compareFreeAndPremium();
 			
 				}
 		});
@@ -411,6 +376,96 @@ public class RegisterPanel extends JPanel {
 			}
 		}
 	}
+	public void compareFreeAndPremium() {
+		if (userTypeComboBox.getSelectedItem().toString().equals("Free")) {
+			UserManager userManager = new UserManager();
+			userController = new UserController();
+			try {
+				Users users = new Users();
+				users.setBirthDateUser(Converter
+						.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
+				users.setAccountType(userTypeComboBox.getSelectedItem().toString());
+				users.setAdmin("No");
+				users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
+				users.setDirUser(fieldRegisterDirection.getText());
+				users.setDNI(fieldRegisterDNI.getText());
+				users.setSurName1(fieldRegisterFirstSurname.getText());
+				users.setSurName2(fieldRegisterSecondSurname.getText());
+				users.setNameUser(fieldRegisterName.getText());
+				users.setLoginUser(fieldRegisterUsername.getText());
+				users.setUserPassword(fieldRegisterPasswd.getText());
+				users.setUserCity(fieldRegisterCity.getText());
+				users.setUserProvince(fieldRegisterProvince.getText());
+				userController.registerUser(users);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+			Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+			Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+			Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+			Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+			Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+			Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+			Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+			Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+			Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+			Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+			Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+			Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+			Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+		
+			}else {
+				userController = new UserController();
+				try {
+					Users users = new Users();
+					users.setBirthDateUser(Converter
+							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
+					users.setAccountType(userTypeComboBox.getSelectedItem().toString());
+					users.setAdmin("No");
+					users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
+					users.setDirUser(fieldRegisterDirection.getText());
+					users.setDNI(fieldRegisterDNI.getText());
+					users.setSurName1(fieldRegisterFirstSurname.getText());
+					users.setSurName2(fieldRegisterSecondSurname.getText());
+					users.setNameUser(fieldRegisterName.getText());
+					users.setLoginUser(fieldRegisterUsername.getText());
+					users.setUserPassword(fieldRegisterPasswd.getText());
+					users.setUserCity(fieldRegisterCity.getText());
+					users.setUserProvince(fieldRegisterProvince.getText());
+					userController.registerUser(users);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PremiumUser userPremium = new PremiumUser();
+				userPremium.setCountNum(Integer.valueOf(fieldRegisterCountName.getText().trim()));
+				userPremium.setCaducity(fieldRegisterCardCaducity.getText());
+				userPremium.setcVV(Integer.valueOf(fieldRegisterCVV.getText()));
+				String logUserName = fieldRegisterUsername.getText();
+				userController.insertPremiumData(userPremium, logUserName);
+				
+				
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+			}
+		} 
+		
+	
 
 	/**
 	 * obtener a este panel

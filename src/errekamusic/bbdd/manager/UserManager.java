@@ -257,28 +257,24 @@ public class UserManager extends AbstractManager implements UserInterface <Users
 		return ret;
 	}
 
-	public boolean userRegister(JTextField userName, JTextField name, JTextField sur1, JTextField sur2, JTextField dni,
-			JTextField birty, JTextField dir, JTextField cp, JTextField city, JTextField province, JTextField password,
-			JTextField password2, String type) throws ParseException {
+	public boolean userRegister(Users users) throws ParseException {
 		
 		boolean ret = false;
 		
-		String countName = userName.getText();
-		String dniUser = dni.getText();
-		String pass = password.getText();
-		String nameUser = name.getText();
-		String surname1 = sur1.getText();
-		String surname2 = sur2.getText();
-		String direction = dir.getText();
-		String userCity = city.getText();
-		String isAmdin = "No";
-		String userProvince = province.getText();
+		String countName = users.getLoginUser();
+		String dniUser = users.getDNI();
+		String pass = users.getUserPassword();
+		String nameUser = users.getNameUser();
+		String surname1 = users.getSurName1();
+		String surname2 = users.getSurName2();
+		String direction = users.getDirUser();
+		String userCity = users.getUserCity();
+		String isAmdin = users.getIsAdmin();
+		String userProvince = users.getUserProvince();
 		Date current = new Date();
-		int userCP = Integer.valueOf(cp.getText());
-		
-		java.sql.Date userBirty = Converter
-				.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(birty.getText()));
-		
+		int userCP = users.getcPUser();
+		String type = users.getAccountType();
+		java.sql.Date userBirty =Converter.convertFromUtilDateToSqlDate(users.getBirthDateUser());
 		java.sql.Date resDate = Converter.convertFromUtilDateToSqlDate(current);
 		
 		Connection conn = null;
@@ -319,12 +315,11 @@ public class UserManager extends AbstractManager implements UserInterface <Users
 		return ret;
 	}
 
-	public boolean insertPremiumUserData(String loginUser, JTextField countNumber, JTextField caducity,
-			JTextField cvv) {
+	public boolean insertPremiumUserData(PremiumUser premiumUser, String loginUser) {
 
-		int cardnumber = Integer.valueOf(countNumber.getText());
-		String cadu = caducity.getText();
-		int cvvNumber = Integer.valueOf(cvv.getText());
+		int cardnumber = premiumUser.getCountNum();
+		String cadu = premiumUser.getCaducity();
+		int cvvNumber = Integer.valueOf(premiumUser.getcVV());
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -332,7 +327,7 @@ public class UserManager extends AbstractManager implements UserInterface <Users
 
 		try {
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "INSERT INTO USERS(CountNum,Caducity,CVV,LoginUserPremium) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO userpremium(CountNum,Caducity,CVV,LoginUserPremium) VALUES(?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cardnumber);
 			pstmt.setString(2, cadu);

@@ -12,21 +12,33 @@ import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.manager.UserManager;
 
 public class UserController {
-
-	public void registerUser(JTextField userName, JTextField dni, JTextField password, JTextField password2,
-			JTextField name, JTextField sur1, JTextField sur2, JTextField dir, JTextField city, JTextField cp,
-			JTextField birty, JTextField province, String type) throws ParseException {
-		boolean reged = false;
-		if (password == password2) {
-			UserManager userManager = new UserManager();
-			userManager.userRegister(userName, name, sur1, sur2, dni, birty, dir, cp, city, province, password,
-					password2, type);
-			reged = true;
-		} else if (password2 != password) {
-			reged = false;
-		} else if (cp.getText().toString().length() > 5) {
-			reged = false;
-		}
+	
+	
+	public void insertPremiumData(PremiumUser premiumUser, String loginUser) {
+		UserManager userManager = new UserManager();
+		userManager.insertPremiumUserData(premiumUser,loginUser );
+	}
+	
+	
+	public void registerUser(Users users) throws ParseException {
+//		
+		UserManager userManager = new UserManager();
+		userManager.userRegister(users);
+		
+		
+//		String cpLong = users.getcPUser() + "";
+//		if (users.getUserPassword() != pass2) {
+//			reged = false;
+////		} else if (users == null) {
+////			reged = false;
+////		} else if (cpLong.length() > 5) {
+////			reged = false;
+////		}
+//		}else {
+//		UserManager userManager = new UserManager();
+//		userManager.userRegister(users);
+//		}
+//		return reged;
 
 	}
 
