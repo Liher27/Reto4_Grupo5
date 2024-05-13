@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Podcast;
 import errekamusic.enumerado.ArtistType;
-import errekamusic.logica.ArtistController;
+//import errekamusic.logica.ArtistController;
 import errekamusic.logica.Sesion;
 import javax.swing.JScrollBar;
 import javax.swing.JTable;
@@ -133,76 +133,76 @@ public class PodcasterPanel extends JPanel {
 		tablePodcaster.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tablePodcaster.setBounds(162, 143, 649, 331);
 		
-		ArtistController artistController = new ArtistController();
-		List<Artist> artists = artistController.getByArtistType(ArtistType.Podcaster);
-		
-	    String[] headers= {"Grupo","Descripción"};
-	    
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(headers);
-		
-		Object[] row = {"Grupo","Descripción"};
-		//model.addRow(row);
-		
-		for (Artist artist : artists) {
-			String grupo = artist.getArtistName();
-			String descripcionGrupo = artist.getArtistDesc();
-			Object[] rowArtistas = {grupo, descripcionGrupo};
-			model.addRow(rowArtistas);
-		}
-		tablePodcaster.setModel(model);
-		add(tablePodcaster);
-		
-		tablePodcaster.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selectedRow = tablePodcaster.getSelectedRow();
-				Artist artist = artists.get(selectedRow);
-				PodcastPanel podcastPanel = new PodcastPanel();
-				podcastPanel.setCreatorId(artist.getArtistID());
-				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
-				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-
-			}
-		});
-		
-		collectionInfoBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
-			public void actionPerformed(ActionEvent e) {
-				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(true);
-				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-
-			}
-
-		});
+//		ArtistController artistController = new ArtistController();
+//		List<Artist> artists = artistController.getByArtistType(ArtistType.Podcaster);
+//		
+//	    String[] headers= {"Grupo","Descripción"};
+//	    
+//		DefaultTableModel model = new DefaultTableModel();
+//		model.setColumnIdentifiers(headers);
+//		
+//		Object[] row = {"Grupo","Descripción"};
+//		//model.addRow(row);
+//		
+//		for (Artist artist : artists) {
+//			String grupo = artist.getArtistName();
+//			String descripcionGrupo = artist.getArtistDesc();
+//			Object[] rowArtistas = {grupo, descripcionGrupo};
+//			model.addRow(rowArtistas);
+//		}
+//		tablePodcaster.setModel(model);
+//		add(tablePodcaster);
+//		
+//		tablePodcaster.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int selectedRow = tablePodcaster.getSelectedRow();
+//				Artist artist = artists.get(selectedRow);
+//				PodcastPanel podcastPanel = new PodcastPanel();
+//				podcastPanel.setCreatorId(artist.getArtistID());
+//				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+//				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+//				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+//				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+//				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+//				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+//				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+//				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+//				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+//				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+//				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
+//				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+//				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+//				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+//
+//			}
+//		});
+//		
+//		collectionInfoBtn.addActionListener(new ActionListener() {
+//			/**
+//			 * Confirmamos para logearnos
+//			 * 
+//			 * @param e
+//			 */
+//			public void actionPerformed(ActionEvent e) {
+//				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+//				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+//				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+//				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+//				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+//				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+//				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+//				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+//				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+//				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+//				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+//				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+//				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(true);
+//				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+//
+//			}
+//
+//		});
 
 	}
 

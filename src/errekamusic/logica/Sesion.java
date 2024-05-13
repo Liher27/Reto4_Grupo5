@@ -1,5 +1,6 @@
 package errekamusic.logica;
 
+import errekamusic.bbdd.Pojo.Users;
 import errekamusic.vista.complementos.*;
 
 /**
@@ -25,10 +26,8 @@ public class Sesion {
 	private SongsPanel songsPanel = null;
 	private WelcomePanel welcomePanel = null;
 
-	/**
-	 * codigo de pelicula
-	 */
-	public String username = null;
+	
+	public Users userInfo = null;
 
 	/**
 	 * Utilizar este metodo para iniciarlizar y nos devuelve el contenido que lleva
@@ -154,12 +153,12 @@ public class Sesion {
 		this.welcomePanel = welcomePanel;
 	}
 
-	public String getUsername() {
-		return username;
+	public Users getUserInfo() {
+		return userInfo;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserInfo(Users userInfo) {
+		this.userInfo = userInfo;
 	}
 
 }

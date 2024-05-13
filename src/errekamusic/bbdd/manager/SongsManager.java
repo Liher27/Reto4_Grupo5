@@ -14,50 +14,8 @@ import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class SongsManager implements ContentsInterface<Canciones>, DataBaseInterface<Canciones> {
+public class SongsManager implements  DatabaseInterface<Canciones, Integer> {
 
-	@Override
-	public List<Canciones> getByID(int ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeByID(int ID) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean changeByID(int ID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<Canciones> getAll() {
-		List<Canciones> songs = new ArrayList<Canciones>();
-		try {
-			Class.forName(DBUtils.DRIVER);
-			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			Statement statement = connection.createStatement();
-			String sql = "SELECT * FROM content";
-			ResultSet result = statement.executeQuery(sql);
-			while (result.next()) {
-				Canciones song = new Canciones();
-				song.setContentName(result.getString("ContentName"));
-				song.setContentDuration(result.getTime("ContentDuration"));
-				song.setContentPath(result.getString("ContentPath"));
-				songs.add(song);
-			}
-		} catch (ClassNotFoundException e) {
-			System.out.println("Ha dado fallo -> " + e.getMessage());
-		} catch (SQLException e) {
-			System.out.println("Malformacion sqlazo -> " + e.getMessage());
-		}
-		return songs;
-
-	}
 
 	public List<Canciones> getAllData() throws Exception {
 		List<Canciones> songs = new ArrayList<Canciones>();
@@ -90,22 +48,57 @@ public class SongsManager implements ContentsInterface<Canciones>, DataBaseInter
 
 	}
 
-	@Override
-	public boolean insertInto(Canciones song) {
-		return false;
-		// TODO Auto-generated method stub
-
-	}
-
 	public Canciones getOne(Canciones song) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Canciones> GetContenidoByDisc(int discId) {
+	public Canciones selectById(Integer z) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Canciones> selectAll() {
+		List<Canciones> songs = new ArrayList<Canciones>();
+		try {
+			Class.forName(DBUtils.DRIVER);
+			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			Statement statement = connection.createStatement();
+			String sql = "SELECT * FROM content";
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				Canciones song = new Canciones();
+				song.setContentName(result.getString("ContentName"));
+				song.setContentDuration(result.getTime("ContentDuration"));
+				song.setContentPath(result.getString("ContentPath"));
+				songs.add(song);
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+		}
+		return songs;
+	}
+
+	@Override
+	public void insert(Canciones t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Canciones t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Canciones t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

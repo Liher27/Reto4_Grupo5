@@ -4,25 +4,38 @@
  
  import errekamusic.bbdd.Pojo.Series;
  
- public class SeriesManager implements CollectionInterface<Series> {
+ public class SeriesManager implements DatabaseInterface<Series, Integer> {
+
+	@Override
+	public Series selectById(Integer z) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Series> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insert(Series t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Series t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Series t) {
+		// TODO Auto-generated method stub
+		
+	}
  
- 	public List<Series> GetAllCollection() {
-// 		  TODO Auto-generated method stub
- 		return null;
- 	}
- 	
- 	@Override
- 	public List<Series> GetCollectionByArtist(int creatorID) {
-// 		  TODO Auto-generated method stub
- 		return null;
- 	}
- 
- 
- 	@Override
- 	public List<Series> GetCollectionByType() {
-// 		  TODO Auto-generated method stub
- 		return null;
- 	}
  	
  	
  

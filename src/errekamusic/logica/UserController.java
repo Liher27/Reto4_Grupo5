@@ -1,10 +1,6 @@
 package errekamusic.logica;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JTextField;
 
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
@@ -12,20 +8,17 @@ import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.manager.UserManager;
 
 public class UserController {
-	
-	
+
 	public void insertPremiumData(PremiumUser premiumUser, String loginUser) {
 		UserManager userManager = new UserManager();
-		userManager.insertPremiumUserData(premiumUser,loginUser );
+		userManager.insertPremiumUserData(premiumUser, loginUser);
 	}
-	
-	
+
 	public void registerUser(Users users) throws ParseException {
 //		
 		UserManager userManager = new UserManager();
 		userManager.userRegister(users);
-		
-		
+
 //		String cpLong = users.getcPUser() + "";
 //		if (users.getUserPassword() != pass2) {
 //			reged = false;
@@ -44,11 +37,8 @@ public class UserController {
 
 	public boolean confirmLogedUser(String username, String password) {
 		boolean ret = false;
-		UserManager userManager = new UserManager();
-		Users user = new UserManager().getByUserName(username);
-
-		if (user.getUserPassword().equals(password)
-				&& userManager.setLastLoginDate(Converter.getCurrentDate(), username)) {
+		Users user = new UserManager().selectById(username);
+		if (user.getUserPassword().equals(password) && new UserManager().setLastLoginDate(Converter.getCurrentDate(), username)) {
 			ret = true;
 		}
 		return ret;
@@ -69,7 +59,7 @@ public class UserController {
 	public Users getLogedUser(String username) {
 		UserManager userManager = new UserManager();
 		Users user = new Users();
-		user = userManager.getByUserName(username);
+		user = userManager.selectById(username);
 
 		if (null != user) {
 			return user;
@@ -106,21 +96,11 @@ public class UserController {
 		return ret;
 	}
 
-	public boolean cplength(int num) {
-		String a = "" + num;
-		int length = a.length();
-		if (length > 5) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	public boolean isAdminUser(String username) {
 		boolean ret = false;
 		Users admin = new Users();
 		UserManager userManager = new UserManager();
-		admin = userManager.getByUserName(username);
+		admin = userManager.selectById(username);
 		if (admin.getIsAdmin().equals("Yes")) {
 			ret = true;
 		} else

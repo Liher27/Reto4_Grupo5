@@ -150,36 +150,36 @@ public class DiscsPanel extends JPanel {
 		tableCollections.setColumnSelectionAllowed(true);
 		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableCollections.setBounds(162, 143, 649, 331);
-		
-		CollectionController collectionController = new CollectionController();
-		System.out.println("CREATOR ID" + this.artistId);
-		List<Disc> discs = collectionController.GetDiscByArtist(this.artistId);
-		
-		String[] headersDisc= {"Grupo","Descripción"};
-	    
-		DefaultTableModel modelDisc = new DefaultTableModel();
-		modelDisc.setColumnIdentifiers(headersDisc);
-		
-		for (Disc disc : discs) {
-			String name = disc.getCollectionName();
-			String type = disc.getCollectionType();
-			String genre = disc.getCollectionGenre();
-			String desc = disc.getCollectionDesc();
-			Object[] row = {name, type, genre, desc};
-			modelDisc.addRow(row);
-		}
-		tableCollections.setModel(modelDisc);
-		add(tableCollections);
-		
-		tableCollections.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selectedRow = tableCollections.getSelectedRow();
-				Disc disc = discs.get(selectedRow);
-				SongsPanel songsPanel = new SongsPanel();
-				songsPanel.setCollectionId(disc.getCollectionID());
-			}
-		});
+//		
+//		CollectionController collectionController = new CollectionController();
+//		System.out.println("CREATOR ID" + this.artistId);
+//		List<Disc> discs = collectionController.selectById(this.artistId);
+//		
+//		String[] headersDisc= {"Grupo","Descripción"};
+//	    
+//		DefaultTableModel modelDisc = new DefaultTableModel();
+//		modelDisc.setColumnIdentifiers(headersDisc);
+//		
+//		for (Disc disc : discs) {
+//			String name = disc.getCollectionName();
+//			String type = disc.getCollectionType();
+//			String genre = disc.getCollectionGenre();
+//			String desc = disc.getCollectionDesc();
+//			Object[] row = {name, type, genre, desc};
+//			modelDisc.addRow(row);
+//		}
+//		tableCollections.setModel(modelDisc);
+//		add(tableCollections);
+//		
+//		tableCollections.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int selectedRow = tableCollections.getSelectedRow();
+//				Disc disc = discs.get(selectedRow);
+//				SongsPanel songsPanel = new SongsPanel();
+//				songsPanel.setCollectionId(disc.getCollectionID());
+//			}
+//		});
 		
 	}
 	

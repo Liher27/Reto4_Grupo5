@@ -242,7 +242,7 @@ public class ProfilePanel extends JPanel {
 				newPasswordConfirm = JOptionPane.showInputDialog("Por favor, repita la contraseña: ");
 
 				if (newPasswordToInsert.equals(newPasswordConfirm)) {
-					if (userController.changeUserPassword(newPasswordToInsert, Sesion.getInstance().getUsername())) {
+					if (userController.changeUserPassword(newPasswordToInsert, Sesion.getInstance().getUserInfo().getLoginUser())) {
 						JOptionPane.showMessageDialog(null, "Contrasenya cambiada correctamente", "OK!!",
 								JOptionPane.INFORMATION_MESSAGE);
 					} else {
@@ -267,7 +267,7 @@ public class ProfilePanel extends JPanel {
 		userController = new UserController();
 
 		premiumUser = new PremiumUser();
-		userProfile = userController.getLogedUser(Sesion.getInstance().getUsername());
+		userProfile =Sesion.getInstance().getUserInfo();
 
 		if (null != userProfile) {
 
@@ -290,7 +290,7 @@ public class ProfilePanel extends JPanel {
 			lblRegisterProvince.setText("Provincia: " + userProfile.getUserProvince());
 			lblRegisterUsername.setText("Nombre usuario: " + userProfile.getLoginUser());
 			if (userProfile.getAccountType().equals("Premium")) {
-				premiumUser = userController.getPremiumUserInfo(Sesion.getInstance().getUsername());
+				premiumUser = userController.getPremiumUserInfo(Sesion.getInstance().getUserInfo().getLoginUser());
 				lblRegisterCountName.setText("Numero de cuenta: " + premiumUser.getCountNum());
 				lblRegisterCardCaducity.setText("Caducidad: " + premiumUser.getCaducity());
 				lblRegisterCVV.setText("Numero de cuenta: " + premiumUser.getcVV());

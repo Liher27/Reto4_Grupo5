@@ -4,48 +4,37 @@ import java.util.List;
 
 import errekamusic.bbdd.Pojo.Podcast;
 
-public class PodcastManager implements ContentsInterface<Podcast>,DataBaseInterface <Podcast> {
+public class PodcastManager implements DatabaseInterface <Podcast, Integer> {
+
 
 	@Override
-	public List<Podcast> getAll() {
+	public Podcast selectById(Integer z) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean insertInto(Podcast podcast) {
-		return false;
+	public List<Podcast> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insert(Podcast t) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List getByID(int ID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeByID(int ID) {
+	public void update(Podcast t) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean changeByID(int ID) {
+	public void delete(Podcast t) {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public Podcast getOne(Podcast podcast) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Podcast> GetContenidoByDisc(int discId) {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	
 

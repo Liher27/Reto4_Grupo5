@@ -21,7 +21,7 @@ import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Pojo.Podcast;
 import errekamusic.enumerado.ArtistType;
-import errekamusic.logica.ArtistController;
+//import errekamusic.logica.ArtistController;
 import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 

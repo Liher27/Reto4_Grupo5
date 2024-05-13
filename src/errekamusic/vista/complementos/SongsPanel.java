@@ -18,7 +18,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import errekamusic.bbdd.Pojo.Contenido;
-import errekamusic.logica.ContentController;
+//import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 
 public class SongsPanel extends JPanel {
@@ -152,30 +152,30 @@ public class SongsPanel extends JPanel {
 		tableSongs.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableSongs.setBounds(162, 143, 649, 331);
 		
-		ContentController contentControllert = new ContentController();
-		List<Contenido> contenidos = null;
-		try {
-			contenidos = contentControllert.GetContenidoByDisc(this.collectionId);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		String[] headersDisc= {"Grupo","Descripción"};
-	    
-		DefaultTableModel modelDisc = new DefaultTableModel();
-		modelDisc.setColumnIdentifiers(headersDisc);
-		/*
-		for (Contenido contenido : contenidos) {
-			String name = contenido.getCollectionName();
-			String type = disc.getCollectionType();
-			String genre = disc.getCollectionGenre();
-			String desc = disc.getCollectionDesc();
-			Object[] row = {name, type, genre, desc};
-			modelDisc.addRow(row);
-		}*/
-		tableSongs.setModel(modelDisc);
-		add(tableSongs);
+//		ContentController contentControllert = new ContentController();
+//		List<Contenido> contenidos = null;
+//		try {
+//			contenidos = contentControllert.GetContenidoByDisc(this.collectionId);
+//		} catch (Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		String[] headersDisc= {"Grupo","Descripción"};
+//	    
+//		DefaultTableModel modelDisc = new DefaultTableModel();
+//		modelDisc.setColumnIdentifiers(headersDisc);
+//		/*
+//		for (Contenido contenido : contenidos) {
+//			String name = contenido.getCollectionName();
+//			String type = disc.getCollectionType();
+//			String genre = disc.getCollectionGenre();
+//			String desc = disc.getCollectionDesc();
+//			Object[] row = {name, type, genre, desc};
+//			modelDisc.addRow(row);
+//		}*/
+//		tableSongs.setModel(modelDisc);
+//		add(tableSongs);
 	}
 	
 	public void setCollectionId(int collectionId){

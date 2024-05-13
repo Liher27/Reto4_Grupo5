@@ -23,20 +23,20 @@ public class CollectionController {
 		return ret;
 	}
 
-	public List<Disc> getDiscList(int id) throws Exception {
-		discManager = new DiscManager();
-		return discManager.getDiscBySongId(id);
-
-	}
-
-	public List<Disc> GetDiscByArtist(int creatorId) {
-		discManager = new DiscManager();
-		discList = discManager.GetCollectionByArtist(creatorId);
-		if (discList.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No se encontraron discos del tipo especificado");
-		}
-		return discList;
-
-	}
+//	public List<Disc> getDiscList(int id) throws Exception {
+//		discManager = new DiscManager();
+//		return discManager.getDiscBySongId(id);
+//
+//	}
+//
+//	public List<Disc> GetDiscByArtist(int creatorId) {
+//		discManager = new DiscManager();
+//		discList = discManager.getByCreator(creatorId);
+//		if (discList.isEmpty()) {
+//			JOptionPane.showMessageDialog(null, "No se encontraron discos del tipo especificado");
+//		}
+//		return discList;
+//
+//	}
 
 }

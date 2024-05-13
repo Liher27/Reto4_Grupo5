@@ -1,17 +1,5 @@
 package errekamusic.vista.complementos;
 
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import errekamusic.bbdd.Pojo.Canciones;
-import errekamusic.bbdd.Pojo.Disc;
-import errekamusic.logica.CollectionController;
-import errekamusic.logica.MusicPlayer;
-import errekamusic.logica.Sesion;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ComponentAdapter;
@@ -21,6 +9,17 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.CollectionController;
+import errekamusic.logica.MusicPlayer;
+import errekamusic.logica.Sesion;
 
 public class MainMenuPanel extends JPanel {
 

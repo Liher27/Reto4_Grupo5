@@ -24,7 +24,7 @@ public class LoginPanel extends JPanel {
 	private UserController userController = null;
 
 	public JTextField userField = null;
-	public JPasswordField passwdTextField = null;
+	public JTextField passwdTextField = null;
 
 	private JLabel passwdLbl = null;
 	private JLabel userLbl = null;
@@ -77,13 +77,13 @@ public class LoginPanel extends JPanel {
 		logInPanelNextBtn = new JButton("Aceptar");
 		logInPanelNextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				System.out.println(passwdTextField.getText().toString());
 				userController = new UserController();
 
 				if (loginErrorCounter < 3) {
-					if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
+					if (!userField.getText().isEmpty() && passwdTextField.getText().length() > 0) {
 						if (userController.confirmLogedUser(userField.getText().toString(),
-								passwdTextField.getPassword().toString())) {
+								passwdTextField.getText().toString())) {
 
 							Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 							Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
@@ -100,7 +100,7 @@ public class LoginPanel extends JPanel {
 							Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 							Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
-							Sesion.getInstance().setUsername(userField.getText().toString());
+							Sesion.getInstance().setUserInfo(userController.getLogedUser(userField.getText().toString()));
 
 							JOptionPane.showMessageDialog(null, "Registro completado correctamente", "Bienvenido!!",
 									JOptionPane.INFORMATION_MESSAGE);
@@ -173,9 +173,9 @@ public class LoginPanel extends JPanel {
 				
 				
 				if (loginErrorCounter < 3) {
-					if (!userField.getText().isEmpty() && passwdTextField.getPassword().length > 0) {
+					if (!userField.getText().isEmpty() && passwdTextField.getText().toString().length() > 0) {
 						if (userController.isAdminUser(userField.getText().toString()) && userController.confirmLogedUser(
-								userField.getText().toString(), passwdTextField.getPassword().toString())) {
+								userField.getText().toString(), passwdTextField.getText().toString())) {
 
 							Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 							Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
@@ -192,8 +192,8 @@ public class LoginPanel extends JPanel {
 							Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 							Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 
-							Sesion.getInstance().setUsername(userField.getText().toString());
-
+							Sesion.getInstance().setUserInfo(userController.getLogedUser(userField.getText().toString()));
+							
 							JOptionPane.showMessageDialog(null, "Bienvenido, administrador", "Bienvenido!!",
 									JOptionPane.INFORMATION_MESSAGE);
 
