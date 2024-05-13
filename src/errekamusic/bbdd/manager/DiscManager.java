@@ -41,8 +41,40 @@ public class DiscManager implements CollectionInterface <Disc>, DataBaseInterfac
 	}
 	@Override
 	public List<Disc> GetCollectionByArtist(int creatorID) {
-		// TODO Auto-generated method stub
-		return null;
+		discInfo = new ArrayList<Disc>();
+
+		try {
+			Class.forName(DBUtils.DRIVER);
+
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection join artist g on collection.creatorId = g.artistId where collectionType = 'disc' and creatorId = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, creatorID);
+			result = pstmt.executeQuery();
+
+			while (result.next()) {
+				artist = new Artist();
+				disc = new Disc();
+
+				disc.setCollectionName(result.getString("CollectionName"));
+				disc.setCollectionGenre(result.getString("CollectionGenre"));
+				disc.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
+				//disc.setCollectionImage(Converter.getImageFromBlob(result.getBlob("CollectionImage")));
+				artist.setArtistName(result.getString("ArtistName"));
+				disc.setArtist(artist);
+				discInfo.add(disc);
+
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Malformacion sql -> " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error genérico -> " + e.getMessage());
+
+		}
+
+		return discInfo;
 	}
 
 	public List<Disc> GetDiscForPropaganda(int randomArtistID) throws Exception {

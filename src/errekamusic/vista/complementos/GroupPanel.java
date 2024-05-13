@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -16,9 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.logica.ArtistController;
-import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 import errekamusic.enumerado.ArtistType;
 
@@ -39,7 +36,6 @@ public class GroupPanel extends JPanel {
 	private JButton collectionInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableGroups;
-	private JTable tableCollections;
 
 
 	/**
@@ -130,56 +126,51 @@ public class GroupPanel extends JPanel {
 		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableGroups.setBounds(162, 143, 649, 331);
 		
-//		ArtistsInterface artistsInterfaceController = new GroupManager();
-//		List<Artist> artists = artistsInterfaceController.getByArtistType(ArtistType.Group);
-//		
-//	    String[] headers= {"Grupo","Descripción"};
-//	    
-//		DefaultTableModel model = new DefaultTableModel();
-//		model.setColumnIdentifiers(headers);
-//		
-//		for (Artist artist : artists) {
-//			String grupo = artist.getArtistName();
-//			String descripcionGrupo = artist.getArtistDesc();
-//			Object[] row = {grupo, descripcionGrupo};
-//			model.addRow(row);
-//		}
-//		tableGroups.setModel(model);
-//		add(tableGroups);
+		ArtistController artistController = new ArtistController();
+		List<Artist> artists = artistController.getByArtistType(ArtistType.Group);
+		
+	    String[] headers= {"Grupo","Descripción"};
+	    
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(headers);
+		
+		Object[] row = {"Grupo","Descripción"};
+		//model.addRow(row);
+		
+		for (Artist artist : artists) {
+			String grupo = artist.getArtistName();
+			String descripcionGrupo = artist.getArtistDesc();
+			Object[] rowArtistas = {grupo, descripcionGrupo};
+			model.addRow(rowArtistas);
+		}
+		tableGroups.setModel(model);
+		add(tableGroups);
 
-//		
-//		tableCollections = new JTable();
-//		tableCollections.setColumnSelectionAllowed(true);
-//		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-//		tableCollections.setBounds(162, 143, 649, 331);
-//		tableGroups.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				int selectedRow = tableGroups.getSelectedRow();
-//				Artist artist = artists.get(selectedRow);
-//				tableGroups.setVisible(false);
-//				CollectionInterface collectionInterface = new DiscManager();
-//				List<Disc> discs = collectionInterface.GetCollectionByArtist(artist.getArtistID());
-//				
-//				String[] headersDisc= {"Grupo","Descripción"};
-//			    
-//				DefaultTableModel modelDisc = new DefaultTableModel();
-//				modelDisc.setColumnIdentifiers(headersDisc);
-//				
-//				for (Disc disc : discs) {
-//					String name = disc.getCollectionName();
-//					String type = disc.getCollectionType();
-//					String genre = disc.getCollectionGenre();
-//					String desc = disc.getCollectionDesc();
-//					Object[] row = {name, type, genre, desc};
-//					modelDisc.addRow(row);
-//				}
-//				tableCollections.setModel(modelDisc);
-//				add(tableCollections);
-//
-//			}
-//		});
-//		
+		tableGroups.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectedRow = tableGroups.getSelectedRow();
+				Artist artist = artists.get(selectedRow);
+				DiscsPanel discsPanel = new DiscsPanel();
+				discsPanel.setArtistId(artist.getArtistID());
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+
+			}
+		});
+	
 
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			
@@ -194,7 +185,7 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
@@ -205,7 +196,8 @@ public class GroupPanel extends JPanel {
 	}
 
 	public JPanel getGroupPanel() {
-		// TODO Auto-generated method stub
+		
+		
 		return this;
 	}
 }

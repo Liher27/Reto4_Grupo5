@@ -2,12 +2,11 @@ package errekamusic.bbdd.manager;
 
 import java.util.List;
 
-import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.enumerado.ArtistType;
 
-public interface ArtistsInterface {
+public interface ArtistsInterface<T> {
 	
-	public List<Artist> getByArtistType (ArtistType artistType);
+	public List<T> getByArtistType (ArtistType artistType);
 		
-	public List<Artist> getById(int id);
+	public List<T> getById(int id);
 }

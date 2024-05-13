@@ -6,14 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
+import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.bbdd.Pojo.Podcast;
+import errekamusic.enumerado.ArtistType;
+import errekamusic.logica.ArtistController;
+import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 
 public class PodcastPanel extends JPanel {
@@ -28,6 +37,9 @@ public class PodcastPanel extends JPanel {
 
 	private JButton reproContentBtn = null;
 	private JButton podcastPanelBackBtn = null;
+	private int creatorID = 0;
+	private JTable tablePodcast;
+
 
 	/**
 	 * Create the panel.
@@ -120,6 +132,34 @@ public class PodcastPanel extends JPanel {
 		reproContentBtn = new JButton("Reproducir contenido");
 		reproContentBtn.setBounds(440, 561, 186, 28);
 		add(reproContentBtn);
+		
+		tablePodcast = new JTable();
+		tablePodcast.setColumnSelectionAllowed(true);
+		tablePodcast.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
+		tablePodcast.setBounds(162, 143, 649, 331);
+		
+		CollectionController collectionController = new CollectionController();
+		//List<Podcast> podcasts = collectionController.GetCollectionByArtist(this.creatorID);
+		
+	    String[] headers= {"Grupo","Descripción"};
+	    
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(headers);
+		
+		//Object[] row = {"Grupo","Descripción"};
+		//model.addRow(row);
+		
+//		for (Podcast podcast : podcasts) {
+//			String name = podcast.getCollectionName();
+//			String type = podcast.getCollectionType();
+//			String genre = podcast.getCollectionGenre();
+//			String desc = podcast.getCollectionDesc();
+//			Object[] row = {name, type, genre, desc};
+//			model.addRow(row);
+//		}
+		tablePodcast.setModel(model);
+		add(tablePodcast);
+		
 		reproContentBtn.addActionListener(new ActionListener() {
 			/**
 			 * Confirmamos para logearnos
@@ -146,6 +186,10 @@ public class PodcastPanel extends JPanel {
 
 		});
 
+	}
+	
+	public void setCreatorId(int artistId) {
+		this.creatorID = artistId;
 	}
 
 	public JPanel getPodcastPanel() {

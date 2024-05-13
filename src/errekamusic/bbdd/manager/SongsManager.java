@@ -102,4 +102,10 @@ public class SongsManager implements ContentsInterface<Canciones>, DataBaseInter
 		return null;
 	}
 
+	@Override
+	public List<Canciones> GetContenidoByDisc(int discId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

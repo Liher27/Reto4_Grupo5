@@ -6,14 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 
 public class DiscsPanel extends JPanel {
@@ -27,6 +32,9 @@ public class DiscsPanel extends JPanel {
 	private JButton discsPanelBackBtn = null;
 	private JButton songInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
+	private JTable tableCollections;
+	private int artistId = 0;
+
 
 	/**
 	 * Create the panel.
@@ -137,6 +145,49 @@ public class DiscsPanel extends JPanel {
 			}
 
 		});
+		
+		tableCollections = new JTable();
+		tableCollections.setColumnSelectionAllowed(true);
+		tableCollections.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
+		tableCollections.setBounds(162, 143, 649, 331);
+		
+		CollectionController collectionController = new CollectionController();
+		System.out.println("CREATOR ID" + this.artistId);
+		List<Disc> discs = collectionController.GetDiscByArtist(this.artistId);
+		
+		String[] headersDisc= {"Grupo","Descripción"};
+	    
+		DefaultTableModel modelDisc = new DefaultTableModel();
+		modelDisc.setColumnIdentifiers(headersDisc);
+		
+		for (Disc disc : discs) {
+			String name = disc.getCollectionName();
+			String type = disc.getCollectionType();
+			String genre = disc.getCollectionGenre();
+			String desc = disc.getCollectionDesc();
+			Object[] row = {name, type, genre, desc};
+			modelDisc.addRow(row);
+		}
+		tableCollections.setModel(modelDisc);
+		add(tableCollections);
+		
+		tableCollections.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int selectedRow = tableCollections.getSelectedRow();
+				Disc disc = discs.get(selectedRow);
+				SongsPanel songsPanel = new SongsPanel();
+				songsPanel.setCollectionId(disc.getCollectionID());
+			}
+		});
+		
+	}
+	
+	public void setArtistId(int artistId) {
+		System.out.println("ENTRA EL ARTISTID" + artistId);
+		this.artistId = artistId;
+		System.out.println("sE INSERTAR EL CREATOR ID" + this.artistId);
+
 	}
 
 	public JPanel getDiscsPanel() {

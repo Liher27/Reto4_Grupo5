@@ -41,6 +41,12 @@ public class PodcastManager implements ContentsInterface<Podcast>,DataBaseInterf
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Podcast> GetContenidoByDisc(int discId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
