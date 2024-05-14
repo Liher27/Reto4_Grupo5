@@ -23,8 +23,7 @@ public class LoginPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private UserController userController = null;
 
-	public JTextField userField = null;
-	public JTextField passwdTextField = null;
+	private JTextField userField = null;
 
 	private JLabel passwdLbl = null;
 	private JLabel userLbl = null;
@@ -38,6 +37,7 @@ public class LoginPanel extends JPanel {
 	private JButton adminPanelBtn = null;
 
 	private int loginErrorCounter = 0;
+	private JTextField passwdTextField;
 
 	public LoginPanel() {
 
@@ -68,8 +68,8 @@ public class LoginPanel extends JPanel {
 		userField.setBounds(470, 385, 211, 20);
 		add(userField);
 		userField.setColumns(10);
-
-		passwdTextField = new JPasswordField();
+		
+		passwdTextField = new JTextField();
 		passwdTextField.setBounds(470, 455, 211, 20);
 		add(passwdTextField);
 		passwdTextField.setColumns(10);
@@ -228,6 +228,7 @@ public class LoginPanel extends JPanel {
 		lblAreYouAdmin.setFont(new Font("Segoe UI Black", Font.PLAIN, 14));
 		lblAreYouAdmin.setBounds(386, 531, 143, 20);
 		add(lblAreYouAdmin);
+		
 	}
 
 	public JPanel getLoginPanel() {

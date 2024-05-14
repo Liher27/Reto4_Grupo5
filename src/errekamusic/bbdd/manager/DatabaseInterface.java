@@ -2,7 +2,7 @@ package errekamusic.bbdd.manager;
 
 import java.util.List;
 
-public interface BorjaInterface <T, Z> {
+public interface DatabaseInterface <T, Z> {
 
 	 public T selectById(Z z); 
 	 
