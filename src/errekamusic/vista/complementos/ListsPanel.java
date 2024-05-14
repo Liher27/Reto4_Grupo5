@@ -4,20 +4,33 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.PlayList;
+import errekamusic.logica.ListsController;
 import errekamusic.logica.Sesion;
+import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JScrollBar;
 
 public class ListsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-
 
 	private JLabel lblProfilePicture = null;
 	private JLabel lblLogoErrekamusic = null;
@@ -30,22 +43,27 @@ public class ListsPanel extends JPanel {
 	private JLabel overlayLbl = null;
 	private JLabel seeYourProfileLbl = null;
 
+	private DefaultComboBoxModel<String> boxmodel = null;
 	private JButton listsPanelBackBtn = null;
+	
+	private JTextArea textArea = null;
+
+	List<PlayList> listsNames = null;
 
 	/**
-	 * Create the panel.
-	 * -	Crear una lista
-	 *	-	Borrar una lista
-	 *	-	Ver las canciones de una lista
-	 *	-	Exportar todas las listas a un fichero
-	 *	-	Importar todas las listas de un fichero 
+	 * Create the panel. - Crear una lista - Borrar una lista - Ver las canciones de
+	 * una lista - Exportar todas las listas a un fichero - Importar todas las
+	 * listas de un fichero
+	 * 
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
 	 */
-	public ListsPanel() {
+	public ListsPanel() throws ClassNotFoundException, SQLException {
 
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
 		setLayout(null);
-
+		
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
@@ -68,10 +86,9 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
-		
+
 		seeYourProfileLbl = new JLabel("Ver perfil");
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
@@ -99,10 +116,9 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
-		
+
 		createListLblBtn = new JLabel("Crear lista");
 		createListLblBtn.setForeground(new Color(255, 255, 255));
 		createListLblBtn.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
@@ -117,8 +133,6 @@ public class ListsPanel extends JPanel {
 		deleteListLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-
 			}
 		});
 
@@ -130,8 +144,6 @@ public class ListsPanel extends JPanel {
 		importListsLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-
 			}
 		});
 
@@ -143,8 +155,6 @@ public class ListsPanel extends JPanel {
 		exportListsLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-			
 			}
 		});
 
@@ -168,18 +178,15 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
-				
 			}
-
 		});
-		
+
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(49, 11, 145, 145);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/errekamusicLogo(1).png"));
 		add(lblLogoErrekamusic);
-		
+
 		overlayLbl = new JLabel("");
 		overlayLbl.setBounds(0, 0, 305, 611);
 		overlayLbl.setIcon(new ImageIcon("contents/overlayClr.jpg"));
@@ -189,14 +196,58 @@ public class ListsPanel extends JPanel {
 		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
 		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.PLAIN, 36));
-		lblFavoriteTitle.setBounds(328, 32, 349, 64); 
+		lblFavoriteTitle.setBounds(328, 32, 349, 64);
 		add(lblFavoriteTitle);
-		
-		
+
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setVisible(true);
+		comboBox.setBounds(396, 146, 231, 22);
+		add(comboBox);
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent c) {
+				try {
+					getLists();
+					comboBox.setModel(boxmodel);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
+		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona tu playlist:");
+		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccionaTuPlaylist.setForeground(new Color(200, 40, 255));
+		lblSeleccionaTuPlaylist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblSeleccionaTuPlaylist.setBounds(398, 110, 219, 25);
+		add(lblSeleccionaTuPlaylist);
+
+		textArea = new JTextArea(20,40);
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(340, 220, 527, 271);
+		add(scrollPane);
+
+		JLabel lblTtulo = new JLabel("Informacion del contenido:");
+		lblTtulo.setBackground(new Color(255, 255, 255));
+		lblTtulo.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setColumnHeaderView(lblTtulo);
+		lblTtulo.setForeground(new Color(200, 40, 255));
+		lblTtulo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 	}
 
 	public JPanel getListsPanel() {
-		// TODO Auto-generated method stub
 		return this;
+	}
+
+	private void getLists() throws ClassNotFoundException, SQLException {
+		listsNames = new ListsController().getUserLists(Sesion.getInstance().getUserInfo().getLoginUser());
+		PlayList playList = new PlayList();
+		boxmodel = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < listsNames.size(); i++) {
+			playList = (listsNames.get(i));
+//			textArea.setText("Titulo de la cancion: " + playList.getContenido().getContentName() + "   Duracion del contenido: " + playList.getContenido().getContentDuration() + "   Veces reproducido: " + playList.getContenido().getContentReproNum() + "\r\n");
+			
+			boxmodel.addElement(playList.getPlayListTitle());
+		}
 	}
 }

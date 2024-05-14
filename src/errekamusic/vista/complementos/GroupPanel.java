@@ -99,9 +99,7 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
-
 			}
-
 		});
 
 		lblLogoErrekamusic = new JLabel("");
@@ -121,7 +119,6 @@ public class GroupPanel extends JPanel {
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
 		add(collectionInfoBtn);
 		
-		
 		tableGroups = new JTable();
 		tableGroups.setColumnSelectionAllowed(true);
 		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
@@ -136,7 +133,7 @@ public class GroupPanel extends JPanel {
 //		model.setColumnIdentifiers(headers);
 //		
 //		Object[] row = {"Grupo","Descripción"};
-//		//model.addRow(row);
+//		model.addRow(row);
 //		
 //		for (Artist artist : artists) {
 //			String grupo = artist.getArtistName();
@@ -146,59 +143,53 @@ public class GroupPanel extends JPanel {
 //		}
 //		tableGroups.setModel(model);
 //		add(tableGroups);
-//
-//		tableGroups.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
+
+		tableGroups.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 //				int selectedRow = tableGroups.getSelectedRow();
 //				Artist artist = artists.get(selectedRow);
 //				DiscsPanel discsPanel = new DiscsPanel();
 //				discsPanel.setArtistId(artist.getArtistID());
-//				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-//				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-//				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-//				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-//				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-//				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-//				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-//				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-//				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-//				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-//				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
-//				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-//				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-//				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-//
-//			}
-//		});
-//	
-//
-//		collectionInfoBtn.addActionListener(new ActionListener() {
-//			
-//			public void actionPerformed(ActionEvent e) {
-//				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-//				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-//				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-//				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-//				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-//				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-//				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-//				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-//				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
-//				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-//				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-//				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-//				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-//				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-//
-//			}
-//
-//		});
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+			}
+		});
+	
+
+		collectionInfoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+			}
+		});
 	}
 
 	public JPanel getGroupPanel() {
-		
-		
 		return this;
 	}
 }

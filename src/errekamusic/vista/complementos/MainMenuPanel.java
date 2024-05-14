@@ -15,10 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.bbdd.Pojo.Canciones;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.logica.CollectionController;
-import errekamusic.logica.MusicPlayer;
 import errekamusic.logica.Sesion;
 
 public class MainMenuPanel extends JPanel {
@@ -41,7 +39,6 @@ public class MainMenuPanel extends JPanel {
 	private JLabel propagandaDiscGenreLbl = null;
 	private JLabel layOutForPropagandaLbl = null;
 	private JLabel seeYourProfileLbl = null;
-	private List<Canciones> musicList = null;
 	private List<Disc> discInfo = null;
 	private CollectionController discController = null;
 	private Disc discForPropaganda = null;

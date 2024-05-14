@@ -5,6 +5,7 @@ import errekamusic.logica.Sesion;
 import errekamusic.vista.complementos.*;
 
 import java.awt.EventQueue;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -56,12 +57,14 @@ public class VentanaPrincipal extends JFrame {
 
 	/**
 	 * iniciamos a los  aqui
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws ClassNotFoundException, SQLException {
 		inicializar();
 	}
 
-	private void inicializar() {
+	private void inicializar() throws ClassNotFoundException, SQLException {
 
 		frame= new JFrame();
 		frame.setBounds(100, 100, 1000, 650);

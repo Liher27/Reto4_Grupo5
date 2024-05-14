@@ -395,7 +395,6 @@ public class RegisterPanel extends JPanel {
 					users.setUserProvince(fieldRegisterProvince.getText());
 					userController.registerUser(users);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
