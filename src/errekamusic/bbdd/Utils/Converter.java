@@ -64,7 +64,7 @@ public class Converter {
 		return new Date(System.currentTimeMillis());
 	}
 
-	public static String blablablalb(String pathFile) throws IOException {
+	public static String pathToBlob(String pathFile) throws IOException {
 		byte[] fileContent = Files.readAllBytes(Paths.get(pathFile));
 		return Base64.getEncoder().encodeToString(fileContent);
 	}

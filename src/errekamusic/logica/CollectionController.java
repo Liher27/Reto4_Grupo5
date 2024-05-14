@@ -22,6 +22,11 @@ public class CollectionController {
 
 		return ret;
 	}
+	
+	
+	
+	
+	
 
 //	public List<Disc> getDiscList(int id) throws Exception {
 //		discManager = new DiscManager();

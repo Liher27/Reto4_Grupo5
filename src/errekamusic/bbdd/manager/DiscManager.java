@@ -10,6 +10,7 @@ import java.util.List;
 
 
 import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Coleccion;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.bbdd.Utils.Converter;
@@ -124,6 +125,8 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 
 		return discInfo;
 	}
+	
+	
 
 	@Override
 	public List<Disc> selectAll() {

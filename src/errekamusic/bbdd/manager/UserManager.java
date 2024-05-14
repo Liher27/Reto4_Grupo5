@@ -198,7 +198,6 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 			pstmt.setString(12, pass);
 			pstmt.setDate(13, resDate);
 			pstmt.setString(14, type);
-			
 			if (pstmt.executeUpdate() > 0) {
 				ret = true;
 			} 

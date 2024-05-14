@@ -11,7 +11,7 @@ public class Artist {
 	private Date artistRegDate = null;
 	private String artistDesc = null;
 	private int artistRepNum = 0;
-	private boolean artistType = false;
+	private String artistType = null;
 	private ImageIcon artistImage = null;
 
 	public int getArtistID() {
@@ -54,11 +54,11 @@ public class Artist {
 		this.artistRepNum = artistRepNum;
 	}
 
-	public boolean isArtistType() {
+	public String isArtistType() {
 		return artistType;
 	}
 
-	public void setArtistType(boolean artistType) {
+	public void setArtistType(String artistType) {
 		this.artistType = artistType;
 	}
 
