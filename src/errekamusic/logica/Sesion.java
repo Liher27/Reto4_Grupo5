@@ -25,6 +25,7 @@ public class Sesion {
 	private SeriesPanel seriesPanel = null;
 	private SongsPanel songsPanel = null;
 	private WelcomePanel welcomePanel = null;
+	private GroupInfoPanel groupInfoPanel = null;
 
 	
 	public Users userInfo = null;
@@ -161,4 +162,12 @@ public class Sesion {
 		this.userInfo = userInfo;
 	}
 
+	public GroupInfoPanel getGroupInfoPanel() {
+		return groupInfoPanel;
+	}
+
+	public void setGroupInfoPanel(GroupInfoPanel groupInfoPanel) {
+		this.groupInfoPanel = groupInfoPanel;
+	}
+	
 }

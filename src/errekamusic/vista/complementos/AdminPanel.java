@@ -57,6 +57,7 @@ public class AdminPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
 		
@@ -91,6 +92,7 @@ public class AdminPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
 
@@ -106,6 +108,32 @@ public class AdminPanel extends JPanel {
 		lblAdminTitle.setFont(new Font("Segoe UI Black", Font.PLAIN, 37));
 		lblAdminTitle.setBounds(255, 32, 448, 64);
 		add(lblAdminTitle);
+		
+		JLabel createGruop = new JLabel("Nuevos Grupos");
+		createGruop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(true);
+			}
+		});
+		createGruop.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
+		createGruop.setForeground(new Color(255, 0, 255));
+		createGruop.setBounds(51, 196, 240, 33);
+		add(createGruop);
 	}
 
 	public JPanel getAdminPanel() {

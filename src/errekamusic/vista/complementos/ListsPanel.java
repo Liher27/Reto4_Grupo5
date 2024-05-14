@@ -68,6 +68,7 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
 		
@@ -98,6 +99,7 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
 		
@@ -166,6 +168,7 @@ public class ListsPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 				
 			}
 

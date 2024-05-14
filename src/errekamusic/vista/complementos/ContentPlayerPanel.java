@@ -1,4 +1,5 @@
 package errekamusic.vista.complementos;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import javax.swing.SwingConstants;
 import errekamusic.bbdd.Pojo.Canciones;
 import errekamusic.logica.MusicPlayer;
 import errekamusic.logica.Sesion;
+
 public class ContentPlayerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -41,6 +43,9 @@ public class ContentPlayerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ContentPlayerPanel() {
+
+		musicPlayer = new MusicPlayer();
+
 		contentPlayerPanel = new JPanel();
 		contentPlayerPanel.setBounds(0, 0, 984, 611);
 		contentPlayerPanel.setBackground(new Color(0, 0, 0));
@@ -68,6 +73,7 @@ public class ContentPlayerPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
 
@@ -102,6 +108,7 @@ public class ContentPlayerPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 
 			}
 
@@ -143,17 +150,20 @@ public class ContentPlayerPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == play) {
 					if (!audioPlay) {
+						try {
+							musicList = musicPlayer.getSongsList();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						if (cancionActual < 0) {
 							musicPlayer = new MusicPlayer();
-								try {
-									musicList = musicPlayer.getSongsList();
-								} catch (Exception e1) {
-									e1.printStackTrace();
-								}
+
 							cancionActual = 0;
 							musicPlayer.playMusic(musicList.get(cancionActual));
 							setSongData();
 						} else {
+							musicPlayer.stopMusic();
 							audioPlay = true;
 							play.setIcon(new ImageIcon("./contents/play-solid.png"));
 							musicPlayer.resumeMusic(musicList.get(cancionActual));
@@ -227,7 +237,7 @@ public class ContentPlayerPanel extends JPanel {
 		discName.setFont(new Font("Segoe UI Black", Font.BOLD, 24));
 		discName.setBounds(506, 202, 345, 51);
 		contentPlayerPanel.add(discName);
-		
+
 		discImageLabel = new JLabel("Disc Image");
 		discImageLabel.setBounds(556, 264, 273, 189);
 		contentPlayerPanel.add(discImageLabel);

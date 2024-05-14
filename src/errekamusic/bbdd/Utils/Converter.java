@@ -2,9 +2,16 @@ package errekamusic.bbdd.Utils;
 
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
@@ -12,6 +19,13 @@ import javax.swing.ImageIcon;
 
 public class Converter {
 
+	public static byte[] readImageData(File imageFile) throws FileNotFoundException, IOException {
+		try (FileInputStream inputStream = new FileInputStream(imageFile)) {
+			byte[] buffer = new byte[(int) imageFile.length()];
+			inputStream.read(buffer);
+			return buffer;
+		}
+	}
 	public static ImageIcon getImageFromBlob(Blob blobFromDatabase) throws Exception {
 		byte[] imageBytes = blobFromDatabase.getBytes(1, (int) blobFromDatabase.length());
 		Image image = ImageIO.read(new ByteArrayInputStream(imageBytes));
@@ -33,7 +47,7 @@ public class Converter {
 		java.util.Date ret = (java.util.Date) formatter.parse(textDate);
 		return ret;
 	}
-	
+
 	public static java.sql.Date convertFromUtilDateToSqlDate(java.util.Date utilDateToDatabase) {
 		java.sql.Date ret = null;
 		ret = new java.sql.Date(utilDateToDatabase.getTime());
@@ -45,9 +59,14 @@ public class Converter {
 		sqldate = new java.sql.Date(utilDate.getTime());
 		return sqldate;
 	}
-	
+
 	public static Date getCurrentDate() {
 		return new Date(System.currentTimeMillis());
 	}
-	
+
+	public static String blablablalb(String pathFile) throws IOException {
+		byte[] fileContent = Files.readAllBytes(Paths.get(pathFile));
+		return Base64.getEncoder().encodeToString(fileContent);
+	}
+
 }

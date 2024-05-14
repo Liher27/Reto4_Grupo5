@@ -10,14 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JTextField;
 
 import errekamusic.bbdd.Pojo.FreeUser;
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
-import errekamusic.logica.UserController;
 
 public class UserManager extends AbstractManager implements DatabaseInterface <Users, String> {
 

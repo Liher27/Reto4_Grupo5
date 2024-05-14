@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -15,13 +16,13 @@ import javax.swing.SwingConstants;
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
-import errekamusic.bbdd.manager.UserManager;
 import errekamusic.logica.Sesion;
 import errekamusic.logica.UserController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+
 import javax.swing.JPasswordField;
 
 /**
@@ -76,11 +77,11 @@ public class RegisterPanel extends JPanel {
 	private JTextField fieldRegisterCountName = null;
 
 	private JComboBox<String> userTypeComboBox = null;
-	private Users users = null;
 	private JButton btnCancelarPanelDeRegistro = null;
 	private JButton btnConfirmarDeRegistro = null;
 	private JPasswordField passwordFieldConfirmarContrasenyaRegistro = null;
 	private boolean registed = false;
+
 	/**
 	 * panel principal
 	 */
@@ -200,8 +201,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegisterUsername);
 
 		userTypeComboBox = new JComboBox<String>();
-		userTypeComboBox
-				.setModel(new DefaultComboBoxModel<String>(new String[] { "Free", "Premium" }));
+		userTypeComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "Free", "Premium" }));
 		userTypeComboBox.setBounds(189, 510, 205, 29);
 		add(userTypeComboBox);
 		userTypeComboBox.addActionListener(new ActionListener() {
@@ -274,8 +274,8 @@ public class RegisterPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				compareFreeAndPremium();
-			
-				}
+
+			}
 		});
 		btnConfirmarDeRegistro.setForeground(new Color(0, 0, 0));
 		btnConfirmarDeRegistro.setBounds(836, 556, 98, 33);
@@ -362,7 +362,6 @@ public class RegisterPanel extends JPanel {
 		fieldRegisterCVV.setBounds(140, 155, 185, 20);
 		premiumPanel.add(fieldRegisterCVV);
 	}
-	
 
 	public void setPremiumPanel() {
 		if (userTypeComboBox != null && userTypeComboBox.getSelectedItem() != null) {
@@ -373,53 +372,62 @@ public class RegisterPanel extends JPanel {
 			}
 		}
 	}
+
 	public void compareFreeAndPremium() {
 		if (userTypeComboBox.getSelectedItem().toString().equals("Free")) {
-			UserManager userManager = new UserManager();
-			userController = new UserController();
-			try {
-				Users users = new Users();
-				users.setBirthDateUser(Converter
-						.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
-				users.setAccountType(userTypeComboBox.getSelectedItem().toString());
-				users.setAdmin("No");
-				users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
-				users.setDirUser(fieldRegisterDirection.getText());
-				users.setDNI(fieldRegisterDNI.getText());
-				users.setSurName1(fieldRegisterFirstSurname.getText());
-				users.setSurName2(fieldRegisterSecondSurname.getText());
-				users.setNameUser(fieldRegisterName.getText());
-				users.setLoginUser(fieldRegisterUsername.getText());
-				users.setUserPassword(fieldRegisterPasswd.getText());
-				users.setUserCity(fieldRegisterCity.getText());
-				users.setUserProvince(fieldRegisterProvince.getText());
-				userController.registerUser(users);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-			Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
-			Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-			Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-			Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-			Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-			Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-			Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-			Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-			Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-			Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-			Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-			Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-			Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
-		
-			}else {
+			if (registed) {
 				userController = new UserController();
 				try {
 					Users users = new Users();
-					users.setBirthDateUser(Converter
-							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
+					users.setBirthDateUser(Converter.convertFromUtilDateToSqlDate(
+							Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
+					users.setAccountType(userTypeComboBox.getSelectedItem().toString());
+					users.setAdmin("No");
+					users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
+					users.setDirUser(fieldRegisterDirection.getText());
+					users.setDNI(fieldRegisterDNI.getText());
+					users.setSurName1(fieldRegisterFirstSurname.getText());
+					users.setSurName2(fieldRegisterSecondSurname.getText());
+					users.setNameUser(fieldRegisterName.getText());
+					users.setLoginUser(fieldRegisterUsername.getText());
+					users.setUserPassword(fieldRegisterPasswd.getText());
+					users.setUserCity(fieldRegisterCity.getText());
+					users.setUserProvince(fieldRegisterProvince.getText());
+					userController.registerUser(users);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				registed = true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Se ha bloqueado el acceso a la aplicacion por demasiados intentos",
+						"Tonto", JOptionPane.ERROR_MESSAGE);
+			}
+
+		} else {
+
+			if (registed) {
+
+				userController = new UserController();
+				try {
+					Users users = new Users();
+					users.setBirthDateUser(Converter.convertFromUtilDateToSqlDate(
+							Converter.convertStringToUtilDate(fieldRegisterBirthDate.getText())));
 					users.setAccountType(userTypeComboBox.getSelectedItem().toString());
 					users.setAdmin("No");
 					users.setcPUser(Integer.valueOf(fieldRegisterCP.getText()));
@@ -443,8 +451,7 @@ public class RegisterPanel extends JPanel {
 				userPremium.setcVV(Integer.valueOf(fieldRegisterCVV.getText()));
 				String logUserName = fieldRegisterUsername.getText();
 				userController.insertPremiumData(userPremium, logUserName);
-				
-				
+
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -459,10 +466,13 @@ public class RegisterPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				registed = true;
+			} else {
+				JOptionPane.showMessageDialog(null, "Se ha bloqueado el acceso a la aplicacion por demasiados intentos",
+						"Tonto", JOptionPane.ERROR_MESSAGE);
 			}
-		} 
-		
-	
+		}
+	}
 
 	/**
 	 * obtener a este panel

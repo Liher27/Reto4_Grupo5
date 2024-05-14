@@ -34,6 +34,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel seriesPanel = null;
 	private JPanel songsPanel = null;
 	private JPanel welcomePanel = null;
+	private JPanel groupInfoPanel = null;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -157,7 +158,13 @@ public class VentanaPrincipal extends JFrame {
 		songsPanel.setVisible(false);
 		frame.getContentPane().add(songsPanel);
 		Sesion.getInstance().setSongsPanel(songs);
-
+		//14
+		GroupInfoPanel groupInfo = new GroupInfoPanel();
+		groupInfoPanel = groupInfo.getGroupInfoPanel();
+		frame.getContentPane().add(groupInfoPanel);
+		groupInfoPanel.setVisible(false);
+		Sesion.getInstance().setGroupInfoPanel(groupInfo);
+		
 	}
 
 }
