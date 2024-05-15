@@ -170,7 +170,7 @@ public class GroupInfoPanel extends JPanel {
 				System.out.println(artist.toString());
 				dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));
 				descFiled.setText(artist.getArtistDesc());
-				comboBox.setSelectedItem(artist.isArtistType());
+				comboBox.setSelectedItem(artist.getArtistType());
 				artistImage = artist.getArtistImage();
 				artistImageLabel.setIcon(artistImage);
 			

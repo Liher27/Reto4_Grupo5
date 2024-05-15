@@ -9,15 +9,15 @@ import errekamusic.bbdd.manager.PlayListManager;
 public class ListsController {
 
 	public List<PlayList> getUserListsNames(String loginUser) throws ClassNotFoundException, SQLException {
-		List<PlayList> ret = new PlayListManager().getUsersAllLists(loginUser);
-		return ret;
+		return new PlayListManager().getUsersAllLists(loginUser);
 	}
-
-	public PlayList getPlayListInfo(int PlayListId) throws ClassNotFoundException, SQLException {
-		PlayList ret = new PlayListManager().selectById(PlayListId);
-		return ret;
+	public List<PlayList> getPlayListInfo(int PlayListId) throws ClassNotFoundException, SQLException {
+		return new PlayListManager().getPlayListInfoByID(PlayListId);
 	}
-
-	// Codigo para administrar la informacion de las playlists
-
+	public boolean createPlayList(PlayList newPlayList) throws ClassNotFoundException, SQLException {
+		return new PlayListManager().insert(newPlayList);
+	}
+	public boolean deletePlayList(int playlistId) throws ClassNotFoundException, SQLException {
+		return new PlayListManager().delete(playlistId);
+	}
 }

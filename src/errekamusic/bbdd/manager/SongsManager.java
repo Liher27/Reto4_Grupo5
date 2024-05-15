@@ -84,21 +84,21 @@ public class SongsManager implements  DatabaseInterface<Canciones, Integer> {
 	}
 
 	@Override
-	public void insert(Canciones t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Canciones t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void update(Canciones t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Canciones t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void delete(Canciones t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Integer t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 }

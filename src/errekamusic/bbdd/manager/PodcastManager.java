@@ -20,21 +20,21 @@ public class PodcastManager implements DatabaseInterface <Podcast, Integer> {
 	}
 
 	@Override
-	public void insert(Podcast t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Podcast t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void update(Podcast t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Podcast t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void delete(Podcast t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Integer t) {
+		boolean ret = false;
+		return ret;		
 	}
 	
 

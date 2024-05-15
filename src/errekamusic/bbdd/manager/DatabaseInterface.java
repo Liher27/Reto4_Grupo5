@@ -7,12 +7,12 @@ public interface DatabaseInterface <T, Z> {
 
 	 public T selectById(Z z) throws ClassNotFoundException, SQLException; 
 	 
-	 public List <T> selectAll();
+	 public List <T> selectAll()throws ClassNotFoundException, SQLException;
 	 
-	 public void insert(T t);
+	 public boolean insert(T t) throws ClassNotFoundException, SQLException;
 	 
-	 public void update(T t);
+	 public boolean update(T t)throws ClassNotFoundException, SQLException;
 	 
-	 public void delete(T t);
+	 public boolean delete(Z z)throws ClassNotFoundException, SQLException;
 	 
 }

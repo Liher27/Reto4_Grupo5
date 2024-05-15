@@ -10,7 +10,6 @@ import java.util.List;
 
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Coleccion;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.bbdd.Utils.Converter;
@@ -134,21 +133,21 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 	}
 
 	@Override
-	public void insert(Disc t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Disc t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void update(Disc t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Disc t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void delete(Disc t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Integer t) {
+		boolean ret = false;
+		return ret;		
 	}
 	
 	public List<Disc> getByCreator(int creatorId){
