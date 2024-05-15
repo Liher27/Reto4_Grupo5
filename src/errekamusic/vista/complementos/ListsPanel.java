@@ -9,6 +9,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -44,11 +45,15 @@ public class ListsPanel extends JPanel {
 	private JLabel seeYourProfileLbl = null;
 
 	private DefaultComboBoxModel<String> boxmodel = null;
+	JComboBox<String> comboBox = null;
 	private JButton listsPanelBackBtn = null;
-	
+	int[] listUniqueID = null;
+
 	private JTextArea textArea = null;
 
-	List<PlayList> listsNames = null;
+	private String playListName = null;
+
+	List<PlayList> playListInfo = null;
 
 	/**
 	 * Create the panel. - Crear una lista - Borrar una lista - Ver las canciones de
@@ -63,7 +68,7 @@ public class ListsPanel extends JPanel {
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
 		setLayout(null);
-		
+
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfilePicture.setBounds(923, 11, 51, 51);
@@ -199,21 +204,35 @@ public class ListsPanel extends JPanel {
 		lblFavoriteTitle.setBounds(328, 32, 349, 64);
 		add(lblFavoriteTitle);
 
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		comboBox.setVisible(true);
 		comboBox.setBounds(396, 146, 231, 22);
-		add(comboBox);
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent c) {
 				try {
 					getLists();
 					comboBox.setModel(boxmodel);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
+		comboBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					int playlistId = listUniqueID[comboBox.getSelectedIndex()];
+					System.out.println(playlistId);
+					getPlayListInfo(playlistId);
+				} catch (ClassNotFoundException c) {
+					c.printStackTrace();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				}
+			}
+		});
+
+		add(comboBox);
 
 		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona tu playlist:");
 		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
@@ -222,7 +241,7 @@ public class ListsPanel extends JPanel {
 		lblSeleccionaTuPlaylist.setBounds(398, 110, 219, 25);
 		add(lblSeleccionaTuPlaylist);
 
-		textArea = new JTextArea(20,40);
+		textArea = new JTextArea(20, 40);
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		scrollPane.setBounds(340, 220, 527, 271);
 		add(scrollPane);
@@ -240,14 +259,22 @@ public class ListsPanel extends JPanel {
 	}
 
 	private void getLists() throws ClassNotFoundException, SQLException {
-		listsNames = new ListsController().getUserLists(Sesion.getInstance().getUserInfo().getLoginUser());
-		PlayList playList = new PlayList();
+		List<PlayList> listsNames = new ListsController()
+				.getUserListsNames(Sesion.getInstance().getUserInfo().getLoginUser());
+		listUniqueID = new int[listsNames.size()];
 		boxmodel = new DefaultComboBoxModel<String>();
 		for (int i = 0; i < listsNames.size(); i++) {
-			playList = (listsNames.get(i));
-//			textArea.setText("Titulo de la cancion: " + playList.getContenido().getContentName() + "   Duracion del contenido: " + playList.getContenido().getContentDuration() + "   Veces reproducido: " + playList.getContenido().getContentReproNum() + "\r\n");
-			
-			boxmodel.addElement(playList.getPlayListTitle());
+			listUniqueID[i] = listsNames.get(i).getPlayListID();
+			String listUniqueName = listsNames.get(i).getPlayListTitle();
+			boxmodel.addElement(listUniqueName);
+
 		}
+	}
+
+	private void getPlayListInfo(int PlayListID) throws ClassNotFoundException, SQLException {
+		PlayList playListInfo = new ListsController().getPlayListInfo(PlayListID);
+		textArea.setText("Titulo de la cancion: " + playListInfo.getContenido().getContentName()
+				+ "   Duracion del contenido: " + playListInfo.getContenido().getContentDuration()
+				+ "   Veces reproducido: " + playListInfo.getContenido().getContentReproNum() + "\r\n");
 	}
 }

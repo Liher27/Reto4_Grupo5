@@ -8,8 +8,13 @@ import errekamusic.bbdd.manager.PlayListManager;
 
 public class ListsController {
 
-	public List<PlayList> getUserLists(String loginUser) throws ClassNotFoundException, SQLException {
+	public List<PlayList> getUserListsNames(String loginUser) throws ClassNotFoundException, SQLException {
 		List<PlayList> ret = new PlayListManager().getUsersAllLists(loginUser);
+		return ret;
+	}
+
+	public PlayList getPlayListInfo(int PlayListId) throws ClassNotFoundException, SQLException {
+		PlayList ret = new PlayListManager().selectById(PlayListId);
 		return ret;
 	}
 

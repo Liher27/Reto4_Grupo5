@@ -54,12 +54,6 @@ public class Converter {
 		return ret;
 	}
 
-	public java.sql.Date convertDateToSqDate(Date utilDate) {
-		java.sql.Date sqldate = null;
-		sqldate = new java.sql.Date(utilDate.getTime());
-		return sqldate;
-	}
-
 	public static Date getCurrentDate() {
 		return new Date(System.currentTimeMillis());
 	}

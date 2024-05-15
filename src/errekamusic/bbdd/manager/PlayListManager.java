@@ -12,7 +12,7 @@ import errekamusic.bbdd.Pojo.Contenido;
 import errekamusic.bbdd.Pojo.PlayList;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class PlayListManager extends AbstractManager implements DatabaseInterface<PlayList, String> {
+public class PlayListManager extends AbstractManager implements DatabaseInterface<PlayList, Integer> {
 
 	private PreparedStatement pstmt = null;
 	private ResultSet result = null;
@@ -20,9 +20,26 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 	private Connection conn = null;
 
 	@Override
-	public PlayList selectById(String z) {
-		// TODO Auto-generated method stub
-		return null;
+	public PlayList selectById(Integer ID) throws ClassNotFoundException, SQLException {
+		PlayList ret = null;
+		Class.forName(DBUtils.DRIVER);
+
+		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		sql = "SELECT content.ContentName, content.ContentReproNum, content.ContentDuration FROM content "
+				+ "join playlistcontent on content.ContentID = playlistcontent.ContentID"
+				+ " join playlist on playlistcontent.playListID = playlist.PlayListID where playlist.PlayListID = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, ID);
+		result = pstmt.executeQuery();
+
+		if (result.next()) {
+			Contenido content = new Contenido();
+			content.setContentName(result.getString("ContentName"));
+			content.setContentDuration(result.getTime("ContentDuration"));
+			content.setContentReproNum(result.getInt("ContentReproNum"));
+			
+		}
+		return ret;
 	}
 
 	@Override
@@ -54,22 +71,16 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		Class.forName(DBUtils.DRIVER);
 
 		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		sql = "select playlist.PlayListTitle, content.contentName, content.contentDuration, content.contentReproNum from playlist "
-				+ "join playlistcontent on playlist.PlayListID = playlistcontent.PlaylistID "
-				+ "join content on playlistcontent.ContentID = content.ContentID where playlist.LoginUserPlayList = ?";
+		sql = "select playListTitle, playListID from playlist where LoginUserPlayList = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, username);
 		result = pstmt.executeQuery();
 
 		while (result.next()) {
-			PlayList playListInfo = new PlayList();
-			Contenido contenido = new Contenido();
-			playListInfo.setPlayListTitle(((result.getString("PlayListTitle"))));
-			contenido.setContentName(result.getString("contentName"));
-			contenido.setContentDuration(result.getTime("contentDuration"));
-			contenido.setContentReproNum(result.getInt("contentReproNum"));
-			playListInfo.setContenido(contenido);
-			ret.add(playListInfo);
+			PlayList playList = new PlayList();
+			playList.setPlayListID(result.getInt("playListID"));
+			playList.setPlayListTitle(result.getString("playListID"));
+			ret.add(playList);
 		}
 
 		return ret;
