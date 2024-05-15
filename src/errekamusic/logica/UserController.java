@@ -1,7 +1,5 @@
 package errekamusic.logica;
 
-import java.text.ParseException;
-
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
@@ -12,27 +10,6 @@ public class UserController {
 	public void insertPremiumData(PremiumUser premiumUser, String loginUser) {
 		UserManager userManager = new UserManager();
 		userManager.insertPremiumUserData(premiumUser, loginUser);
-	}
-
-	public void registerUser(Users users) throws ParseException {
-//		
-		UserManager userManager = new UserManager();
-		userManager.userRegister(users);
-
-//		String cpLong = users.getcPUser() + "";
-//		if (users.getUserPassword() != pass2) {
-//			reged = false;
-////		} else if (users == null) {
-////			reged = false;
-////		} else if (cpLong.length() > 5) {
-////			reged = false;
-////		}
-//		}else {
-//		UserManager userManager = new UserManager();
-//		userManager.userRegister(users);
-//		}
-//		return reged;
-
 	}
 
 	public boolean confirmLogedUser(String username, String password) {
@@ -81,7 +58,7 @@ public class UserController {
 	public boolean insertNewUser(Users user) {
 		boolean ret = false;
 		UserManager userManager = new UserManager();
-		userManager.insertInto(user);
+		userManager.insert(user);
 
 		return ret;
 	}

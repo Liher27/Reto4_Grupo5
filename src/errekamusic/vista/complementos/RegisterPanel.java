@@ -393,7 +393,7 @@ public class RegisterPanel extends JPanel {
 					users.setUserPassword(fieldRegisterPasswd.getText());
 					users.setUserCity(fieldRegisterCity.getText());
 					users.setUserProvince(fieldRegisterProvince.getText());
-					userController.registerUser(users);
+					userController.insertNewUser(users);
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
@@ -439,7 +439,7 @@ public class RegisterPanel extends JPanel {
 					users.setUserPassword(fieldRegisterPasswd.getText());
 					users.setUserCity(fieldRegisterCity.getText());
 					users.setUserProvince(fieldRegisterProvince.getText());
-					userController.registerUser(users);
+					userController.insertNewUser(users);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -474,7 +474,7 @@ public class RegisterPanel extends JPanel {
 	}
 
 	/**
-	 * obtener a este panel
+	 * obtener este panel
 	 *
 	 * @return panelDeRegistro
 	 */

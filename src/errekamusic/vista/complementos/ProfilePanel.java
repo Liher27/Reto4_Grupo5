@@ -48,7 +48,6 @@ public class ProfilePanel extends JPanel {
 	private JLabel lblCountOpt = null;
 	private JLabel lblPremiumOpt = null;
 	private JLabel lblUserDirOpt = null;
-	private String registerUsername = null;
 	
 	private JButton NextBtn = null;
 	private JButton btnCambiarContrasea = null;

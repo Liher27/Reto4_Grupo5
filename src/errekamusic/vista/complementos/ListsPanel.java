@@ -2,6 +2,7 @@ package errekamusic.vista.complementos;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -9,9 +10,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -22,12 +21,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.PlayList;
+import errekamusic.bbdd.Pojo.Users;
 import errekamusic.logica.ListsController;
 import errekamusic.logica.Sesion;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 
 public class ListsPanel extends JPanel {
 
@@ -50,8 +49,6 @@ public class ListsPanel extends JPanel {
 	int[] listUniqueID = null;
 
 	private JTextArea textArea = null;
-
-	private String playListName = null;
 
 	List<PlayList> playListInfo = null;
 
@@ -128,6 +125,31 @@ public class ListsPanel extends JPanel {
 		createListLblBtn.setForeground(new Color(255, 255, 255));
 		createListLblBtn.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		createListLblBtn.setBounds(49, 166, 214, 25);
+		createListLblBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String newPlayListName = JOptionPane.showInputDialog("Ingrese el nombre para su nueva lista: ");
+				PlayList playList = new PlayList();
+				playList.setPlayListTitle(newPlayListName);
+				playList.setUsers(Sesion.getInstance().getUserInfo());
+				try {
+					if (new ListsController().createPlayList(playList)) {
+						JOptionPane.showMessageDialog(null, "PlayList creada con exito", "OK!!",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "PlayList no creada", "Error", JOptionPane.ERROR_MESSAGE);
+
+					}
+				} catch (HeadlessException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+
+		});
 		add(createListLblBtn);
 
 		deleteListLblBtn = new JLabel("Eliminar lista");
@@ -138,6 +160,22 @@ public class ListsPanel extends JPanel {
 		deleteListLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {
+					int playlistId = listUniqueID[comboBox.getSelectedIndex()];
+					if (new ListsController().deletePlayList(playlistId)) {
+						JOptionPane.showMessageDialog(null, "PlayList eliminida con exito", "OK!!",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "PlayList no eliminida", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (HeadlessException e1) {
+					e1.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -204,6 +242,26 @@ public class ListsPanel extends JPanel {
 		lblFavoriteTitle.setBounds(328, 32, 349, 64);
 		add(lblFavoriteTitle);
 
+		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona tu playlist:");
+		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccionaTuPlaylist.setForeground(new Color(200, 40, 255));
+		lblSeleccionaTuPlaylist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblSeleccionaTuPlaylist.setBounds(398, 110, 219, 25);
+		add(lblSeleccionaTuPlaylist);
+
+		textArea = new JTextArea(20, 40);
+		textArea.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+		JScrollPane scrollPane = new JScrollPane(textArea);
+		scrollPane.setBounds(340, 220, 580, 271);
+		add(scrollPane);
+
+		JLabel lblTtulo = new JLabel("Informacion del contenido:");
+		lblTtulo.setBackground(new Color(255, 255, 255));
+		lblTtulo.setHorizontalAlignment(SwingConstants.CENTER);
+		scrollPane.setColumnHeaderView(lblTtulo);
+		lblTtulo.setForeground(new Color(200, 40, 255));
+		lblTtulo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+
 		comboBox = new JComboBox<String>();
 		comboBox.setVisible(true);
 		comboBox.setBounds(396, 146, 231, 22);
@@ -221,8 +279,8 @@ public class ListsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
+					textArea.setText("");
 					int playlistId = listUniqueID[comboBox.getSelectedIndex()];
-					System.out.println(playlistId);
 					getPlayListInfo(playlistId);
 				} catch (ClassNotFoundException c) {
 					c.printStackTrace();
@@ -233,25 +291,6 @@ public class ListsPanel extends JPanel {
 		});
 
 		add(comboBox);
-
-		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona tu playlist:");
-		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSeleccionaTuPlaylist.setForeground(new Color(200, 40, 255));
-		lblSeleccionaTuPlaylist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
-		lblSeleccionaTuPlaylist.setBounds(398, 110, 219, 25);
-		add(lblSeleccionaTuPlaylist);
-
-		textArea = new JTextArea(20, 40);
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		scrollPane.setBounds(340, 220, 527, 271);
-		add(scrollPane);
-
-		JLabel lblTtulo = new JLabel("Informacion del contenido:");
-		lblTtulo.setBackground(new Color(255, 255, 255));
-		lblTtulo.setHorizontalAlignment(SwingConstants.CENTER);
-		scrollPane.setColumnHeaderView(lblTtulo);
-		lblTtulo.setForeground(new Color(200, 40, 255));
-		lblTtulo.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 	}
 
 	public JPanel getListsPanel() {
@@ -272,9 +311,16 @@ public class ListsPanel extends JPanel {
 	}
 
 	private void getPlayListInfo(int PlayListID) throws ClassNotFoundException, SQLException {
-		PlayList playListInfo = new ListsController().getPlayListInfo(PlayListID);
-		textArea.setText("Titulo de la cancion: " + playListInfo.getContenido().getContentName()
-				+ "   Duracion del contenido: " + playListInfo.getContenido().getContentDuration()
-				+ "   Veces reproducido: " + playListInfo.getContenido().getContentReproNum() + "\r\n");
+		List<PlayList> playLists = new ListsController().getPlayListInfo(PlayListID);
+		PlayList playlistInfo = new PlayList();
+		StringBuilder info = new StringBuilder();
+		for (int i = 0; i < playLists.size(); i++) {
+			playlistInfo = playLists.get(i);
+			String contentInfo = ("Titulo del contenido: " + playlistInfo.getContenido().getContentName()
+					+ "   Duracion del contenido: " + playlistInfo.getContenido().getContentDuration()
+					+ "   Veces reproducido: " + playlistInfo.getContenido().getContentReproNum() + "\r\n");
+			info.append(contentInfo);
+		}
+		textArea.setText(info.toString());
 	}
 }

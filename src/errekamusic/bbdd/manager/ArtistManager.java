@@ -17,21 +17,21 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface 
 
 
 	@Override
-	public void insert(Artist t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Artist t) {
+		boolean ret = false;
+		return ret;
 	}
 
 	@Override
-	public void update(Artist t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Artist t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void delete(Artist t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(String z) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface 
 		
 		String name = artist.getArtistName();
 		String desc = artist.getArtistDesc();
-		String type = artist.isArtistType();
+		String type = artist.getArtistType();
 		int repro = 0;
 		String img = Converter.pathToBlob(path);
 		Date date = artist.getArtistRegDate();

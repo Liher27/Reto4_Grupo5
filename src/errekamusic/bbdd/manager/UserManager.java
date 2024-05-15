@@ -10,14 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import errekamusic.bbdd.Pojo.FreeUser;
 import errekamusic.bbdd.Pojo.PremiumUser;
 import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class UserManager extends AbstractManager implements DatabaseInterface <Users, String> {
+public class UserManager extends AbstractManager implements DatabaseInterface<Users, String> {
 
 	private PreparedStatement pstmt = null;
 	private ResultSet result = null;
@@ -25,7 +24,6 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 	private Users user = null;
 	private PremiumUser premiumUser = null;
 	private FreeUser freeUser = null;
-
 
 	public boolean changeUserPassword(String newPasswordToInsert, String registerUsername) {
 		boolean ret = false;
@@ -48,57 +46,6 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 			System.out.println("Malformacion sqlazo -> " + e.getMessage());
 		}
 
-		return ret;
-	}
-
-	public boolean insertInto(Users users) {
-		boolean ret = false;
-//		
-//		String username = users.getLoginUser();
-//		String name = users.getLoginUser();
-//		String surnameUser = autorLibro;
-//		String surnameUser2 = editorialLibro;
-//		String DNIUser = users.getLoginUser();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//		String birthDate = users.getBirthDateUser().toString();
-//		java.util.Date fechaEnSQLConvertida = dateFormat.parse(birthDate);
-//		java.sql.Date sqlDate = new java.sql.Date(fechaEnSQLConvertida.getTime());
-//		String DirUser = autorLibro;
-//		String CPUser = editorialLibro;
-//		String IsAdmin = users.getLoginUser();
-//		String UserCity = users.getLoginUser();
-//		String UserProvince = autorLibro;
-//		String userPassword = editorialLibro;
-//		String registerDate = users.getRegisterDate().toString();
-//		java.util.Date fechaEnSQLConvertida = dateFormat.parse(birthDate);
-//		java.sql.Date sqlDate = new java.sql.Date(fechaEnSQLConvertida.getTime());
-//		String userPassword = editorialLibro;
-//
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-//			String sql = "INSERT INTO Users (`LoginUser`, `TITULO`, `AUTOR`, `EDITORIAL`, `FECHAPUBLICACION`)"
-//					+ " VALUES (?,?,?,?,?);";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, getInputIdLibro);
-//			pstmt.setString(2, getInputTitulo);
-//			pstmt.setString(3, getInputAutor);
-//			pstmt.setString(4, getInputEditorial);
-//			pstmt.setDate(5, sqlDate);
-//
-//			int i = pstmt.executeUpdate();
-//			if (i > 0) {
-//				return true;
-//			}
-//
-//		} catch (ClassNotFoundException e) {
-//			System.out.println("Ha dado fallo -> " + e.getMessage());
-//		} catch (SQLException e) {
-//			System.out.println("Malformacion sqlazo -> " + e.getMessage());
-//		}
-//		
 		return ret;
 	}
 
@@ -150,63 +97,6 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 			System.out.println("Malformacion sqlazo -> " + e.getMessage());
 		}
 
-		return ret;
-	}
-
-	public boolean userRegister(Users users) throws ParseException {
-		
-		boolean ret = false;
-		
-		String countName = users.getLoginUser();
-		String dniUser = users.getDNI();
-		String pass = users.getUserPassword();
-		String nameUser = users.getNameUser();
-		String surname1 = users.getSurName1();
-		String surname2 = users.getSurName2();
-		String direction = users.getDirUser();
-		String userCity = users.getUserCity();
-		String isAmdin = users.getIsAdmin();
-		String userProvince = users.getUserProvince();
-		Date current = new Date();
-		int userCP = users.getcPUser();
-		String type = users.getAccountType();
-		java.sql.Date userBirty =Converter.convertFromUtilDateToSqlDate(users.getBirthDateUser());
-		java.sql.Date resDate = Converter.convertFromUtilDateToSqlDate(current);
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			
-			String sql = "INSERT INTO USERS(LoginUser,Nameuser,SurnameUser1,SurnameUser2,DNIUser,BirthDateUser,DirUser,CPUser,IsAdmin,UserCity,UserProvince,UserPassword,registerDate,accountType) "
-					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, countName);
-			pstmt.setString(2, nameUser);
-			pstmt.setString(3, surname1);
-			pstmt.setString(4, surname2);
-			pstmt.setString(5, dniUser);
-			pstmt.setDate(6, userBirty);
-			pstmt.setString(7, direction);
-			pstmt.setInt(8, userCP);
-			pstmt.setString(9, isAmdin);
-			pstmt.setString(10, userCity);
-			pstmt.setString(11, userProvince);
-			pstmt.setString(12, pass);
-			pstmt.setDate(13, resDate);
-			pstmt.setString(14, type);
-			if (pstmt.executeUpdate() > 0) {
-				ret = true;
-			} 
-			
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		} finally {
-			release(conn, pstmt, rs);
-		}
 		return ret;
 	}
 
@@ -361,21 +251,72 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 	}
 
 	@Override
-	public void insert(Users t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Users users) {
+		boolean ret = false;
+
+		String countName = users.getLoginUser();
+		String dniUser = users.getDNI();
+		String pass = users.getUserPassword();
+		String nameUser = users.getNameUser();
+		String surname1 = users.getSurName1();
+		String surname2 = users.getSurName2();
+		String direction = users.getDirUser();
+		String userCity = users.getUserCity();
+		String isAmdin = users.getIsAdmin();
+		String userProvince = users.getUserProvince();
+		Date current = new Date();
+		int userCP = users.getcPUser();
+		String type = users.getAccountType();
+		java.sql.Date userBirty = Converter.convertFromUtilDateToSqlDate(users.getBirthDateUser());
+		java.sql.Date resDate = Converter.convertFromUtilDateToSqlDate(current);
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+			String sql = "INSERT INTO USERS(LoginUser,Nameuser,SurnameUser1,SurnameUser2,DNIUser,BirthDateUser,DirUser,CPUser,IsAdmin,UserCity,UserProvince,UserPassword,registerDate,accountType) "
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, countName);
+			pstmt.setString(2, nameUser);
+			pstmt.setString(3, surname1);
+			pstmt.setString(4, surname2);
+			pstmt.setString(5, dniUser);
+			pstmt.setDate(6, userBirty);
+			pstmt.setString(7, direction);
+			pstmt.setInt(8, userCP);
+			pstmt.setString(9, isAmdin);
+			pstmt.setString(10, userCity);
+			pstmt.setString(11, userProvince);
+			pstmt.setString(12, pass);
+			pstmt.setDate(13, resDate);
+			pstmt.setString(14, type);
+			if (pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			release(conn, pstmt, rs);
+		}
+		return ret;
 	}
 
 	@Override
-	public void update(Users t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Users t) {
+		boolean ret = false;
+		return ret;
 	}
 
 	@Override
-	public void delete(Users t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(String z) {
+		boolean ret = false;
+		return ret;
 	}
 
 }

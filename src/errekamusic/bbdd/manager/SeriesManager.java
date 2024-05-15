@@ -19,21 +19,21 @@
 	}
 
 	@Override
-	public void insert(Series t) {
-		// TODO Auto-generated method stub
-		
+	public boolean insert(Series t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void update(Series t) {
-		// TODO Auto-generated method stub
-		
+	public boolean update(Series t) {
+		boolean ret = false;
+		return ret;		
 	}
 
 	@Override
-	public void delete(Series t) {
-		// TODO Auto-generated method stub
-		
+	public boolean delete(Integer z) {
+		boolean ret = false;
+		return ret;		
 	}
  
  	
