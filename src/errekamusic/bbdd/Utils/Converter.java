@@ -62,5 +62,16 @@ public class Converter {
 		byte[] fileContent = Files.readAllBytes(Paths.get(pathFile));
 		return Base64.getEncoder().encodeToString(fileContent);
 	}
+	
+	
+	public static String convertDateToString(java.util.Date date){
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String s = formatter.format(date);
+		
+		
+		return s;
+		
+	}
 
 }

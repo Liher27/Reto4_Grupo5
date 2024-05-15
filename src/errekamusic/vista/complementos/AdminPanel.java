@@ -6,14 +6,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.logica.ArtistController;
+import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
+import javax.swing.JList;
 
 public class AdminPanel extends JPanel {
 
@@ -25,6 +33,13 @@ public class AdminPanel extends JPanel {
 
 	private JButton adminPanelBackBtn = null;
 	private JLabel lblProfilePicture = null;
+	private JList<String> list = null;
+	private JLabel lblTopSongs = null;
+	private List<Canciones>top10Songs = new ArrayList<>();
+	private List<Artist>top10Artist = new ArrayList<>();
+	private DefaultListModel<String> listModel = new DefaultListModel<String>();
+	private JLabel lblTopArtist = null;
+	private JLabel lblTopDiscserie = null;
 
 	/**
 	 * Create the panel.
@@ -132,10 +147,59 @@ public class AdminPanel extends JPanel {
 		});
 		createGruop.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
 		createGruop.setForeground(new Color(255, 0, 255));
-		createGruop.setBounds(51, 196, 240, 33);
+		createGruop.setBounds(52, 147, 240, 33);
 		add(createGruop);
+		
+		list = new JList<String>();
+		list.setBounds(626, 147, 267, 312);
+		add(list);
+		list.setVisible(true);
+		
+		lblTopSongs = new JLabel("Top 10 Songs");
+		lblTopSongs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				listModel.removeAllElements();
+				ContentController contentController = new ContentController();
+				top10Songs = contentController.getTop10Songs();
+				for (int i = 0; i<top10Songs.size(); i++) {
+					listModel.addElement(top10Songs.get(i).getContentName());
+				}
+				list.setModel(listModel);
+				
+			}
+		});
+		lblTopSongs.setForeground(Color.MAGENTA);
+		lblTopSongs.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
+		lblTopSongs.setBounds(52, 191, 240, 33);
+		add(lblTopSongs);
+		
+		lblTopArtist = new JLabel("Top 10 Artist");
+		lblTopArtist.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				listModel.removeAllElements();
+				ArtistController artistController = new ArtistController();
+				top10Artist = artistController.top10Artist();
+				for (int i = 0; i < top10Artist.size(); i++) {
+					listModel.addElement(top10Artist.get(i).getArtistName());
+				}
+				list.setModel(listModel);
+				
+				
+			}
+		});
+		lblTopArtist.setForeground(Color.MAGENTA);
+		lblTopArtist.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
+		lblTopArtist.setBounds(52, 235, 240, 33);
+		add(lblTopArtist);
+		
+		lblTopDiscserie = new JLabel("Top 10 Disc/Serie");
+		lblTopDiscserie.setForeground(Color.MAGENTA);
+		lblTopDiscserie.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
+		lblTopDiscserie.setBounds(52, 279, 240, 33);
+		add(lblTopDiscserie);
 	}
-
 	public JPanel getAdminPanel() {
 		return this;
 	}

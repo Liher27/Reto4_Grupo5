@@ -362,7 +362,7 @@ public class UserManager extends AbstractManager implements DatabaseInterface <U
 
 	@Override
 	public void insert(Users t) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

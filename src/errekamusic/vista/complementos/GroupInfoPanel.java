@@ -41,7 +41,8 @@ public class GroupInfoPanel extends JPanel {
 	private JComboBox<String> comboBox = null;
 	private JComboBox<String> typeArtist = null;
 	private List<String> listPath = new ArrayList<String>() ;
-
+	private JButton searchButton = null;
+	private ImageIcon artistImage = null;
 	public GroupInfoPanel() {
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(255,69,90));
@@ -124,7 +125,7 @@ public class GroupInfoPanel extends JPanel {
 				}
 			}
 		});
-		addButton.setBounds(463, 365, 89, 23);
+		addButton.setBounds(722, 295, 89, 23);
 		add(addButton);
 		
 		backButton = new JButton("Volver");
@@ -158,6 +159,25 @@ public class GroupInfoPanel extends JPanel {
 		typeArtist.setModel(new DefaultComboBoxModel<String>(new String[] { "Group", "Podcast" }));
 		typeArtist.setBounds(651, 186, 160, 22);
 		add(typeArtist);
+		
+		searchButton = new JButton("Buscar");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String searchName = nameFiled.getText();
+				ArtistController artistController = new ArtistController();
+				artistController.findArtist(searchName);			
+				Artist artist = new Artist();
+				System.out.println(artist.toString());
+				dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));
+				descFiled.setText(artist.getArtistDesc());
+				comboBox.setSelectedItem(artist.isArtistType());
+				artistImage = artist.getArtistImage();
+				artistImageLabel.setIcon(artistImage);
+			
+			}
+		});
+		searchButton.setBounds(537, 295, 89, 23);
+		add(searchButton);
 	}
 	public void getAllImagePath() {
 		File file = new File(directory);

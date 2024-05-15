@@ -120,7 +120,6 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 			System.out.println("Malformacion sql -> " + e.getMessage());
 		} catch (Exception e) {
 			System.out.println("Error genérico -> " + e.getMessage());
-
 		}
 
 		return discInfo;
