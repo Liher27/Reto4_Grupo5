@@ -1,8 +1,10 @@
 package errekamusic.bbdd.Pojo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class PlayList {
+public class PlayList implements Serializable {
+	private static final long serialVersionUID = 2817809012732922451L;
 	private int playListID = 0;
 	private String playListTitle = null;
 	private int playListContentNum = 0;

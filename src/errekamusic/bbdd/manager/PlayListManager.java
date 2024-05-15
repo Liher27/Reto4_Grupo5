@@ -92,12 +92,12 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		return ret;
 	}
 
-	public List<PlayList> getUsersAllLists(String username) throws ClassNotFoundException, SQLException {
+	public List<PlayList> getUsersAllListsNames(String username) throws ClassNotFoundException, SQLException {
 		List<PlayList> ret = new ArrayList<PlayList>();
 		Class.forName(DBUtils.DRIVER);
 
 		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		sql = "select playListTitle, playListID from playlist where LoginUserPlayList = ?";
+		sql = "select playListID, playListTitle from playlist where LoginUserPlayList = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, username);
 		result = pstmt.executeQuery();
@@ -137,4 +137,28 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		return ret;
 	}
 
+	public List<PlayList> getUsersAllLists(String username) throws ClassNotFoundException, SQLException {
+		List<PlayList> ret = new ArrayList<PlayList>();
+		Class.forName(DBUtils.DRIVER);
+
+		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		sql = "select * from playlist join playListContent on playList.playListID = playListContent.playListID join content on playListContent.contentID = content.contentID where LoginUserPlayList = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, username);
+		result = pstmt.executeQuery();
+
+		while (result.next()) {
+			PlayList playList = new PlayList();
+			Contenido content = new Contenido();
+			playList.setPlayListID(result.getInt("playListID"));
+			playList.setPlayListTitle(result.getString("playListTitle"));
+			content.setContentDuration(result.getTime("ContentDuration"));
+			content.setContentName("ContentName");
+			content.setContentType(result.getString("ContentType"));
+			content.setContentReproNum(result.getInt("ContentReproNum"));
+			playList.setContenido(content);
+			ret.add(playList);
+		}
+		return ret;
+	}
 }

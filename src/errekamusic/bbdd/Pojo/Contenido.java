@@ -1,13 +1,15 @@
 package errekamusic.bbdd.Pojo;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Objects;
 
-public class Contenido {
+public class Contenido implements Serializable {
+	private static final long serialVersionUID = 2929858780287555805L;
 	private int contentID = 0;
 	private String contentName = null;
 	private Time contentDuration = null;
-	private boolean contentType = false;
+	private String contentType = null;
 	private int contentReproNum = 0;
 	private String contentPath = null;
 	public int getContentID() {
@@ -28,10 +30,10 @@ public class Contenido {
 	public void setContentDuration(Time contentDuration) {
 		this.contentDuration = contentDuration;
 	}
-	public boolean isContentType() {
+	public String isContentType() {
 		return contentType;
 	}
-	public void setContentType(boolean contentType) {
+	public void setContentType(String contentType) {
 		this.contentType = contentType;
 	}
 	public int getContentReproNum() {

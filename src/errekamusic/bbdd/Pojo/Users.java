@@ -1,10 +1,11 @@
 package errekamusic.bbdd.Pojo;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Users {
+public class Users implements Serializable{
+	private static final long serialVersionUID = 7749054044661142211L;
 	private String loginUser = null;
 	private String nameUser = null;
 	private String surName1 = null;

@@ -9,6 +9,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.PlayList;
-import errekamusic.bbdd.Pojo.Users;
 import errekamusic.logica.ListsController;
 import errekamusic.logica.Sesion;
 import javax.swing.JComboBox;
@@ -187,6 +187,15 @@ public class ListsPanel extends JPanel {
 		importListsLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {
+					importPlayLists();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -198,7 +207,17 @@ public class ListsPanel extends JPanel {
 		exportListsLblBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {
+					exportPlayLists();
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
+
 		});
 
 		listsPanelBackBtn = new JButton("Volver");
@@ -279,7 +298,6 @@ public class ListsPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					textArea.setText("");
 					int playlistId = listUniqueID[comboBox.getSelectedIndex()];
 					getPlayListInfo(playlistId);
 				} catch (ClassNotFoundException c) {
@@ -298,22 +316,21 @@ public class ListsPanel extends JPanel {
 	}
 
 	private void getLists() throws ClassNotFoundException, SQLException {
-		List<PlayList> listsNames = new ListsController()
+		List<PlayList> lists = new ListsController()
 				.getUserListsNames(Sesion.getInstance().getUserInfo().getLoginUser());
-		listUniqueID = new int[listsNames.size()];
+		listUniqueID = new int[lists.size()];
 		boxmodel = new DefaultComboBoxModel<String>();
-		for (int i = 0; i < listsNames.size(); i++) {
-			listUniqueID[i] = listsNames.get(i).getPlayListID();
-			String listUniqueName = listsNames.get(i).getPlayListTitle();
+		for (int i = 0; i < lists.size(); i++) {
+			listUniqueID[i] = lists.get(i).getPlayListID();
+			String listUniqueName = lists.get(i).getPlayListTitle();
 			boxmodel.addElement(listUniqueName);
-
 		}
 	}
 
 	private void getPlayListInfo(int PlayListID) throws ClassNotFoundException, SQLException {
+		StringBuilder info = new StringBuilder();
 		List<PlayList> playLists = new ListsController().getPlayListInfo(PlayListID);
 		PlayList playlistInfo = new PlayList();
-		StringBuilder info = new StringBuilder();
 		for (int i = 0; i < playLists.size(); i++) {
 			playlistInfo = playLists.get(i);
 			String contentInfo = ("Titulo del contenido: " + playlistInfo.getContenido().getContentName()
@@ -322,5 +339,16 @@ public class ListsPanel extends JPanel {
 			info.append(contentInfo);
 		}
 		textArea.setText(info.toString());
+	}
+
+	private void exportPlayLists() throws ClassNotFoundException, SQLException, IOException {
+		List<PlayList> lists = new ListsController()
+				.getAllPlayListInfo(Sesion.getInstance().getUserInfo().getLoginUser());
+		new ListsController().exportAllUserLists(lists);
+	}
+
+	private void importPlayLists() throws ClassNotFoundException, SQLException, IOException {
+		List<PlayList> lists = new ListsController().importAllUserPlayLists();
+		new ListsController().insertImportedPlayLists(lists);
 	}
 }

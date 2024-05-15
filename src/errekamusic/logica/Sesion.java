@@ -27,6 +27,8 @@ public class Sesion {
 	private WelcomePanel welcomePanel = null;
 	private GroupInfoPanel groupInfoPanel = null;
 
+	private static final String PATH_FICHERO = "C:\\Users\\in1dm3-v\\Desktop\\";
+	private static final String NOMBRE_FICHERO = "playLists.txt";
 	
 	public Users userInfo = null;
 
@@ -168,6 +170,14 @@ public class Sesion {
 
 	public void setGroupInfoPanel(GroupInfoPanel groupInfoPanel) {
 		this.groupInfoPanel = groupInfoPanel;
+	}
+
+	public static String getPathFichero() {
+		return PATH_FICHERO;
+	}
+
+	public static String getNombreFichero() {
+		return NOMBRE_FICHERO;
 	}
 	
 }
