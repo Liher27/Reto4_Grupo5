@@ -3,7 +3,7 @@ package errekamusic.bbdd.Pojo;
 import java.util.Date;
 import java.util.Objects;
 
-public class Series extends Coleccion {
+public class Serie extends Coleccion {
 	private Date seriesEndDate = null;
 
 	public Date getSeriesEndDate() {
@@ -30,7 +30,7 @@ public class Series extends Coleccion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Series other = (Series) obj;
+		Serie other = (Serie) obj;
 		return Objects.equals(seriesEndDate, other.seriesEndDate);
 	}
 

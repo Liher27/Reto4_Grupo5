@@ -12,9 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Canciones;
-import errekamusic.bbdd.Pojo.Disc;
-import errekamusic.bbdd.Pojo.Users;
 import errekamusic.bbdd.Utils.*;
 
 public class ArtistManager extends AbstractManager implements DatabaseInterface <Artist, String> {

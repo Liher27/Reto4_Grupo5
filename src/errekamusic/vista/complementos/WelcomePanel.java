@@ -47,10 +47,10 @@ public class WelcomePanel extends JPanel{
 				esperar();
 				
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(true);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
 				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(true);
 				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);

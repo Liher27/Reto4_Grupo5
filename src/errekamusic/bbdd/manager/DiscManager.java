@@ -8,13 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.bbdd.Utils.Converter;
 
-public class DiscManager implements DatabaseInterface <Disc, Integer> {
+public class DiscManager implements DatabaseInterface<Disc, Integer> {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -22,8 +21,7 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 	private List<Disc> discInfo = null;
 	private Disc disc = null;
 	private Artist artist = null;
-	
-	
+
 	public List<Disc> getDiscForPropaganda(int randomArtistID) throws Exception {
 		discInfo = new ArrayList<Disc>();
 
@@ -56,6 +54,7 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 		}
 		return discInfo;
 	}
+
 	public List<Disc> getDiscBySongId(int contentId) throws Exception {
 		discInfo = new ArrayList<Disc>();
 		try {
@@ -123,8 +122,6 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 
 		return discInfo;
 	}
-	
-	
 
 	@Override
 	public List<Disc> selectAll() {
@@ -135,25 +132,41 @@ public class DiscManager implements DatabaseInterface <Disc, Integer> {
 	@Override
 	public boolean insert(Disc t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
 	}
 
 	@Override
 	public boolean update(Disc t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
 	}
 
 	@Override
 	public boolean delete(Integer t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
 	}
-	
-	public List<Disc> getByCreator(int creatorId){
-		return null;
-		
+
+	public List<Disc> getByCreator(int creatorId) throws ClassNotFoundException, SQLException {
+		List<Disc> listDisc = new ArrayList<Disc>();
+
+		Class.forName(DBUtils.DRIVER);
+
+		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection where collectionType = 'disc' and creatorId = ? ";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, creatorId);
+		result = pstmt.executeQuery();
+
+		while (result.next()) {
+			disc = new Disc();
+			disc.setCollectionName(result.getString("CollectionName"));
+			disc.setCollectionGenre(result.getString("CollectionGenre"));
+			disc.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
+			listDisc.add(disc);
+		}
+
+		return discInfo;
 	}
-	
 
 }

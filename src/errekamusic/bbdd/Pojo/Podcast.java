@@ -2,14 +2,14 @@ package errekamusic.bbdd.Pojo;
 
 import java.util.Objects;
 
-public class Podcast extends Coleccion{
-	private Series series = null;
+public class Podcast extends Contenido{
+	private Serie series = null;
 
-	public Series getSeries() {
+	public Serie getSeries() {
 		return series;
 	}
 
-	public void setSeries(Series series) {
+	public void setSeries(Serie series) {
 		this.series = series;
 	}
 

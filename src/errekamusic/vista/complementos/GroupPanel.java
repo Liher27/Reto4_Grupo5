@@ -6,15 +6,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Group;
+import errekamusic.logica.ArtistController;
 import errekamusic.logica.Sesion;
 import errekamusic.enumerado.ArtistType;
 
@@ -35,6 +39,7 @@ public class GroupPanel extends JPanel {
 	private JButton collectionInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableGroups;
+	public int creatorId;
 
 
 	/**
@@ -124,33 +129,40 @@ public class GroupPanel extends JPanel {
 		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
 		tableGroups.setBounds(162, 143, 649, 331);
 		
-//		ArtistController artistController = new ArtistController();
-//		List<Artist> artists = artistController.getByArtistType(ArtistType.Group);
-//		
-//	    String[] headers= {"Grupo","Descripción"};
-//	    
-//		DefaultTableModel model = new DefaultTableModel();
-//		model.setColumnIdentifiers(headers);
-//		
-//		Object[] row = {"Grupo","Descripción"};
-//		model.addRow(row);
-//		
-//		for (Artist artist : artists) {
-//			String grupo = artist.getArtistName();
-//			String descripcionGrupo = artist.getArtistDesc();
-//			Object[] rowArtistas = {grupo, descripcionGrupo};
-//			model.addRow(rowArtistas);
-//		}
-//		tableGroups.setModel(model);
-//		add(tableGroups);
+		ArtistController artistiController = new ArtistController();
+		List<Group> groups = null;
+		try {
+			groups = artistiController.getGroupByArtistType(ArtistType.Group);
+		} catch (ClassNotFoundException e1) {
+			JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
+		}
+		
+	    String[] headers= {"Grupo","Descripción"};
+	    
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(headers);
+		
+		Object[] row = {"Grupo","Descripción"};
+		model.addRow(row);
+				
+		for (Group group : groups) {
+			String grupo = group.getArtistName();
+			String descripcionGrupo = group.getArtistDesc();
+			Object[] rowArtistas = {grupo, descripcionGrupo};
+			model.addRow(rowArtistas);
+		}
+		tableGroups.setModel(model);
+		add(tableGroups);
 
+		List<Group> gruposSelected = groups;
+		
 		tableGroups.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				int selectedRow = tableGroups.getSelectedRow();
-//				Artist artist = artists.get(selectedRow);
-//				DiscsPanel discsPanel = new DiscsPanel();
-//				discsPanel.setArtistId(artist.getArtistID());
+				int selectedRow = tableGroups.getSelectedRow();
+				creatorId = gruposSelected.get(selectedRow-1).getArtistID();
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -161,6 +173,7 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().setSelectedrow(selectedRow);
 				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
@@ -187,6 +200,10 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 			}
 		});
+	}
+	
+	public int getSelectedRow() {
+		return this.creatorId;
 	}
 
 	public JPanel getGroupPanel() {

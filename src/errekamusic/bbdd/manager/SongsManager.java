@@ -2,6 +2,7 @@ package errekamusic.bbdd.manager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,8 +15,7 @@ import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class SongsManager implements  DatabaseInterface<Canciones, Integer> {
-
+public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 
 	public List<Canciones> getAllData() throws Exception {
 		List<Canciones> songs = new ArrayList<Canciones>();
@@ -86,19 +86,38 @@ public class SongsManager implements  DatabaseInterface<Canciones, Integer> {
 	@Override
 	public boolean insert(Canciones t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
 	}
 
 	@Override
 	public boolean update(Canciones t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
 	}
 
 	@Override
 	public boolean delete(Integer t) {
 		boolean ret = false;
-		return ret;		
+		return ret;
+	}
+
+	public List<Canciones> getSongsByDisc(int discId) throws ClassNotFoundException, SQLException {
+		List<Canciones> songs = new ArrayList<Canciones>();
+		Class.forName(DBUtils.DRIVER);
+		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		String sql = "SELECT * FROM content where collectionID =";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, discId);
+		ResultSet result = statement.executeQuery();
+		while (result.next()) {
+			Canciones song = new Canciones();
+			song.setContentName(result.getString("ContentName"));
+			song.setContentDuration(result.getTime("ContentDuration"));
+			song.setContentPath(result.getString("ContentPath"));
+			songs.add(song);
+		}
+
+		return songs;
 	}
 
 }
