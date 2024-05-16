@@ -23,6 +23,12 @@ public class CollectionController {
 
 	}
 	
+	public List<Disc> GetAllDiscByCreatorId (int creatorId ) throws ClassNotFoundException, SQLException{
+		DiscManager discManager = new DiscManager();
+		List<Disc> ret = discManager.getByCreator(creatorId);
+		return ret;
+	}
+	
 	public List<Disc> getDiscByArtist(int creatorId) throws ClassNotFoundException, SQLException {
 		return new DiscManager().getByCreator(creatorId);
 	}

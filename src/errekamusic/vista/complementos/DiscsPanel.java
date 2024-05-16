@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 
 public class DiscsPanel extends JPanel {
@@ -30,12 +35,16 @@ public class DiscsPanel extends JPanel {
 	private JButton songInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableCollections;
+	private List<Disc> discList = new ArrayList<>();
+	private DefaultTableModel modelDisc = new DefaultTableModel();
 
 
 	/**
 	 * Create the panel.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public DiscsPanel() {
+	public DiscsPanel() throws ClassNotFoundException, SQLException {
 
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
@@ -154,17 +163,8 @@ public class DiscsPanel extends JPanel {
 				
 		String[] headersDisc= {"Grupo","Descripción"};
 	    
-		DefaultTableModel modelDisc = new DefaultTableModel();
+		modelDisc = new DefaultTableModel();
 		modelDisc.setColumnIdentifiers(headersDisc);
-		
-//		for (Disc disc : discs) {
-//			String name = disc.getCollectionName();
-//			String type = disc.getCollectionType();
-//			String genre = disc.getCollectionGenre();
-//			String desc = disc.getCollectionDesc();
-//			Object[] row = {name, type, genre, desc};
-//			modelDisc.addRow(row);
-//		}
 		
 		tableCollections.setModel(modelDisc);
 		add(tableCollections);
@@ -172,10 +172,7 @@ public class DiscsPanel extends JPanel {
 		tableCollections.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				int selectedRow = tableCollections.getSelectedRow();
-//				Disc disc = discs.get(selectedRow);
-//				SongsPanel songsPanel = new SongsPanel();
-//				songsPanel.setCollectionId(disc.getCollectionID());
+			
 			}
 		});
 		
@@ -184,5 +181,19 @@ public class DiscsPanel extends JPanel {
 	public JPanel getDiscsPanel() {
 		// TODO Auto-generated method stub
 		return this;
+	}
+	public void displayTables() throws ClassNotFoundException, SQLException {
+		CollectionController collectionController = new CollectionController();
+		discList = collectionController.GetAllDiscByCreatorId(Sesion.getInstance().getRowSelected());
+		System.out.println(discList.toString());
+		for (int i = 0; i < discList.size(); i++) {
+			String name = discList.get(i).getCollectionName();
+			String type = discList.get(i).getCollectionType();
+			String genre = discList.get(i).getCollectionGenre();
+			String desc = discList.get(i).getCollectionDesc();
+			Object[] row = {name, type, genre, desc};
+			modelDisc.addRow(row);
+		}
+		
 	}
 }

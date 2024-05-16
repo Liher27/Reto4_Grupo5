@@ -156,7 +156,7 @@ public class GroupInfoPanel extends JPanel {
 		add(artistImageLabel);
 		
 		typeArtist = new JComboBox<String>();
-		typeArtist.setModel(new DefaultComboBoxModel<String>(new String[] { "Group", "Podcast" }));
+		typeArtist.setModel(new DefaultComboBoxModel<String>(new String[] { "Group", "Podcaster" }));
 		typeArtist.setBounds(651, 186, 160, 22);
 		add(typeArtist);
 		
@@ -165,8 +165,8 @@ public class GroupInfoPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String searchName = nameFiled.getText();
 				ArtistController artistController = new ArtistController();
-				artistController.findArtist(searchName);			
-				Artist artist = new Artist();
+						
+				Artist artist = artistController.findArtist(searchName);	
 				System.out.println(artist.toString());
 				dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));
 				descFiled.setText(artist.getArtistDesc());

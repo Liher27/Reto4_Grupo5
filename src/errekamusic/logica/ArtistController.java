@@ -29,9 +29,9 @@ public class ArtistController {
 
 	}
 
-	public void findArtist(String name) {
+	public Artist findArtist(String name) {
 		ArtistManager artistManager = new ArtistManager();
-		artistManager.selectById(name);
+		return artistManager.selectById(name);
 
 	}
 

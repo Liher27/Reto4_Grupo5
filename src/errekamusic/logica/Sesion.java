@@ -31,6 +31,9 @@ public class Sesion {
 	private static final String NOMBRE_FICHERO = "playLists.txt";
 	
 	public Users userInfo = null;
+	public int rowSelected = 0;
+
+	
 
 	/**
 	 * Utilizar este metodo para iniciarlizar y nos devuelve el contenido que lleva
@@ -178,6 +181,14 @@ public class Sesion {
 
 	public static String getNombreFichero() {
 		return NOMBRE_FICHERO;
+	}
+	
+	public int getRowSelected() {
+		return rowSelected;
+	}
+
+	public void setRowSelected(int rowSelected) {
+		this.rowSelected = rowSelected;
 	}
 	
 }

@@ -39,7 +39,6 @@ public class GroupPanel extends JPanel {
 	private JButton collectionInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableGroups;
-	public int creatorId;
 
 
 	/**
@@ -162,7 +161,8 @@ public class GroupPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int selectedRow = tableGroups.getSelectedRow();
-				creatorId = gruposSelected.get(selectedRow-1).getArtistID();
+				int creatorId = gruposSelected.get(selectedRow-1).getArtistID();
+				Sesion.getInstance().setRowSelected(creatorId);
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -177,6 +177,15 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				try {
+					Sesion.getInstance().getDiscsPanel().displayTables();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	
@@ -201,9 +210,6 @@ public class GroupPanel extends JPanel {
 		});
 	}
 	
-	public int getSelectedRow() {
-		return this.creatorId;
-	}
 
 	public JPanel getGroupPanel() {
 		return this;

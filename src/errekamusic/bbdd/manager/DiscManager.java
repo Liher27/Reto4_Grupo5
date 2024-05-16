@@ -153,7 +153,7 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		Class.forName(DBUtils.DRIVER);
 
 		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection where collectionType = 'disc' and creatorId = ? ";
+		String sql = "select collectionName, collectionGenre, CollectionDesc,collectionType from collection where collectionType = 'disc' and creatorId = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, creatorId);
 		result = pstmt.executeQuery();
@@ -162,11 +162,13 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 			disc = new Disc();
 			disc.setCollectionName(result.getString("CollectionName"));
 			disc.setCollectionGenre(result.getString("CollectionGenre"));
-			disc.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
+			disc.setCollectionDesc(result.getString("CollectionDesc"));
+			disc.setCollectionType(result.getString("collectionType"));
+			
 			listDisc.add(disc);
 		}
 
-		return discInfo;
+		return listDisc;
 	}
 
 }
