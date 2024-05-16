@@ -173,7 +173,6 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().setSelectedrow(selectedRow);
 				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
