@@ -20,6 +20,7 @@ public class PodcasterManager extends AbstractManager implements DatabaseInterfa
 
 	public List<Podcaster> getPodcasterByArtistType(ArtistType artistType) throws ClassNotFoundException, SQLException {
 		List<Podcaster> PodcasterInfo = new ArrayList<Podcaster>();
+		System.out.println("Podcaster "+artistType);
 		String artistTypeSend = artistType.toString();
 
 		Class.forName(DBUtils.DRIVER);
@@ -31,14 +32,14 @@ public class PodcasterManager extends AbstractManager implements DatabaseInterfa
 		result = pstmt.executeQuery();
 
 		while (result.next()) {
-			Podcaster Podcaster = new Podcaster();
-			Podcaster.setArtistID(result.getInt("ArtistID"));
-			Podcaster.setArtistName(result.getString("ArtistName"));
-			Podcaster.setArtistRegDate(result.getDate("ArtistRegDate"));
-			Podcaster.setArtistDesc(result.getString("ArtistDesc"));
-			Podcaster.setArtistRepNum(result.getInt("ArtistRepNum"));
+			Podcaster podcaster = new Podcaster();
+			podcaster.setArtistID(result.getInt("ArtistID"));
+			podcaster.setArtistName(result.getString("ArtistName"));
+			podcaster.setArtistRegDate(result.getDate("ArtistRegDate"));
+			podcaster.setArtistDesc(result.getString("ArtistDesc"));
+			podcaster.setArtistRepNum(result.getInt("ArtistRepNum"));
 			// artist.setArtistImage((ImageIcon) result.getObject("CreatorIconImage"));
-			PodcasterInfo.add(Podcaster);
+			PodcasterInfo.add(podcaster);
 		}
 
 		return PodcasterInfo;

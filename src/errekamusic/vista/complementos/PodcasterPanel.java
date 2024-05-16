@@ -24,7 +24,6 @@ import errekamusic.enumerado.ArtistType;
 import errekamusic.logica.ArtistController;
 //import errekamusic.logica.ArtistController;
 import errekamusic.logica.Sesion;
-import javax.swing.JScrollBar;
 import javax.swing.JTable;
 
 public class PodcasterPanel extends JPanel {
@@ -129,10 +128,6 @@ public class PodcasterPanel extends JPanel {
 		collectionInfoBtn.setBounds(440, 561, 186, 28);
 		add(collectionInfoBtn);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(103, 147, 756, 366);
-		add(scrollBar);
-		
 		tablePodcaster = new JTable();
 		tablePodcaster.setColumnSelectionAllowed(true);
 		tablePodcaster.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
@@ -154,7 +149,7 @@ public class PodcasterPanel extends JPanel {
 		model.setColumnIdentifiers(headers);
 		
 		Object[] row = {"Grupo","Descripción"};
-		//model.addRow(row);
+		model.addRow(row);
 				
 		for (Podcaster podcaster : podcasters) {
 			String grupo = podcaster.getArtistName();

@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.bbdd.Pojo.Artist;
 import errekamusic.bbdd.Pojo.Group;
 import errekamusic.logica.ArtistController;
 import errekamusic.logica.Sesion;
@@ -163,6 +162,8 @@ public class GroupPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int selectedRow = tableGroups.getSelectedRow();
 				creatorId = gruposSelected.get(selectedRow-1).getArtistID();
+				Sesion.getInstance().setSelectedRow(creatorId);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().updateUI();
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);

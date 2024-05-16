@@ -6,16 +6,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
+import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 
 public class DiscsPanel extends JPanel {
@@ -25,9 +30,9 @@ public class DiscsPanel extends JPanel {
 	private JLabel lblLogoErrekamusic = null;
 	private JLabel lblDiscsTitle = null;
 	private JLabel lblProfilePicture = null;
+	private JButton songInfoBtn = null;
 
 	private JButton discsPanelBackBtn = null;
-	private JButton songInfoBtn = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableCollections;
 
@@ -116,34 +121,34 @@ public class DiscsPanel extends JPanel {
 		lblDiscsTitle.setBounds(328, 32, 349, 64);
 		add(lblDiscsTitle);
 
-//		songInfoBtn = new JButton("Mas informacion");
-//		songInfoBtn.setBounds(440, 561, 186, 28);
-//		add(songInfoBtn);
-//		songInfoBtn.addActionListener(new ActionListener() {
-//			/**
-//			 * Confirmamos para logearnos
-//			 * 
-//			 * @param e
-//			 */
-//			public void actionPerformed(ActionEvent e) {
-//				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
-//				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
-//				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
-//				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
-//				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-//				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
-//				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
-//				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-//				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
-//				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-//				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
-//				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-//				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
-//				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(true);
-//				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
-//			}
-//
-//		});
+		songInfoBtn = new JButton("Mas informacion");
+		songInfoBtn.setBounds(440, 561, 186, 28);
+		add(songInfoBtn);
+		songInfoBtn.addActionListener(new ActionListener() {
+			/**
+			 * Confirmamos para logearnos
+			 * 
+			 * @param e
+			 */
+			public void actionPerformed(ActionEvent e) {
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(true);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
+			}
+
+		});
 		
 		tableCollections = new JTable();
 		tableCollections.setColumnSelectionAllowed(true);
@@ -152,19 +157,28 @@ public class DiscsPanel extends JPanel {
 				
 		add(tableCollections);
 				
-		String[] headersDisc= {"Grupo","Descripción"};
 	    
-		DefaultTableModel modelDisc = new DefaultTableModel();
-		modelDisc.setColumnIdentifiers(headersDisc);
+		CollectionController collectionController = new CollectionController();
+		List<Disc> discs = null;
+		try {
+			discs = collectionController.getDiscByArtist(Sesion.getInstance().getSelectedRow());
+		} catch (ClassNotFoundException e1) {
+			JOptionPane.showMessageDialog(null, "No se encontraron discos del tipo especificado");
+		} catch (SQLException e1) {
+			JOptionPane.showMessageDialog(null, "No se encontraron discos del tipo especificado");
+		}
 		
-//		for (Disc disc : discs) {
-//			String name = disc.getCollectionName();
-//			String type = disc.getCollectionType();
-//			String genre = disc.getCollectionGenre();
-//			String desc = disc.getCollectionDesc();
-//			Object[] row = {name, type, genre, desc};
-//			modelDisc.addRow(row);
-//		}
+		DefaultTableModel modelDisc = new DefaultTableModel();
+		if(discs != null) {
+			for (Disc disc : discs) {
+				String name = disc.getCollectionName();
+				String type = disc.getCollectionType();
+				String genre = disc.getCollectionGenre();
+				String desc = disc.getCollectionDesc();
+				Object[] row = {name, type, genre, desc};
+				modelDisc.addRow(row);
+			}
+		}
 		
 		tableCollections.setModel(modelDisc);
 		add(tableCollections);

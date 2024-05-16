@@ -6,7 +6,6 @@ import errekamusic.vista.complementos.*;
 
 import java.awt.EventQueue;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
