@@ -1,3 +1,4 @@
+
 package errekamusic.bbdd.manager;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Pojo.Group;
 import errekamusic.bbdd.Pojo.Podcaster;
 import errekamusic.bbdd.Utils.*;
@@ -57,17 +59,17 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 	@Override
 	public boolean delete(Integer id) throws SQLException {
 		boolean ret = false;
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "delete from artist where artistid = '"+ id+"'";
+			String sql = "delete from artist where artistid = '" + id + "'";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate(sql);
-			
+
 		} finally {
 			release(conn, pstmt, rs);
 		}
@@ -101,7 +103,7 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 
 	@Override
 	public List<Artist> selectAll() {
-		// TODO Auto-generated method stub
+// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -125,8 +127,8 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		return listArtist;
 
 	}
-	
-	public List<Artist> getDiscInfo (int id) throws SQLException, ClassNotFoundException{
+
+	public List<Artist> getDiscInfo(int id) throws SQLException, ClassNotFoundException {
 		List<Artist> ArtistInfo = new ArrayList<Artist>();
 		Class.forName(DBUtils.DRIVER);
 		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
@@ -136,11 +138,16 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		pstmt.setInt(1, id);
 		ResultSet result = pstmt.executeQuery();
 		while (result.next()) {
-			
+			Artist artist = new Artist();
+			Disc disc = new Disc();
+			disc.setCollectionName(result.getString("CollectionName"));
+			disc.setArtist(artist);
+			ArtistInfo.add(artist);
+
 		}
-		
+
 		return ArtistInfo;
-		
+
 	}
 
 	public List<Artist> getArtistsByType(String artistType) throws SQLException, ClassNotFoundException {
@@ -207,15 +214,15 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		String type = artist.getArtistType();
 		Date date = artist.getArtistRegDate();
 		java.sql.Date regdate = Converter.convertFromUtilDateToSqlDate(date);
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			String sql = "UPDATE ARTIST SET ARTISTNAME = ?,ArtistRegDate = ?, ArtistDesc = ? , ArtistType =? WHERE ARTISTID =?";
-					
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setDate(2, regdate);
