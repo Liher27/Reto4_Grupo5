@@ -77,7 +77,7 @@ public class Converter {
 
 	public static String convertDateToString(java.util.Date date) {
 
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String s = formatter.format(date);
 
 		return s;

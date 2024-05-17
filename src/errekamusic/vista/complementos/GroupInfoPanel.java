@@ -44,6 +44,9 @@ public class GroupInfoPanel extends JPanel {
 	private List<String> listPath = new ArrayList<String>() ;
 	private JButton searchButton = null;
 	private ImageIcon artistImage = null;
+	private JButton updateInfo = null;
+	private JTextField idFiled;
+	private JLabel idArtista = null;
 	
 	public GroupInfoPanel() {
 		setBounds(0, 0, 984, 611);
@@ -129,6 +132,7 @@ public class GroupInfoPanel extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				cleanFileContent();
 			}
 		});
 		addButton.setBounds(722, 295, 89, 23);
@@ -152,6 +156,7 @@ public class GroupInfoPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				cleanFileContent();
 			}
 		});
 		backButton.setBounds(718, 365, 89, 23);
@@ -161,6 +166,16 @@ public class GroupInfoPanel extends JPanel {
 		artistImageLabel.setBounds(125, 28, 349, 269);
 		add(artistImageLabel);
 		
+		idFiled = new JTextField();
+		idFiled.setBounds(441, 296, 86, 20);
+		add(idFiled);
+		idFiled.setColumns(10);
+		
+		idArtista = new JLabel("ID Artista");
+		idArtista.setForeground(Color.WHITE);
+		idArtista.setBounds(357, 291, 92, 30);
+		add(idArtista);
+		
 		typeArtist = new JComboBox<String>();
 		typeArtist.setModel(new DefaultComboBoxModel<String>(new String[] { "Group", "Podcast" }));
 		typeArtist.setBounds(651, 186, 160, 22);
@@ -169,25 +184,60 @@ public class GroupInfoPanel extends JPanel {
 		searchButton = new JButton("Buscar");
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String searchName = nameFiled.getText();
+				int searchid = Integer.valueOf(idFiled.getText());
 				ArtistController artistController = new ArtistController();
-				try {
-					artistController.findArtist(searchName);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}			
 				Artist artist = new Artist();
-				System.out.println(artist.toString());
-				dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));
-				descFiled.setText(artist.getArtistDesc());
-				comboBox.setSelectedItem(artist.getArtistType());
-				artistImage = artist.getArtistImage();
-				artistImageLabel.setIcon(artistImage);
+				try {
+					artist = artistController.findArtist(searchid);
+					nameFiled.setText(artist.getArtistName());
+					dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));
+					descFiled.setText(artist.getArtistDesc());
+					comboBox.setSelectedItem(artist.getArtistType());
+					artistImage = artist.getArtistImage();
+					artistImageLabel.setIcon(artistImage);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			
 			}
 		});
 		searchButton.setBounds(537, 295, 89, 23);
 		add(searchButton);
+		
+		updateInfo = new JButton("Update");
+		updateInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int artistId = Integer.valueOf(idFiled.getText());
+				Artist artist = new Artist();
+				artist.setArtistName(nameFiled.getText());
+				artist.setArtistDesc(descFiled.getText());
+				artist.setArtistType(typeArtist.getSelectedItem().toString());
+				try {
+					artist.setArtistRegDate(Converter.convertFromUtilDateToSqlDate(
+							Converter.convertStringToUtilDate(dateFiled.getText())));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ArtistController artistController = new ArtistController();
+				try {
+					artistController.updateArtist(artist, artistId);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				cleanFileContent();
+			}
+		});
+		updateInfo.setBounds(537, 365, 89, 23);
+		add(updateInfo);
+		
+		
 	}
 	public void getAllImagePath() {
 		File file = new File(directory);
@@ -203,6 +253,24 @@ public class GroupInfoPanel extends JPanel {
 	            	listPath.add(fs.getName());
 	            }
 		}
+	}
+	public void setInvisibleForModify() {
+		addButton.setVisible(false);
+		idFiled.setVisible(true);
+		idArtista.setVisible(true);
+	}
+	public void setInvisibleForCreate() {
+		idArtista.setVisible(false);
+		addButton.setVisible(true);
+		idFiled.setVisible(false);
+	}
+	
+	private void cleanFileContent() {
+		
+		nameFiled.setText("");
+		idFiled.setText("");
+		descFiled.setText("");
+		dateFiled.setText("");
 	}
 	
 	public JPanel getGroupInfoPanel() {

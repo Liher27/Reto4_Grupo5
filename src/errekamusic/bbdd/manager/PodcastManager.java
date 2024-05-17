@@ -87,13 +87,15 @@ public class PodcastManager extends AbstractManager implements DatabaseInterface
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
-	public boolean update(Podcast t) throws ClassNotFoundException, SQLException {
+	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
-	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
+	public boolean update(Podcast t, Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}

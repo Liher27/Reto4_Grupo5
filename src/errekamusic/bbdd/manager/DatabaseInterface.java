@@ -12,7 +12,7 @@ public interface DatabaseInterface <T, Z> {
 	 
 	 public boolean insert(T t) throws ClassNotFoundException, SQLException, IOException;
 	 
-	 public boolean update(T t)throws ClassNotFoundException, SQLException;
+	 public boolean update(T t,Z z)throws ClassNotFoundException, SQLException;
 	 
 	 public boolean delete(Z z)throws ClassNotFoundException, SQLException;
 	 

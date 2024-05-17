@@ -88,16 +88,17 @@ public class SerieManager implements DatabaseInterface <Serie, Integer> {
 		return ret;		
 	}
 
-	@Override
-	public boolean update(Serie t) {
-		boolean ret = false;
-		return ret;		
-	}
 
 	@Override
 	public boolean delete(Integer t) {
 		boolean ret = false;
 		return ret;		
+	}
+
+	@Override
+	public boolean update(Serie t, Integer z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

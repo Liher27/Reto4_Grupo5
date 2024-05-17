@@ -132,11 +132,7 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		return ret;
 	}
 
-	@Override
-	public boolean update(Disc t) {
-		boolean ret = false;
-		return ret;
-	}
+
 
 	@Override
 	public boolean delete(Integer t) {
@@ -165,6 +161,12 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		}
 
 		return listDisc;
+	}
+
+	@Override
+	public boolean update(Disc t, Integer z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

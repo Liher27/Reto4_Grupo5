@@ -57,12 +57,13 @@ public class CancionesManager extends AbstractManager implements DatabaseInterfa
 		return false;
 	}
 	@Override
-	public boolean update(Canciones t) throws ClassNotFoundException, SQLException {
+	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
-	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
+	public boolean update(Canciones t, Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}

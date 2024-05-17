@@ -68,12 +68,7 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		return ret;
 	}
 
-	@Override
-	public boolean update(PlayList t) {
-		boolean ret = false;
-		return ret;
 
-	}
 
 	@Override
 	public boolean delete(Integer playlistId) throws ClassNotFoundException, SQLException {
@@ -177,5 +172,11 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 			ret = true;
 		}
 		return ret;
+	}
+
+	@Override
+	public boolean update(PlayList t, Integer z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

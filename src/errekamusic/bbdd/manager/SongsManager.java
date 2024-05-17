@@ -109,11 +109,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		return ret;
 	}
 
-	@Override
-	public boolean update(Canciones t) {
-		boolean ret = false;
-		return ret;
-	}
+
 
 	@Override
 	public boolean delete(Integer t) {
@@ -138,6 +134,12 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		}
 
 		return songs;
+	}
+
+	@Override
+	public boolean update(Canciones t, Integer z) throws ClassNotFoundException, SQLException {
+		
+		return false;
 	}
 
 }

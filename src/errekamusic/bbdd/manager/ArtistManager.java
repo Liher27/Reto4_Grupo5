@@ -55,12 +55,6 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 	}
 
 	@Override
-	public boolean update(Artist t) {
-		boolean ret = false;
-		return ret;
-	}
-
-	@Override
 	public boolean delete(Integer z) {
 		boolean ret = false;
 		return ret;
@@ -105,17 +99,13 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 		Statement statement = connection.createStatement();
-		String sql = "SELECT ArtistName, ArtistRepNum FROM Artist order by ArtistRepNum desc limit 4 ;";
+		String sql = "SELECT ArtistName, ArtistType,ArtistRepNum FROM Artist order by ArtistRepNum desc limit 4 ;";
 		ResultSet result = statement.executeQuery(sql);
 		while (result.next()) {
 			Artist artist = new Artist();
-			artist.setArtistID(result.getInt("ArtistID"));
 			artist.setArtistName(result.getString("ArtistName"));
-			artist.setArtistRegDate(result.getDate("ArtistRegDate"));
-			artist.setArtistDesc(result.getString("ArtistDesc"));
 			artist.setArtistRepNum(result.getInt("ArtistRepNum"));
 			artist.setArtistType(result.getString("ArtistType"));
-			artist.setArtistImage(Converter.getImageFromBlob(result.getBlob("CreatorIconImage")));
 			listArtist.add(artist);
 		}
 		return listArtist;
@@ -157,14 +147,14 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		return ArtistInfo;
 	}
 
-	public Artist findByName(String name) throws Exception {
+	public Artist findByName(int id) throws Exception {
 		Artist artist = new Artist();
 		Class.forName(DBUtils.DRIVER);
 
 		Connection conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 
 		Statement statement = conn.createStatement();
-		String sql = "select * from Artist where ArtistName ='" + name + "'";
+		String sql = "select * from Artist where ArtistID ='" + id + "'";
 		ResultSet result = statement.executeQuery(sql);
 		if (result.next()) {
 			artist.setArtistID(result.getInt("ArtistID"));
@@ -173,11 +163,44 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 			artist.setArtistDesc(result.getString("ArtistDesc"));
 			artist.setArtistRepNum(result.getInt("ArtistRepNum"));
 			artist.setArtistType(result.getString("ArtistType"));
-			artist.setArtistImage(Converter.getImageFromBlob(result.getBlob("CreatorIconImage")));
 		}
 
 		return artist;
 
+	}
+
+	@Override
+	public boolean update(Artist artist, Integer id) throws ClassNotFoundException, SQLException {
+		boolean ret = false;
+
+		String name = artist.getArtistName();
+		String desc = artist.getArtistDesc();
+		String type = artist.getArtistType();
+		Date date = artist.getArtistRegDate();
+		java.sql.Date regdate = Converter.convertFromUtilDateToSqlDate(date);
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "UPDATE ARTIST SET ARTISTNAME = ? ArtistRegDate = ? ArtistDesc = ?   ArtistType =? WHERE ARTISTID ?";
+					
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setDate(2, regdate);
+			pstmt.setString(3, desc);
+			pstmt.setString(4, type);
+			pstmt.setInt(5, id);
+			if (pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+		} finally {
+			release(conn, pstmt, rs);
+		}
+		return ret;
+		
 	}
 
 }

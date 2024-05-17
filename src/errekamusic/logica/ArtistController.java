@@ -22,8 +22,8 @@ public class ArtistController {
 		new ArtistManager().insert(artist);
 	}
 
-	public Artist findArtist(String name) throws Exception {
-		return new ArtistManager().findByName(name);
+	public Artist findArtist(int id) throws Exception {
+		return new ArtistManager().findByName(id);
 
 	}
 
@@ -39,4 +39,7 @@ public class ArtistController {
 		artistInfo = new ArtistManager().selectById(ArtistID);
 		return artistInfo;
 	}
+	public void updateArtist(Artist artist, int id) throws ClassNotFoundException, SQLException {
+		new ArtistManager().update(artist, id);
+	} 
 }

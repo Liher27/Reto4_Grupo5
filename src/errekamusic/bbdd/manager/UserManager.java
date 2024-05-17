@@ -307,16 +307,17 @@ public class UserManager extends AbstractManager implements DatabaseInterface<Us
 		return ret;
 	}
 
-	@Override
-	public boolean update(Users t) {
-		boolean ret = false;
-		return ret;
-	}
 
 	@Override
 	public boolean delete(String z) {
 		boolean ret = false;
 		return ret;
+	}
+
+	@Override
+	public boolean update(Users t, String z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

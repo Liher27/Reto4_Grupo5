@@ -63,14 +63,15 @@ public class GroupManager extends AbstractManager implements DatabaseInterface<G
 		return false;
 	}
 
+
 	@Override
-	public boolean update(Group t) throws ClassNotFoundException, SQLException {
+	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Integer z) throws ClassNotFoundException, SQLException {
+	public boolean update(Group t, Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}

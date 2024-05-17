@@ -40,6 +40,7 @@ public class AdminPanel extends JPanel {
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private JLabel lblTopArtist = null;
 	private JLabel lblTopDiscserie = null;
+	private JLabel modifyGroup = null;
 
 	/**
 	 * Create the panel.
@@ -143,7 +144,8 @@ public class AdminPanel extends JPanel {
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(true);
-			}
+				Sesion.getInstance().getGroupInfoPanel().setInvisibleForCreate();
+							}
 		});
 		createGruop.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
 		createGruop.setForeground(new Color(255, 0, 255));
@@ -171,7 +173,7 @@ public class AdminPanel extends JPanel {
 		});
 		lblTopSongs.setForeground(Color.MAGENTA);
 		lblTopSongs.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
-		lblTopSongs.setBounds(52, 191, 240, 33);
+		lblTopSongs.setBounds(52, 235, 240, 33);
 		add(lblTopSongs);
 		
 		lblTopArtist = new JLabel("Top 10 Artist");
@@ -196,15 +198,43 @@ public class AdminPanel extends JPanel {
 		});
 		lblTopArtist.setForeground(Color.MAGENTA);
 		lblTopArtist.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
-		lblTopArtist.setBounds(52, 235, 240, 33);
+		lblTopArtist.setBounds(52, 279, 240, 33);
 		add(lblTopArtist);
 		
 		lblTopDiscserie = new JLabel("Top 10 Disc/Serie");
 		lblTopDiscserie.setForeground(Color.MAGENTA);
 		lblTopDiscserie.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
-		lblTopDiscserie.setBounds(52, 279, 240, 33);
+		lblTopDiscserie.setBounds(52, 323, 240, 33);
 		add(lblTopDiscserie);
+		
+		modifyGroup = new JLabel("Modificar Grupo");
+		modifyGroup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
+				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
+				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
+				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
+				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
+				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
+				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
+				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(true);
+				Sesion.getInstance().getGroupInfoPanel().setInvisibleForModify();
+			}
+		});
+		modifyGroup.setForeground(Color.MAGENTA);
+		modifyGroup.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
+		modifyGroup.setBounds(52, 191, 240, 33);
+		add(modifyGroup);
 	}
+
 	public JPanel getAdminPanel() {
 		return this;
 	}

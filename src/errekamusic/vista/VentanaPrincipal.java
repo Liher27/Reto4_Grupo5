@@ -5,7 +5,9 @@ import errekamusic.logica.Sesion;
 import errekamusic.vista.complementos.*;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -60,7 +62,7 @@ public class VentanaPrincipal extends JFrame {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws ParseException, IOException {
 		try {
 			inicializar();
 		} catch (ClassNotFoundException e) {
@@ -68,6 +70,9 @@ public class VentanaPrincipal extends JFrame {
 					JOptionPane.ERROR_MESSAGE);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error, no se ha podido concectar a la base de datos...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha encontrado un archivo...", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
