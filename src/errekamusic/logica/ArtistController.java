@@ -6,41 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Group;
-import errekamusic.bbdd.Pojo.Podcaster;
 import errekamusic.bbdd.manager.ArtistManager;
-import errekamusic.bbdd.manager.GroupManager;
-import errekamusic.bbdd.manager.PodcasterManager;
-import errekamusic.enumerado.ArtistType;
 
 public class ArtistController {
 
-	public List<Group> getGroupByArtistType(ArtistType artistType) throws ClassNotFoundException, SQLException {
-		return new GroupManager().getGroupByArtistType(artistType);
+	public List<Artist> getByArtistType(String artistType) throws ClassNotFoundException, SQLException {
+		return new ArtistManager().getArtistsByType(artistType);
 	}
 
-	public List<Podcaster> getPodcasterByArtistType(ArtistType artistType) throws ClassNotFoundException, SQLException {
-		return new PodcasterManager().getPodcasterByArtistType(artistType);
+	public List<Artist> getPodcasterByArtistType(String artistType) throws ClassNotFoundException, SQLException {
+		return new ArtistManager().getArtistsByType(artistType);
 	}
 
-	public void insertArtist(Artist artist, String path) throws IOException {
-		ArtistManager artistManager = new ArtistManager();
-		artistManager.insertNewArtist(artist, path);
-
+	public void insertArtist(Artist artist) throws IOException, SQLException {
+		new ArtistManager().insert(artist);
 	}
 
-	public Artist findArtist(String name) {
-		ArtistManager artistManager = new ArtistManager();
-		return artistManager.selectById(name);
+	public Artist findArtist(int id) throws Exception {
+		return new ArtistManager().findByName(id);
 
 	}
+	public List<Artist> top10Artist() throws Exception {
 
-	public List<Artist> top10Artist() {
-
-		ArtistManager artistManager = new ArtistManager();
 		List<Artist> artistList = new ArrayList<>();
-		artistList = artistManager.top10Artist();
+		artistList = new ArtistManager().top10Artist();
 		return artistList;
-
 	}
+	
+
+	public Artist getArtistByID(int ArtistID) throws Exception {
+		Artist artistInfo = new Artist();
+		artistInfo = new ArtistManager().selectById(ArtistID);
+		return artistInfo;
+	}
+	public void updateArtist(Artist artist, int id) throws ClassNotFoundException, SQLException {
+		new ArtistManager().update(artist, id);
+	} 
 }

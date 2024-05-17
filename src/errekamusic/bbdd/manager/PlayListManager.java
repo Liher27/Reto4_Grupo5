@@ -68,12 +68,7 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		return ret;
 	}
 
-	@Override
-	public boolean update(PlayList t) {
-		boolean ret = false;
-		return ret;
 
-	}
 
 	@Override
 	public boolean delete(Integer playlistId) throws ClassNotFoundException, SQLException {
@@ -160,5 +155,28 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 			ret.add(playList);
 		}
 		return ret;
+	}
+
+	public boolean insertContent(PlayList playList) throws ClassNotFoundException, SQLException {
+		boolean ret = false;
+
+		Class.forName(DBUtils.DRIVER);
+
+		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		sql = "INSERT INTO `reto4_grupo5`.`playlistcontent` (`PlayListID`, `ContentID`) VALUES (?, ?)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, playList.getPlayListID());
+		pstmt.setInt(2, playList.getContenido().getContentID());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			ret = true;
+		}
+		return ret;
+	}
+
+	@Override
+	public boolean update(PlayList t, Integer z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

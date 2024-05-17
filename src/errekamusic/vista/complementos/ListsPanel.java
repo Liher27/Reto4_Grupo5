@@ -44,7 +44,7 @@ public class ListsPanel extends JPanel {
 	private JLabel seeYourProfileLbl = null;
 
 	private DefaultComboBoxModel<String> boxmodel = null;
-	JComboBox<String> comboBox = null;
+	private JComboBox<String> comboBox = null;
 	private JButton listsPanelBackBtn = null;
 	int[] listUniqueID = null;
 
@@ -315,7 +315,7 @@ public class ListsPanel extends JPanel {
 		return this;
 	}
 
-	private void getLists() throws ClassNotFoundException, SQLException {
+	public void getLists() throws ClassNotFoundException, SQLException {
 		List<PlayList> lists = new ListsController()
 				.getUserListsNames(Sesion.getInstance().getUserInfo().getLoginUser());
 		listUniqueID = new int[lists.size()];

@@ -4,42 +4,49 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
 
-import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Pojo.Podcast;
-import errekamusic.enumerado.ArtistType;
-//import errekamusic.logica.ArtistController;
-import errekamusic.logica.CollectionController;
+import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 
 public class PodcastPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private JButton btnReproContent = null;
 	private JLabel lblProfilePicture = null;
+	private JButton songsPanelBackBtn = null;
+
 	private JLabel lblLogoErrekamusic = null;
-	private JLabel lblSubtitle = null;
-	private JLabel lblPodcastTitle = null;
+	private JLabel lblDiscoverSongsTitle = null;
 	private JLabel seeYourProfileLbl = null;
+	private JComboBox<String> comboBox = null;
+	private JLabel lblContentDurationText = null;
+	private JLabel lbldiscsDescText = null;
+	private JLabel artistImageLbl = null;
+	private ImageIcon artistImageIcon = null;
 
-	private JButton reproContentBtn = null;
-	private JButton podcastPanelBackBtn = null;
-	private int creatorID = 0;
-	private JTable tablePodcast;
+	private DefaultComboBoxModel<String> boxmodel = null;
+	private int podcastID = 0;
+	private JLabel lbldiscsName = null;
+	
+	private JLabel layOutFordiscsLbl = null;
 
+	private int[] listUniqueID = null;
 
 	/**
 	 * Create the panel.
@@ -49,13 +56,6 @@ public class PodcastPanel extends JPanel {
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
 		setLayout(null);
-
-		lblPodcastTitle = new JLabel("Descubre podcasts");
-		lblPodcastTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPodcastTitle.setForeground(new Color(200, 40, 255));
-		lblPodcastTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
-		lblPodcastTitle.setBounds(284, 32, 393, 64);
-		add(lblPodcastTitle);
 
 		lblProfilePicture = new JLabel("");
 		lblProfilePicture.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,21 +84,16 @@ public class PodcastPanel extends JPanel {
 		});
 
 		seeYourProfileLbl = new JLabel("Ver perfil");
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
-		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		add(seeYourProfileLbl);
-
-		podcastPanelBackBtn = new JButton("Volver");
-		podcastPanelBackBtn.setBounds(844, 556, 98, 33);
-		podcastPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		add(podcastPanelBackBtn);
-		podcastPanelBackBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
+		
+		songsPanelBackBtn = new JButton("Volver");
+		songsPanelBackBtn.setBounds(844, 556, 98, 33);
+		songsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		add(songsPanelBackBtn);
+		songsPanelBackBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
@@ -110,65 +105,34 @@ public class PodcastPanel extends JPanel {
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
+				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(true);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(true);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
-
 			}
 
 		});
-
-		lblSubtitle = new JLabel("Seleccione la opción que desee:");
-		lblSubtitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSubtitle.setBounds(68, 64, 285, 25);
-		add(lblSubtitle);
+		lblDiscoverSongsTitle = new JLabel("Descubre podcasts");
+		lblDiscoverSongsTitle.setBounds(279, 32, 398, 64);
+		lblDiscoverSongsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDiscoverSongsTitle.setForeground(new Color(200, 40, 255));
+		lblDiscoverSongsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		add(lblDiscoverSongsTitle);
 
 		lblLogoErrekamusic = new JLabel("");
-		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
+		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		add(lblLogoErrekamusic);
 
-		reproContentBtn = new JButton("Reproducir contenido");
-		reproContentBtn.setBounds(440, 561, 186, 28);
-		add(reproContentBtn);
-		
-		tablePodcast = new JTable();
-		tablePodcast.setColumnSelectionAllowed(true);
-		tablePodcast.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tablePodcast.setBounds(162, 143, 649, 331);
-		
-		CollectionController collectionController = new CollectionController();
-		//List<Podcast> podcasts = collectionController.GetCollectionByArtist(this.creatorID);
-		
-	    String[] headers= {"Grupo","Descripción"};
-	    
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(headers);
-		
-		//Object[] row = {"Grupo","Descripción"};
-		//model.addRow(row);
-		
-//		for (Podcast podcast : podcasts) {
-//			String name = podcast.getCollectionName();
-//			String type = podcast.getCollectionType();
-//			String genre = podcast.getCollectionGenre();
-//			String desc = podcast.getCollectionDesc();
-//			Object[] row = {name, type, genre, desc};
-//			model.addRow(row);
-//		}
-		tablePodcast.setModel(model);
-		add(tablePodcast);
-		
-		reproContentBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
+		btnReproContent = new JButton("Reproducir contenido");
+		btnReproContent.setBounds(440, 561, 186, 28);
+		add(btnReproContent);
+		btnReproContent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Sesion.getInstance().setContentID(podcastID);
+				
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -189,15 +153,107 @@ public class PodcastPanel extends JPanel {
 
 		});
 
+		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona el podcast:");
+		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccionaTuPlaylist.setForeground(new Color(200, 40, 255));
+		lblSeleccionaTuPlaylist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblSeleccionaTuPlaylist.setBounds(362, 111, 219, 25);
+		add(lblSeleccionaTuPlaylist);
+
+		comboBox = new JComboBox<String>();
+		comboBox.setVisible(true);
+		comboBox.setBounds(360, 147, 231, 22);
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent c) {
+				try {
+					getPodcasts(Sesion.getInstance().getCollectionID());
+					comboBox.setModel(boxmodel);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		comboBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					podcastID = listUniqueID[comboBox.getSelectedIndex()];
+					getPodcastInfo(podcastID);
+				} catch (ClassNotFoundException c) {
+					c.printStackTrace();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		add(comboBox);
+
+		lbldiscsName = new JLabel("");
+		lbldiscsName.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsName.setForeground(new Color(200, 40, 255));
+		lbldiscsName.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
+		lbldiscsName.setBounds(21, 245, 248, 64);
+		add(lbldiscsName);
+
+		lbldiscsDescText = new JLabel("");
+		lbldiscsDescText.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsDescText.setForeground(new Color(255, 255, 255));
+		lbldiscsDescText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lbldiscsDescText.setBounds(715, 212, 219, 219);
+		add(lbldiscsDescText);
+
+		lblContentDurationText = new JLabel("");
+		lblContentDurationText.setHorizontalAlignment(SwingConstants.CENTER);
+		lblContentDurationText.setForeground(new Color(255, 255, 255));
+		lblContentDurationText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblContentDurationText.setBounds(29, 388, 219, 25);
+		add(lblContentDurationText);
+		
+		artistImageLbl = new JLabel("");
+		artistImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		artistImageLbl.setBounds(336, 226, 292, 280);
+		add(artistImageLbl);
+		
+		layOutFordiscsLbl = new JLabel("");
+		layOutFordiscsLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
+		layOutFordiscsLbl.setForeground(new Color(255, 255, 255));
+		layOutFordiscsLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
+		layOutFordiscsLbl.setBounds(310, 198, 342, 338);
+		add(layOutFordiscsLbl);
+		
+		JLabel lbldiscsRegDate = new JLabel("Duracion:");
+		lbldiscsRegDate.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsRegDate.setForeground(new Color(200, 40, 255));
+		lbldiscsRegDate.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lbldiscsRegDate.setBounds(29, 336, 219, 25);
+		add(lbldiscsRegDate);
+
 	}
-	
-	public void setCreatorId(int artistId) {
-		this.creatorID = artistId;
+
+	private void getPodcasts(int collectionID) throws ClassNotFoundException, SQLException {
+		List<Podcast> podcasts = new ContentController().getPodcastBySerieId(collectionID);
+		listUniqueID = new int[podcasts.size()];
+		boxmodel = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < podcasts.size(); i++) {
+			listUniqueID[i] = podcasts.get(i).getContentID();
+			String songsNames = podcasts.get(i).getContentName();
+			boxmodel.addElement(songsNames);
+		}
+	}
+
+	private void getPodcastInfo(int podcastID) throws Exception {
+		Podcast podcast = new ContentController().getPodcastInfo(podcastID);
+		lblContentDurationText.setText(podcast.getContentDuration().toString());
+		lbldiscsName.setText(podcast.getContentName());
+		artistImageIcon = podcast.getSeries().getCollectionImage();
+		artistImageLbl.setIcon(artistImageIcon);
 	}
 
 	public JPanel getPodcastPanel() {
 		// TODO Auto-generated method stub
 		return this;
 	}
-
 }

@@ -26,15 +26,27 @@ public class Converter {
 			return buffer;
 		}
 	}
+
 	public static ImageIcon getImageFromBlob(Blob blobFromDatabase) throws Exception {
 		byte[] imageBytes = blobFromDatabase.getBytes(1, (int) blobFromDatabase.length());
-		Image image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+		ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+		Image image = ImageIO.read(bais);
 		return new ImageIcon(image);
 	}
 
 	public static java.util.Date convertFromSqlDateToUtilDate(java.sql.Date sqlDateFromDatabase) {
 		return new java.util.Date(sqlDateFromDatabase.getTime());
 	}
+
+	public static String convertToSimpleDate(java.util.Date date) {
+	    if (date != null) {
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	        return formatter.format(date);
+	    } else {
+	        return "N/A"; // O cualquier otro valor predeterminado que desees usar para fechas nulas
+	    }
+	}
+
 
 	public static java.sql.Date convertStringToSqlDate(String textDate) throws ParseException {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,16 +74,14 @@ public class Converter {
 		byte[] fileContent = Files.readAllBytes(Paths.get(pathFile));
 		return Base64.getEncoder().encodeToString(fileContent);
 	}
-	
-	
-	public static String convertDateToString(java.util.Date date){
-		
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	public static String convertDateToString(java.util.Date date) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String s = formatter.format(date);
-		
-		
+
 		return s;
-		
+
 	}
 
 }

@@ -5,10 +5,12 @@ import errekamusic.logica.Sesion;
 import errekamusic.vista.complementos.*;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -60,8 +62,19 @@ public class VentanaPrincipal extends JFrame {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public VentanaPrincipal() throws ClassNotFoundException, SQLException {
-		inicializar();
+	public VentanaPrincipal() throws ParseException, IOException {
+		try {
+			inicializar();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha encontrado un archivo...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha podido concectar a la base de datos...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha encontrado un archivo...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void inicializar() throws ClassNotFoundException, SQLException {

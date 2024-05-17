@@ -1,6 +1,5 @@
 package errekamusic.logica;
 
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -85,6 +84,11 @@ public class ListsController {
 		} else {
 			System.out.println ("No hay libros que insertar");
 		}
+	}
+
+	public boolean insertContentIntoPlayList(PlayList playList) throws ClassNotFoundException, SQLException {
+		return new PlayListManager().insertContent(playList);
+		
 	}
 
 }

@@ -30,9 +30,10 @@ public class Sesion {
 	private static final String PATH_FICHERO = "C:\\Users\\in1dm3-v\\Desktop\\";
 	private static final String NOMBRE_FICHERO = "playLists.txt";
 	
-	public Users userInfo = null;
-	public int rowSelected = 0;
-
+	private Users userInfo = null;
+	private int artistID = 0;
+	private int collectionID = 0;
+	private int contentID = 0;
 	
 
 	/**
@@ -182,13 +183,29 @@ public class Sesion {
 	public static String getNombreFichero() {
 		return NOMBRE_FICHERO;
 	}
-	
-	public int getRowSelected() {
-		return rowSelected;
+
+	public int getArtistID() {
+		return artistID;
 	}
 
-	public void setRowSelected(int rowSelected) {
-		this.rowSelected = rowSelected;
+	public void setArtistID(int artistID) {
+		this.artistID = artistID;
 	}
-	
+
+	public int getCollectionID() {
+		return collectionID;
+	}
+
+	public void setCollectionID(int collectionID) {
+		this.collectionID = collectionID;
+	}
+
+	public int getContentID() {
+		return contentID;
+	}
+
+	public void setContentID(int contentID) {
+		this.contentID = contentID;
+	}
+
 }

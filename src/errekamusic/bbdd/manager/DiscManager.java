@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,20 +98,17 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection join artist g on collection.creatorId = g.artistId where collectionType = 'disc' and creatorId = ? ";
+			String sql = "select collectionID, CollectionName, CollectionGenre, CollectionDate, CollectionImage from collection where creatorId = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, discID);
 			result = pstmt.executeQuery();
 
 			while (result.next()) {
-				artist = new Artist();
+				discInfo.setCollectionID(result.getInt("collectionID"));
 				discInfo.setCollectionName(result.getString("CollectionName"));
 				discInfo.setCollectionGenre(result.getString("CollectionGenre"));
 				discInfo.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
 				discInfo.setCollectionImage(Converter.getImageFromBlob(result.getBlob("CollectionImage")));
-				artist.setArtistName(result.getString("ArtistName"));
-				discInfo.setArtist(artist);
-
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());
@@ -135,11 +133,7 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		return ret;
 	}
 
-	@Override
-	public boolean update(Disc t) {
-		boolean ret = false;
-		return ret;
-	}
+
 
 	@Override
 	public boolean delete(Integer t) {
@@ -153,22 +147,48 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		Class.forName(DBUtils.DRIVER);
 
 		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		String sql = "select collectionName, collectionGenre, CollectionDesc,collectionType from collection where collectionType = 'disc' and creatorId = ? ";
+		String sql = "select collectionID, collectionName, collectionGenre, CollectionDate, CollectionImage from collection where creatorId = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, creatorId);
 		result = pstmt.executeQuery();
 
 		while (result.next()) {
-			disc = new Disc();
+			Disc disc = new Disc();
+			disc.setCollectionID(result.getInt("collectionID"));
 			disc.setCollectionName(result.getString("CollectionName"));
 			disc.setCollectionGenre(result.getString("CollectionGenre"));
-			disc.setCollectionDesc(result.getString("CollectionDesc"));
-			disc.setCollectionType(result.getString("collectionType"));
-			
+			disc.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
 			listDisc.add(disc);
 		}
 
 		return listDisc;
+	}
+	
+	public List<Disc> top10Artist() throws Exception {
+		List<Disc> listDisc = new ArrayList<>();
+
+		Class.forName(DBUtils.DRIVER);
+
+		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+		Statement statement = connection.createStatement();
+		String sql = "SELECT CollectionName,CollectionReproNum,CollectionType FROM collection where CollectionType = 'DISC' order by CollectionReproNum desc limit 10 ;";
+		ResultSet result = statement.executeQuery(sql);
+		while (result.next()) {
+			Disc disc = new Disc();
+			disc.setCollectionName(result.getString("CollectionName"));
+			disc.setCollectionRepNum(result.getInt("CollectionReproNum"));
+			disc.setCollectionType(result.getString("CollectionType"));
+			listDisc.add(disc);
+		}
+		return listDisc;
+
+	}
+
+	@Override
+	public boolean update(Disc t, Integer z) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

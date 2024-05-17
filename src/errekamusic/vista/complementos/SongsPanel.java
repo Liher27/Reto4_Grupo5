@@ -4,36 +4,49 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
 
-import errekamusic.bbdd.Pojo.Contenido;
-//import errekamusic.logica.ContentController;
+import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 
 public class SongsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JLabel lblLogoErrekamusic = null;
-	private JLabel lblSongsTitle = null;
-
-	private JButton songsPanelBackBtn = null;
 	private JButton btnReproContent = null;
 	private JLabel lblProfilePicture = null;
+	private JButton songsPanelBackBtn = null;
+
+	private JLabel lblLogoErrekamusic = null;
+	private JLabel lblDiscoverSongsTitle = null;
 	private JLabel seeYourProfileLbl = null;
-	private JTable tableSongs;
-	private int collectionId = 0;
+	private JComboBox<String> comboBox = null;
+	private JLabel lblContentDurationText = null;
+	private JLabel lbldiscsDescText = null;
+	private JLabel artistImageLbl = null;
+	private ImageIcon artistImageIcon = null;
+
+	private DefaultComboBoxModel<String> boxmodel = null;
+	private int SongID = 0;
+	private JLabel lbldiscsName = null;
+	
+	private JLabel layOutFordiscsLbl = null;
+
+	private int[] listUniqueID = null;
 
 	/**
 	 * Create the panel.
@@ -57,7 +70,7 @@ public class SongsPanel extends JPanel {
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
 				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
 				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
@@ -71,28 +84,23 @@ public class SongsPanel extends JPanel {
 		});
 
 		seeYourProfileLbl = new JLabel("Ver perfil");
+		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
-		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		add(seeYourProfileLbl);
-
+		
 		songsPanelBackBtn = new JButton("Volver");
 		songsPanelBackBtn.setBounds(844, 556, 98, 33);
 		songsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		add(songsPanelBackBtn);
 		songsPanelBackBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
 			public void actionPerformed(ActionEvent e) {
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
 				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
 				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
 				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
@@ -105,39 +113,35 @@ public class SongsPanel extends JPanel {
 			}
 
 		});
+		lblDiscoverSongsTitle = new JLabel("Descubre Songs");
+		lblDiscoverSongsTitle.setBounds(279, 32, 398, 64);
+		lblDiscoverSongsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDiscoverSongsTitle.setForeground(new Color(200, 40, 255));
+		lblDiscoverSongsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		add(lblDiscoverSongsTitle);
 
 		lblLogoErrekamusic = new JLabel("");
-		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
+		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		add(lblLogoErrekamusic);
-
-		lblSongsTitle = new JLabel("Descubre canciones");
-		lblSongsTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSongsTitle.setForeground(new Color(200, 40, 255));
-		lblSongsTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
-		lblSongsTitle.setBounds(274, 32, 403, 64);
-		add(lblSongsTitle);
 
 		btnReproContent = new JButton("Reproducir contenido");
 		btnReproContent.setBounds(440, 561, 186, 28);
 		add(btnReproContent);
 		btnReproContent.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
 			public void actionPerformed(ActionEvent e) {
+				Sesion.getInstance().setContentID(SongID);
+				System.out.println(SongID);
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
 				Sesion.getInstance().getMainMenuPanel().getMainMenuPanel().setVisible(false);
 				Sesion.getInstance().getGroupPanel().getGroupPanel().setVisible(false);
-				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
+				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(true);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
 				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
@@ -148,45 +152,109 @@ public class SongsPanel extends JPanel {
 			}
 
 		});
+
+		JLabel lblSeleccionaTuPlaylist = new JLabel("Selecciona el Song:");
+		lblSeleccionaTuPlaylist.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeleccionaTuPlaylist.setForeground(new Color(200, 40, 255));
+		lblSeleccionaTuPlaylist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblSeleccionaTuPlaylist.setBounds(362, 111, 219, 25);
+		add(lblSeleccionaTuPlaylist);
+
+		comboBox = new JComboBox<String>();
+		comboBox.setVisible(true);
+		comboBox.setBounds(360, 147, 231, 22);
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent c) {
+				try {
+					getSongs(Sesion.getInstance().getCollectionID());
+					System.out.println(Sesion.getInstance().getCollectionID());
+					comboBox.setModel(boxmodel);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		comboBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					SongID = listUniqueID[comboBox.getSelectedIndex()];
+					System.out.println(SongID);
+					getSongInfo(SongID);
+				} catch (ClassNotFoundException c) {
+					c.printStackTrace();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		add(comboBox);
+
+		lbldiscsName = new JLabel("");
+		lbldiscsName.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsName.setForeground(new Color(200, 40, 255));
+		lbldiscsName.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
+		lbldiscsName.setBounds(21, 245, 248, 64);
+		add(lbldiscsName);
+
+		lbldiscsDescText = new JLabel("");
+		lbldiscsDescText.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsDescText.setForeground(new Color(255, 255, 255));
+		lbldiscsDescText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lbldiscsDescText.setBounds(715, 212, 219, 219);
+		add(lbldiscsDescText);
+
+		lblContentDurationText = new JLabel("");
+		lblContentDurationText.setHorizontalAlignment(SwingConstants.CENTER);
+		lblContentDurationText.setForeground(new Color(255, 255, 255));
+		lblContentDurationText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblContentDurationText.setBounds(29, 388, 219, 25);
+		add(lblContentDurationText);
 		
-		tableSongs = new JTable();
-		tableSongs.setColumnSelectionAllowed(true);
-		tableSongs.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tableSongs.setBounds(162, 143, 649, 331);
+		artistImageLbl = new JLabel("");
+		artistImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		artistImageLbl.setBounds(336, 226, 292, 280);
+		add(artistImageLbl);
 		
-//		ContentController contentControllert = new ContentController();
-//		List<Contenido> contenidos = null;
-//		try {
-//			contenidos = contentControllert.GetContenidoByDisc(this.collectionId);
-//		} catch (Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		
-//		String[] headersDisc= {"Grupo","Descripción"};
-//	    
-//		DefaultTableModel modelDisc = new DefaultTableModel();
-//		modelDisc.setColumnIdentifiers(headersDisc);
-//		/*
-//		for (Contenido contenido : contenidos) {
-//			String name = contenido.getCollectionName();
-//			String type = disc.getCollectionType();
-//			String genre = disc.getCollectionGenre();
-//			String desc = disc.getCollectionDesc();
-//			Object[] row = {name, type, genre, desc};
-//			modelDisc.addRow(row);
-//		}*/
-//		tableSongs.setModel(modelDisc);
-//		add(tableSongs);
+		layOutFordiscsLbl = new JLabel("");
+		layOutFordiscsLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
+		layOutFordiscsLbl.setForeground(new Color(255, 255, 255));
+		layOutFordiscsLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
+		layOutFordiscsLbl.setBounds(310, 198, 342, 338);
+		add(layOutFordiscsLbl);
+		
+		JLabel lbldiscsRegDate = new JLabel("Duracion:");
+		lbldiscsRegDate.setHorizontalAlignment(SwingConstants.CENTER);
+		lbldiscsRegDate.setForeground(new Color(200, 40, 255));
+		lbldiscsRegDate.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lbldiscsRegDate.setBounds(29, 336, 219, 25);
+		add(lbldiscsRegDate);
+
 	}
-	
-	public void setCollectionId(int collectionId){
-		this.collectionId = collectionId;
+
+	private void getSongs(int collectionID) throws ClassNotFoundException, SQLException {
+		List<Canciones> Songs = new ContentController().getSongByDiscId(collectionID);
+		listUniqueID = new int[Songs.size()];
+		boxmodel = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < Songs.size(); i++) {
+			listUniqueID[i] = Songs.get(i).getContentID();
+			String songsNames = Songs.get(i).getContentName();
+			boxmodel.addElement(songsNames);
+		}
+	}
+
+	private void getSongInfo(int SongID) throws Exception {
+		Canciones Song = new ContentController().getSongInfo(SongID);
+		lblContentDurationText.setText(String.valueOf(Song.getContentDuration()));
+		lbldiscsName.setText(Song.getContentName());
+		artistImageIcon = Song.getDisc().getCollectionImage();
+		artistImageLbl.setIcon(artistImageIcon);
 	}
 
 	public JPanel getSongsPanel() {
-		// TODO Auto-generated method stub
 		return this;
 	}
-
 }
