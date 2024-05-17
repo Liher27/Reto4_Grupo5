@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Objects;
 
-public class Contenido implements Serializable {
+public class Content implements Serializable {
 	private static final long serialVersionUID = 2929858780287555805L;
 	private int contentID = 0;
 	private String contentName = null;
@@ -60,7 +60,7 @@ public class Contenido implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Contenido other = (Contenido) obj;
+		Content other = (Content) obj;
 		return Objects.equals(contentDuration, other.contentDuration) && contentID == other.contentID
 				&& Objects.equals(contentName, other.contentName) && Objects.equals(contentPath, other.contentPath)
 				&& contentReproNum == other.contentReproNum && contentType == other.contentType;

@@ -2,7 +2,7 @@ package errekamusic.bbdd.Pojo;
 
 import java.util.Objects;
 
-public class Canciones extends Contenido {
+public class Song extends Content {
 	
 	private Disc disc = null;
 
@@ -27,7 +27,7 @@ public class Canciones extends Contenido {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Canciones other = (Canciones) obj;
+		Song other = (Song) obj;
 		return Objects.equals(disc, other.disc);
 	}
 

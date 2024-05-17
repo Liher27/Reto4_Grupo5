@@ -16,10 +16,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 
@@ -169,8 +170,9 @@ public class SongsPanel extends JPanel {
 					getSongs(Sesion.getInstance().getCollectionID());
 					System.out.println(Sesion.getInstance().getCollectionID());
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				}  catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -181,12 +183,15 @@ public class SongsPanel extends JPanel {
 					SongID = listUniqueID[comboBox.getSelectedIndex()];
 					System.out.println(SongID);
 					getSongInfo(SongID);
-				} catch (ClassNotFoundException c) {
-					c.printStackTrace();
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+				}  catch (ClassNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -236,7 +241,7 @@ public class SongsPanel extends JPanel {
 	}
 
 	private void getSongs(int collectionID) throws ClassNotFoundException, SQLException {
-		List<Canciones> Songs = new ContentController().getSongByDiscId(collectionID);
+		List<Song> Songs = new ContentController().getSongByDiscId(collectionID);
 		listUniqueID = new int[Songs.size()];
 		boxmodel = new DefaultComboBoxModel<String>();
 		for (int i = 0; i < Songs.size(); i++) {
@@ -247,7 +252,7 @@ public class SongsPanel extends JPanel {
 	}
 
 	private void getSongInfo(int SongID) throws Exception {
-		Canciones Song = new ContentController().getSongInfo(SongID);
+		Song Song = new ContentController().getSongInfo(SongID);
 		lblContentDurationText.setText(String.valueOf(Song.getContentDuration()));
 		lbldiscsName.setText(Song.getContentName());
 		artistImageIcon = Song.getDisc().getCollectionImage();

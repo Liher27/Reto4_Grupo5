@@ -6,12 +6,14 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -208,7 +210,6 @@ public class MainMenuPanel extends JPanel {
 		lblMenuPrincipal.setBounds(472, 11, 266, 99);
 		lblMenuPrincipal.setIcon(new ImageIcon("contents/errekaMusicLogoForMainMenu.png"));
 		add(lblMenuPrincipal);
-		
 
 		propagandaImageLbl = new JLabel("");
 		propagandaImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
@@ -217,9 +218,8 @@ public class MainMenuPanel extends JPanel {
 			public void componentShown(ComponentEvent c) {
 				try {
 					getPropagandaImage();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -274,7 +274,7 @@ public class MainMenuPanel extends JPanel {
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
-				
+
 			}
 		});
 
@@ -306,15 +306,14 @@ public class MainMenuPanel extends JPanel {
 			try {
 				discForPropaganda = discInfo.get(0);
 
-				
 				discNameLbl.setText(discForPropaganda.getCollectionName().toUpperCase());
 				groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
 				propagandaDiscDateLbl.setText(Converter.convertToSimpleDate(discForPropaganda.getCollectionDate()));
 				propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
 				discImageIcon = discForPropaganda.getCollectionImage();
 				propagandaImageLbl.setIcon(discImageIcon);
-			} catch (Exception e) {
-
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 

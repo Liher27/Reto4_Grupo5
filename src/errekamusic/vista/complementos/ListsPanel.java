@@ -140,12 +140,14 @@ public class ListsPanel extends JPanel {
 						JOptionPane.showMessageDialog(null, "PlayList no creada", "Error", JOptionPane.ERROR_MESSAGE);
 
 					}
-				} catch (HeadlessException e1) {
-					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -169,12 +171,14 @@ public class ListsPanel extends JPanel {
 						JOptionPane.showMessageDialog(null, "PlayList no eliminida", "Error",
 								JOptionPane.ERROR_MESSAGE);
 					}
-				} catch (HeadlessException e1) {
-					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -190,11 +194,13 @@ public class ListsPanel extends JPanel {
 				try {
 					importPlayLists();
 				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -210,11 +216,13 @@ public class ListsPanel extends JPanel {
 				try {
 					exportPlayLists();
 				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -289,8 +297,8 @@ public class ListsPanel extends JPanel {
 				try {
 					getLists();
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -300,10 +308,12 @@ public class ListsPanel extends JPanel {
 				try {
 					int playlistId = listUniqueID[comboBox.getSelectedIndex()];
 					getPlayListInfo(playlistId);
-				} catch (ClassNotFoundException c) {
-					c.printStackTrace();
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+				} catch (ClassNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -112,9 +112,8 @@ public class GroupInfoPanel extends JPanel {
 				try {
 					artist.setArtistRegDate(Converter
 							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(dateFiled.getText())));
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				artist.setArtistDesc(descFiled.getText());
 				artist.setArtistType(typeArtist.getSelectedItem().toString());
@@ -124,11 +123,11 @@ public class GroupInfoPanel extends JPanel {
 				try {
 					artistController.insertArtist(artist);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				cleanFileContent();
 			}
@@ -140,6 +139,10 @@ public class GroupInfoPanel extends JPanel {
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				addButton.setVisible(false);
+				searchButton.setVisible(false);
+				updateInfo.setVisible(false);
+				
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -194,10 +197,8 @@ public class GroupInfoPanel extends JPanel {
 					artistImage = artist.getArtistImage();
 					artistImageLabel.setIcon(artistImage);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
 			}
 		});
 		searchButton.setBounds(537, 295, 89, 23);
@@ -214,20 +215,18 @@ public class GroupInfoPanel extends JPanel {
 				try {
 					artist.setArtistRegDate(Converter
 							.convertFromUtilDateToSqlDate(Converter.convertStringToUtilDate(dateFiled.getText())));
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				ArtistController artistController = new ArtistController();
 				try {
 					artistController.updateArtist(artist, artistId);
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null,
-							"El Formato de La fecha esta incorrecto, vuelva a introducirlo（ejemplo：yyyy-MM-dd）");
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				cleanFileContent();
 			}
@@ -276,4 +275,17 @@ public class GroupInfoPanel extends JPanel {
 	public JPanel getGroupInfoPanel() {
 		return this;
 	}
+	
+	public JButton getAddButton() {
+		return addButton;
+	}
+
+	public JButton getSearchButton() {
+		return searchButton;
+	}
+
+	public JButton getUpdateInfo() {
+		return updateInfo;
+	}
+
 }

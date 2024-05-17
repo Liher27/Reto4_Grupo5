@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Pojo.Serie;
 import errekamusic.logica.ArtistController;
@@ -25,6 +26,7 @@ import errekamusic.logica.CollectionController;
 import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class AdminPanel extends JPanel {
 
@@ -38,10 +40,10 @@ public class AdminPanel extends JPanel {
 	private JLabel lblProfilePicture = null;
 	private JList<String> list = null;
 	private JLabel lblTopSongs = null;
-	private List<Canciones> top10Songs = new ArrayList<>();
+	private List<Song> top10Songs = new ArrayList<>();
 	private List<Artist> top10Artist = new ArrayList<>();
 	private List<Disc> top10Discs = new ArrayList<>();
-	private List<Serie>top10Series = new ArrayList<>();
+	private List<Serie> top10Series = new ArrayList<>();
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private JLabel lblTopArtist = null;
 	private JLabel lblTopDiscserie = null;
@@ -150,7 +152,7 @@ public class AdminPanel extends JPanel {
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(true);
-				Sesion.getInstance().getGroupInfoPanel().setInvisibleForCreate();
+				Sesion.getInstance().getGroupInfoPanel().getAddButton().setVisible(true);
 			}
 		});
 		createGruop.setFont(new Font("Segoe UI Black", Font.PLAIN, 27));
@@ -191,8 +193,7 @@ public class AdminPanel extends JPanel {
 				try {
 					top10Artist = artistController.top10Artist();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				for (int i = 0; i < top10Artist.size(); i++) {
 					listModel.addElement(i + 1 + "." + top10Artist.get(i).getArtistName());
@@ -215,8 +216,7 @@ public class AdminPanel extends JPanel {
 				try {
 					top10Discs = collectionController.top10Disc();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				for (int i = 0; i < top10Discs.size(); i++) {
 					listModel.addElement(i + 1 + "." + top10Discs.get(i).getCollectionName());
@@ -248,7 +248,8 @@ public class AdminPanel extends JPanel {
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(true);
-				Sesion.getInstance().getGroupInfoPanel().setInvisibleForModify();
+				Sesion.getInstance().getGroupInfoPanel().getAddButton().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getSearchButton().setVisible(true);
 			}
 		});
 		modifyGroup.setForeground(Color.MAGENTA);
@@ -260,14 +261,13 @@ public class AdminPanel extends JPanel {
 		lblTopSerie.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				listModel.removeAllElements();
 				CollectionController collectionController = new CollectionController();
 				try {
 					top10Series = collectionController.top10Serie();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				for (int i = 0; i < top10Series.size(); i++) {
 					listModel.addElement(i + 1 + "." + top10Series.get(i).getCollectionName());

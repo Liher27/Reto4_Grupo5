@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.Converter;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class SongsManager implements DatabaseInterface<Canciones, Integer> {
+public class SongsManager implements DatabaseInterface<Song, Integer> {
 
-	public List<Canciones> getAllData() throws Exception {
-		List<Canciones> songs = new ArrayList<Canciones>();
+	public List<Song> getAllData() throws Exception {
+		List<Song> songs = new ArrayList<Song>();
 		try {
 			Class.forName(DBUtils.DRIVER);
 			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
@@ -26,7 +26,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 			String sql = "select contentID, contentName,collectionName,ArtistName,ContentPath,CollectionImage,ContentDuration from content join collection on content.collectionID = collection.collectionid join artist on collection.creatorId = artist.ArtistID";
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
-				Canciones song = new Canciones();
+				Song song = new Song();
 				song.setContentID(result.getInt("contentID"));
 				song.setContentName(result.getString("ContentName"));
 				song.setContentDuration(result.getTime("ContentDuration"));
@@ -50,8 +50,8 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 	}
 
 	@Override
-	public Canciones selectById(Integer songID) throws Exception {
-		Canciones song = new Canciones();
+	public Song selectById(Integer songID) throws Exception {
+		Song song = new Song();
 		try {
 			Class.forName(DBUtils.DRIVER);
 			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
@@ -80,8 +80,8 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 	}
 
 	@Override
-	public List<Canciones> selectAll() {
-		List<Canciones> songs = new ArrayList<Canciones>();
+	public List<Song> selectAll() {
+		List<Song> songs = new ArrayList<Song>();
 		try {
 			Class.forName(DBUtils.DRIVER);
 			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
@@ -89,7 +89,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 			String sql = "SELECT * FROM content";
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
-				Canciones song = new Canciones();
+				Song song = new Song();
 				song.setContentName(result.getString("ContentName"));
 				song.setContentDuration(result.getTime("ContentDuration"));
 				song.setContentPath(result.getString("ContentPath"));
@@ -104,12 +104,10 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 	}
 
 	@Override
-	public boolean insert(Canciones t) {
+	public boolean insert(Song t) {
 		boolean ret = false;
 		return ret;
 	}
-
-
 
 	@Override
 	public boolean delete(Integer t) {
@@ -117,8 +115,8 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		return ret;
 	}
 
-	public List<Canciones> getSongsByDisc(int discId) throws ClassNotFoundException, SQLException {
-		List<Canciones> songs = new ArrayList<Canciones>();
+	public List<Song> getSongsByDisc(int discId) throws ClassNotFoundException, SQLException {
+		List<Song> songs = new ArrayList<Song>();
 		Class.forName(DBUtils.DRIVER);
 		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 		String sql = "SELECT * FROM content where collectionID = ?";
@@ -126,7 +124,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		statement.setInt(1, discId);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
-			Canciones song = new Canciones();
+			Song song = new Song();
 			song.setContentID(result.getInt("ContentId"));
 			song.setContentName(result.getString("ContentName"));
 			song.setContentDuration(result.getTime("ContentDuration"));
@@ -135,10 +133,10 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		}
 		return songs;
 	}
-	
-	public List<Canciones> getSongBySongID(int id ) throws Exception{
-		
-		List<Canciones> songs = new ArrayList<Canciones>();
+
+	public List<Song> getSongBySongID(int id) throws Exception {
+
+		List<Song> songs = new ArrayList<Song>();
 		Class.forName(DBUtils.DRIVER);
 		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 		String sql = "SELECT  ContentName,CollectionName,ArtistName,"
@@ -148,7 +146,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		statement.setInt(1, id);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
-			Canciones song = new Canciones();
+			Song song = new Song();
 			song.setContentName(result.getString("ContentName"));
 			song.setContentDuration(result.getTime("ContentDuration"));
 			song.setContentPath(result.getString("ContentPath"));
@@ -164,10 +162,9 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 	}
 
 	@Override
-	public boolean update(Canciones t, Integer z) throws ClassNotFoundException, SQLException {
-		
+	public boolean update(Song t, Integer z) throws ClassNotFoundException, SQLException {
+
 		return false;
 	}
-
 
 }

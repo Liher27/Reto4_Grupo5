@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.Pojo.PlayList;
 import errekamusic.logica.ContentController;
 import errekamusic.logica.ListsController;
@@ -43,7 +43,7 @@ public class ContentPlayerPanel extends JPanel {
 	private JLabel artistName = null;
 	private JLabel discName = null;
 	private ImageIcon discImage = null;
-	private List<Canciones> musicList = null;
+	private List<Song> musicList = null;
 	private DefaultComboBoxModel<String> boxmodel = null;
 	private JComboBox<String> comboBox = null;
 	private PlayList playList = null;
@@ -166,14 +166,16 @@ public class ContentPlayerPanel extends JPanel {
 					if (!audioPlay) {
 						ContentController contentManager = new ContentController();
 						try {
-							musicList = contentManager.getSongById(Sesion.getInstance().getContentID()) ;
-						} catch (ClassNotFoundException e1) {
-							e1.printStackTrace();
+							musicList = contentManager.getSongById(Sesion.getInstance().getContentID());
+						}  catch (ClassNotFoundException e1) {
+							JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+									JOptionPane.ERROR_MESSAGE);
 						} catch (SQLException e1) {
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+									JOptionPane.ERROR_MESSAGE);
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+									JOptionPane.ERROR_MESSAGE);
 						}
 						if (cancionActual < 0) {
 							musicPlayer = new MusicPlayer();
@@ -224,8 +226,9 @@ public class ContentPlayerPanel extends JPanel {
 				try {
 					getLists();
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				}  catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -319,10 +322,8 @@ public class ContentPlayerPanel extends JPanel {
 			songName.setText(musicList.get(cancionActual).getContentName());
 			discName.setText(musicList.get(cancionActual).getDisc().getCollectionName());
 			artistName.setText(musicList.get(cancionActual).getDisc().getArtist().getArtistName());
-//			discImage = musicList.get(cancionActual).getDisc().getCollectionImage();
-//			discImageLabel.setIcon(discImage);
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

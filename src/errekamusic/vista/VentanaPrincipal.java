@@ -50,8 +50,9 @@ public class VentanaPrincipal extends JFrame {
 			public void run() {
 				try {
 					new VentanaPrincipal().frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -85,10 +86,6 @@ public class VentanaPrincipal extends JFrame {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
-
-		/**
-		 * El array que usaremos para guardar los 
-		 */
 
 		// 0
 		WelcomePanel welcome = new WelcomePanel();

@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -169,8 +170,9 @@ public class SeriesPanel extends JPanel {
 				try {
 					getSeries(Sesion.getInstance().getArtistID());
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -180,12 +182,15 @@ public class SeriesPanel extends JPanel {
 				try {
 					seriesID = listUniqueID[comboBox.getSelectedIndex()];
 					getSerieInfo(seriesID);
-				} catch (ClassNotFoundException c) {
-					c.printStackTrace();
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+				}  catch (ClassNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

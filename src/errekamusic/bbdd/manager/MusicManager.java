@@ -8,15 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.Utils.DBUtils;
 
 public class MusicManager {
 		
 	
 	
-	public List<Canciones>top10Songs (){
-		List<Canciones> listSongs = new ArrayList<>();
+	public List<Song>top10Songs (){
+		List<Song> listSongs = new ArrayList<>();
 		
 		try {
 			Class.forName(DBUtils.DRIVER);
@@ -27,7 +27,7 @@ public class MusicManager {
 			String sql = "SELECT ContentName,ContentReproNum  FROM Content ORDER BY ContentReproNum DESC LIMIT 4;";
 			ResultSet result = statement.executeQuery(sql);
 			while(result.next()) {
-				Canciones canciones = new Canciones();
+				Song canciones = new Song();
 				canciones.setContentName(result.getString("ContentName"));
 				canciones.setContentReproNum(result.getInt("ContentReproNum"));
 				listSongs.add(canciones);

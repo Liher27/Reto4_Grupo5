@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import errekamusic.bbdd.Pojo.Contenido;
+import errekamusic.bbdd.Pojo.Content;
 import errekamusic.bbdd.Pojo.PlayList;
 import errekamusic.bbdd.Utils.DBUtils;
 
@@ -33,7 +33,7 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		result = pstmt.executeQuery();
 
 		if (result.next()) {
-			Contenido content = new Contenido();
+			Content content = new Content();
 			ret = new PlayList();
 			content.setContentName(result.getString("ContentName"));
 			content.setContentDuration(result.getTime("ContentDuration"));
@@ -120,7 +120,7 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		result = pstmt.executeQuery();
 
 		while (result.next()) {
-			Contenido content = new Contenido();
+			Content content = new Content();
 			PlayList playList = new PlayList();
 			content.setContentName(result.getString("ContentName"));
 			content.setContentDuration(result.getTime("ContentDuration"));
@@ -144,7 +144,7 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 
 		while (result.next()) {
 			PlayList playList = new PlayList();
-			Contenido content = new Contenido();
+			Content content = new Content();
 			playList.setPlayListID(result.getInt("playListID"));
 			playList.setPlayListTitle(result.getString("playListTitle"));
 			content.setContentDuration(result.getTime("ContentDuration"));

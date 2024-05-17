@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import javax.swing.ImageIcon;
 
-public class Coleccion {
+public class Collection {
 	private int collectionID = 0;
 	private String collectionName = null;
 	private Date localDate = null;
@@ -83,7 +83,7 @@ public class Coleccion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Coleccion other = (Coleccion) obj;
+		Collection other = (Collection) obj;
 		return Objects.equals(artist, other.artist) && Objects.equals(localDate, other.localDate)
 				&& Objects.equals(collectionDesc, other.collectionDesc)
 				&& Objects.equals(collectionGenre, other.collectionGenre) && collectionID == other.collectionID

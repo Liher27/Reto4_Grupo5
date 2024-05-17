@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.manager.SongsManager;
 import javazoom.jl.player.Player;
 
@@ -12,17 +12,17 @@ public class MusicPlayer {
 	private boolean paused = false;
 	private Player player;
 
-	public List<Canciones> getSongsList() throws Exception {
+	public List<Song> getSongsList() throws Exception {
 		SongsManager songsController = new SongsManager();
 		return songsController.getAllData();
 	}
 	
-	public Canciones getSong(int songID) throws Exception {
+	public Song getSong(int songID) throws Exception {
 		SongsManager songsController = new SongsManager();
 		return songsController.selectById(songID);
 	}
 
-	public void playMusic(Canciones canciones) {
+	public void playMusic(Song canciones) {
 		new Thread() {
 			@Override
 			public void run() {
@@ -37,11 +37,11 @@ public class MusicPlayer {
 		}.start();
 	}
 
-	public void runMusic(Canciones canciones) {
+	public void runMusic(Song canciones) {
 
 	}
 
-	public void resumeMusic(Canciones canciones) {
+	public void resumeMusic(Song canciones) {
 		if (paused) {
 			paused = false;
 			playMusic(canciones);

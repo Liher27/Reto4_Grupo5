@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,9 +70,9 @@ public class ProfilePanel extends JPanel {
 			public void componentShown(ComponentEvent c) {
 				try {
 					showUserInfor();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				}  catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

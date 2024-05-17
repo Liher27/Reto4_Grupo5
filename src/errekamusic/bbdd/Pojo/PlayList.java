@@ -8,7 +8,7 @@ public class PlayList implements Serializable {
 	private int playListID = 0;
 	private String playListTitle = null;
 	private int playListContentNum = 0;
-	private Contenido contenido = null;
+	private Content contenido = null;
 	private Users users = null;
 	public int getPlayListID() {
 		return playListID;
@@ -28,10 +28,10 @@ public class PlayList implements Serializable {
 	public void setPlayListContentNum(int playListContentNum) {
 		this.playListContentNum = playListContentNum;
 	}
-	public Contenido getContenido() {
+	public Content getContenido() {
 		return contenido;
 	}
-	public void setContenido(Contenido contenido) {
+	public void setContenido(Content contenido) {
 		this.contenido = contenido;
 	}
 	public Users getUsers() {

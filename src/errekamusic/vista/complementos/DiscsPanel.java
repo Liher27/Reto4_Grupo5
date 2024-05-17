@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -44,7 +45,7 @@ public class DiscsPanel extends JPanel {
 	private DefaultComboBoxModel<String> boxmodel = null;
 	private int discsID = 0;
 	private JLabel lbldiscsName = null;
-	
+
 	private JLabel layOutFordiscsLbl = null;
 
 	private int[] listUniqueID = null;
@@ -187,8 +188,8 @@ public class DiscsPanel extends JPanel {
 				try {
 					getDiscs(Sesion.getInstance().getArtistID());
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -199,12 +200,15 @@ public class DiscsPanel extends JPanel {
 					discsID = listUniqueID[comboBox.getSelectedIndex()];
 					Sesion.getInstance().setCollectionID(discsID);
 					getDiscsInfo(Sesion.getInstance().getArtistID());
-				} catch (ClassNotFoundException c) {
-					c.printStackTrace();
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+				}  catch (ClassNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -231,19 +235,19 @@ public class DiscsPanel extends JPanel {
 		lbldiscsRegDateText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
 		lbldiscsRegDateText.setBounds(29, 388, 219, 25);
 		add(lbldiscsRegDateText);
-		
+
 		artistImageLbl = new JLabel("");
 		artistImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
 		artistImageLbl.setBounds(336, 226, 292, 280);
 		add(artistImageLbl);
-		
+
 		layOutFordiscsLbl = new JLabel("");
 		layOutFordiscsLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
 		layOutFordiscsLbl.setForeground(new Color(255, 255, 255));
 		layOutFordiscsLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
 		layOutFordiscsLbl.setBounds(310, 198, 342, 338);
 		add(layOutFordiscsLbl);
-		
+
 		JLabel lbldiscsRegDate = new JLabel("Fecha de registro:");
 		lbldiscsRegDate.setHorizontalAlignment(SwingConstants.CENTER);
 		lbldiscsRegDate.setForeground(new Color(200, 40, 255));
@@ -271,7 +275,6 @@ public class DiscsPanel extends JPanel {
 		lbldiscsName.setText(disc.getCollectionName());
 		artistImageIcon = disc.getCollectionImage();
 		artistImageLbl.setIcon(artistImageIcon);
-		
 
 	}
 

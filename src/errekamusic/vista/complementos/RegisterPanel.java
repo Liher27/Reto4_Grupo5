@@ -21,6 +21,7 @@ import errekamusic.logica.UserController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.swing.JPasswordField;
@@ -395,7 +396,8 @@ public class RegisterPanel extends JPanel {
 					users.setUserProvince(fieldRegisterProvince.getText());
 					userController.insertNewUser(users);
 				} catch (ParseException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
@@ -441,8 +443,8 @@ public class RegisterPanel extends JPanel {
 					users.setUserProvince(fieldRegisterProvince.getText());
 					userController.insertNewUser(users);
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 				PremiumUser userPremium = new PremiumUser();
 				userPremium.setCountNum(Integer.valueOf(fieldRegisterCountName.getText().trim()));

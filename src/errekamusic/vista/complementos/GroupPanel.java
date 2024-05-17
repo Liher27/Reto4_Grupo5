@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -186,8 +187,9 @@ public class GroupPanel extends JPanel {
 				try {
 					getgroups();
 					comboBox.setModel(boxmodel);
-				} catch (Exception e) {
-					e.printStackTrace();
+				}  catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 
@@ -199,12 +201,15 @@ public class GroupPanel extends JPanel {
 					groupID = listUniqueID[comboBox.getSelectedIndex()];
 					System.out.println(groupID);
 					getgroupInfo(groupID);
-				} catch (ClassNotFoundException c) {
-					c.printStackTrace();
-				} catch (SQLException sqle) {
-					sqle.printStackTrace();
+				}  catch (ClassNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "Error al encontrar un archivo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e1) {
+					JOptionPane.showMessageDialog(null, "Error en la base de datos", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

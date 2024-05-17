@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
-import errekamusic.bbdd.Pojo.Coleccion;
+import errekamusic.bbdd.Pojo.Collection;
 import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Pojo.Podcast;
 import errekamusic.bbdd.Pojo.Serie;

@@ -8,17 +8,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import errekamusic.bbdd.Pojo.Canciones;
+import errekamusic.bbdd.Pojo.Song;
 import errekamusic.bbdd.Utils.DBUtils;
 
-public class CancionesManager extends AbstractManager implements DatabaseInterface<Canciones, Integer> {
+public class CancionesManager extends AbstractManager implements DatabaseInterface<Song, Integer> {
 
 	private PreparedStatement pstmt = null;
 	private ResultSet result = null;
 	private Connection conn = null;
 	
-	public List<Canciones> getCancionesByDiscId(int discId) throws ClassNotFoundException, SQLException {
-		List<Canciones> lCanciones = new ArrayList<Canciones>();
+	public List<Song> getCancionesByDiscId(int discId) throws ClassNotFoundException, SQLException {
+		List<Song> lCanciones = new ArrayList<Song>();
 
 		Class.forName(DBUtils.DRIVER);
 
@@ -29,7 +29,7 @@ public class CancionesManager extends AbstractManager implements DatabaseInterfa
 		result = pstmt.executeQuery();
 		
 		while (result.next()) {
-			Canciones cancion = new Canciones();
+			Song cancion = new Song();
 			cancion.setContentID(result.getInt("ContentID"));
 			cancion.setContentName(result.getString("ContentName"));
 			cancion.setContentDuration(result.getTime("ContentDuration"));
@@ -42,17 +42,17 @@ public class CancionesManager extends AbstractManager implements DatabaseInterfa
 	}
 	
 	@Override
-	public Canciones selectById(Integer z) throws ClassNotFoundException, SQLException {
+	public Song selectById(Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public List<Canciones> selectAll() throws ClassNotFoundException, SQLException {
+	public List<Song> selectAll() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public boolean insert(Canciones t) throws ClassNotFoundException, SQLException {
+	public boolean insert(Song t) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -63,7 +63,7 @@ public class CancionesManager extends AbstractManager implements DatabaseInterfa
 	}
 
 	@Override
-	public boolean update(Canciones t, Integer z) throws ClassNotFoundException, SQLException {
+	public boolean update(Song t, Integer z) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}

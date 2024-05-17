@@ -4,10 +4,12 @@ package errekamusic.vista.complementos;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -97,7 +99,9 @@ public class WelcomePanel extends JPanel{
 	private void esperar() {
 		try {
 			Thread.sleep(1000);
-		} catch (InterruptedException e) {
+		}  catch (InterruptedException e1) {
+			JOptionPane.showMessageDialog(null, "Error en el programa", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
