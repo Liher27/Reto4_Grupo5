@@ -55,8 +55,22 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 	}
 
 	@Override
-	public boolean delete(Integer z) {
+	public boolean delete(Integer id) throws SQLException {
 		boolean ret = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "delete from artist where artistid = '"+ id+"'";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate(sql);
+			
+		} finally {
+			release(conn, pstmt, rs);
+		}
 		return ret;
 	}
 
@@ -110,6 +124,23 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		}
 		return listArtist;
 
+	}
+	
+	public List<Artist> getDiscInfo (int id) throws SQLException, ClassNotFoundException{
+		List<Artist> ArtistInfo = new ArrayList<Artist>();
+		Class.forName(DBUtils.DRIVER);
+		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		String sql = "Select CollectionName from artist join collection on artist.artistid = collection.creatorid"
+				+ "where artistid = ?";
+		PreparedStatement pstmt = connection.prepareStatement(sql);
+		pstmt.setInt(1, id);
+		ResultSet result = pstmt.executeQuery();
+		while (result.next()) {
+			
+		}
+		
+		return ArtistInfo;
+		
 	}
 
 	public List<Artist> getArtistsByType(String artistType) throws SQLException, ClassNotFoundException {

@@ -1,5 +1,6 @@
 package errekamusic.bbdd.manager;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import errekamusic.bbdd.Pojo.Artist;
@@ -14,7 +16,7 @@ import errekamusic.bbdd.Pojo.Disc;
 import errekamusic.bbdd.Utils.DBUtils;
 import errekamusic.bbdd.Utils.Converter;
 
-public class DiscManager implements DatabaseInterface<Disc, Integer> {
+public class DiscManager extends AbstractManager implements DatabaseInterface<Disc, Integer> {
 
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -128,16 +130,65 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 	}
 
 	@Override
-	public boolean insert(Disc t) {
+	public boolean insert(Disc disc) throws IOException, SQLException {
 		boolean ret = false;
+
+		String name = disc.getCollectionName();
+		String desc = disc.getCollectionDesc();
+		String type = disc.getCollectionType();
+		String genre = disc.getCollectionGenre();
+		int repro = 0;
+		String img = Converter.pathToBlob(artist.getPath());
+		Date date = artist.getArtistRegDate();
+		java.sql.Date regdate = Converter.convertFromUtilDateToSqlDate(date);
+		int id = disc.getArtist().getArtistID();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "INSERT INTO ARTIST(CollectionName,CollectionGenre,CollectionReproNum,CollectionDesc,CollectionImage,CollectionType,CreatorID,collectionDate)"
+					+ "VALUE(?,?,?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, genre);
+			pstmt.setInt(3, repro);
+			pstmt.setString(4, desc);
+			pstmt.setString(5, img);
+			pstmt.setString(6, type);
+			pstmt.setInt(7, id);
+			pstmt.setDate(8, regdate);
+			if (pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+		} finally {
+			release(conn, pstmt, rs);
+		}
 		return ret;
 	}
 
 
 
 	@Override
-	public boolean delete(Integer t) {
+	public boolean delete(Integer id) throws SQLException {
 		boolean ret = false;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "delete from collection where CollectionID = '"+ id+"'";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate(sql);
+		
+			
+		} finally {
+			release(conn, pstmt, rs);
+		}
 		return ret;
 	}
 
@@ -186,9 +237,49 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 	}
 
 	@Override
-	public boolean update(Disc t, Integer z) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Disc disc, Integer id) throws ClassNotFoundException, SQLException {
+		boolean ret = false;
+		
+		String name = disc.getCollectionName();
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "UPDATE Collection SET CollectionName = ?,CollectionGenre = ?, CollectionDesc = ? , CollectionType =? ,collectionDate =? WHERE ARTISTID =?";
+					
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setInt(2, id);
+			if (pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+		} finally {
+			release(conn, pstmt, rs);
+		}
+		return ret;
+	}
+	public void updateTestado(String name,int id) throws SQLException {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "UPDATE Collection SET CollectionName = ? WHERE CollectionID = '"+ id+"'";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.executeUpdate(sql);
+		
+			
+		} finally {
+			release(conn, pstmt, rs);
+		}
+		
+
 	}
 
 }

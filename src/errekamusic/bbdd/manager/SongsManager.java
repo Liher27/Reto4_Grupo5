@@ -141,7 +141,7 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 		List<Canciones> songs = new ArrayList<Canciones>();
 		Class.forName(DBUtils.DRIVER);
 		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		String sql = "SELECT  ContentName,CollectionName,ArtistName,CollectionImage\r\n"
+		String sql = "SELECT  ContentName,CollectionName,ArtistName,"
 				+ "ContentDuration,ContentPath FROM content join Collection on\r\n"
 				+ "content.CollectionID = collection.CollectionID join Artist on artist.ArtistID = collection.CreatorID where ContentID = ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
@@ -155,7 +155,6 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 			Artist artist = new Artist();
 			Disc disc = new Disc();
 			disc.setCollectionName(result.getString("CollectionName"));
-			disc.setCollectionImage(Converter.getImageFromBlob(result.getBlob("CollectionImage")));
 			artist.setArtistName(result.getString("ArtistName"));
 			disc.setArtist(artist);
 			song.setDisc(disc);
