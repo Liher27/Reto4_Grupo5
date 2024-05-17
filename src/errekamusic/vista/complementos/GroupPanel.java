@@ -4,48 +4,53 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import errekamusic.bbdd.Pojo.Group;
+import errekamusic.bbdd.Pojo.Artist;
+import errekamusic.bbdd.Utils.Converter;
 import errekamusic.logica.ArtistController;
 import errekamusic.logica.Sesion;
-import errekamusic.enumerado.ArtistType;
-
-import javax.swing.JTable;
-import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
-
 
 public class GroupPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JLabel lblLogoErrekamusic = null;
-	private JLabel lblGroupTitle = null;
-
+	private JButton collectionInfoBtn = null;
 	private JLabel lblProfilePicture = null;
 	private JButton groupPanelBackBtn = null;
-	private JButton collectionInfoBtn = null;
+
+	private JLabel lblLogoErrekamusic = null;
+	private JLabel lblFavoriteTitle = null;
 	private JLabel seeYourProfileLbl = null;
-	private JTable tableGroups;
-	public int creatorId;
+	private JComboBox<String> comboBox = null;
+	private JLabel lblgroupRegDateText = null;
+	private JLabel lblgroupDescText = null;
+	private JLabel artistImageLbl = null;
+	private ImageIcon artistImageIcon = null;
 
+	private DefaultComboBoxModel<String> boxmodel = null;
+	private int groupID = 0;
+	private JLabel lblgroupName = null;
+	
+	private JLabel layOutForgroupLbl = null;
 
-	/**
-	 * Create the panel.
-	 */
+	private int[] listUniqueID = null;
+
 	public GroupPanel() {
-				
+
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(0, 0, 0));
 		setLayout(null);
@@ -75,13 +80,12 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
-		
+
 		seeYourProfileLbl = new JLabel("Ver perfil");
 		seeYourProfileLbl.setBounds(856, 26, 64, 25);
 		seeYourProfileLbl.setFont(new Font("Segoe UI Semibold", Font.BOLD, 15));
 		seeYourProfileLbl.setForeground(new Color(255, 255, 255));
 		add(seeYourProfileLbl);
-
 		groupPanelBackBtn = new JButton("Volver");
 		groupPanelBackBtn.setBounds(844, 556, 98, 33);
 		groupPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -106,64 +110,28 @@ public class GroupPanel extends JPanel {
 			}
 		});
 
+		lblFavoriteTitle = new JLabel("Descubre grupos");
+		lblFavoriteTitle.setBounds(279, 32, 398, 64);
+		lblFavoriteTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFavoriteTitle.setForeground(new Color(200, 40, 255));
+		lblFavoriteTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
+		add(lblFavoriteTitle);
+
 		lblLogoErrekamusic = new JLabel("");
 		lblLogoErrekamusic.setBounds(29, -20, 145, 119);
 		lblLogoErrekamusic.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoErrekamusic.setIcon(new ImageIcon("contents/secondaryLogo.png"));
 		add(lblLogoErrekamusic);
 
-		lblGroupTitle = new JLabel("Descubre grupos");
-		lblGroupTitle.setBounds(328, 32, 349, 64);
-		lblGroupTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGroupTitle.setForeground(new Color(200, 40, 255));
-		lblGroupTitle.setFont(new Font("Segoe UI Black", Font.BOLD, 37));
-		add(lblGroupTitle);
-
 		collectionInfoBtn = new JButton("Mas informacion");
-		collectionInfoBtn.setBounds(440, 561, 186, 28);
-		add(collectionInfoBtn);
-		
-		tableGroups = new JTable();
-		tableGroups.setColumnSelectionAllowed(true);
-		tableGroups.setBorder(new MatteBorder(3, 3, 3, 3, (Color) new Color(186, 85, 211)));
-		tableGroups.setBounds(162, 143, 649, 331);
-		
-		ArtistController artistiController = new ArtistController();
-		List<Group> groups = null;
-		try {
-			groups = artistiController.getGroupByArtistType(ArtistType.Group);
-		} catch (ClassNotFoundException e1) {
-			JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
-		} catch (SQLException e1) {
-			JOptionPane.showMessageDialog(null, "No se encontraron artistas del tipo especificado");
-		}
-		
-	    String[] headers= {"Grupo","Descripción"};
-	    
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(headers);
-		
-		Object[] row = {"Grupo","Descripción"};
-		model.addRow(row);
-				
-		for (Group group : groups) {
-			String grupo = group.getArtistName();
-			String descripcionGrupo = group.getArtistDesc();
-			Object[] rowArtistas = {grupo, descripcionGrupo};
-			model.addRow(rowArtistas);
-		}
-		tableGroups.setModel(model);
-		add(tableGroups);
-
-		List<Group> gruposSelected = groups;
-		
-		tableGroups.addMouseListener(new MouseAdapter() {
+		collectionInfoBtn.setBounds(385, 560, 186, 28);
+		collectionInfoBtn.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				int selectedRow = tableGroups.getSelectedRow();
-				creatorId = gruposSelected.get(selectedRow-1).getArtistID();
-				Sesion.getInstance().setSelectedRow(creatorId);
-				Sesion.getInstance().getDiscsPanel().getDiscsPanel().updateUI();
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println(groupID);
+				Sesion.getInstance().setArtistID(groupID);
+				
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
 				Sesion.getInstance().getRegisterPanel().getRegisterPanel().setVisible(false);
@@ -178,9 +146,11 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
 				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
+				Sesion.getInstance().getGroupInfoPanel().getGroupInfoPanel().setVisible(false);
 			}
 		});
-	
+
+		add(collectionInfoBtn);
 
 		collectionInfoBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -192,21 +162,120 @@ public class GroupPanel extends JPanel {
 				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(false);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
 				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
-				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(false);
+				Sesion.getInstance().getSeriesPanel().getSeriesPanel().setVisible(true);
 				Sesion.getInstance().getSongsPanel().getSongsPanel().setVisible(false);
 			}
 		});
+
+		JLabel lblSelectYourArtist = new JLabel("Selecciona el grupo:");
+		lblSelectYourArtist.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelectYourArtist.setForeground(new Color(200, 40, 255));
+		lblSelectYourArtist.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblSelectYourArtist.setBounds(362, 111, 219, 25);
+		add(lblSelectYourArtist);
+
+		comboBox = new JComboBox<String>();
+		comboBox.setVisible(true);
+		comboBox.setBounds(360, 147, 231, 22);
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent c) {
+				try {
+					getgroups();
+					comboBox.setModel(boxmodel);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		});
+		comboBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					groupID = listUniqueID[comboBox.getSelectedIndex()];
+					getgroupInfo(groupID);
+				} catch (ClassNotFoundException c) {
+					c.printStackTrace();
+				} catch (SQLException sqle) {
+					sqle.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		add(comboBox);
+
+		lblgroupName = new JLabel("");
+		lblgroupName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblgroupName.setForeground(new Color(200, 40, 255));
+		lblgroupName.setFont(new Font("Segoe UI Black", Font.BOLD, 20));
+		lblgroupName.setBounds(21, 245, 248, 64);
+		add(lblgroupName);
+
+		lblgroupDescText = new JLabel("");
+		lblgroupDescText.setHorizontalAlignment(SwingConstants.CENTER);
+		lblgroupDescText.setForeground(new Color(255, 255, 255));
+		lblgroupDescText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblgroupDescText.setBounds(715, 212, 219, 219);
+		add(lblgroupDescText);
+
+		lblgroupRegDateText = new JLabel("");
+		lblgroupRegDateText.setHorizontalAlignment(SwingConstants.CENTER);
+		lblgroupRegDateText.setForeground(new Color(255, 255, 255));
+		lblgroupRegDateText.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblgroupRegDateText.setBounds(29, 388, 219, 25);
+		add(lblgroupRegDateText);
+		
+		artistImageLbl = new JLabel("");
+		artistImageLbl.setFont(new Font("Cambria", Font.BOLD, 20));
+		artistImageLbl.setBounds(336, 226, 292, 280);
+		add(artistImageLbl);
+		
+		layOutForgroupLbl = new JLabel("");
+		layOutForgroupLbl.setIcon(new ImageIcon("contents/layOutForPropaganda.png"));
+		layOutForgroupLbl.setForeground(new Color(255, 255, 255));
+		layOutForgroupLbl.setFont(new Font("Myanmar Text", Font.BOLD, 99));
+		layOutForgroupLbl.setBounds(310, 198, 342, 338);
+		add(layOutForgroupLbl);
+		
+		JLabel lblgroupRegDate = new JLabel("Fecha de registro:");
+		lblgroupRegDate.setHorizontalAlignment(SwingConstants.CENTER);
+		lblgroupRegDate.setForeground(new Color(200, 40, 255));
+		lblgroupRegDate.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblgroupRegDate.setBounds(29, 336, 219, 25);
+		add(lblgroupRegDate);
+
 	}
-	
-	public int getSelectedRow() {
-		return this.creatorId;
+
+	private void getgroups() throws ClassNotFoundException, SQLException {
+		List<Artist> groups = new ArtistController().getByArtistType("Group");
+		listUniqueID = new int[groups.size()];
+		boxmodel = new DefaultComboBoxModel<String>();
+		for (int i = 0; i < groups.size(); i++) {
+			listUniqueID[i] = groups.get(i).getArtistID();
+			String groupName = groups.get(i).getArtistName();
+			boxmodel.addElement(groupName);
+		}
+	}
+
+	private void getgroupInfo(int groupID) throws Exception {
+		Artist group = new ArtistController().getArtistByID(groupID);
+		lblgroupRegDateText.setText(Converter.convertToSimpleDate(group.getArtistRegDate()));
+		lblgroupDescText.setText(group.getArtistDesc());
+		lblgroupName.setText(group.getArtistName());
+		artistImageIcon = group.getArtistImage();
+		artistImageLbl.setIcon(artistImageIcon);
+		
+
 	}
 
 	public JPanel getGroupPanel() {
+		// TODO Auto-generated method stub
 		return this;
 	}
 }

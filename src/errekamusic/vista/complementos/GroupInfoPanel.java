@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +38,13 @@ public class GroupInfoPanel extends JPanel {
 	private JButton backButton = null;
 	private JButton addButton = null;
 	private JLabel artistImageLabel = null;
-	private String directory = "./GroupImage/";
+	private String directory = "./contents/GroupImage/";
 	private JComboBox<String> comboBox = null;
 	private JComboBox<String> typeArtist = null;
 	private List<String> listPath = new ArrayList<String>() ;
 	private JButton searchButton = null;
 	private ImageIcon artistImage = null;
+	
 	public GroupInfoPanel() {
 		setBounds(0, 0, 984, 611);
 		setBackground(new Color(255,69,90));
@@ -116,10 +118,14 @@ public class GroupInfoPanel extends JPanel {
 				artist.setArtistDesc(descFiled.getText());
 				artist.setArtistType(typeArtist.getSelectedItem().toString());
 				String imgpath = directory +comboBox.getSelectedItem().toString();
+				artist.setPath(imgpath);
 				ArtistController artistController = new ArtistController();
 				try {
-					artistController.insertArtist(artist, imgpath);
+					artistController.insertArtist(artist);
 				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -165,7 +171,11 @@ public class GroupInfoPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String searchName = nameFiled.getText();
 				ArtistController artistController = new ArtistController();
-				artistController.findArtist(searchName);			
+				try {
+					artistController.findArtist(searchName);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}			
 				Artist artist = new Artist();
 				System.out.println(artist.toString());
 				dateFiled.setText(Converter.convertDateToString(artist.getArtistRegDate()));

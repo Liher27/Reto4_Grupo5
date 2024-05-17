@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import errekamusic.bbdd.Pojo.Disc;
+import errekamusic.bbdd.Utils.Converter;
 import errekamusic.logica.CollectionController;
 import errekamusic.logica.Sesion;
 
@@ -305,9 +306,10 @@ public class MainMenuPanel extends JPanel {
 			try {
 				discForPropaganda = discInfo.get(0);
 
+				
 				discNameLbl.setText(discForPropaganda.getCollectionName().toUpperCase());
 				groupDiscBelongLbl.setText(discForPropaganda.getArtist().getArtistName());
-				propagandaDiscDateLbl.setText(discForPropaganda.getCollectionDate().toString());
+				propagandaDiscDateLbl.setText(Converter.convertToSimpleDate(discForPropaganda.getCollectionDate()));
 				propagandaDiscGenreLbl.setText(discForPropaganda.getCollectionGenre());
 				discImageIcon = discForPropaganda.getCollectionImage();
 				propagandaImageLbl.setIcon(discImageIcon);

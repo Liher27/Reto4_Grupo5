@@ -30,6 +30,7 @@ public class Coleccion {
 	public Date getCollectionDate() {
 		return localDate;
 	}
+
 	public void setCollectionDate(Date localDate) {
 		this.localDate = localDate;
 	}

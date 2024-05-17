@@ -18,7 +18,6 @@ import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 import errekamusic.bbdd.Pojo.Contenido;
-//import errekamusic.logica.ContentController;
 import errekamusic.logica.Sesion;
 
 public class SongsPanel extends JPanel {
@@ -33,7 +32,6 @@ public class SongsPanel extends JPanel {
 	private JLabel lblProfilePicture = null;
 	private JLabel seeYourProfileLbl = null;
 	private JTable tableSongs;
-	private int collectionId = 0;
 
 	/**
 	 * Create the panel.
@@ -81,11 +79,6 @@ public class SongsPanel extends JPanel {
 		songsPanelBackBtn.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		add(songsPanelBackBtn);
 		songsPanelBackBtn.addActionListener(new ActionListener() {
-			/**
-			 * Confirmamos para logearnos
-			 * 
-			 * @param e
-			 */
 			public void actionPerformed(ActionEvent e) {
 				Sesion.getInstance().getWelcomePanel().getWelcomePanel().setVisible(false);
 				Sesion.getInstance().getLoginPanel().getLoginPanel().setVisible(false);
@@ -137,7 +130,7 @@ public class SongsPanel extends JPanel {
 				Sesion.getInstance().getPodcastPanel().getPodcastPanel().setVisible(false);
 				Sesion.getInstance().getContentPlayerPanel().getContentPlayerPanel().setVisible(true);
 				Sesion.getInstance().getListsPanel().getListsPanel().setVisible(false);
-				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(true);
+				Sesion.getInstance().getProfilePanel().getProfilePanel().setVisible(false);
 				Sesion.getInstance().getAdminPanel().getAdminPanel().setVisible(false);
 				Sesion.getInstance().getDiscsPanel().getDiscsPanel().setVisible(false);
 				Sesion.getInstance().getPodcasterPanel().getPodcasterPanel().setVisible(false);
@@ -180,9 +173,6 @@ public class SongsPanel extends JPanel {
 //		add(tableSongs);
 	}
 	
-	public void setCollectionId(int collectionId){
-		this.collectionId = collectionId;
-	}
 
 	public JPanel getSongsPanel() {
 		// TODO Auto-generated method stub

@@ -180,7 +180,12 @@ public class AdminPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				listModel.removeAllElements();
 				ArtistController artistController = new ArtistController();
-				top10Artist = artistController.top10Artist();
+				try {
+					top10Artist = artistController.top10Artist();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				for (int i = 0; i < top10Artist.size(); i++) {
 					listModel.addElement(top10Artist.get(i).getArtistName());
 				}

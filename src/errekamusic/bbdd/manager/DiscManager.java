@@ -97,20 +97,17 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection join artist g on collection.creatorId = g.artistId where collectionType = 'disc' and creatorId = ? ";
+			String sql = "select collectionID, CollectionName, CollectionGenre, CollectionDate, CollectionImage from collection where creatorId = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, discID);
 			result = pstmt.executeQuery();
 
 			while (result.next()) {
-				artist = new Artist();
+				discInfo.setCollectionID(result.getInt("collectionID"));
 				discInfo.setCollectionName(result.getString("CollectionName"));
 				discInfo.setCollectionGenre(result.getString("CollectionGenre"));
 				discInfo.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
 				discInfo.setCollectionImage(Converter.getImageFromBlob(result.getBlob("CollectionImage")));
-				artist.setArtistName(result.getString("ArtistName"));
-				discInfo.setArtist(artist);
-
 			}
 		} catch (ClassNotFoundException e) {
 			System.out.println("Ha dado fallo -> " + e.getMessage());
@@ -153,20 +150,21 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		Class.forName(DBUtils.DRIVER);
 
 		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-		String sql = "select collectionName, collectionGenre, CollectionDate, CollectionImage, g.ArtistName from collection where collectionType = 'disc' and creatorId = ? ";
+		String sql = "select collectionID, collectionName, collectionGenre, CollectionDate, CollectionImage from collection where creatorId = ? ";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, creatorId);
 		result = pstmt.executeQuery();
 
 		while (result.next()) {
-			disc = new Disc();
+			Disc disc = new Disc();
+			disc.setCollectionID(result.getInt("collectionID"));
 			disc.setCollectionName(result.getString("CollectionName"));
 			disc.setCollectionGenre(result.getString("CollectionGenre"));
 			disc.setCollectionDate(Converter.convertFromSqlDateToUtilDate(result.getDate("CollectionDate")));
 			listDisc.add(disc);
 		}
 
-		return discInfo;
+		return listDisc;
 	}
 
 }

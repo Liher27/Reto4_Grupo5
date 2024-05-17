@@ -26,8 +26,18 @@ public class CollectionController {
 	public List<Disc> getDiscByArtist(int creatorId) throws ClassNotFoundException, SQLException {
 		return new DiscManager().getByCreator(creatorId);
 	}
-
-	public List<Serie> getSerieByPodcaster(int creatorId) throws ClassNotFoundException, SQLException {
+	
+	public Disc getDiscInfo(int discID) throws ClassNotFoundException, SQLException {
+		return new DiscManager().selectById(discID);
+	}
+	
+	public List<Serie> getSerieByArtist(int creatorId) throws ClassNotFoundException, SQLException {
 		return new SerieManager().getByCreator(creatorId);
 	}
+	
+	public Serie getSerieInfo(int discID) throws ClassNotFoundException, SQLException {
+		return new SerieManager().selectById(discID);
+	}
+
+
 }

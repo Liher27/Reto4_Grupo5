@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -59,8 +60,16 @@ public class VentanaPrincipal extends JFrame {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public VentanaPrincipal() throws ClassNotFoundException, SQLException {
-		inicializar();
+	public VentanaPrincipal() {
+		try {
+			inicializar();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha encontrado un archivo...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se ha podido concectar a la base de datos...", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void inicializar() throws ClassNotFoundException, SQLException {

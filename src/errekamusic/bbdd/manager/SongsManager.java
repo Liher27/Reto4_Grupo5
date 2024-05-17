@@ -23,10 +23,11 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 			Class.forName(DBUtils.DRIVER);
 			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
 			Statement statement = connection.createStatement();
-			String sql = "select contentName,collectionName,ArtistName,ContentPath,CollectionImage,ContentDuration from content join collection on content.collectionID = collection.collectionid join artist on collection.creatorId = artist.ArtistID;";
+			String sql = "select contentID, contentName,collectionName,ArtistName,ContentPath,CollectionImage,ContentDuration from content join collection on content.collectionID = collection.collectionid join artist on collection.creatorId = artist.ArtistID";
 			ResultSet result = statement.executeQuery(sql);
 			while (result.next()) {
 				Canciones song = new Canciones();
+				song.setContentID(result.getInt("contentID"));
 				song.setContentName(result.getString("ContentName"));
 				song.setContentDuration(result.getTime("ContentDuration"));
 				song.setContentPath(result.getString("ContentPath"));
@@ -48,15 +49,34 @@ public class SongsManager implements DatabaseInterface<Canciones, Integer> {
 
 	}
 
-	public Canciones getOne(Canciones song) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
-	public Canciones selectById(Integer z) {
-		// TODO Auto-generated method stub
-		return null;
+	public Canciones selectById(Integer songID) throws Exception {
+		Canciones song = new Canciones();
+		try {
+			Class.forName(DBUtils.DRIVER);
+			Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+			String sql = "select contentName,collectionName,ArtistName,ContentPath,CollectionImage,ContentDuration from content join collection on content.collectionID = collection.collectionid join artist on collection.creatorId = artist.ArtistID where contentID = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, songID);
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				song.setContentName(result.getString("ContentName"));
+				song.setContentDuration(result.getTime("ContentDuration"));
+				song.setContentPath(result.getString("ContentPath"));
+				Artist artist = new Artist();
+				artist.setArtistName(result.getString("ArtistName"));
+				Disc disc = new Disc();
+				disc.setCollectionName(result.getString("CollectionName"));
+				disc.setCollectionImage(Converter.getImageFromBlob(result.getBlob("CollectionImage")));
+				disc.setArtist(artist);
+				song.setDisc(disc);
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Ha dado fallo -> " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Malformacion sqlazo -> " + e.getMessage());
+		}
+		return song;
 	}
 
 	@Override

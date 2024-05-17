@@ -161,4 +161,21 @@ public class PlayListManager extends AbstractManager implements DatabaseInterfac
 		}
 		return ret;
 	}
+
+	public boolean insertContent(PlayList playList) throws ClassNotFoundException, SQLException {
+		boolean ret = false;
+
+		Class.forName(DBUtils.DRIVER);
+
+		conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+		sql = "INSERT INTO `reto4_grupo5`.`playlistcontent` (`PlayListID`, `ContentID`) VALUES (?, ?)";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, playList.getPlayListID());
+		pstmt.setInt(2, playList.getContenido().getContentID());
+		int i = pstmt.executeUpdate();
+		if (i > 0) {
+			ret = true;
+		}
+		return ret;
+	}
 }

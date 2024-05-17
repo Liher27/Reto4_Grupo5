@@ -9,27 +9,17 @@ import errekamusic.bbdd.manager.SongsManager;
 import javazoom.jl.player.Player;
 
 public class MusicPlayer {
-	private int pausedLocation = 0;
 	private boolean paused = false;
 	private Player player;
-	private List<Canciones> allSongs = null;
 
-	/*
-	 * public String musicPath(String ruta) { getSongsList(); for (int i = 0; i <
-	 * allSongs.size(); i++) { ruta = allSongs.get(i).getContentPath();
-	 * System.out.println(allSongs.get(i).getContentPath()); } return ruta; }
-	 */
-//	public List<String> musicPaths() {
-//	    List<String> paths = new ArrayList<>();
-//	    allSongs = getSongsList();
-//	    for (int i = 0; i < allSongs.size();i++) {
-//	        paths.add(allSongs.get(i).getContentPath());
-//	    }
-//	    return paths;
-//	}
 	public List<Canciones> getSongsList() throws Exception {
 		SongsManager songsController = new SongsManager();
 		return songsController.getAllData();
+	}
+	
+	public Canciones getSong(int songID) throws Exception {
+		SongsManager songsController = new SongsManager();
+		return songsController.selectById(songID);
 	}
 
 	public void playMusic(Canciones canciones) {
