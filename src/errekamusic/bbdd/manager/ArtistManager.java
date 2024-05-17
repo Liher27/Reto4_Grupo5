@@ -141,9 +141,7 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 				group.setArtistRepNum(result.getInt("ArtistRepNum"));
 				ArtistInfo.add(group);
 			}
-
 		}
-
 		return ArtistInfo;
 	}
 
@@ -185,7 +183,7 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 		
 		try {
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "UPDATE ARTIST SET ARTISTNAME = ? ArtistRegDate = ? ArtistDesc = ?   ArtistType =? WHERE ARTISTID ?";
+			String sql = "UPDATE ARTIST SET ARTISTNAME = ?,ArtistRegDate = ?, ArtistDesc = ? , ArtistType =? WHERE ARTISTID =?";
 					
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -200,7 +198,6 @@ public class ArtistManager extends AbstractManager implements DatabaseInterface<
 			release(conn, pstmt, rs);
 		}
 		return ret;
-		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +74,26 @@ public class SerieManager implements DatabaseInterface <Serie, Integer> {
 	    }
 
 	    return serieInfo;
+	}
+	public List<Serie> top10Serie() throws Exception {
+		List<Serie> listSerie = new ArrayList<>();
+
+		Class.forName(DBUtils.DRIVER);
+
+		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+		Statement statement = connection.createStatement();
+		String sql = "SELECT CollectionName,CollectionReproNum,CollectionType FROM collection where CollectionType = 'SERIE' order by CollectionReproNum desc limit 10 ;";
+		ResultSet result = statement.executeQuery(sql);
+		while (result.next()) {
+			Serie serie = new Serie();
+			serie.setCollectionName(result.getString("CollectionName"));
+			serie.setCollectionRepNum(result.getInt("CollectionReproNum"));
+			serie.setCollectionType(result.getString("CollectionType"));
+			listSerie.add(serie);
+		}
+		return listSerie;
+
 	}
 
 

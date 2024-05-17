@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,6 +162,27 @@ public class DiscManager implements DatabaseInterface<Disc, Integer> {
 		}
 
 		return listDisc;
+	}
+	
+	public List<Disc> top10Artist() throws Exception {
+		List<Disc> listDisc = new ArrayList<>();
+
+		Class.forName(DBUtils.DRIVER);
+
+		Connection connection = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
+
+		Statement statement = connection.createStatement();
+		String sql = "SELECT CollectionName,CollectionReproNum,CollectionType FROM collection where CollectionType = 'DISC' order by CollectionReproNum desc limit 10 ;";
+		ResultSet result = statement.executeQuery(sql);
+		while (result.next()) {
+			Disc disc = new Disc();
+			disc.setCollectionName(result.getString("CollectionName"));
+			disc.setCollectionRepNum(result.getInt("CollectionReproNum"));
+			disc.setCollectionType(result.getString("CollectionType"));
+			listDisc.add(disc);
+		}
+		return listDisc;
+
 	}
 
 	@Override

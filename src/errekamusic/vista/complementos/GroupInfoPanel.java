@@ -2,6 +2,7 @@ package errekamusic.vista.complementos;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import errekamusic.bbdd.Pojo.Artist;
@@ -228,7 +229,7 @@ public class GroupInfoPanel extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					 JOptionPane.showMessageDialog(null, "El Formato de La fecha esta incorrecto, vuelva a introducirlo（ejemplo：yyyy-MM-dd）");
 					e1.printStackTrace();
 				}
 				cleanFileContent();
