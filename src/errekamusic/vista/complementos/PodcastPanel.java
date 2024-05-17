@@ -246,10 +246,10 @@ public class PodcastPanel extends JPanel {
 
 	private void getPodcastInfo(int podcastID) throws Exception {
 		Podcast podcast = new ContentController().getPodcastInfo(podcastID);
-//		lblContentDurationText.setText(podcast.getContentDuration().toString());
+		lblContentDurationText.setText(podcast.getContentDuration().toString());
 		lbldiscsName.setText(podcast.getContentName());
-//		artistImageIcon = podcast.getSeries().getCollectionImage();
-//		artistImageLbl.setIcon(artistImageIcon);
+		artistImageIcon = podcast.getSeries().getCollectionImage();
+		artistImageLbl.setIcon(artistImageIcon);
 	}
 
 	public JPanel getPodcastPanel() {

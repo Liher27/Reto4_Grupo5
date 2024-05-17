@@ -13,6 +13,7 @@ import errekamusic.bbdd.manager.CancionesManager;
 import errekamusic.bbdd.manager.DiscManager;
 import errekamusic.bbdd.manager.MusicManager;
 import errekamusic.bbdd.manager.PodcastManager;
+import errekamusic.bbdd.manager.SongsManager;
 
 public class ContentController {
 
@@ -42,6 +43,14 @@ public class ContentController {
 	
 	public Podcast getPodcastInfo(int podcastID) throws ClassNotFoundException, SQLException {
 		return new PodcastManager().selectById(podcastID);
+	}
+
+	public List<Canciones> getSongByDiscId(int collectionID) throws ClassNotFoundException, SQLException {
+		return new SongsManager().getSongsByDisc(collectionID);
+	}
+
+	public Canciones getSongInfo(int songID) throws Exception {
+		return new SongsManager().selectById(songID);
 	}
 	
 }

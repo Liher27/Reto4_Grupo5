@@ -54,7 +54,7 @@ public class PodcastManager extends AbstractManager implements DatabaseInterface
 			Class.forName(DBUtils.DRIVER);
 
 			conn = DriverManager.getConnection(DBUtils.URL, DBUtils.USER, DBUtils.PASS);
-			String sql = "SELECT * FROM reto4_grupo5.content join collection on content.CollectionID = collection.CollectionID where collectionId = ? ";
+			String sql = "SELECT * FROM reto4_grupo5.content join collection on content.CollectionID = collection.CollectionID where collection.CollectionID = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, podcastID);
 			result = pstmt.executeQuery();
